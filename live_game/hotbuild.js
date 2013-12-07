@@ -41,26 +41,22 @@ function polelockToggle(event) {
     event.preventDefault();
 }
 
-//Debug Window
-//data-bind="with: myHotBuildViewModel"
 $('body').append(
 '<div id="hotbuild_info" class="ignoremouse" data-bind="with: myHotBuildViewModel"><div>' +
-//'HOTBUILD INFO:' +
-//'<div data-bind="text: myHotBuildViewModel.lastkey"></div>' +
-//'C<div data-bind="text: myHotBuildViewModel.cycleid"></div>' +
-//'S<div data-bind="text: myHotBuildViewModel.selectedcycleid"></div>' +
-//'<div data-bind="text: myHotBuildViewModel.debuginfo"></div>' +
+//'<div data-bind="text: lastkey"></div>' +
+//'C<div data-bind="text: cycleid"></div>' +
+//'<div>Debug: <span data-bind="text: debuginfo"/></div>' +
 '<div data-bind="text: unitName"></div>' +
 '<div class="hotbuild_fab_info_cont">' +
 '<div class="hotbuild_current_fab_info_cont" data-bind="foreach: hotbuildPreviews">' +
 //'<!-- ko foreach: hotbuildPreviews -->' +
 '<div class="hotbuild_fab_selection">' +
 '<img class="hotbuild_selected_fab" src="" data-bind="attr: { src: $data }" border="0" />' +
-'<span class="hotbuild_selected_text" data-bind="text: $parent.selectedcycleid"/>' +
+'<span class="hotbuild_selected_text" data-bind="text: $index"/>' +
 '</div>' +
 //'<!-- /ko -->' +
 '</div>' +
-'</div>'+
+'</div>' +
 '</div>');
 
 function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
@@ -68,133 +64,42 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     this.lastCycleTime = ko.observable(time)
     this.lastkey = ko.observable(lastkey);
     this.cycleid = ko.observable(cycleid);
-    this.selectedcycleid = ko.observable(99);
     this.hotbuilds = ko.observableArray(hotbuilds);
     this.hotbuildPreviews = ko.observableArray(["img/build_bar/units/undefined.png"]);
 
     this.debuginfo = ko.computed(function () {
         if (this.hotbuilds() != undefined) {
-            if (this.hotbuilds()[this.cycleid()] != undefined) {
-                return model.unitSpecs[this.hotbuilds()[this.cycleid()]].name;
-            }
-            else {
-                return this.hotbuilds()[this.cycleid()];
-            }
-        }
-        else {
-            return "";
+            return this.hotbuilds().length;
         }
     }, this);
 
-    this.unitName = ko.computed(function () {
-        if (this.hotbuilds() != undefined) {
-            if (this.hotbuilds()[this.cycleid()] != undefined) {
-                if (this.knowsBuildCommand(this.hotbuilds()[this.cycleid()])) {
-                    return model.unitSpecs[this.hotbuilds()[this.cycleid()]].name;
-                }
-            }
-            else {
-                return this.hotbuilds()[this.cycleid()];
-            }
-        }
-        else {
-            return "";
-        }
-    }, this);
+    this.unitName = ko.observable("");
 
-    this.unitSpecs = ko.computed(function () {
-        if (this.hotbuilds() != undefined) {
-            if (this.hotbuilds()[this.cycleid()] != undefined) {
-                if (this.knowsBuildCommand(this.hotbuilds()[this.cycleid()])) {
-                    return model.unitSpecs[this.hotbuilds()[this.cycleid()]];
-                }
-            }
-            else {
-                return undefined;
-            }
-        }
-        else {
-            return undefined;
-        }
-    }, this);
 
-   
-
-    this.selectedimage = ko.computed(function () {
-        if (this.unitSpecs() != undefined)
-        {
-            //debugger;
-            return this.unitSpecs().buildIcon;
-        }
-        else
-        {
-            //return undefined;
-            return "img/build_bar/units/undefined.png";
-        }
-        
-    }, this);
-
-    this.getStructureinList = function (n) {
-        if (this.hotbuilds() != undefined && this.selectedcycleid() != 99) {
-            if (this.hotbuilds().length > 0) {
-                var nextid = this.selectedcycleid() + n;
-                var unitinfo = undefined;
-                var length = this.hotbuilds().length;
-                var failDetect = 0;
-                do {
-                    failDetect++;
-                    if (nextid == length) { //why is hotbuilds losing it's length
-                        nextid = 0;
+    this.buildPreviewList = function (hbindex, hotbuilds) {
+        //set the buildPreview list 
+        if (hotbuilds != undefined) {
+            this.hotbuildPreviews(["img/build_bar/units/undefined.png"]);
+            for (i = hbindex; i < hotbuilds.length; i++) {
+                if (this.knowsBuildCommand(hotbuilds[i])) {
+                    unitinfo = model.unitSpecs[hotbuilds[i]];
+                    if (unitinfo.buildStructure) {
+                        this.hotbuildPreviews.push(unitinfo.buildIcon);
                     }
-                    if (failDetect > 99) {
-                        //debugger;
-                        //gameConsole.log("loop of death\n"); // I dont think this should ever happen...
-                        return;
-                    }
-                    unitinfo = model.unitSpecs[this.hotbuilds()[nextid]];
-
                 }
-                while (!unitinfo.buildStructure && !this.knowsBuildCommand(this.hotbuilds()[nextid]))
-
-                return unitinfo;
+            }
+            for (j = 0; j < hbindex; j++) {
+                if (this.knowsBuildCommand(hotbuilds[j])) {
+                    unitinfo = model.unitSpecs[hotbuilds[j]];
+                    if (unitinfo.buildStructure) {
+                        this.hotbuildPreviews.push(unitinfo.buildIcon);
+                    }
+                }
             }
         }
     }
 
-    this.unitSpecs1 = ko.computed(function () {
-        return this.getStructureinList(1);
-    }, this);
-
-    this.unitSpecs2 = ko.computed(function () {
-        return this.getStructureinList(2);
-    }, this);
-
-    this.nextimage = ko.computed(function () {
-        if (this.unitSpecs1() != undefined) {
-            //debugger;
-            return this.unitSpecs1().buildIcon;
-        }
-        else {
-            //return undefined;
-            return "img/build_bar/units/undefined.png";
-        }
-
-    }, this);
-
-    this.nextimage2 = ko.computed(function () {
-        if (this.unitSpecs2() != undefined) {
-            //debugger;
-            return this.unitSpecs2().buildIcon;
-        }
-        else {
-            //return undefined;
-            return "img/build_bar/units/undefined.png";
-        }
-
-    }, this);
-
     this.hotBuild = function (event, hotbuilds) {
-        this.selectedcycleid(99);
         this.hotbuilds(hotbuilds);
         if (model['maybeSetBuildTarget']) {
             if (this.knowsAnyBuildCommand()) {
@@ -207,17 +112,15 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
                         return;
                     }
                 } while (!this.knowsBuildCommand(this.hotbuilds()[this.cycleid()]) && this.knowsAnyBuildCommand());
-                
-                if (this.unitSpecs().buildStructure) {
+
+                if (model.unitSpecs[this.hotbuilds()[this.cycleid()]].buildStructure) {
                     model['maybeSetBuildTarget'](this.hotbuilds()[this.cycleid()]);
                 }
                 else {
-                    model.executeStartBuild(event,this.getBuildItemId())
+                    model.executeStartBuild(event, this.getBuildItemId())
                 }
-                this.selectedcycleid(this.cycleid());
-                this.hotbuildPreviews(["img/build_bar/units/undefined.png"]);
-                this.hotbuildPreviews([this.unitSpecs().buildIcon]);
-                //model.setBuildHover(currentCycleId);
+                this.unitName(model.unitSpecs[this.hotbuilds()[this.cycleid()]].name);
+                this.buildPreviewList(this.cycleid(), this.hotbuilds());
                 event.preventDefault();
             }
             else {
@@ -255,7 +158,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     this.doCycleId = function (length, key) {
         var thisTime = new Date();
         if (thisTime - this.lastCycleTime > this.cycleResetTime || key != myHotBuildViewModel.lastkey()) {
-            //if (key != myHotBuildViewModel.lastkey()) {
+            //if (key != this.lastkey()) {
             this.cycleid(0);
         } else {
             this.cycleid(this.cycleid() + 1);
@@ -269,7 +172,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     }
 
 
-    this.getBuildItemId = function() {
+    this.getBuildItemId = function () {
         for (var i = 0; i < model.buildItems().length; i++) {
             if (model.buildItems()[i].id() == this.hotbuilds()[this.cycleid()]) {
                 return i;
