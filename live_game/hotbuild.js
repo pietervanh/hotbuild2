@@ -42,21 +42,23 @@ function polelockToggle(event) {
 }
 
 //Debug Window
+//data-bind="with: myHotBuildViewModel"
 $('body').append(
-'<div id="hotbuild_info" class="ignoremouse"><div>' +
+'<div id="hotbuild_info" class="ignoremouse" data-bind="with: myHotBuildViewModel"><div>' +
 //'HOTBUILD INFO:' +
 //'<div data-bind="text: myHotBuildViewModel.lastkey"></div>' +
 //'C<div data-bind="text: myHotBuildViewModel.cycleid"></div>' +
 //'S<div data-bind="text: myHotBuildViewModel.selectedcycleid"></div>' +
 //'<div data-bind="text: myHotBuildViewModel.debuginfo"></div>' +
-'<div data-bind="text: myHotBuildViewModel.unitName"></div>' +
+'<div data-bind="text: unitName"></div>' +
 '<div class="hotbuild_fab_info_cont">' +
-'<div class="hotbuild_current_fab_info_cont">' +
-//'<!-- ko foreach: hotbuildPreview -->' +
+'<div class="hotbuild_current_fab_info_cont" data-bind="foreach: hotbuildPreviews">' +
+//'<!-- ko foreach: hotbuildPreviews -->' +
 '<div class="hotbuild_fab_selection">' +
-'<img class="hotbuild_selected_fab" data-bind="attr: { src: myHotBuildViewModel.selectedimage }" border="0" />' +
+'<img class="hotbuild_selected_fab" src="" data-bind="attr: { src: $data }" border="0" />' +
+'<span class="hotbuild_selected_text" data-bind="text: $parent.selectedcycleid"/>' +
 '</div>' +
-//'<-- /ko -->
+//'<!-- /ko -->' +
 '</div>' +
 '</div>'+
 '</div>');
@@ -68,6 +70,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     this.cycleid = ko.observable(cycleid);
     this.selectedcycleid = ko.observable(99);
     this.hotbuilds = ko.observableArray(hotbuilds);
+    this.hotbuildPreviews = ko.observableArray(["img/build_bar/units/undefined.png"]);
 
     this.debuginfo = ko.computed(function () {
         if (this.hotbuilds() != undefined) {
@@ -212,6 +215,8 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
                     model.executeStartBuild(event,this.getBuildItemId())
                 }
                 this.selectedcycleid(this.cycleid());
+                this.hotbuildPreviews(["img/build_bar/units/undefined.png"]);
+                this.hotbuildPreviews([this.unitSpecs().buildIcon]);
                 //model.setBuildHover(currentCycleId);
                 event.preventDefault();
             }
@@ -277,6 +282,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
 var myHotBuildViewModel = new HotBuildViewModel(0, 0, hotbuild1, new Date());
 //var myHotBuildViewModel = new HotBuildViewModel(0, 0, hotbuild1);
 ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
+//ko.applyBindings(myHotBuildViewModel);
 
 var hotbuild1 = [
  	'/pa/units/land/metal_extractor_adv/metal_extractor_adv.json',
