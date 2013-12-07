@@ -43,14 +43,22 @@ function polelockToggle(event) {
 
 //Debug Window
 $('body').append(
-'<div id="hotbuild_info">' +
+'<div id="hotbuild_info" class="ignoremouse"><div>' +
 //'HOTBUILD INFO:' +
 //'<div data-bind="text: myHotBuildViewModel.lastkey"></div>' +
 //'C<div data-bind="text: myHotBuildViewModel.cycleid"></div>' +
 //'S<div data-bind="text: myHotBuildViewModel.selectedcycleid"></div>' +
 //'<div data-bind="text: myHotBuildViewModel.debuginfo"></div>' +
 '<div data-bind="text: myHotBuildViewModel.unitName"></div>' +
-'<div><img data-bind="attr: { src: myHotBuildViewModel.selectedimage }" border="0" /><img data-bind="attr: { src: myHotBuildViewModel.nextimage }" border="0" /><img data-bind="attr: { src: myHotBuildViewModel.nextimage2 }" border="0" /></div>' +
+'<div class="hotbuild_fab_info_cont">' +
+'<div class="hotbuild_current_fab_info_cont">' +
+//'<!-- ko foreach: hotbuildPreview -->' +
+'<div class="hotbuild_fab_selection">' +
+'<img class="hotbuild_selected_fab" data-bind="attr: { src: myHotBuildViewModel.selectedimage }" border="0" />' +
+'</div>' +
+//'<-- /ko -->
+'</div>' +
+'</div>'+
 '</div>');
 
 function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {

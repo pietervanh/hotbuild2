@@ -3,3 +3,51 @@
 	top: 250px;
 	left: 10px;
 }
+
+/*----- SELECTION BAR
+-----------------------------------------------------------------*/
+.hotbuild_fab_info__cont {
+height: auto;
+min-width:52px; 
+max-width: 156px;
+position: absolute;
+bottom: 22px;
+background:rgba(0,0,0,.6);
+border-radius:4px;
+}
+
+.hotbuild_current_fab_info_cont {
+    height:auto;
+    width:auto;
+}
+
+.hotbuild_fab_selection {
+    height: 48px;
+    width: 48px;
+    border: 1px solid rgba(0,255,255,.5);
+    border-radius:2px; 
+    float:left;
+    margin:1px;
+    position:relative;
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%); 
+    box-shadow: inset 0 0 30px rgb(0, 100, 100);
+}
+
+.hotbuild_selected_fab {
+    height: 36px;
+    width: 36px;
+    position:absolute;
+    top:4px;
+    left:4px;
+}
+/*
+.span_selection_count {
+    padding: 2px;
+    font-size: 12px;
+    position:absolute;
+    bottom:0;
+    right:0;
+    z-index:100;
+    color: #00ffff;
+}
+*/
