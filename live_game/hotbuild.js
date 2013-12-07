@@ -5,46 +5,16 @@ E: MEX / Adv Factories
 R: Power / Radar / Basic Spam / Adv Spam
 A: Air Def / Single Laser / Pelter / Adv Laser / Med Laser / Wall
 F: Veh Fac / Bot Fac / Air Fac / Nav Fac / Fabber
-TAB: Pause / Unpuase
+TAB: Pause / Unpause
 */
 
 /// <reference path="jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="knockout-2.2.1.debug.js" />
 
-//Pause / Unpause energy
-function energyToggle(event) {
-    var currentOrder = model.selectedEnergyOrderIndex();
-    if (currentOrder === 0) {
-        eOrder = 'conserve';
-    } else {
-        eOrder = 'consume';
-    }
-    model.selectedEnergyOrderIndex(model.energyOrdersMap[eOrder]);
-    model.endFabMode();
-    engine.call('set_order_state', 'energy', eOrder);
-    event.preventDefault();
-}
-
-//Pole Lock on/off
-function polelockToggle(event) {
-    var allSettings = decode(localStorage.settings);
-    var currentPoleLock = allSettings.camera_pole_lock.toLowerCase(); // the settings store this upper case, the engine processes it in lowercase... wtf
-    var nextSetting = "";
-    if (currentPoleLock === 'off') {
-        nextSetting = "on";
-    } else {
-        nextSetting = "off";
-    }
-    engine.call("set_camera_pole_lock", nextSetting);
-    allSettings.camera_pole_lock = nextSetting.toUpperCase();
-    localStorage.settings = encode(allSettings);
-    event.preventDefault();
-}
-
 $('body').append(
 '<div id="hotbuild_info" class="ignoremouse" data-bind="with: myHotBuildViewModel"><div>' +
 //'<div data-bind="text: lastkey"></div>' +
-//'C<div data-bind="text: cycleid"></div>' +
+//'<div data-bind="text: cycleid"></div>' +
 //'<div>Debug: <span data-bind="text: debuginfo"/></div>' +
 '<div data-bind="text: unitName"></div>' +
 '<div class="hotbuild_fab_info_cont">' +
@@ -139,14 +109,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     }
 
     this.knowsBuildCommand = function (cmd) {
-        /*for (var i = 0; i < model.buildItems().length; i++) {
-            if (model.buildItems()[i].id() == cmd) {
-                return true;
-            }
-        }
-        */
         for (var i = 0; i < model.buildTabLists()[0].length; i++) {
-            //debugger;
             if (model.buildTabLists()[0][i].id == cmd) {
                 return true;
             }
@@ -182,26 +145,56 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     }
 }
 
-var myHotBuildViewModel = new HotBuildViewModel(0, 0, hotbuild1, new Date());
-//var myHotBuildViewModel = new HotBuildViewModel(0, 0, hotbuild1);
-ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
-//ko.applyBindings(myHotBuildViewModel);
+//Pause / Unpause energy
+function energyToggle(event) {
+    var currentOrder = model.selectedEnergyOrderIndex();
+    if (currentOrder === 0) {
+        eOrder = 'conserve';
+    } else {
+        eOrder = 'consume';
+    }
+    model.selectedEnergyOrderIndex(model.energyOrdersMap[eOrder]);
+    model.endFabMode();
+    engine.call('set_order_state', 'energy', eOrder);
+    event.preventDefault();
+}
 
+//Pole Lock on/off
+function polelockToggle(event) {
+    var allSettings = decode(localStorage.settings);
+    var currentPoleLock = allSettings.camera_pole_lock.toLowerCase(); // the settings store this upper case, the engine processes it in lowercase... wtf
+    var nextSetting = "";
+    if (currentPoleLock === 'off') {
+        nextSetting = "on";
+    } else {
+        nextSetting = "off";
+    }
+    engine.call("set_camera_pole_lock", nextSetting);
+    allSettings.camera_pole_lock = nextSetting.toUpperCase();
+    localStorage.settings = encode(allSettings);
+    event.preventDefault();
+}
+
+var myHotBuildViewModel = new HotBuildViewModel(0, 0, hotbuild1, new Date());
+ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
+
+//// add variables with references to json files you want to hotbuild 
+//// look in your pa installfolder /media/pa/units/ to find what you want to put below
 var hotbuild1 = [
  	'/pa/units/land/metal_extractor_adv/metal_extractor_adv.json',
-	'/pa/units/land/metal_extractor/metal_extractor.json',
+	'/pa/units/land/metal_extractor/metal_extractor.json'
 ];
 var hotbuild2 = [
  	'/pa/units/land/energy_plant_adv/energy_plant_adv.json',
     '/pa/units/land/energy_plant/energy_plant.json',
 	'/pa/units/land/radar_adv/radar_adv.json',
 	'/pa/units/land/radar/radar.json',
-    '/pa/units/land/assault_bot/assault_bot.json',
     '/pa/units/land/assault_bot_adv/assault_bot_adv.json',
+    '/pa/units/land/assault_bot/assault_bot.json',
+    '/pa/units/land/tank_laser_adv/tank_laser_adv.json',
     '/pa/units/land/tank_light_laser/tank_light_laser.json',
-	'/pa/units/land/tank_laser_adv/tank_laser_adv.json',
-	'/pa/units/air/fighter/fighter.json',
 	'/pa/units/air/bomber_adv/bomber_adv.json',
+	'/pa/units/air/fighter/fighter.json',
 	'/pa/units/sea/destroyer/destroyer.json',
 	'/pa/units/sea/battleship/battleship.json'
 ];
@@ -227,7 +220,7 @@ var hotbuild4 = [
     '/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json',
 	'/pa/units/air/fabrication_aircraft/fabrication_aircraft.json'
 ];
-
+//add keybinds as you see fit
 action_sets['gameplay']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
 action_sets['gameplay']['hotbuild2'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
 action_sets['gameplay']['hotbuild3'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
@@ -239,16 +232,15 @@ action_sets['gameplay']['hotbuilds4'] = function (event) { myHotBuildViewModel.h
 action_sets['gameplay']['energytoggle'] = function (event) { energyToggle(event) };
 action_sets['gameplay']['pole_lock'] = function (event) { polelockToggle(event) };
 
-
+//change keys as you see fit
 default_keybinds['gameplay']['hotbuild1'] = 'e';
 default_keybinds['gameplay']['hotbuild2'] = 'r';
 default_keybinds['gameplay']['hotbuild3'] = 'q';
 default_keybinds['gameplay']['hotbuild4'] = 'f';
+//you have to put the shift+ binding as well or queuing won't work
 default_keybinds['gameplay']['hotbuilds1'] = 'shift+e';
 default_keybinds['gameplay']['hotbuilds2'] = 'shift+r';
 default_keybinds['gameplay']['hotbuilds3'] = 'shift+q';
 default_keybinds['gameplay']['hotbuilds4'] = 'shift+f';
 default_keybinds['gameplay']['energytoggle'] = 'tab';
 default_keybinds['gameplay']['pole_lock'] = 'p';
-
-//maybe check keybind conflicts and give popup warning
