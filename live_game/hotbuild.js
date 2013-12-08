@@ -1,8 +1,10 @@
 /// <reference path="jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="knockout-2.2.1.debug.js" />
+var settings = decode(localStorage.settings);
+model.hotbuild_preview_enabled = ko.computed(function () { return settings.hotbuild_preview_display_val == 'ON' });
 
 $('body').append(
-'<div id="hotbuild_info" class="ignoremouse" data-bind="with: myHotBuildViewModel"><div>' +
+'<div id="hotbuild_info" class="ignoremouse" data-bind="visible: hotbuild_preview_enabled, with: myHotBuildViewModel"><div>' +
 //'<div data-bind="text: lastkey"></div>' +
 //'<div data-bind="text: cycleid"></div>' +
 //'<div>Debug: <span data-bind="text: debuginfo"/></div>' +
@@ -25,7 +27,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     this.lastkey = ko.observable(lastkey);
     this.cycleid = ko.observable(cycleid);
     this.hotbuilds = ko.observableArray(hotbuilds);
-    this.hotbuildPreviews = ko.observableArray(["img/build_bar/units/undefined.png"]);
+    this.hotbuildPreviews = ko.observableArray([]);
 
     this.debuginfo = ko.computed(function () {
         if (this.hotbuilds() != undefined) {
@@ -39,7 +41,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     this.buildPreviewList = function (hbindex, hotbuilds) {
         //set the buildPreview list 
         if (hotbuilds != undefined) {
-            this.hotbuildPreviews(["img/build_bar/units/undefined.png"]);
+            this.hotbuildPreviews([]);
             for (i = hbindex; i < hotbuilds.length; i++) {
                 if (this.knowsBuildCommand(hotbuilds[i])) {
                     unitinfo = model.unitSpecs[hotbuilds[i]];
