@@ -135,7 +135,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     }
 }
 
-var myHotBuildViewModel = new HotBuildViewModel(0, 0, hotbuild1, new Date());
+var myHotBuildViewModel = new HotBuildViewModel(0, 0, [""], new Date());
 ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
 
 //Pause / Unpause energy

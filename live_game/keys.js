@@ -77,3 +77,4 @@ action_sets['gameplay']['pole_lock'] = function (event) { polelockToggle(event) 
 action_sets['gameplay']['requeue'] = function (event) { requeue(event) };
 default_keybinds['gameplay']['energytoggle'] = 'tab';
 default_keybinds['gameplay']['pole_lock'] = 'p';
+default_keybinds['gameplay']['requeue'] = 'o';
