@@ -125,9 +125,8 @@ function HotBuildViewModel(resetTime) {
     }
 }
 
+//init hotbuildsystem
 var myHotBuildViewModel = new HotBuildViewModel(model.hotbuild_reset_time);
-//ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
-//ko.applyBindings(myHotBuildViewModel);
 
 //Pause / Unpause energy
 function energyToggle(event) {

@@ -73,12 +73,12 @@ action_sets.hotbuild = {};
 default_keybinds.hotbuild = {};
 
 //Special Actions
-action_sets['hotbuild']['energytoggle'] = function (event) { energyToggle(event) };
-action_sets['hotbuild']['pole_lock'] = function (event) { polelockToggle(event) };
-action_sets['hotbuild']['requeue'] = function (event) { requeue(event) };
-default_keybinds['hotbuild']['energytoggle'] = 'tab';
-default_keybinds['hotbuild']['pole_lock'] = 'p';
-default_keybinds['hotbuild']['requeue'] = 'o';
+action_sets['hotbuild']['Toggle Energy'] = function (event) { energyToggle(event) };
+action_sets['hotbuild']['Lock Pole'] = function (event) { polelockToggle(event) };
+action_sets['hotbuild']['Requeue'] = function (event) { requeue(event) };
+default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
+default_keybinds['hotbuild']['Lock Pole'] = '^';
+default_keybinds['hotbuild']['Requeue'] = 'o';
 //add keybinds as you see fit
 action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
 action_sets['hotbuild']['hotbuilds1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
