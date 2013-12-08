@@ -3,6 +3,13 @@
 var settings = decode(localStorage.settings);
 model.hotbuild_preview_enabled = ko.computed(function () { return settings.hotbuild_preview_display_val == 'ON' });
 
+model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
+//fast check on bad reset_time input
+if (isNaN(model.hotbuild_reset_time)) {
+    model.hotbuild_reset_time = 2000;
+}
+
+
 $('body').append(
 '<div id="hotbuild_info" class="ignoremouse" data-bind="visible: hotbuild_preview_enabled, with: myHotBuildViewModel"><div>' +
 //'<div data-bind="text: lastkey"></div>' +
@@ -21,12 +28,12 @@ $('body').append(
 '</div>' +
 '</div>');
 
-function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
-    this.cycleResetTime = 2000; //time you have to press again to loop trough list
-    this.lastCycleTime = ko.observable(time)
-    this.lastkey = ko.observable(lastkey);
-    this.cycleid = ko.observable(cycleid);
-    this.hotbuilds = ko.observableArray(hotbuilds);
+function HotBuildViewModel(resetTime) {
+    this.cycleResetTime = resetTime; //time you have to press again to loop trough list
+    this.lastCycleTime = ko.observable(new Date())
+    this.lastkey = ko.observable(0);
+    this.cycleid = ko.observable(0);
+    this.hotbuilds = ko.observableArray([]);
     this.hotbuildPreviews = ko.observableArray([]);
 
     this.debuginfo = ko.computed(function () {
@@ -137,7 +144,7 @@ function HotBuildViewModel(lastkey, cycleid, hotbuilds, time) {
     }
 }
 
-var myHotBuildViewModel = new HotBuildViewModel(0, 0, [""], new Date());
+var myHotBuildViewModel = new HotBuildViewModel(model.hotbuild_reset_time);
 ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
 
 //Pause / Unpause energy
