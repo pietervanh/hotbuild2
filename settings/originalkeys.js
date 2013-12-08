@@ -83,26 +83,17 @@ default_keybinds['hotbuild']['Requeue'] = 'o';
 
 //add keybinds as you see fit
 action_sets['hotbuild']['build T1 Veh/Bot Factory'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
-action_sets['hotbuild']['build T1 Veh/Bot Factory(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
 action_sets['hotbuild']['build Air/Naval Factory'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
-action_sets['hotbuild']['build Air/Naval Factory(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
 action_sets['hotbuild']['build Radar'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
-action_sets['hotbuild']['build Radar(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
 action_sets['hotbuild']['build T2 Veh/Bot Factory'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
-action_sets['hotbuild']['build T2 Veh/Bot Factory(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
 action_sets['hotbuild']['build Power'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild5) };
-action_sets['hotbuild']['build Power(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild5) };
 action_sets['hotbuild']['build Metal Extractor'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild6) };
-action_sets['hotbuild']['build Metal Extractor(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild6) };
 action_sets['hotbuild']['build Laser Turret'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild7) };
-action_sets['hotbuild']['build Laser Turret(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild7) };
 action_sets['hotbuild']['build AirDef/Wall'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild8) };
-action_sets['hotbuild']['build AirDef/Wall(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild8) };
 action_sets['hotbuild']['build Artillery'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild9) };
-action_sets['hotbuild']['build Artillery(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild9) };
 action_sets['hotbuild']['build Storage'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild10) };
-action_sets['hotbuild']['build Storage(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild10) };
-//change keys as you see fit
+
+//default bindings / you can change them in keyboard settings
 default_keybinds['hotbuild']['build T1 Veh/Bot Factory'] = 'w';
 default_keybinds['hotbuild']['build Air/Naval Factory'] = 'e';
 default_keybinds['hotbuild']['build Radar'] = 'r';
@@ -113,14 +104,4 @@ default_keybinds['hotbuild']['build Laser Turret'] = 'x';
 default_keybinds['hotbuild']['build AirDef/Wall'] = 'c';
 default_keybinds['hotbuild']['build Artillery'] = 'v';
 default_keybinds['hotbuild']['build Storage'] = 'd';
-//you have to put the shift+ binding as well or queuing won't work
-default_keybinds['hotbuild']['build T1 Veh/Bot Factory(shift)'] = 'shift+w';
-default_keybinds['hotbuild']['build Air/Naval Factory(shift)'] = 'shift+e';
-default_keybinds['hotbuild']['build Radar(shift)'] = 'shift+r';
-default_keybinds['hotbuild']['build T2 Veh/Bot Factory(shift)'] = 'shift+t';
-default_keybinds['hotbuild']['build Power(shift)'] = 'shift+f';
-default_keybinds['hotbuild']['build Metal Extractor(shift)'] = 'shift+s';
-default_keybinds['hotbuild']['build Laser Turret(shift)'] = 'shift+x';
-default_keybinds['hotbuild']['build AirDef/Wall(shift)'] = 'shift+c';
-default_keybinds['hotbuild']['build Artillery(shift)'] = 'shift+v';
-default_keybinds['hotbuild']['build Storage(shift)'] = 'shift+d';
+
