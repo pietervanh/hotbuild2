@@ -80,14 +80,14 @@ default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
 default_keybinds['hotbuild']['Lock Pole'] = '^';
 default_keybinds['hotbuild']['Requeue'] = 'o';
 //add keybinds as you see fit
-action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
-action_sets['hotbuild']['hotbuilds1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
-action_sets['hotbuild']['hotbuild2'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
-action_sets['hotbuild']['hotbuilds2'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
-action_sets['hotbuild']['hotbuild3'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
-action_sets['hotbuild']['hotbuilds3'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
-action_sets['hotbuild']['hotbuild4'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
-action_sets['hotbuild']['hotbuilds4'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
+action_sets['hotbuild']['build MEX'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
+action_sets['hotbuild']['build MEX(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
+action_sets['hotbuild']['build Power/Radar/SpamUnit'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
+action_sets['hotbuild']['build Power/Radar/SpamUnit(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
+action_sets['hotbuild']['build Defence'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
+action_sets['hotbuild']['build Defence(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
+action_sets['hotbuild']['build Factory/Fabber'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
+action_sets['hotbuild']['build Factory/Fabber(shift)'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
 action_sets['hotbuild']['hotbuild5'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild5) };
 action_sets['hotbuild']['hotbuilds5'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild5) };
 action_sets['hotbuild']['hotbuild6'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild6) };
@@ -103,15 +103,15 @@ action_sets['hotbuild']['hotbuilds10'] = function (event) { myHotBuildViewModel.
 
 
 //change keys as you see fit
-default_keybinds['hotbuild']['hotbuild1'] = 'e';
-default_keybinds['hotbuild']['hotbuild2'] = 'r';
-default_keybinds['hotbuild']['hotbuild3'] = 'q';
-default_keybinds['hotbuild']['hotbuild4'] = 'f';
+default_keybinds['hotbuild']['build MEX'] = 'e';
+default_keybinds['hotbuild']['build Power/Radar/SpamUnit'] = 'r';
+default_keybinds['hotbuild']['build Defence'] = 'q';
+default_keybinds['hotbuild']['build Factory/Fabber'] = 'f';
 
 //you have to put the shift+ binding as well or queuing won't work
-default_keybinds['hotbuild']['hotbuilds1'] = 'shift+e';
-default_keybinds['hotbuild']['hotbuilds2'] = 'shift+r';
-default_keybinds['hotbuild']['hotbuilds3'] = 'shift+q';
-default_keybinds['hotbuild']['hotbuilds4'] = 'shift+f';
+default_keybinds['hotbuild']['build MEX(shift)'] = 'shift+e';
+default_keybinds['hotbuild']['build Power/Radar/SpamUnit(shift)'] = 'shift+r';
+default_keybinds['hotbuild']['build Defence(shift)'] = 'shift+q';
+default_keybinds['hotbuild']['build Factory/Fabber(shift)'] = 'shift+f';
 
 
