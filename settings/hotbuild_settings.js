@@ -4,7 +4,7 @@ model.hotbuild_preview_display_options = ko.observableArray(['ON', 'OFF']);
 model.hotbuild_preview_display_val = ko.observable(s.hotbuild_preview_display_val ? s.hotbuild_preview_display_val : model.hotbuild_preview_display_options()[0]);
 
 model.hotbuild_reset_time = ko.observable(s.hotbuild_reset_time ? s.hotbuild_reset_time : 2000);
-debugger;
+//debugger;
 
 model.oldSettings = model.settings;
 
