@@ -15,15 +15,13 @@ $('body').append(
     //'<div data-bind="text: cycleid"/>' +
     //'<div>Debug: <span data-bind="text: debuginfo"/>' +
     '<div data-bind="text: unitName"/>' +
-    '<div data-bind="foreach: hotbuilds"><div data-bind="text: $data"/></div>' +
+    //'<div data-bind="foreach: hotbuilds"><div data-bind="text: $data"/></div>' +
     '<div class="hotbuild_fab_info_cont">' +
         '<div class="hotbuild_current_fab_info_cont" data-bind="foreach: hotbuildPreviews">' +
-//'<!-- ko foreach: hotbuildPreviews -->' +
             '<div class="hotbuild_fab_selection">' +
                 '<img class="hotbuild_selected_fab" src="" data-bind="attr: { src: $data }" border="0" />' +
                 '<span class="hotbuild_selected_text" data-bind="text: $index"/>' +
             '</div>' +
-//'<!-- /ko -->' +
         '</div>' +
 '</div>');
 ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
