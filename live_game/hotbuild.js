@@ -15,7 +15,7 @@ function HotBuildViewModel(resetTime) {
     this.lastkey = ko.observable(0);
     this.cycleid = ko.observable(0);
     this.hotbuilds = ko.observableArray([]);
-    this.hotbuildPreviews = ko.observableArray([]);
+    this.hotbuildPreviews = ko.observableArray([""]);
 
     this.debuginfo = ko.computed(function () {
         if (this.hotbuilds() != undefined) {
