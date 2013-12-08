@@ -50,3 +50,4 @@ $(".div_settings_control_lbl:contains('SHOW TERRESTRIAL')").parent().parent().pa
                             '</td>' +
                         '</tr>'
                         );
+
