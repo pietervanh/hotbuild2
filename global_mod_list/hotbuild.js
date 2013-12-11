@@ -1,10 +1,18 @@
+//IntelliSense for WebMatrix /VS
 /// <reference path="jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="knockout-2.2.1.debug.js" />
+
+action_sets.hotbuild = {}; //adds a hotbuildgroup item to keys settings
+default_keybinds.hotbuild = {}; 
+//for the default keys and actions check the xxxkeys.js files
+
+//Make sure settings are set / if not set defaults
 initialSettingValue(hotbuild_reset_time,2000);
 initialSettingValue(hotbuild_requeue_amount,50);
 initialSettingValue(hotbuild_preview_display,'ON');
+
 var settings = decode(localStorage.settings);
-//model.hotbuild_preview_enabled = ko.computed(function () { return settings.hotbuild_preview_display_val == 'ON' });
+
 model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
 //fast check on bad reset_time input
 if (isNaN(model.hotbuild_reset_time)) {
