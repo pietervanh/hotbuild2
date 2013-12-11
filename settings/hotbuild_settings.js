@@ -6,22 +6,22 @@ model.hotbuild_preview_display_val = ko.observable(s.hotbuild_preview_display_va
 model.hotbuild_reset_time = ko.observable(s.hotbuild_reset_time ? s.hotbuild_reset_time : 2000);
 //debugger;
 
-model.oldSettings = model.settings;
+model.oldSettingsBeforeHotbuild = model.settings;
 
 model.settings = ko.computed(function () {
-    var newSettings = model.oldSettings();
+    var newSettings = model.oldSettingsBeforeHotbuild();
     newSettings['hotbuild_preview_display_val'] = model.hotbuild_preview_display_val();
     newSettings['hotbuild_reset_time'] = model.hotbuild_reset_time();
     //debugger;
     return newSettings;
 });
 
-model.oldDefaults = model.defaults;
+model.oldDefaultsBeforeHotbuild = model.defaults;
 
 model.defaults = function () {
     model.hotbuild_preview_display_val(model.hotbuild_preview_display_options()[0]);
     model.hotbuild_reset_time(2000);
-    model.oldDefaults();
+    model.oldDefaultsBeforeHotbuild();
 };
 
 $(".div_settings_control_lbl:contains('SHOW TERRESTRIAL')").parent().parent().parent().append(
