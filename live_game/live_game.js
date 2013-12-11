@@ -1,13 +1,8 @@
 var settings = decode(localStorage.settings);
+
 model.hotbuild_preview_enabled = ko.computed(function () {
     return settings.hotbuild_preview_display_val == 'ON';
 },this);
-model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
-//fast check on bad reset_time input
-if (isNaN(model.hotbuild_reset_time)) {
-    model.hotbuild_reset_time = 2000;
-}
-
 
 $('body').append(
 '<div id="hotbuild_info" class="ignoremouse" data-bind="Visible: model.hotbuild_preview_enabled , with: myHotBuildViewModel">' +
@@ -26,6 +21,8 @@ $('body').append(
 '</div>');
 ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
 
+
+//Better move this to settings or global ??
 //same as the one in media\ui\alpha\shared\js\inputmap.js
 //problem default you can't give in the arrays with upper and lower keys
 //this version automaticaly gives in [binding,binding+shift] wich solves the problem
