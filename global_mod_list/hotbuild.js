@@ -1,5 +1,8 @@
 /// <reference path="jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="knockout-2.2.1.debug.js" />
+initialSettingValue(hotbuild_reset_time,2000);
+initialSettingValue(hotbuild_requeue_count,50);
+initialSettingValue(hotbuild_buildpreview,'ON');
 var settings = decode(localStorage.settings);
 //model.hotbuild_preview_enabled = ko.computed(function () { return settings.hotbuild_preview_display_val == 'ON' });
 model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
