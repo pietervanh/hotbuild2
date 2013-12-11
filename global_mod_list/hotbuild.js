@@ -168,7 +168,7 @@ api.unit.build = function (itemId, cnt, ctrK) {
 };
 
 function requeue(event) {
-    for (var x = 0; x < 50; x++) {
+    for (var x = 0; x < settings.hotbuild_requeue_amount; x++) {
         for (var i = 0; i < recentQueueCommands.length; i++) {
             var cmd = recentQueueCommands[i];
             oldApiUnitBuild(cmd["id"], cmd["count"], cmd["ctrl"]);
