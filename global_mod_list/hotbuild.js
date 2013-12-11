@@ -1,15 +1,15 @@
 //IntelliSense for WebMatrix /VS
-/// <reference path="jquery-1.9.1-vsdoc.js" /> 
-/// <reference path="knockout-2.2.1.debug.js" />
+/// <reference path="../vsdoc/jquery-1.9.1-vsdoc.js" /> 
+/// <reference path="../vsdoc/knockout-2.2.1.debug.js" />
 
 action_sets.hotbuild = {}; //adds a hotbuildgroup item to keys settings
 default_keybinds.hotbuild = {}; 
 //for the default keys and actions check the xxxkeys.js files
 
 //Make sure settings are set / if not set defaults
-initialSettingValue(hotbuild_reset_time,2000);
-initialSettingValue(hotbuild_requeue_amount,50);
-initialSettingValue(hotbuild_preview_display,'ON');
+initialSettingValue('hotbuild_reset_time',2000);
+initialSettingValue('hotbuild_requeue_amount',50);
+initialSettingValue('hotbuild_preview_display','ON');
 
 var settings = decode(localStorage.settings);
 
@@ -183,6 +183,69 @@ function requeue(event) {
         for (var i = 0; i < recentQueueCommands.length; i++) {
             var cmd = recentQueueCommands[i];
             oldApiUnitBuild(cmd["id"], cmd["count"], cmd["ctrl"]);
+        }
+    }
+}
+
+
+//same as the one in media\ui\alpha\shared\js\inputmap.js
+//problem default you can't give in the arrays with upper and lower keys
+//this version automaticaly gives in [binding,binding+shift] wich solves the problem
+function apply_keybindsHotbuild(set, used_keybinds, conflicts, resolve) {
+
+    var key;
+    var action;
+    var binding;
+    var clear_conflict;
+    var i;
+    var defaults = default_keybinds[set];
+
+    var squelch = function (e) {
+        if (e.preventDefault)
+            e.preventDefault();
+        return false;
+    }
+
+    // kill bad chrome defaults. todo: get list of all default bindings
+    Mousetrap.bind('backspace', squelch);
+
+    used_keybinds = (used_keybinds) ? used_keybinds : {};
+    conflicts = (conflicts) ? conflicts : [];
+
+    //console.log('apply_keybinds:' + set);
+
+    for (key in action_sets[set]) {
+        action = action_sets[set][key];
+        binding = defaults[key];
+
+        if (localStorage['keybinding_' + key] !== undefined)
+            binding = decode(localStorage['keybinding_' + key]);
+
+        //console.log(key + ":" + (binding) ? binding : "unbound");
+
+        if (resolve) {
+            clear_conflict = true;
+            for (i = 0; i < conflicts.length; i++) {
+                if (conflicts[i].binding === binding) {
+                    localStorage['keybinding_' + key] = encode('conflict');
+                    Mousetrap.unbind(binding);
+                    clear_conflict = false;
+                }
+            }
+
+            if (clear_conflict && binding === 'conflict')
+                localStorage.removeItem('keybinding_' + key);
+        }
+        else {
+            if (binding && binding !== 'conflict') {
+                if (used_keybinds[binding])
+                    conflicts.push({ 'set': set, 'key': key, 'binding': binding });
+                else {
+                    used_keybinds[binding] = true;
+                    binding = [binding,'shift+' + binding] //array with shift DIFFERENCE so both upper and lower case should work
+                    Mousetrap.bind(binding, _.partial(function (callback, event, binding) { callback(event, binding); event.preventDefault(); }, action));
+                }
+            }
         }
     }
 }

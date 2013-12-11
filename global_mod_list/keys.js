@@ -61,7 +61,7 @@ var hotbuild8 = [
 	'/pa/units/land/land_barrier/land_barrier.json'
 ];
 var hotbuild9 = [
-	'/pa/units/land/artillery_short/artillery_short.json',
+    '/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json',
 	'/pa/units/land/artillery_long/artillery_long.json'
 ];
 var hotbuild10 = [
@@ -86,8 +86,8 @@ action_sets['hotbuild']['hotbuild5'] = function (event) { myHotBuildViewModel.ho
 action_sets['hotbuild']['hotbuild6'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild6) };
 action_sets['hotbuild']['hotbuild7'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild7) };
 action_sets['hotbuild']['hotbuild8'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild8) };
-action_sets['hotbuild']['hotbuild9'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild9) };
-action_sets['hotbuild']['hotbuild10'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild10) };
+action_sets['hotbuild']['build Cata/Holkins'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild9) };
+action_sets['hotbuild']['build Storage'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild10) };
 
 //default bindings / you can change them in keyboard settings
 default_keybinds['hotbuild']['build MEX'] = 'e';
