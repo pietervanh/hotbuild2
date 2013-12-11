@@ -70,8 +70,6 @@ var hotbuild10 = [
 	'/pa/units/land/metal_storage/metal_storage.json'
 ];
 
-action_sets.hotbuild = {};
-default_keybinds.hotbuild = {};
 
 //Special Actions
 action_sets['hotbuild']['Toggle Energy'] = function (event) { energyToggle(event) };
