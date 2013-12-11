@@ -77,6 +77,18 @@ action_sets['hotbuild']['Requeue'] = function (event) { requeue(event) };
 default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
 default_keybinds['hotbuild']['Lock Pole'] = '^';
 default_keybinds['hotbuild']['Requeue'] = 'o';
+
+//Fixes for Uber Casesensitive keybinds
+action_sets['hotbuild']['move'] = function(event) {hotbuildCommandMode(0)};
+action_sets['hotbuild']['attack'] = function(event) {hotbuildCommandMode(1)};
+action_sets['hotbuild']['assist'] = function(event) {hotbuildCommandMode(2)};
+action_sets['hotbuild']['repair'] = function(event) {hotbuildCommandMode(3)};
+action_sets['hotbuild']['reclaim'] = function(event) {hotbuildCommandMode(4)};
+action_sets['hotbuild']['patrol'] = function(event) {hotbuildCommandMode(5)};
+action_sets['hotbuild']['stop'] = function(event) {hotbuildCommandMode(-1)};
+action_sets['hotbuild']['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
+
+
 //add keybinds as you see fit
 action_sets['hotbuild']['build MEX'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
 action_sets['hotbuild']['build Power/Radar/SpamUnit'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
@@ -94,5 +106,21 @@ default_keybinds['hotbuild']['build MEX'] = 'e';
 default_keybinds['hotbuild']['build Power/Radar/SpamUnit'] = 'r';
 default_keybinds['hotbuild']['build Defence'] = 'q';
 default_keybinds['hotbuild']['build Factory/Fabber'] = 'f';
+
+default_keybinds['hotbuild']['hotbuild5'] = '';
+default_keybinds['hotbuild']['hotbuild6'] = '';
+default_keybinds['hotbuild']['hotbuild7'] = '';
+default_keybinds['hotbuild']['hotbuild8'] = '';
+default_keybinds['hotbuild']['build Cata/Holkins'] = '';
+default_keybinds['hotbuild']['build Storage'] = '';
+
+default_keybinds['hotbuild']['move'] = '';
+default_keybinds['hotbuild']['attack'] = '';
+default_keybinds['hotbuild']['assist'] = '';
+default_keybinds['hotbuild']['repair'] = '';
+default_keybinds['hotbuild']['reclaim'] = '';
+default_keybinds['hotbuild']['patrol'] = '';
+default_keybinds['hotbuild']['stop'] = 't';
+default_keybinds['hotbuild']['select commie'] = 'c';
 
 

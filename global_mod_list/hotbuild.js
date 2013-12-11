@@ -187,6 +187,13 @@ function requeue(event) {
     }
 }
 
+//Standard CommandMode functionality
+
+function hotbuildCommandMode(cmd) {
+    if (model['setCommandIndex']) {
+        model['setCommandIndex'](cmd);
+    }
+}
 
 //same as the one in media\ui\alpha\shared\js\inputmap.js
 //problem default you can't give in the arrays with upper and lower keys
