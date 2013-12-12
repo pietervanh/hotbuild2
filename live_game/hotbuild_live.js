@@ -5,13 +5,13 @@
 var settings = decode(localStorage.settings);
 
 model.hotbuild_preview_enabled = ko.computed(function () {
-    return settings.hotbuild_preview_display_val == 'ON';
+    return true;//settings.hotbuild_preview_display_val == 'ON';
 },this);
 
-//createFloatingFrame('hotbuild_info_frame', 320, 58, {'offset': 'leftCenter', 'left': 0});
+createFloatingFrame('hotbuild_info_frame', 320, 70, {'offset': 'leftCenter', 'left': 0});
 
-//$('#hotbuild_info_frame_content').append(
-$('body').append(
+$('#hotbuild_info_frame_content').append(
+//$('body').append(
 '<div id="hotbuild_info" class="ignoremouse" data-bind="Visible: model.hotbuild_preview_enabled , with: myHotBuildViewModel">' +
     //'<div data-bind="text: lastkey"/>' +
     //'<div data-bind="text: cycleid"/>' +
