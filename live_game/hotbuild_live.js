@@ -1,6 +1,6 @@
 //IntelliSense for WebMatrix /VS
-/// <reference path="../vsdoc/jquery-1.9.1-vsdoc.js" /> 
-/// <reference path="../vsdoc/knockout-2.2.1.debug.js" />
+/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
+/// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 
 var settings = decode(localStorage.settings);
 

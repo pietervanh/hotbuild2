@@ -1,6 +1,6 @@
 //IntelliSense for WebMatrix /VS
-/// <reference path="../vsdoc/jquery-1.9.1-vsdoc.js" /> 
-/// <reference path="../vsdoc/knockout-2.2.1.debug.js" />
+/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
+/// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 
 action_sets.hotbuild = {}; //adds a hotbuildgroup item to keys settings
 default_keybinds.hotbuild = {}; 
