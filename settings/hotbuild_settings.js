@@ -8,35 +8,20 @@ model.addSetting_Text('Hotbuild Requeue Amount','hotbuild_requeue_amount','UI','
 model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
 
-var hotbuilds1 = [
-	'/pa/units/land/vehicle_factory/vehicle_factory.json',
-	'/pa/units/land/bot_factory/bot_factory.json',
-    '/pa/units/land/fabrication_bot/fabrication_bot.json',
-	'/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json',
-	'/pa/units/land/fabrication_vehicle/fabrication_vehicle.json',
-	'/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json',
-	'/pa/units/air/fabrication_aircraft/fabrication_aircraft.json',
-	'/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json',
-];
-var hotbuilds2 = [
-	'/pa/units/air/air_factory_adv/air_factory_adv.json',
-	'/pa/units/sea/naval_factory_adv/naval_factory_adv.json',
-	'/pa/units/air/air_factory/air_factory.json',
-	'/pa/units/sea/naval_factory/naval_factory.json',
-	'/pa/units/land/land_scout/land_scout.json',
-	'/pa/units/air/air_scout/air_scout.json',
-	'/pa/units/land/bot_aa/bot_aa.json',
-	'/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json',
-	'/pa/units/land/bot_artillery_adv/bot_artillery_adv.json',
-	'/pa/units/air/fighter_adv/fighter_adv.json'
-];
-
 
 function HotBuildSettingsViewModel()
 {
     this.keyinfos = ko.observableArray([
-        {hbid:"hotbuilds1",info:hotbuilds1},
-        {hbid:"hotbuilds2",info:hotbuilds2}
+        {hbid:"hotbuild1",info:hotbuild1},
+        {hbid:"hotbuild2",info:hotbuild2},
+        {hbid:"hotbuild3",info:hotbuild3},
+        {hbid:"hotbuild4",info:hotbuild4},
+        {hbid:"hotbuild5",info:hotbuild5},
+        {hbid:"hotbuild6",info:hotbuild6},
+        {hbid:"hotbuild7",info:hotbuild7},
+        {hbid:"hotbuild8",info:hotbuild8},
+        {hbid:"hotbuild9",info:hotbuild9},
+        {hbid:"hotbuild10",info:hotbuild10}
     ]);
     this.selectedhotbuild = ko.observableArray([""]);
     //this.buildings = ko.observableArray(hotbuildgamemodel.unitSpecs());
