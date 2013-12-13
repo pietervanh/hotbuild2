@@ -93,8 +93,8 @@ action_sets['hotbuild']['select commie'] = input.doubleTap(api.select.commander,
 
 
 //add keybinds as you see fit
-action_sets['hotbuild']['build MEX'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
-action_sets['hotbuild']['build Power/Radar/SpamUnit'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
+action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
+action_sets['hotbuild']['hotbuild2'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
 action_sets['hotbuild']['build Defence'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
 action_sets['hotbuild']['build Factory/Fabber'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
 action_sets['hotbuild']['hotbuild5'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild5) };
@@ -105,8 +105,8 @@ action_sets['hotbuild']['build Cata/Holkins'] = function (event) { myHotBuildVie
 action_sets['hotbuild']['build Storage'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild10) };
 
 //default bindings / you can change them in keyboard settings
-default_keybinds['hotbuild']['build MEX'] = 'e';
-default_keybinds['hotbuild']['build Power/Radar/SpamUnit'] = 'r';
+default_keybinds['hotbuild']['hotbuild1'] = 'e';
+default_keybinds['hotbuild']['hotbuild2'] = 'r';
 default_keybinds['hotbuild']['build Defence'] = 'q';
 default_keybinds['hotbuild']['build Factory/Fabber'] = 'f';
 

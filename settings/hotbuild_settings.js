@@ -8,7 +8,7 @@ model.addSetting_Text('Hotbuild Requeue Amount','hotbuild_requeue_amount','UI','
 model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
 
-var hotbuilds1 = [
+var hotbuild1s = [
         {displayname:"Vec Factory",json:"/pa/units/land/vehicle_factory/vehicle_factory.json"},
         {displayname:"Bot Factory",json:"/pa/units/land/bot_factory/bot_factory.json"},
         {displayname:"BotFabber",factory:"botfac",json:"/pa/units/land/fabrication_bot/fabrication_bot.json"},
@@ -18,17 +18,18 @@ var hotbuilds1 = [
 
 ];
 
-hotbuildglobal[hotbuilds1] = hotbuilds1;
+hotbuildglobal[hotbuild1s] = hotbuild1s;
 
 
 function HotBuildSettingsViewModel()
 {
     var self = this;
-    self.test = "test";
     self.keyinfos = ko.observableArray([
-        {hbid:"hotbuilds1",info:hotbuildglobal[hotbuilds1]}
+        {hbid:"hotbuild1s",info:hotbuildglobal[hotbuild1s]}
     ]);
-    self.selectedhotbuild = ko.observableArray([{displayname:"Vec Factory",json:"/pa/units/land/vehicle_factory/vehicle_factory.json"}]);
+    self.selectedhotbuild = ko.observableArray([{displayname:"",json:""}]);
+
+
     //this.buildings = ko.observableArray(hotbuildgamemodel.unitSpecs());
     self.buildings = ko.observableArray([
                                          {displayname:"Bot Factory",json:"/pa/units/land/bot_factory/bot_factory.json"},
@@ -38,18 +39,24 @@ function HotBuildSettingsViewModel()
                                      {displayname:"BotFabber",factory:"botfac",json:"/pa/units/land/fabrication_bot/fabrication_bot.json"},
                                      {displayname:"VecFabber",factory:"vecfac",json:"/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"},
                                      {displayname:"AA Bot",factory:"botfac",json:"/pa/units/land/bot_aa/bot_aa.json"},
-                                     {displayname:"Scout",facotry:"vecfac",json:"/pa/units/land/land_scout/land_scout.json"}
+                                     {displayname:"Scout",factory:"vecfac",json:"/pa/units/land/land_scout/land_scout.json"}
                                     ]);
     self.selectedkeyinfo = ko.observable();
     self.selectKey = function () {
         self.selectedhotbuild(hotbuildglobal[eval(self.selectedkeyinfo())]);
     };
+
+    self.bindkey = ko.computed(function () {
+        if (self.selectedkeyinfo() != undefined) {
+            var hotbuildid = self.selectedkeyinfo();
+            hotbuildid = hotbuildid.substr(0, hotbuildid.length - 1);
+            return default_keybinds['hotbuild'][hotbuildid];
+        }
+    }, this);
     
     self.selectedbuilding = ko.observable();
     
     self.selectedunit = ko.observable();
-    
-    
 
     self.addBuilding = function () {
         self.selectedhotbuild.push(self.selectedbuilding());
@@ -81,15 +88,15 @@ function HotBuildSettingsViewModel()
     };
 
 }
-
+//todo read the json files dynamically but we can't :(
 var hbuisettings = new HotBuildSettingsViewModel();
 
 $("#game_settings").children(":first").append("<li class='game_settings'>" +
                 "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
             "</li>");
 $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" data-bind="with: hbuisettings" style="height: 400px; overflow: scroll; overflow-x:hidden;">' +
-                '<h1>Work in Progress<h1/><br/>' +
-                'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsText: \'hbid\', optionsValue: \'hbid\',optionsCaption: \'Select an key...\',click:$root.selectKey"></select><br/>' +
+                '<h3>Work in Progress<h3/><p>Please give comments/ideas on the forum</p>' +
+                'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsText: \'hbid\', optionsValue: \'hbid\',optionsCaption: \'Select an key...\',click:$root.selectKey"></select>&nbsp;<span data-bind="text: bindkey"/><br/>' +
                 'Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:\'displayname\', optionsCaption: \'Select an Building...\'"></select>' +
                 '<button id="hbuiaddbuilding" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.addBuilding">Add</button></br>' +
                 'Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:\'displayname\', optionsCaption: \'Select a unit...\'"></select>' +
@@ -105,17 +112,3 @@ $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" dat
             '</div>');
 
 ko.applyBindings(hbuisettings, $('#tab_hotbuildprefs')[0]);
-
-debugger;
-$.getJSON("../../../../../pa/units/land/bot_factory/bot_factory.json", function (data) {
-    debugger;
-    var items = [];
-    $.each(data, function (key, val) {
-        items.push("<li id='" + key + "'>" + val + "</li>");
-    });
-
-    $("<ul/>", {
-        "class": "my-new-list",
-        html: items.join("")
-    }).appendTo("#game_settings");
-});
