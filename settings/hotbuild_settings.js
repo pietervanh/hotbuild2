@@ -20,6 +20,7 @@ var hotbuilds1 = [
 
 hotbuildglobal[hotbuilds1] = hotbuilds1;
 
+
 function HotBuildSettingsViewModel()
 {
     var self = this;
@@ -104,3 +105,17 @@ $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" dat
             '</div>');
 
 ko.applyBindings(hbuisettings, $('#tab_hotbuildprefs')[0]);
+
+debugger;
+$.getJSON("../../../../../pa/units/land/bot_factory/bot_factory.json", function (data) {
+    debugger;
+    var items = [];
+    $.each(data, function (key, val) {
+        items.push("<li id='" + key + "'>" + val + "</li>");
+    });
+
+    $("<ul/>", {
+        "class": "my-new-list",
+        html: items.join("")
+    }).appendTo("#game_settings");
+});
