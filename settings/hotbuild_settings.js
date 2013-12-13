@@ -8,8 +8,6 @@ model.addSetting_Text('Hotbuild Requeue Amount','hotbuild_requeue_amount','UI','
 model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
 
-var hotbuildglobal = {};
-
 var hotbuilds1 = [
         {displayname:"Vec Factory",json:"/pa/units/land/vehicle_factory/vehicle_factory.json"},
         {displayname:"Bot Factory",json:"/pa/units/land/bot_factory/bot_factory.json"},
@@ -20,15 +18,16 @@ var hotbuilds1 = [
 
 ];
 
-hotbuildglobal[hotbuild1] = hotbuilds1;
+hotbuildglobal[hotbuilds1] = hotbuilds1;
 
 function HotBuildSettingsViewModel()
 {
     var self = this;
+    self.test = "test";
     self.keyinfos = ko.observableArray([
-        {hbid:"hotbuild1",info:hotbuildglobal[hotbuild1]}
+        {hbid:"hotbuilds1",info:hotbuildglobal[hotbuilds1]}
     ]);
-    self.selectedhotbuild = ko.observableArray([]);
+    self.selectedhotbuild = ko.observableArray([{displayname:"Vec Factory",json:"/pa/units/land/vehicle_factory/vehicle_factory.json"}]);
     //this.buildings = ko.observableArray(hotbuildgamemodel.unitSpecs());
     self.buildings = ko.observableArray([
                                          {displayname:"Bot Factory",json:"/pa/units/land/bot_factory/bot_factory.json"},
@@ -42,7 +41,7 @@ function HotBuildSettingsViewModel()
                                     ]);
     self.selectedkeyinfo = ko.observable();
     self.selectKey = function () {
-        self.selectedhotbuild(eval(self.selectedkeyinfo()));
+        self.selectedhotbuild(hotbuildglobal[eval(self.selectedkeyinfo())]);
     };
     
     self.selectedbuilding = ko.observable();
@@ -98,7 +97,7 @@ $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" dat
                 '<table cellspacing="2" cellpadding="2">' +
                 '<thead><tr><th>Building/Unit</th><th>JSON</th><th>Sequence</th></tr></thead>' +
                 '<tbody data-bind="foreach: selectedhotbuild">' +
-                '<tr><td data-bind="text: displayname"></td><td data-bind="text: json"></td><td><button id="hbremovefromlist" type="submit" data-bind="click: $root.remFromList">Del</button></td></tr>' +
+                '<tr><td data-bind="text: displayname"></td><td data-bind="text: json"></td><td><button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">Del</button></td></tr>' +
                 '</tbody>' +
                 '</table>' +
                 '<button id="hbuisave" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.Save">Save</button>' +

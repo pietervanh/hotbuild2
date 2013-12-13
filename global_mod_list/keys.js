@@ -3,6 +3,9 @@
 
 //// add variables with references to json files you want to hotbuild 
 //// look in your pa installfolder /media/pa/units/ to find what you want to put below
+
+var hotbuildglobal = {};
+
 var hotbuild1 = [
  	'/pa/units/land/metal_extractor_adv/metal_extractor_adv.json',
 	'/pa/units/land/metal_extractor/metal_extractor.json'
