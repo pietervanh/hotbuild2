@@ -78,7 +78,7 @@ function HotBuildSettingsViewModel()
 	                                     { displayname: "Radar", desc:"Radar", json: "/pa/units/land/radar/radar.json" },
                                          { displayname: "Halley", desc:"Delta-V Engine", json: "/pa/units/orbital/delta_v_engine/delta_v_engine.json" },
                                          { displayname: "Anti-Nuke Launcher", desc:"Anti-Nuke Launcher", json: "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json" },
-                                         { displayname: "Nuclear Missile Launcher", desc:"Nuclear Missile Launcher", json: "/pa/units/land/nuke_launcher/nuke_launcher.json" },
+                                         { displayname: "Nuclear Missile Launcher", desc:"Nuclear Missile Launcher", json: "/pa/units/land/nuke_launcher/nuke_launcher.json" }
                                         ]);
 	                                     self.units = ko.observableArray([
                                          { displayname: "Fabrication Bot", desc:"Fabrication Bot", factory: "botfac", json: "/pa/units/land/fabrication_bot/fabrication_bot.json" },
