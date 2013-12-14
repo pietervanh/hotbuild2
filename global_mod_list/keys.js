@@ -35,6 +35,7 @@ action_sets['hotbuild']['reclaim'] = function(event) {hotbuildCommandMode(4)};
 action_sets['hotbuild']['patrol'] = function(event) {hotbuildCommandMode(5)};
 action_sets['hotbuild']['stop'] = function(event) {hotbuildCommandMode(-1)};
 action_sets['hotbuild']['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
+action_sets['hotbuild']['unload'] = function(event) {hotbuildCommandMode(9)};
 
 default_keybinds['hotbuild']['move'] = '';
 default_keybinds['hotbuild']['attack'] = '';
@@ -44,7 +45,7 @@ default_keybinds['hotbuild']['reclaim'] = '';
 default_keybinds['hotbuild']['patrol'] = '';
 default_keybinds['hotbuild']['stop'] = '';
 default_keybinds['hotbuild']['select commie'] = '';
-
+default_keybinds['hotbuild']['unload'] = '';
 
 //add keybinds as you see fit
 action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild1s"]) };
@@ -59,9 +60,9 @@ action_sets['hotbuild']['hotbuild9'] = function (event) { myHotBuildViewModel.ho
 action_sets['hotbuild']['hotbuild10'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild10s"]) };
 
 //default bindings / you can change them in keyboard settings
-default_keybinds['hotbuild']['hotbuild1'] = 'e';
-default_keybinds['hotbuild']['hotbuild2'] = 'r';
-default_keybinds['hotbuild']['hotbuild3'] = 'q';
+default_keybinds['hotbuild']['hotbuild1'] = '';
+default_keybinds['hotbuild']['hotbuild2'] = '';
+default_keybinds['hotbuild']['hotbuild3'] = '';
 default_keybinds['hotbuild']['hotbuild4'] = '';
 default_keybinds['hotbuild']['hotbuild5'] = '';
 default_keybinds['hotbuild']['hotbuild6'] = '';
