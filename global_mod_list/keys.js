@@ -1,5 +1,3 @@
-//Personal Keys PRoeleert
-
 //set empty defaults
 var hotbuildglobal = {};
 hotbuildglobal["hotbuild1s"] = [];
@@ -12,6 +10,17 @@ hotbuildglobal["hotbuild7s"] = [];
 hotbuildglobal["hotbuild8s"] = [];
 hotbuildglobal["hotbuild9s"] = [];
 hotbuildglobal["hotbuild10s"] = [];
+hotbuildglobal["hotbuild11s"] = [];
+hotbuildglobal["hotbuild12s"] = [];
+hotbuildglobal["hotbuild13s"] = [];
+hotbuildglobal["hotbuild14s"] = [];
+hotbuildglobal["hotbuild15s"] = [];
+hotbuildglobal["hotbuild16s"] = [];
+hotbuildglobal["hotbuild17s"] = [];
+hotbuildglobal["hotbuild18s"] = [];
+hotbuildglobal["hotbuild19s"] = [];
+hotbuildglobal["hotbuild20s"] = [];
+
 
 //load hotbuildconfig from settings
 var settings = decode(localStorage.settings);
@@ -58,6 +67,17 @@ action_sets['hotbuild']['hotbuild7'] = function (event) { myHotBuildViewModel.ho
 action_sets['hotbuild']['hotbuild8'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild8s"]) };
 action_sets['hotbuild']['hotbuild9'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild9s"]) };
 action_sets['hotbuild']['hotbuild10'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild10s"]) };
+action_sets['hotbuild']['hotbuild11'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild11s"]) };
+action_sets['hotbuild']['hotbuild12'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild12s"]) };
+action_sets['hotbuild']['hotbuild13'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild13s"]) };
+action_sets['hotbuild']['hotbuild14'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild14s"]) };
+action_sets['hotbuild']['hotbuild15'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild15s"]) };
+action_sets['hotbuild']['hotbuild16'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild16s"]) };
+action_sets['hotbuild']['hotbuild17'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild17s"]) };
+action_sets['hotbuild']['hotbuild18'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild18s"]) };
+action_sets['hotbuild']['hotbuild19'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild19s"]) };
+action_sets['hotbuild']['hotbuild20'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild20s"]) };
+
 
 //default bindings / you can change them in keyboard settings
 default_keybinds['hotbuild']['hotbuild1'] = '';
@@ -70,6 +90,16 @@ default_keybinds['hotbuild']['hotbuild7'] = '';
 default_keybinds['hotbuild']['hotbuild8'] = '';
 default_keybinds['hotbuild']['hotbuild9'] = '';
 default_keybinds['hotbuild']['hotbuild10'] = '';
+default_keybinds['hotbuild']['hotbuild11'] = '';
+default_keybinds['hotbuild']['hotbuild12'] = '';
+default_keybinds['hotbuild']['hotbuild13'] = '';
+default_keybinds['hotbuild']['hotbuild14'] = '';
+default_keybinds['hotbuild']['hotbuild15'] = '';
+default_keybinds['hotbuild']['hotbuild16'] = '';
+default_keybinds['hotbuild']['hotbuild17'] = '';
+default_keybinds['hotbuild']['hotbuild18'] = '';
+default_keybinds['hotbuild']['hotbuild19'] = '';
+default_keybinds['hotbuild']['hotbuild20'] = '';
 
 
 
