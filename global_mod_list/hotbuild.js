@@ -42,16 +42,16 @@ function HotBuildViewModel(resetTime) {
         if (hotbuilds != undefined) {
             this.hotbuildPreviews([]);
             for (i = hbindex; i < hotbuilds.length; i++) {
-                if (this.knowsBuildCommand(hotbuilds[i])) {
-                    unitinfo = model.unitSpecs[hotbuilds[i]];
+                if (this.knowsBuildCommand(hotbuilds[i].json)) {
+                    unitinfo = model.unitSpecs[hotbuilds[i].json];
                     if (unitinfo.buildStructure) {
                         this.hotbuildPreviews.push(unitinfo.buildIcon);
                     }
                 }
             }
             for (j = 0; j < hbindex; j++) {
-                if (this.knowsBuildCommand(hotbuilds[j])) {
-                    unitinfo = model.unitSpecs[hotbuilds[j]];
+                if (this.knowsBuildCommand(hotbuilds[j].json)) {
+                    unitinfo = model.unitSpecs[hotbuilds[j].json];
                     if (unitinfo.buildStructure) {
                         this.hotbuildPreviews.push(unitinfo.buildIcon);
                     }
@@ -72,15 +72,15 @@ function HotBuildViewModel(resetTime) {
                         gameConsole.log("loop of death\n"); // I dont think this should ever happen...
                         return;
                     }
-                } while (!this.knowsBuildCommand(this.hotbuilds()[this.cycleid()]) && this.knowsAnyBuildCommand());
+                } while (!this.knowsBuildCommand(this.hotbuilds()[this.cycleid()].json) && this.knowsAnyBuildCommand());
 
-                if (model.unitSpecs[this.hotbuilds()[this.cycleid()]].buildStructure) {
-                    model['maybeSetBuildTarget'](this.hotbuilds()[this.cycleid()]);
+                if (model.unitSpecs[this.hotbuilds()[this.cycleid()].json].buildStructure) {
+                    model['maybeSetBuildTarget'](this.hotbuilds()[this.cycleid()].json);
                 }
                 else {
                     model.executeStartBuild(event, this.getBuildItemId())
                 }
-                this.unitName(model.unitSpecs[this.hotbuilds()[this.cycleid()]].name);
+                this.unitName(model.unitSpecs[this.hotbuilds()[this.cycleid()].json].name);
                 this.buildPreviewList(this.cycleid(), this.hotbuilds());
                 event.preventDefault();
             }
@@ -92,7 +92,7 @@ function HotBuildViewModel(resetTime) {
 
     this.knowsAnyBuildCommand = function () {
         for (var i = 0; i < this.hotbuilds().length; i++) {
-            if (this.knowsBuildCommand(this.hotbuilds()[i])) {
+            if (this.knowsBuildCommand(this.hotbuilds()[i].json)) {
                 return true;
             }
         }
@@ -128,7 +128,7 @@ function HotBuildViewModel(resetTime) {
 
     this.getBuildItemId = function () {
         for (var i = 0; i < model.buildItems().length; i++) {
-            if (model.buildItems()[i].id() == this.hotbuilds()[this.cycleid()]) {
+            if (model.buildItems()[i].id() == this.hotbuilds()[this.cycleid()].json) {
                 return i;
             }
         }

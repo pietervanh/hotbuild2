@@ -8,24 +8,13 @@ model.addSetting_Text('Hotbuild Requeue Amount','hotbuild_requeue_amount','UI','
 model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
 
-var hotbuild1s = [
-        {displayname:"Vec Factory",json:"/pa/units/land/vehicle_factory/vehicle_factory.json"},
-        {displayname:"Bot Factory",json:"/pa/units/land/bot_factory/bot_factory.json"},
-        {displayname:"BotFabber",factory:"botfac",json:"/pa/units/land/fabrication_bot/fabrication_bot.json"},
-        {displayname:"Adv BotFabber",factory:"advbotfac",json:"/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json"},
-        {displayname:"VecFabber",factory:"vecfac",json:"/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"},
-        {displayname:"Adv VecFabber",factory:"vecfac",json:"/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json"},
-
-];
-
-hotbuildglobal[hotbuild1s] = hotbuild1s;
-
-
 function HotBuildSettingsViewModel()
 {
     var self = this;
     self.keyinfos = ko.observableArray([
-        {hbid:"hotbuild1s",info:hotbuildglobal[hotbuild1s]}
+        {hbid:"hotbuild1s",info:hotbuildglobal["hotbuild1s"]},
+        {hbid:"hotbuild2s",info:hotbuildglobal["hotbuild2s"]},
+        {hbid:"hotbuild3s",info:hotbuildglobal["hotbuild3s"]}
     ]);
     self.selectedhotbuild = ko.observableArray([{displayname:"",json:""}]);
 
@@ -43,7 +32,7 @@ function HotBuildSettingsViewModel()
                                     ]);
     self.selectedkeyinfo = ko.observable();
     self.selectKey = function () {
-        self.selectedhotbuild(hotbuildglobal[eval(self.selectedkeyinfo())]);
+        self.selectedhotbuild(hotbuildglobal[self.selectedkeyinfo()]);
     };
 
     self.bindkey = ko.computed(function () {
@@ -85,6 +74,7 @@ function HotBuildSettingsViewModel()
     self.Save = function ()
     {
       hotbuildglobal[eval(self.selectedkeyinfo())] =  self.selectedhotbuild();
+      //save into settings
     };
 
 }
@@ -102,8 +92,8 @@ $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" dat
                 'Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:\'displayname\', optionsCaption: \'Select a unit...\'"></select>' +
                 '<button id="hbuiaddunit" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.addUnit">Add</button></br>' +
                 '<hr>' +
-                '<table cellspacing="2" cellpadding="2">' +
-                '<thead><tr><th>Building/Unit</th><th>JSON</th><th>Sequence</th></tr></thead>' +
+                '<table class="tbl_hotbuildsui">' +
+                '<thead><tr class="hotbuildsui_row_header"><th>Building/Unit</th><th>JSON</th><th>Sequence</th></tr></thead>' +
                 '<tbody data-bind="foreach: selectedhotbuild">' +
                 '<tr><td data-bind="text: displayname"></td><td data-bind="text: json"></td><td><button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">Del</button></td></tr>' +
                 '</tbody>' +

@@ -1,0 +1,12 @@
+.tbl_hotbuildsui
+{
+  width:100%;
+  text-align:left;
+}
+
+.tr_hotbuildsui_row_header
+{
+  text-align:left;
+  border-bottom:1px solid #888;
+  color:#0FF;
+}

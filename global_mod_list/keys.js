@@ -6,6 +6,31 @@
 
 var hotbuildglobal = {};
 
+
+var hotbuild1s = [
+        {displayname:"Vec Factory",json:"/pa/units/land/vehicle_factory/vehicle_factory.json"},
+        {displayname:"Bot Factory",json:"/pa/units/land/bot_factory/bot_factory.json"},
+        {displayname:"BotFabber",factory:"botfac",json:"/pa/units/land/fabrication_bot/fabrication_bot.json"},
+        {displayname:"Adv BotFabber",factory:"advbotfac",json:"/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json"},
+        {displayname:"VecFabber",factory:"vecfac",json:"/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"},
+        {displayname:"Adv VecFabber",factory:"vecfac",json:"/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json"},
+
+];
+
+
+//load keys from settings
+hotbuildglobal["hotbuild1s"] = hotbuild1s;
+
+hotbuildglobal["hotbuild2s"] = [];
+hotbuildglobal["hotbuild3s"] = [];
+hotbuildglobal["hotbuild4s"] = [];
+hotbuildglobal["hotbuild5s"] = [];
+hotbuildglobal["hotbuild6s"] = [];
+hotbuildglobal["hotbuild7s"] = [];
+hotbuildglobal["hotbuild8s"] = [];
+hotbuildglobal["hotbuild9s"] = [];
+hotbuildglobal["hotbuild10s"] = [];
+
 var hotbuild1 = [
  	'/pa/units/land/metal_extractor_adv/metal_extractor_adv.json',
 	'/pa/units/land/metal_extractor/metal_extractor.json'
@@ -77,6 +102,7 @@ var hotbuild10 = [
 action_sets['hotbuild']['Toggle Energy'] = function (event) { energyToggle(event) };
 action_sets['hotbuild']['Lock Pole'] = function (event) { polelockToggle(event) };
 action_sets['hotbuild']['Requeue'] = function (event) { requeue(event) };
+
 default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
 default_keybinds['hotbuild']['Lock Pole'] = '^';
 default_keybinds['hotbuild']['Requeue'] = 'o';
@@ -91,32 +117,6 @@ action_sets['hotbuild']['patrol'] = function(event) {hotbuildCommandMode(5)};
 action_sets['hotbuild']['stop'] = function(event) {hotbuildCommandMode(-1)};
 action_sets['hotbuild']['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
 
-
-//add keybinds as you see fit
-action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild1) };
-action_sets['hotbuild']['hotbuild2'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild2) };
-action_sets['hotbuild']['build Defence'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild3) };
-action_sets['hotbuild']['build Factory/Fabber'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild4) };
-action_sets['hotbuild']['hotbuild5'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild5) };
-action_sets['hotbuild']['hotbuild6'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild6) };
-action_sets['hotbuild']['hotbuild7'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild7) };
-action_sets['hotbuild']['hotbuild8'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild8) };
-action_sets['hotbuild']['build Cata/Holkins'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild9) };
-action_sets['hotbuild']['build Storage'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuild10) };
-
-//default bindings / you can change them in keyboard settings
-default_keybinds['hotbuild']['hotbuild1'] = 'e';
-default_keybinds['hotbuild']['hotbuild2'] = 'r';
-default_keybinds['hotbuild']['build Defence'] = 'q';
-default_keybinds['hotbuild']['build Factory/Fabber'] = 'f';
-
-default_keybinds['hotbuild']['hotbuild5'] = '';
-default_keybinds['hotbuild']['hotbuild6'] = '';
-default_keybinds['hotbuild']['hotbuild7'] = '';
-default_keybinds['hotbuild']['hotbuild8'] = '';
-default_keybinds['hotbuild']['build Cata/Holkins'] = '';
-default_keybinds['hotbuild']['build Storage'] = '';
-
 default_keybinds['hotbuild']['move'] = '';
 default_keybinds['hotbuild']['attack'] = '';
 default_keybinds['hotbuild']['assist'] = '';
@@ -125,5 +125,32 @@ default_keybinds['hotbuild']['reclaim'] = '';
 default_keybinds['hotbuild']['patrol'] = '';
 default_keybinds['hotbuild']['stop'] = 't';
 default_keybinds['hotbuild']['select commie'] = 'c';
+
+
+//add keybinds as you see fit
+action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild1s"]) };
+action_sets['hotbuild']['hotbuild2'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild2s"]) };
+action_sets['hotbuild']['hotbuild3'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild3s"]) };
+action_sets['hotbuild']['hotbuild4'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild4s"]) };
+action_sets['hotbuild']['hotbuild5'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild5s"]) };
+action_sets['hotbuild']['hotbuild6'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild6s"]) };
+action_sets['hotbuild']['hotbuild7'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild7s"]) };
+action_sets['hotbuild']['hotbuild8'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild8s"]) };
+action_sets['hotbuild']['hotbuild9'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild9s"]) };
+action_sets['hotbuild']['hotbuild10'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild10s"]) };
+
+//default bindings / you can change them in keyboard settings
+default_keybinds['hotbuild']['hotbuild1'] = 'e';
+default_keybinds['hotbuild']['hotbuild2'] = 'r';
+default_keybinds['hotbuild']['hotbuild3'] = 'q';
+default_keybinds['hotbuild']['hotbuild4'] = 'f';
+default_keybinds['hotbuild']['hotbuild5'] = '';
+default_keybinds['hotbuild']['hotbuild6'] = '';
+default_keybinds['hotbuild']['hotbuild7'] = '';
+default_keybinds['hotbuild']['hotbuild8'] = '';
+default_keybinds['hotbuild']['hotbuild9'] = '';
+default_keybinds['hotbuild']['hotbuild10'] = '';
+
+
 
 
