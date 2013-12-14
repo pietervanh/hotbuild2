@@ -101,6 +101,17 @@ default_keybinds['hotbuild']['hotbuild18'] = '';
 default_keybinds['hotbuild']['hotbuild19'] = '';
 default_keybinds['hotbuild']['hotbuild20'] = '';
 
-
-
-
+//remove default Uber bindings !
+default_keybinds['gameplay']['command mode [move]'] =  '';
+default_keybinds['gameplay']['command mode [attack]'] =  '';
+default_keybinds['gameplay']['command mode [assist]'] =  '';
+default_keybinds['gameplay']['command mode [repair]'] =  '';
+default_keybinds['gameplay']['command mode [reclaim]'] =  '';
+default_keybinds['gameplay']['command mode [patrol]'] =  '';
+default_keybinds['gameplay']['command mode [special move]'] =  '';
+default_keybinds['gameplay']['command mode [unload]'] =  '';
+default_keybinds['gameplay']['command mode [celestial move]'] =  '';
+default_keybinds['gameplay']['stop command'] =  '';
+default_keybinds['gameplay']['next build tab'] =  '';
+default_keybinds['gameplay']['select commander'] =  '';
+default_keybinds['gameplay']['select idle fabbers'] =  '';

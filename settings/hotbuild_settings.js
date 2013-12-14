@@ -125,9 +125,7 @@ function HotBuildSettingsViewModel()
 
     self.bindkey = ko.computed(function () {
         if (self.selectedkeyinfo() != undefined) {
-            var hotbuildid = self.selectedkeyinfo();
-            hotbuildid = hotbuildid.substr(0, hotbuildid.length - 1);
-            return eval("localStorage.keybinding_" + hotbuildid);
+            return eval("localStorage.keybinding_" + self.selectedkeyinfo());
         }
     }, this);
     
