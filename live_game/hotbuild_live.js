@@ -4,6 +4,15 @@
 
 var settings = decode(localStorage.settings);
 
+// take care of deleting all contents in the requeue array on any "stop" command
+var hotBuildOldSetCmd = model.setCommandIndex;
+model.setCommandIndex = function(index) {
+	hotBuildOldSetCmd(index);
+	if (index == -1) {
+		recentQueueCommands = [];
+	}
+};
+
 model.hotbuild_preview_enabled = ko.computed(function () {
     return true;//settings.hotbuild_preview_display_val == 'ON';
 },this);
