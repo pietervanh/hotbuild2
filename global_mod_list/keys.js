@@ -31,30 +31,6 @@ action_sets['hotbuild']['Toggle Energy'] = function (event) { energyToggle(event
 action_sets['hotbuild']['Lock Pole'] = function (event) { polelockToggle(event) };
 action_sets['hotbuild']['Requeue'] = function (event) { requeue(event) };
 
-default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
-default_keybinds['hotbuild']['Lock Pole'] = '^';
-default_keybinds['hotbuild']['Requeue'] = 'o';
-
-//Fixes for Uber Casesensitive keybinds
-action_sets['hotbuild']['move'] = function(event) {hotbuildCommandMode(0)};
-action_sets['hotbuild']['attack'] = function(event) {hotbuildCommandMode(1)};
-action_sets['hotbuild']['assist'] = function(event) {hotbuildCommandMode(2)};
-action_sets['hotbuild']['repair'] = function(event) {hotbuildCommandMode(3)};
-action_sets['hotbuild']['reclaim'] = function(event) {hotbuildCommandMode(4)};
-action_sets['hotbuild']['patrol'] = function(event) {hotbuildCommandMode(5)};
-action_sets['hotbuild']['stop'] = function(event) {hotbuildCommandMode(-1)};
-action_sets['hotbuild']['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
-action_sets['hotbuild']['unload'] = function(event) {hotbuildCommandMode(9)};
-
-default_keybinds['hotbuild']['move'] = '';
-default_keybinds['hotbuild']['attack'] = '';
-default_keybinds['hotbuild']['assist'] = '';
-default_keybinds['hotbuild']['repair'] = '';
-default_keybinds['hotbuild']['reclaim'] = '';
-default_keybinds['hotbuild']['patrol'] = '';
-default_keybinds['hotbuild']['stop'] = '';
-default_keybinds['hotbuild']['select commie'] = '';
-default_keybinds['hotbuild']['unload'] = '';
 
 //add keybinds as you see fit
 action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild1s"]) };
@@ -78,6 +54,32 @@ action_sets['hotbuild']['hotbuild18'] = function (event) { myHotBuildViewModel.h
 action_sets['hotbuild']['hotbuild19'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild19s"]) };
 action_sets['hotbuild']['hotbuild20'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild20s"]) };
 
+//Fixes for Uber Casesensitive keybinds
+action_sets['hotbuild']['move'] = function(event) {hotbuildCommandMode(0)};
+action_sets['hotbuild']['attack'] = function(event) {hotbuildCommandMode(1)};
+action_sets['hotbuild']['assist'] = function(event) {hotbuildCommandMode(2)};
+action_sets['hotbuild']['repair'] = function(event) {hotbuildCommandMode(3)};
+action_sets['hotbuild']['reclaim'] = function(event) {hotbuildCommandMode(4)};
+action_sets['hotbuild']['patrol'] = function(event) {hotbuildCommandMode(5)};
+action_sets['hotbuild']['stop'] = function(event) {hotbuildCommandMode(-1)};
+action_sets['hotbuild']['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
+action_sets['hotbuild']['unload'] = function(event) {hotbuildCommandMode(9)};
+
+
+default_keybinds['hotbuild']['Toggle Energy'] = '';
+default_keybinds['hotbuild']['Lock Pole'] = '';
+default_keybinds['hotbuild']['Requeue'] = '';
+
+
+default_keybinds['hotbuild']['move'] = '';
+default_keybinds['hotbuild']['attack'] = '';
+default_keybinds['hotbuild']['assist'] = '';
+default_keybinds['hotbuild']['repair'] = '';
+default_keybinds['hotbuild']['reclaim'] = '';
+default_keybinds['hotbuild']['patrol'] = '';
+default_keybinds['hotbuild']['stop'] = '';
+default_keybinds['hotbuild']['select commie'] = '';
+default_keybinds['hotbuild']['unload'] = '';
 
 //default bindings / you can change them in keyboard settings
 default_keybinds['hotbuild']['hotbuild1'] = '';
@@ -101,17 +103,3 @@ default_keybinds['hotbuild']['hotbuild18'] = '';
 default_keybinds['hotbuild']['hotbuild19'] = '';
 default_keybinds['hotbuild']['hotbuild20'] = '';
 
-//remove default Uber bindings !
-default_keybinds['gameplay']['command mode [move]'] =  '';
-default_keybinds['gameplay']['command mode [attack]'] =  '';
-default_keybinds['gameplay']['command mode [assist]'] =  '';
-default_keybinds['gameplay']['command mode [repair]'] =  '';
-default_keybinds['gameplay']['command mode [reclaim]'] =  '';
-default_keybinds['gameplay']['command mode [patrol]'] =  '';
-default_keybinds['gameplay']['command mode [special move]'] =  '';
-default_keybinds['gameplay']['command mode [unload]'] =  '';
-default_keybinds['gameplay']['command mode [celestial move]'] =  '';
-default_keybinds['gameplay']['stop command'] =  '';
-default_keybinds['gameplay']['next build tab'] =  '';
-default_keybinds['gameplay']['select commander'] =  '';
-default_keybinds['gameplay']['select idle fabbers'] =  '';

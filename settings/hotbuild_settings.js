@@ -42,8 +42,6 @@ function HotBuildSettingsViewModel()
     ]);
     self.selectedhotbuild = ko.observableArray([{displayname:"",desc:"",json:""}]);
 
-
-    //this.buildings = ko.observableArray(hotbuildgamemodel.unitSpecs());
     self.buildings = ko.observableArray([
                                          { displayname: "Bot Factory", desc:"Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
                                          { displayname: "Vehicle Factory", desc:"Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
@@ -199,11 +197,14 @@ function HotBuildSettingsViewModel()
             { displayname: "Advanced Naval Factory", desc:"Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
             { displayname: "Air Factory", desc:"Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
             { displayname: "Naval Factory", desc:"Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
+            { displayname: "Orbital Launcher", desc:"Orbital Launcher", json: "/pa/units/orbital/orbital_launcher/orbital_launcher.json" },
             { displayname: "Skitter", desc:"Land Scout", factory: "vecfac", json: "/pa/units/land/land_scout/land_scout.json" },
             { displayname: "Firefly", desc:"Air Scout", factory: "airfac", json: "/pa/units/air/air_scout/air_scout.json" },
             { displayname: "Stinger", desc:"AA Bot", factory: "botfac", json: "/pa/units/land/bot_aa/bot_aa.json" },
             { displayname: "Sheller", desc:"Artillery Tank", factory: "avecfac", json: "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json" },
             { displayname: "Perigrine", desc:"Advanced Fighter", factory: "aafac", json: "/pa/units/air/fighter_adv/fighter_adv.json" },
+            { displayname: "Dolphin", desc:"Attack Sub", factory: "nfac", json: "/pa/units/sea/attack_sub/attack_sub.json" },            
+            { displayname: "Stingray", desc:"Missile Ship", factory: "anfac", json: "/pa/units/sea/missile_ship/missile_ship.json" },
             { displayname: "SXX-1304 Laser Platform", desc:"Mining Laser", factory: "ofac", json: "/pa/units/orbital/orbital_laser/orbital_laser.json" }
         ];
         hotbuildglobal["hotbuild3s"] = [
@@ -214,17 +215,24 @@ function HotBuildSettingsViewModel()
             { displayname: "Ant", desc:"Tank", factory: "vecfac", json: "/pa/units/land/tank_light_laser/tank_light_laser.json" },
             { displayname: "Leveler", desc:"Advanced Tank", factory: "avecfac", json: "/pa/units/land/tank_laser_adv/tank_laser_adv.json" },
             { displayname: "Hummingbird", desc:"Fighter", factory: "airfac", json: "/pa/units/air/fighter/fighter.json" },
-            { displayname: "Hornet", desc:"Advanced Bomber", factory: "aafac", json: "/pa/units/air/bomber_adv/bomber_adv.json" }
+            { displayname: "Hornet", desc:"Advanced Bomber", factory: "aafac", json: "/pa/units/air/bomber_adv/bomber_adv.json" },
+            { displayname: "Bluebottle", desc:"Destroyer", factory: "nfac", json: "/pa/units/sea/destroyer/destroyer.json" },
+            { displayname: "Leviathan", desc:"Advanced Destroyer", factory: "anfac", json: "/pa/units/sea/battleship/battleship.json" },
+            { displayname: "Avenger", desc:"Orbital Fighter", factory: "ofac", json: "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }
         ];
         hotbuildglobal["hotbuild4s"] = [
             { displayname: "Advanced Vehicle Factory", desc:"Advanced Vehicle Factory", json: "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
             { displayname: "Advanced Bot Factory", desc:"Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
             { displayname: "Spinner", desc:"AA Tank", factory: "vecfac", json: "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
-            { displayname: "Bumblebee", desc:"Bomber", factory: "airfac", json: "/pa/units/air/bomber/bomber.json" }
+            { displayname: "Narwhal", desc:"AA Frigate", factory: "nfac", json: "/pa/units/sea/frigate/frigate.json" },
+            { displayname: "Barracuda", desc:"Nuclear Sub", factory: "anfac", json: "/pa/units/sea/nuclear_sub/nuclear_sub.json" },
+            { displayname: "Bumblebee", desc:"Bomber", factory: "airfac", json: "/pa/units/air/bomber/bomber.json" },
+            { displayname: "Astraeus", desc:"Orbital Lander", factory: "ofac", json: "/pa/units/orbital/orbital_lander/orbital_lander.json" }
         ];
         hotbuildglobal["hotbuild5s"] = [
             { displayname: "Advanced Energy Plant", desc:"Advanced Energy Plant", json: "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
-            { displayname: "Energy Plant", desc:"Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" }
+            { displayname: "Energy Plant", desc:"Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" },
+            { displayname: "Solar Array", desc:"Solar Panel Satellite", factory: "ofac", json: "/pa/units/orbital/solar_array/solar_array.json" }
         ];
         hotbuildglobal["hotbuild6s"] = [
             { displayname: "Adv Metal Extractor", desc:"Advanced Metal Extractor", json: "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
@@ -275,11 +283,11 @@ function HotBuildSettingsViewModel()
         default_keybinds['hotbuild']['move'] = 'm';
         default_keybinds['hotbuild']['attack'] = 'a';
         default_keybinds['hotbuild']['assist'] = 'i';
-        default_keybinds['hotbuild']['repair'] = 'r';
-        default_keybinds['hotbuild']['reclaim'] = 'e';
-        default_keybinds['hotbuild']['patrol'] = 'p';
-        default_keybinds['hotbuild']['stop'] = 's';
-        default_keybinds['hotbuild']['select commie'] = 'c';
+        default_keybinds['hotbuild']['repair'] = '';
+        default_keybinds['hotbuild']['reclaim'] = '';
+        default_keybinds['hotbuild']['patrol'] = 'q';
+        default_keybinds['hotbuild']['stop'] = 'y';
+        default_keybinds['hotbuild']['select commie'] = '';
         default_keybinds['hotbuild']['unload'] = 'u';
         default_keybinds['gameplay']['command mode [move]'] =  '';
         default_keybinds['gameplay']['command mode [attack]'] =  '';
@@ -294,6 +302,7 @@ function HotBuildSettingsViewModel()
         default_keybinds['gameplay']['next build tab'] =  '';
         default_keybinds['gameplay']['select commander'] =  '';
         default_keybinds['gameplay']['select idle fabbers'] =  '';
+        default_keybinds['gameplay']['track selection with camera'] =  '';
 
         model.restoreDefaultKeybinds();
     
@@ -306,8 +315,9 @@ $("#game_settings").children(":first").append("<li class='game_settings'>" +
                 "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
             "</li>");
 $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" data-bind="with: hbuisettings" style="height: 400px; overflow: scroll; overflow-x:hidden;">' +
-                '<p>Please give comments/ideas on the forum</p>' +
-                '<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.ComunityDefaults">Set Comunity Defaults</button><br/>' +
+                '<p>' +
+                '<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.ComunityDefaults">Set Comunity Defaults</button>' +
+                '&nbsp;&nbsp;Please give comments/ideas on the forum</p>' +
                 'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsText: \'hbid\', optionsValue: \'hbid\',optionsCaption: \'Select an key...\',click:$root.selectKey"></select>&nbsp;<span data-bind="text: bindkey"/><br/>' +
                 'Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:\'displayname\', optionsCaption: \'Select an Building...\'"></select>' +
                 '<button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: \'default\', rollover_sound: \'default\',click:$root.addBuilding">Add</button></br>' +
