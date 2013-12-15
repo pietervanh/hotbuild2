@@ -12,34 +12,38 @@ model.oldSettingsBeforeHotbuild = model.settings;
 model.settings = ko.computed(function () {
     var newSettings = model.oldSettingsBeforeHotbuild();
     newSettings.hotbuildconfig = hotbuildglobal;
+    newSettings.hotbuildconfigkey = hotbuildglobalkey;
+    newSettings.hotbuildconfigname = hotbuildglobalname;
     return newSettings;
 });
+
+var hbkeydropdown = [
+        { hbid: "hotbuild1", info: hotbuildglobal["hotbuild1s"], name: hotbuildglobalname["hotbuild1s"] },
+        { hbid: "hotbuild2", info: hotbuildglobal["hotbuild2s"], name: hotbuildglobalname["hotbuild2s"] },
+        { hbid: "hotbuild3", info: hotbuildglobal["hotbuild3s"], name: hotbuildglobalname["hotbuild3s"] },
+        { hbid: "hotbuild4", info: hotbuildglobal["hotbuild4s"], name: hotbuildglobalname["hotbuild4s"] },
+        { hbid: "hotbuild5", info: hotbuildglobal["hotbuild5s"], name: hotbuildglobalname["hotbuild5s"] },
+        { hbid: "hotbuild6", info: hotbuildglobal["hotbuild6s"], name: hotbuildglobalname["hotbuild6s"] },
+        { hbid: "hotbuild7", info: hotbuildglobal["hotbuild7s"], name: hotbuildglobalname["hotbuild7s"] },
+        { hbid: "hotbuild8", info: hotbuildglobal["hotbuild8s"], name: hotbuildglobalname["hotbuild8s"] },
+        { hbid: "hotbuild9", info: hotbuildglobal["hotbuild9s"], name: hotbuildglobalname["hotbuild9s"] },
+        { hbid: "hotbuild10", info: hotbuildglobal["hotbuild10s"], name: hotbuildglobalname["hotbuild10s"] },
+        { hbid: "hotbuild11", info: hotbuildglobal["hotbuild11s"], name: hotbuildglobalname["hotbuild11s"] },
+        { hbid: "hotbuild12", info: hotbuildglobal["hotbuild12s"], name: hotbuildglobalname["hotbuild12s"] },
+        { hbid: "hotbuild13", info: hotbuildglobal["hotbuild13s"], name: hotbuildglobalname["hotbuild13s"] },
+        { hbid: "hotbuild14", info: hotbuildglobal["hotbuild14s"], name: hotbuildglobalname["hotbuild14s"] },
+        { hbid: "hotbuild15", info: hotbuildglobal["hotbuild15s"], name: hotbuildglobalname["hotbuild15s"] },
+        { hbid: "hotbuild16", info: hotbuildglobal["hotbuild16s"], name: hotbuildglobalname["hotbuild16s"] },
+        { hbid: "hotbuild17", info: hotbuildglobal["hotbuild17s"], name: hotbuildglobalname["hotbuild17s"] },
+        { hbid: "hotbuild18", info: hotbuildglobal["hotbuild18s"], name: hotbuildglobalname["hotbuild18s"] },
+        { hbid: "hotbuild19", info: hotbuildglobal["hotbuild19s"], name: hotbuildglobalname["hotbuild19s"] },
+        { hbid: "hotbuild20", info: hotbuildglobal["hotbuild20s"], name: hotbuildglobalname["hotbuild20s"] }
+    ];
 
 function HotBuildSettingsViewModel()
 {
     var self = this;
-    self.keyinfos = ko.observableArray([
-        {hbid:"hotbuild1",info:hotbuildglobal["hotbuild1s"]},
-        {hbid:"hotbuild2",info:hotbuildglobal["hotbuild2s"]},       
-        {hbid:"hotbuild3",info:hotbuildglobal["hotbuild3s"]},
-        {hbid:"hotbuild4",info:hotbuildglobal["hotbuild4s"]},
-        {hbid:"hotbuild5",info:hotbuildglobal["hotbuild5s"]},
-        {hbid:"hotbuild6",info:hotbuildglobal["hotbuild6s"]},
-        {hbid:"hotbuild7",info:hotbuildglobal["hotbuild7s"]},
-        {hbid:"hotbuild8",info:hotbuildglobal["hotbuild8s"]},
-        {hbid:"hotbuild9",info:hotbuildglobal["hotbuild9s"]},
-        {hbid:"hotbuild10",info:hotbuildglobal["hotbuild10s"]},
-        {hbid:"hotbuild11",info:hotbuildglobal["hotbuild11s"]},
-        {hbid:"hotbuild12",info:hotbuildglobal["hotbuild12s"]},       
-        {hbid:"hotbuild13",info:hotbuildglobal["hotbuild13s"]},
-        {hbid:"hotbuild14",info:hotbuildglobal["hotbuild14s"]},
-        {hbid:"hotbuild15",info:hotbuildglobal["hotbuild15s"]},
-        {hbid:"hotbuild16",info:hotbuildglobal["hotbuild16s"]},
-        {hbid:"hotbuild17",info:hotbuildglobal["hotbuild17s"]},
-        {hbid:"hotbuild18",info:hotbuildglobal["hotbuild18s"]},
-        {hbid:"hotbuild19",info:hotbuildglobal["hotbuild19s"]},
-        {hbid:"hotbuild20",info:hotbuildglobal["hotbuild20s"]}
-    ]);
+    self.keyinfos = ko.observableArray(hbkeydropdown);
     self.selectedhotbuild = ko.observableArray([{displayname:"",desc:"",json:""}]);
 
     self.buildings = ko.observableArray([
@@ -122,11 +126,33 @@ function HotBuildSettingsViewModel()
         self.selectedhotbuild(hotbuildglobal[self.selectedkeyinfo() + "s"]);
     };
 
+    self.hbkey = ko.computed({
+        read: function () {
+            return hotbuildglobalkey[self.selectedkeyinfo() + "s"];
+        },
+        write: function (value) {
+            hotbuildglobalkey[self.selectedkeyinfo() + "s"] = value;
+        },
+        owner: self
+    });
+
+    self.hbname = ko.computed({
+        read: function () {
+            return hotbuildglobalname[self.selectedkeyinfo() + "s"];
+        },
+        write: function (value) {
+            hotbuildglobalname[self.selectedkeyinfo() + "s"] = value;
+        },
+        owner: self
+    });
+
+    /*
     self.bindkey = ko.computed(function () {
         if (self.selectedkeyinfo() != undefined) {
             return eval("localStorage.keybinding_" + self.selectedkeyinfo());
         }
     }, this);
+    */
     
     self.selectedbuilding = ko.observable();
     
@@ -173,11 +199,10 @@ function HotBuildSettingsViewModel()
         }
         self.Save();
     };
-        
-    self.Save = function ()
-    {
-      hotbuildglobal[self.selectedkeyinfo()] =  self.selectedhotbuild();
-      //save into settings
+
+    self.Save = function () {
+        hotbuildglobal[self.selectedkeyinfo()] = self.selectedhotbuild();
+        self.keyinfos(hbkeydropdown);
     };
 
     self.ComunityDefaults = function () {
@@ -268,16 +293,39 @@ function HotBuildSettingsViewModel()
         hotbuildglobal["hotbuild19s"] = [];
         hotbuildglobal["hotbuild20s"] = [];
 
-        default_keybinds['hotbuild']['hotbuild1'] = 'w';
-        default_keybinds['hotbuild']['hotbuild2'] = 'e';
-        default_keybinds['hotbuild']['hotbuild3'] = 'r';
-        default_keybinds['hotbuild']['hotbuild4'] = 't';
-        default_keybinds['hotbuild']['hotbuild5'] = 'f';
-        default_keybinds['hotbuild']['hotbuild6'] = 's';
-        default_keybinds['hotbuild']['hotbuild7'] = 'x';
-        default_keybinds['hotbuild']['hotbuild8'] = 'c';
-        default_keybinds['hotbuild']['hotbuild9'] = 'v';
-        default_keybinds['hotbuild']['hotbuild10'] = 'd';
+        hotbuildglobalkey["hotbuild1s"] = 'w';
+        hotbuildglobalkey["hotbuild2s"] = 'e';
+        hotbuildglobalkey["hotbuild3s"] = 'r';
+        hotbuildglobalkey["hotbuild4s"] = 't';
+        hotbuildglobalkey["hotbuild5s"] = 'f';
+        hotbuildglobalkey["hotbuild6s"] = 's';
+        hotbuildglobalkey["hotbuild7s"] = 'x';
+        hotbuildglobalkey["hotbuild8s"] = 'c';
+        hotbuildglobalkey["hotbuild9s"] = 'v';
+        hotbuildglobalkey["hotbuild10s"] = 'd';
+
+        default_keybinds['hotbuild']['hotbuild1'] = '';
+        default_keybinds['hotbuild']['hotbuild2'] = '';
+        default_keybinds['hotbuild']['hotbuild3'] = '';
+        default_keybinds['hotbuild']['hotbuild4'] = '';
+        default_keybinds['hotbuild']['hotbuild5'] = '';
+        default_keybinds['hotbuild']['hotbuild6'] = '';
+        default_keybinds['hotbuild']['hotbuild7'] = '';
+        default_keybinds['hotbuild']['hotbuild8'] = '';
+        default_keybinds['hotbuild']['hotbuild9'] = '';
+        default_keybinds['hotbuild']['hotbuild10'] = '';
+
+        hotbuildglobalkey["hotbuilds1"] = 'w';
+        hotbuildglobalkey["hotbuilds2"] = 'e';
+        hotbuildglobalkey["hotbuilds3"] = 'r';
+        hotbuildglobalkey["hotbuilds4"] = 't';
+        hotbuildglobalkey["hotbuilds5"] = 'f';
+        hotbuildglobalkey["hotbuilds6"] = 's';
+        hotbuildglobalkey["hotbuilds7"] = 'x';
+        hotbuildglobalkey["hotbuilds8"] = 'c';
+        hotbuildglobalkey["hotbuilds9"] = 'v';
+        hotbuildglobalkey["hotbuilds10"] = 'd';
+
         default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
         default_keybinds['hotbuild']['Lock Pole'] = '^';
         default_keybinds['hotbuild']['Requeue'] = 'o';
@@ -287,8 +335,8 @@ function HotBuildSettingsViewModel()
         default_keybinds['hotbuild']['repair'] = '';
         default_keybinds['hotbuild']['reclaim'] = '';
         default_keybinds['hotbuild']['patrol'] = 'q';
-        default_keybinds['hotbuild']['stop'] = 'y';
-        default_keybinds['hotbuild']['select commie'] = '';
+        default_keybinds['hotbuild']['stop'] = 's';
+        default_keybinds['hotbuild']['select commie'] = 'c';
         default_keybinds['hotbuild']['unload'] = 'u';
         default_keybinds['gameplay']['command mode [move]'] = '';
         default_keybinds['gameplay']['command mode [attack]'] = '';
@@ -321,7 +369,11 @@ $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" dat
                 '<p>' +
                 '<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.ComunityDefaults">Set Community Defaults</button>' +
                 '&nbsp;&nbsp;Please give comments/ideas on the forum</p>' +
-                'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsText: \'hbid\', optionsValue: \'hbid\',optionsCaption: \'Select an key...\',click:$root.selectKey"></select>&nbsp;<span data-bind="text: bindkey"/><br/>' +
+                //'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: \'hbid\', optionsText: function(item) {if(item.name != \'\' && item.name != undefined){ return item.name } else { return item.hbid }},optionsCaption: \'Select an key...\',click:$root.selectKey"></select>' + 
+                'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: \'hbid\', optionsText: \'hbid\',optionsCaption: \'Select an key...\',click:$root.selectKey"></select>' + 
+                '&nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;"/>' +
+                '&nbsp; Name: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbname" id=hbuihotbuildname"/><br/>' +
+                //'&nbsp;<span data-bind="text: bindkey"/><br/>' +
                 'Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:\'displayname\', optionsCaption: \'Select an Building...\'"></select>' +
                 '<button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: \'default\', rollover_sound: \'default\',click:$root.addBuilding">Add</button></br>' +
                 'Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:\'displayname\', optionsCaption: \'Select a unit...\'"></select>' +

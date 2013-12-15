@@ -38,3 +38,24 @@ $('#hotbuild_info_frame_content').append(
 ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
 
 apply_keybindsHotbuild('hotbuild');
+
+//fix for allowing multiple bindings per key
+//for example stop = s / build mex = s
+// stop = s = default mousetrap binding
+// build mex = hotbuild key = using keydown
+$(document).keydown(function (e) {
+
+    if (!model.hasSelection() || model.showLanding() || model.chatSelected())
+        return;
+
+    var value = String.fromCharCode(e.keyCode).toLowerCase();
+    
+    for (i = 1; i <= 20; i++) {
+        if (hotbuildglobalkey["hotbuild" + i + "s"] ==  value) {
+            myHotBuildViewModel.hotBuild(e, hotbuildglobal["hotbuild" + i + "s"]);
+            break;
+        }
+    }
+
+
+});

@@ -21,10 +21,58 @@ hotbuildglobal["hotbuild18s"] = [];
 hotbuildglobal["hotbuild19s"] = [];
 hotbuildglobal["hotbuild20s"] = [];
 
+var hotbuildglobalname = {};
+
+hotbuildglobalname["hotbuild1s"] = "";
+hotbuildglobalname["hotbuild2s"] = "";
+hotbuildglobalname["hotbuild3s"] = "";
+hotbuildglobalname["hotbuild4s"] = "";
+hotbuildglobalname["hotbuild5s"] = "";
+hotbuildglobalname["hotbuild6s"] = "";
+hotbuildglobalname["hotbuild7s"] = "";
+hotbuildglobalname["hotbuild8s"] = "";
+hotbuildglobalname["hotbuild9s"] = "";
+hotbuildglobalname["hotbuild10s"] = "";
+hotbuildglobalname["hotbuild11s"] = "";
+hotbuildglobalname["hotbuild12s"] = "";
+hotbuildglobalname["hotbuild13s"] = "";
+hotbuildglobalname["hotbuild14s"] = "";
+hotbuildglobalname["hotbuild15s"] = "";
+hotbuildglobalname["hotbuild16s"] = "";
+hotbuildglobalname["hotbuild17s"] = "";
+hotbuildglobalname["hotbuild18s"] = "";
+hotbuildglobalname["hotbuild19s"] = "";
+hotbuildglobalname["hotbuild20s"] = "";
+
+var hotbuildglobalkey = {}
+
+hotbuildglobalkey["hotbuild1s"] = "";
+hotbuildglobalkey["hotbuild2s"] = "";
+hotbuildglobalkey["hotbuild3s"] = "";
+hotbuildglobalkey["hotbuild4s"] = "";
+hotbuildglobalkey["hotbuild5s"] = "";
+hotbuildglobalkey["hotbuild6s"] = "";
+hotbuildglobalkey["hotbuild7s"] = "";
+hotbuildglobalkey["hotbuild8s"] = "";
+hotbuildglobalkey["hotbuild9s"] = "";
+hotbuildglobalkey["hotbuild10s"] = "";
+hotbuildglobalkey["hotbuild11s"] = "";
+hotbuildglobalkey["hotbuild12s"] = "";
+hotbuildglobalkey["hotbuild13s"] = "";
+hotbuildglobalkey["hotbuild14s"] = "";
+hotbuildglobalkey["hotbuild15s"] = "";
+hotbuildglobalkey["hotbuild16s"] = "";
+hotbuildglobalkey["hotbuild17s"] = "";
+hotbuildglobalkey["hotbuild18s"] = "";
+hotbuildglobalkey["hotbuild19s"] = "";
+hotbuildglobalkey["hotbuild20s"] = "";
+
 
 //load hotbuildconfig from settings
 var settings = decode(localStorage.settings);
 hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
+hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
+hotbuildglobalname = settings.hotbuildconfigname ? settings.hotbuildconfigname : hotbuildglobalname;
 
 //Special Actions
 action_sets['hotbuild']['Toggle Energy'] = function (event) { energyToggle(event) };
@@ -33,6 +81,7 @@ action_sets['hotbuild']['Requeue'] = function (event) { requeue(event) };
 
 
 //add keybinds as you see fit
+/*
 action_sets['hotbuild']['hotbuild1'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild1s"]) };
 action_sets['hotbuild']['hotbuild2'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild2s"]) };
 action_sets['hotbuild']['hotbuild3'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild3s"]) };
@@ -53,7 +102,29 @@ action_sets['hotbuild']['hotbuild17'] = function (event) { myHotBuildViewModel.h
 action_sets['hotbuild']['hotbuild18'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild18s"]) };
 action_sets['hotbuild']['hotbuild19'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild19s"]) };
 action_sets['hotbuild']['hotbuild20'] = function (event) { myHotBuildViewModel.hotBuild(event, hotbuildglobal["hotbuild20s"]) };
-
+*/
+/*
+action_sets['hotbuild']['hotbuild1'] = '';
+action_sets['hotbuild']['hotbuild2'] = '';
+action_sets['hotbuild']['hotbuild3'] = '';
+action_sets['hotbuild']['hotbuild4'] = '';
+action_sets['hotbuild']['hotbuild5'] = '';
+action_sets['hotbuild']['hotbuild6'] = '';
+action_sets['hotbuild']['hotbuild7'] = '';
+action_sets['hotbuild']['hotbuild8'] = '';
+action_sets['hotbuild']['hotbuild9'] = '';
+action_sets['hotbuild']['hotbuild10'] = '';
+action_sets['hotbuild']['hotbuild11'] = '';
+action_sets['hotbuild']['hotbuild12'] = '';
+action_sets['hotbuild']['hotbuild13'] = '';
+action_sets['hotbuild']['hotbuild14'] = '';
+action_sets['hotbuild']['hotbuild15'] = '';
+action_sets['hotbuild']['hotbuild16'] = '';
+action_sets['hotbuild']['hotbuild17'] = '';
+action_sets['hotbuild']['hotbuild18'] = '';
+action_sets['hotbuild']['hotbuild19'] = '';
+action_sets['hotbuild']['hotbuild20'] = '';
+*/
 //Fixes for Uber Casesensitive keybinds
 action_sets['hotbuild']['move'] = function(event) {hotbuildCommandMode(0)};
 action_sets['hotbuild']['attack'] = function(event) {hotbuildCommandMode(1)};
@@ -82,6 +153,7 @@ default_keybinds['hotbuild']['select commie'] = '';
 default_keybinds['hotbuild']['unload'] = '';
 
 //default bindings / you can change them in keyboard settings
+/*
 default_keybinds['hotbuild']['hotbuild1'] = '';
 default_keybinds['hotbuild']['hotbuild2'] = '';
 default_keybinds['hotbuild']['hotbuild3'] = '';
@@ -102,4 +174,5 @@ default_keybinds['hotbuild']['hotbuild17'] = '';
 default_keybinds['hotbuild']['hotbuild18'] = '';
 default_keybinds['hotbuild']['hotbuild19'] = '';
 default_keybinds['hotbuild']['hotbuild20'] = '';
+*/
 

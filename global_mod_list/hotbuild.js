@@ -100,12 +100,20 @@ function HotBuildViewModel(resetTime) {
     }
 
     this.knowsBuildCommand = function (cmd) {
+        /*
         for (var i = 0; i < model.buildTabLists()[0].length; i++) {
             if (model.buildTabLists()[0][i].id == cmd) {
                 return true;
             }
-        }
+        }*/
+
+		for(var i = 0; i < model.buildItems().length; i++) {
+			if (model.buildItems()[i].id() == cmd) {
+				return true;
+			}
+		}
         return false;
+
     }
 
     //move trough hotbuilds array when pushing multiple time the same key in a certain time interval
@@ -190,6 +198,7 @@ function requeue(event) {
 //Standard CommandMode functionality
 
 function hotbuildCommandMode(cmd) {
+    debugger;
     if (model['setCommandIndex']) {
         model['setCommandIndex'](cmd);
     }
