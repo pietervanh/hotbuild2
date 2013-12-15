@@ -17,7 +17,7 @@ model.hotbuild_preview_enabled = ko.computed(function () {
     return true;//settings.hotbuild_preview_display_val == 'ON';
 },this);
 
-createFloatingFrame('hotbuild_info_frame', 320, 70, {'offset': 'leftCenter', 'right': 10});
+createFloatingFrame('hotbuild_info_frame', 320, 70, {'offset': 'leftCenter', 'top': -200});
 
 $('#hotbuild_info_frame_content').append(
 //$('body').append(
