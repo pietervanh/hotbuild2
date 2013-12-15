@@ -69,6 +69,7 @@ function HotBuildSettingsViewModel()
                                          { displayname: "Umbrella", desc:"Orbital Defense (ground to orbital)", json: "/pa/units/orbital/ion_defense/ion_defense.json" },
                                          { displayname: "Jelly Fish", desc:"Sea Mine", json: "/pa/units/sea/sea_mine/sea_mine.json" },
                                          { displayname: "Sonar", desc:"Sonar", json: "/pa/units/sea/sonar/sonar.json" },
+                                         { displayname: "Advanced Sonar", desc:"Advanced Sonar", json: "/pa/units/sea/sonar_adv/sonar_adv.json" },
                                          { displayname: "Torpedo Launcher", desc:"Torpedo Launcher", json: "/pa/units/sea/torpedo_launcher/torpedo_launcher.json" },
                                          { displayname: "Advanced Torpedo Launcher", desc:"Advanced Torpedo Launcher", json: "/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json" },
                                          { displayname: "Orbital and Deepspace Radar", desc:"Orbital and Deepspace Radar", json: "/pa/units/orbital/deep_space_radar/deep_space_radar.json" },
@@ -316,7 +317,7 @@ $("#game_settings").children(":first").append("<li class='game_settings'>" +
             "</li>");
 $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" data-bind="with: hbuisettings" style="height: 400px; overflow: scroll; overflow-x:hidden;">' +
                 '<p>' +
-                '<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.ComunityDefaults">Set Comunity Defaults</button>' +
+                '<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.ComunityDefaults">Set Community Defaults</button>' +
                 '&nbsp;&nbsp;Please give comments/ideas on the forum</p>' +
                 'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsText: \'hbid\', optionsValue: \'hbid\',optionsCaption: \'Select an key...\',click:$root.selectKey"></select>&nbsp;<span data-bind="text: bindkey"/><br/>' +
                 'Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:\'displayname\', optionsCaption: \'Select an Building...\'"></select>' +
