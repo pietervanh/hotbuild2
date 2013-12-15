@@ -182,80 +182,80 @@ function HotBuildSettingsViewModel()
 
     self.ComunityDefaults = function () {
         hotbuildglobal["hotbuild1s"] = [
-            { displayname: "Vehicle Factory", desc:"Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
-            { displayname: "Bot Factory", desc:"Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
-            { displayname: "Advanced Fabrication Bot", desc:"Advanced Fabrication Bot", factory: "abotfac", json: "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
-            { displayname: "Fabrication Bot", desc:"Fabrication Bot", factory: "botfac", json: "/pa/units/land/fabrication_bot/fabrication_bot.json" },
-            { displayname: "Advanced Fabrication Vehicle", desc:"Advanced Fabrication Vehicle", factory: "avecfac", json: "/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json" },
-            { displayname: "Fabrication Vehicle", desc:"Fabrication Vehicle", factory: "vecfac", json: "/pa/units/land/fabrication_vehicle/fabrication_vehicle.json" },
-            { displayname: "Advanced Fab Aircraft", desc:"Advanced Fab Aircraft", factory: "aafac", json: "/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json" },
-            { displayname: "Fabrication Aircraft", desc:"Fabrication Aircraft", factory: "airfac", json: "/pa/units/air/fabrication_aircraft/fabrication_aircraft.json" },
-            { displayname: "Advanced Fabrication Ship", desc:"Advanced Fabrication Ship", factory: "anfac", json: "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" },
-            { displayname: "Fabrication Ship", desc:"Fabrication Ship", factory: "nfac", json: "/pa/units/sea/fabrication_ship/fabrication_ship.json" }
+            { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
+            { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
+            { displayname: "Advanced Fabrication Bot", desc: "Advanced Fabrication Bot", factory: "abotfac", json: "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
+            { displayname: "Fabrication Bot", desc: "Fabrication Bot", factory: "botfac", json: "/pa/units/land/fabrication_bot/fabrication_bot.json" },
+            { displayname: "Advanced Fabrication Vehicle", desc: "Advanced Fabrication Vehicle", factory: "avecfac", json: "/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json" },
+            { displayname: "Fabrication Vehicle", desc: "Fabrication Vehicle", factory: "vecfac", json: "/pa/units/land/fabrication_vehicle/fabrication_vehicle.json" },
+            { displayname: "Advanced Fab Aircraft", desc: "Advanced Fab Aircraft", factory: "aafac", json: "/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json" },
+            { displayname: "Fabrication Aircraft", desc: "Fabrication Aircraft", factory: "airfac", json: "/pa/units/air/fabrication_aircraft/fabrication_aircraft.json" },
+            { displayname: "Advanced Fabrication Ship", desc: "Advanced Fabrication Ship", factory: "anfac", json: "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" },
+            { displayname: "Fabrication Ship", desc: "Fabrication Ship", factory: "nfac", json: "/pa/units/sea/fabrication_ship/fabrication_ship.json" }
         ];
         hotbuildglobal["hotbuild2s"] = [
-	        { displayname: "Advanced Air Factory", desc:"Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
-            { displayname: "Advanced Naval Factory", desc:"Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
-            { displayname: "Air Factory", desc:"Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
-            { displayname: "Naval Factory", desc:"Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
-            { displayname: "Orbital Launcher", desc:"Orbital Launcher", json: "/pa/units/orbital/orbital_launcher/orbital_launcher.json" },
-            { displayname: "Skitter", desc:"Land Scout", factory: "vecfac", json: "/pa/units/land/land_scout/land_scout.json" },
-            { displayname: "Firefly", desc:"Air Scout", factory: "airfac", json: "/pa/units/air/air_scout/air_scout.json" },
-            { displayname: "Stinger", desc:"AA Bot", factory: "botfac", json: "/pa/units/land/bot_aa/bot_aa.json" },
-            { displayname: "Sheller", desc:"Artillery Tank", factory: "avecfac", json: "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json" },
-            { displayname: "Perigrine", desc:"Advanced Fighter", factory: "aafac", json: "/pa/units/air/fighter_adv/fighter_adv.json" },
-            { displayname: "Dolphin", desc:"Attack Sub", factory: "nfac", json: "/pa/units/sea/attack_sub/attack_sub.json" },            
-            { displayname: "Stingray", desc:"Missile Ship", factory: "anfac", json: "/pa/units/sea/missile_ship/missile_ship.json" },
-            { displayname: "SXX-1304 Laser Platform", desc:"Mining Laser", factory: "ofac", json: "/pa/units/orbital/orbital_laser/orbital_laser.json" }
+	        { displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+            { displayname: "Advanced Naval Factory", desc: "Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
+            { displayname: "Air Factory", desc: "Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
+            { displayname: "Naval Factory", desc: "Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
+            { displayname: "Orbital Launcher", desc: "Orbital Launcher", json: "/pa/units/orbital/orbital_launcher/orbital_launcher.json" },
+            { displayname: "Skitter", desc: "Land Scout", factory: "vecfac", json: "/pa/units/land/land_scout/land_scout.json" },
+            { displayname: "Firefly", desc: "Air Scout", factory: "airfac", json: "/pa/units/air/air_scout/air_scout.json" },
+            { displayname: "Stinger", desc: "AA Bot", factory: "botfac", json: "/pa/units/land/bot_aa/bot_aa.json" },
+            { displayname: "Sheller", desc: "Artillery Tank", factory: "avecfac", json: "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json" },
+            { displayname: "Perigrine", desc: "Advanced Fighter", factory: "aafac", json: "/pa/units/air/fighter_adv/fighter_adv.json" },
+            { displayname: "Dolphin", desc: "Attack Sub", factory: "nfac", json: "/pa/units/sea/attack_sub/attack_sub.json" },
+            { displayname: "Stingray", desc: "Missile Ship", factory: "anfac", json: "/pa/units/sea/missile_ship/missile_ship.json" },
+            { displayname: "SXX-1304 Laser Platform", desc: "Mining Laser", factory: "ofac", json: "/pa/units/orbital/orbital_laser/orbital_laser.json" }
         ];
         hotbuildglobal["hotbuild3s"] = [
-            { displayname: "Advanced Radar", desc:"Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
-	        { displayname: "Radar", desc:"Radar", json: "/pa/units/land/radar/radar.json" },
-            { displayname: "Dox", desc:"Assault Bot", factory: "botfac", json: "/pa/units/land/assault_bot/assault_bot.json" },
-            { displayname: "Slammer", desc:"Advanced Assault Bot", factory: "abotfac", json: "/pa/units/land/assault_bot_adv/assault_bot_adv.json" },
-            { displayname: "Ant", desc:"Tank", factory: "vecfac", json: "/pa/units/land/tank_light_laser/tank_light_laser.json" },
-            { displayname: "Leveler", desc:"Advanced Tank", factory: "avecfac", json: "/pa/units/land/tank_laser_adv/tank_laser_adv.json" },
-            { displayname: "Hummingbird", desc:"Fighter", factory: "airfac", json: "/pa/units/air/fighter/fighter.json" },
-            { displayname: "Hornet", desc:"Advanced Bomber", factory: "aafac", json: "/pa/units/air/bomber_adv/bomber_adv.json" },
-            { displayname: "Bluebottle", desc:"Destroyer", factory: "nfac", json: "/pa/units/sea/destroyer/destroyer.json" },
-            { displayname: "Leviathan", desc:"Advanced Destroyer", factory: "anfac", json: "/pa/units/sea/battleship/battleship.json" },
-            { displayname: "Avenger", desc:"Orbital Fighter", factory: "ofac", json: "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }
+            { displayname: "Advanced Radar", desc: "Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
+	        { displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
+            { displayname: "Dox", desc: "Assault Bot", factory: "botfac", json: "/pa/units/land/assault_bot/assault_bot.json" },
+            { displayname: "Slammer", desc: "Advanced Assault Bot", factory: "abotfac", json: "/pa/units/land/assault_bot_adv/assault_bot_adv.json" },
+            { displayname: "Ant", desc: "Tank", factory: "vecfac", json: "/pa/units/land/tank_light_laser/tank_light_laser.json" },
+            { displayname: "Leveler", desc: "Advanced Tank", factory: "avecfac", json: "/pa/units/land/tank_laser_adv/tank_laser_adv.json" },
+            { displayname: "Hummingbird", desc: "Fighter", factory: "airfac", json: "/pa/units/air/fighter/fighter.json" },
+            { displayname: "Hornet", desc: "Advanced Bomber", factory: "aafac", json: "/pa/units/air/bomber_adv/bomber_adv.json" },
+            { displayname: "Bluebottle", desc: "Destroyer", factory: "nfac", json: "/pa/units/sea/destroyer/destroyer.json" },
+            { displayname: "Leviathan", desc: "Advanced Destroyer", factory: "anfac", json: "/pa/units/sea/battleship/battleship.json" },
+            { displayname: "Avenger", desc: "Orbital Fighter", factory: "ofac", json: "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }
         ];
         hotbuildglobal["hotbuild4s"] = [
-            { displayname: "Advanced Vehicle Factory", desc:"Advanced Vehicle Factory", json: "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
-            { displayname: "Advanced Bot Factory", desc:"Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
-            { displayname: "Spinner", desc:"AA Tank", factory: "vecfac", json: "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
-            { displayname: "Narwhal", desc:"AA Frigate", factory: "nfac", json: "/pa/units/sea/frigate/frigate.json" },
-            { displayname: "Barracuda", desc:"Nuclear Sub", factory: "anfac", json: "/pa/units/sea/nuclear_sub/nuclear_sub.json" },
-            { displayname: "Bumblebee", desc:"Bomber", factory: "airfac", json: "/pa/units/air/bomber/bomber.json" },
-            { displayname: "Astraeus", desc:"Orbital Lander", factory: "ofac", json: "/pa/units/orbital/orbital_lander/orbital_lander.json" }
+            { displayname: "Advanced Vehicle Factory", desc: "Advanced Vehicle Factory", json: "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
+            { displayname: "Advanced Bot Factory", desc: "Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
+            { displayname: "Spinner", desc: "AA Tank", factory: "vecfac", json: "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
+            { displayname: "Narwhal", desc: "AA Frigate", factory: "nfac", json: "/pa/units/sea/frigate/frigate.json" },
+            { displayname: "Barracuda", desc: "Nuclear Sub", factory: "anfac", json: "/pa/units/sea/nuclear_sub/nuclear_sub.json" },
+            { displayname: "Bumblebee", desc: "Bomber", factory: "airfac", json: "/pa/units/air/bomber/bomber.json" },
+            { displayname: "Astraeus", desc: "Orbital Lander", factory: "ofac", json: "/pa/units/orbital/orbital_lander/orbital_lander.json" }
         ];
         hotbuildglobal["hotbuild5s"] = [
-            { displayname: "Advanced Energy Plant", desc:"Advanced Energy Plant", json: "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
-            { displayname: "Energy Plant", desc:"Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" },
-            { displayname: "Solar Array", desc:"Solar Panel Satellite", factory: "ofac", json: "/pa/units/orbital/solar_array/solar_array.json" }
+            { displayname: "Advanced Energy Plant", desc: "Advanced Energy Plant", json: "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
+            { displayname: "Energy Plant", desc: "Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" },
+            { displayname: "Solar Array", desc: "Solar Panel Satellite", factory: "ofac", json: "/pa/units/orbital/solar_array/solar_array.json" }
         ];
         hotbuildglobal["hotbuild6s"] = [
-            { displayname: "Adv Metal Extractor", desc:"Advanced Metal Extractor", json: "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
-            { displayname: "Metal Extractor", desc:"Metal Extractor", json: "/pa/units/land/metal_extractor/metal_extractor.json" }
+            { displayname: "Adv Metal Extractor", desc: "Advanced Metal Extractor", json: "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
+            { displayname: "Metal Extractor", desc: "Metal Extractor", json: "/pa/units/land/metal_extractor/metal_extractor.json" }
         ];
         hotbuildglobal["hotbuild7s"] = [
-            { displayname: "Advanced Laser Defense Tower", desc:"Triple Barrel Laser Tower", json: "/pa/units/land/laser_defense_adv/laser_defense_adv.json" },
-            { displayname: "Laser Defense Tower", desc:"Dual Barrel Laser Tower", json: "/pa/units/land/laser_defense/laser_defense.json" },
-            { displayname: "Single Laser Defense Tower", desc:"Single Barrel Laser Tower", json: "/pa/units/land/laser_defense_single/laser_defense_single.json" }        
+            { displayname: "Advanced Laser Defense Tower", desc: "Triple Barrel Laser Tower", json: "/pa/units/land/laser_defense_adv/laser_defense_adv.json" },
+            { displayname: "Laser Defense Tower", desc: "Dual Barrel Laser Tower", json: "/pa/units/land/laser_defense/laser_defense.json" },
+            { displayname: "Single Laser Defense Tower", desc: "Single Barrel Laser Tower", json: "/pa/units/land/laser_defense_single/laser_defense_single.json" }
         ];
         hotbuildglobal["hotbuild8s"] = [
-            { displayname: "Missile Defense Tower", desc:"Air Defense", json: "/pa/units/land/air_defense/air_defense.json" },
-            { displayname: "Land Barrier", desc:"Wall", json: "/pa/units/land/land_barrier/land_barrier.json" }        
+            { displayname: "Missile Defense Tower", desc: "Air Defense", json: "/pa/units/land/air_defense/air_defense.json" },
+            { displayname: "Land Barrier", desc: "Wall", json: "/pa/units/land/land_barrier/land_barrier.json" }
         ];
         hotbuildglobal["hotbuild9s"] = [
-	        { displayname: "Catapult", desc:"Tactical Missle Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
-            { displayname: "Holkins", desc:"Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
-            { displayname: "Pelter", desc:"Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" }
+	        { displayname: "Catapult", desc: "Tactical Missle Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
+            { displayname: "Holkins", desc: "Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
+            { displayname: "Pelter", desc: "Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" }
         ];
         hotbuildglobal["hotbuild10s"] = [
-            { displayname: "Energy Storage", desc:"Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
-            { displayname: "Metal Storage", desc:"Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" }
+            { displayname: "Energy Storage", desc: "Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
+            { displayname: "Metal Storage", desc: "Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" }
         ];
         hotbuildglobal["hotbuild11s"] = [];
         hotbuildglobal["hotbuild12s"] = [];
@@ -290,23 +290,25 @@ function HotBuildSettingsViewModel()
         default_keybinds['hotbuild']['stop'] = 'y';
         default_keybinds['hotbuild']['select commie'] = '';
         default_keybinds['hotbuild']['unload'] = 'u';
-        default_keybinds['gameplay']['command mode [move]'] =  '';
-        default_keybinds['gameplay']['command mode [attack]'] =  '';
-        default_keybinds['gameplay']['command mode [assist]'] =  '';
-        default_keybinds['gameplay']['command mode [repair]'] =  '';
-        default_keybinds['gameplay']['command mode [reclaim]'] =  '';
-        default_keybinds['gameplay']['command mode [patrol]'] =  '';
-        default_keybinds['gameplay']['command mode [special move]'] =  '';
-        default_keybinds['gameplay']['command mode [unload]'] =  '';
-        default_keybinds['gameplay']['command mode [celestial move]'] =  '';
-        default_keybinds['gameplay']['stop command'] =  '';
-        default_keybinds['gameplay']['next build tab'] =  '';
-        default_keybinds['gameplay']['select commander'] =  '';
-        default_keybinds['gameplay']['select idle fabbers'] =  '';
-        default_keybinds['gameplay']['track selection with camera'] =  '';
+        default_keybinds['gameplay']['command mode [move]'] = '';
+        default_keybinds['gameplay']['command mode [attack]'] = '';
+        default_keybinds['gameplay']['command mode [assist]'] = '';
+        default_keybinds['gameplay']['command mode [repair]'] = '';
+        default_keybinds['gameplay']['command mode [reclaim]'] = '';
+        default_keybinds['gameplay']['command mode [patrol]'] = '';
+        default_keybinds['gameplay']['command mode [special move]'] = '';
+        default_keybinds['gameplay']['command mode [unload]'] = '';
+        default_keybinds['gameplay']['command mode [celestial move]'] = '';
+        default_keybinds['gameplay']['stop command'] = '';
+        default_keybinds['gameplay']['next build tab'] = '';
+        default_keybinds['gameplay']['select commander'] = '';
+        default_keybinds['gameplay']['select idle fabbers'] = '';
+        default_keybinds['gameplay']['track selection with camera'] = '';
 
         model.restoreDefaultKeybinds();
-    
+
+        forgetFramePosition('hotbuild_info_frame');
+
     }
 }
 //todo read the json files dynamically but we can't :(
