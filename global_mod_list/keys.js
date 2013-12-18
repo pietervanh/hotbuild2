@@ -78,6 +78,7 @@ hotbuildglobalname = settings.hotbuildconfigname ? settings.hotbuildconfigname :
 action_sets['hotbuild']['Toggle Energy'] = function (event) { energyToggle(event) };
 action_sets['hotbuild']['Lock Pole'] = function (event) { polelockToggle(event) };
 action_sets['hotbuild']['Requeue'] = function (event) { requeue(event) };
+action_sets['hotbuild']['View Notification'] = function (event) { hotbuildViewAlert() };
 
 
 //add keybinds as you see fit
@@ -140,6 +141,7 @@ action_sets['hotbuild']['unload'] = function(event) {hotbuildCommandMode(9)};
 default_keybinds['hotbuild']['Toggle Energy'] = '';
 default_keybinds['hotbuild']['Lock Pole'] = '';
 default_keybinds['hotbuild']['Requeue'] = '';
+default_keybinds['hotbuild']['View Notification'] = '';
 
 
 default_keybinds['hotbuild']['move'] = '';

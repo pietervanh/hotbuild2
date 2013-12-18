@@ -331,13 +331,14 @@ function HotBuildSettingsViewModel()
         default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
         default_keybinds['hotbuild']['Lock Pole'] = '^';
         default_keybinds['hotbuild']['Requeue'] = 'o';
+        default_keybinds['hotbuild']['View Notification'] = 'space';
         default_keybinds['hotbuild']['move'] = 'm';
         default_keybinds['hotbuild']['attack'] = 'a';
         default_keybinds['hotbuild']['assist'] = 'i';
         default_keybinds['hotbuild']['repair'] = '';
         default_keybinds['hotbuild']['reclaim'] = '';
         default_keybinds['hotbuild']['patrol'] = 'q';
-        default_keybinds['hotbuild']['stop'] = 's';
+        default_keybinds['hotbuild']['stop'] = '';
         default_keybinds['hotbuild']['select commie'] = 'c';
         default_keybinds['hotbuild']['unload'] = 'u';
         default_keybinds['gameplay']['command mode [move]'] = '';
@@ -354,6 +355,7 @@ function HotBuildSettingsViewModel()
         default_keybinds['gameplay']['select commander'] = '';
         default_keybinds['gameplay']['select idle fabbers'] = '';
         default_keybinds['gameplay']['track selection with camera'] = '';
+        default_keybinds['camera']['zoom to celestial'] = '';
 
         model.restoreDefaultKeybinds();
 

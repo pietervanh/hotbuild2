@@ -49,13 +49,14 @@ $(document).keydown(function (e) {
         return;
 
     var value = String.fromCharCode(e.keyCode).toLowerCase();
-    
+
     for (i = 1; i <= 20; i++) {
-        if (hotbuildglobalkey["hotbuild" + i + "s"] ==  value) {
+        if (hotbuildglobalkey["hotbuild" + i + "s"] == value) {
             myHotBuildViewModel.hotBuild(e, hotbuildglobal["hotbuild" + i + "s"]);
             break;
         }
     }
 
-
 });
+
+
