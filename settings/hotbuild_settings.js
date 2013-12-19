@@ -11,6 +11,7 @@ model.oldSettingsBeforeHotbuild = model.settings;
 
 model.settings = ko.computed(function () {
     var newSettings = model.oldSettingsBeforeHotbuild();
+    //check hotbuildconfigkey conflicts ?
     newSettings.hotbuildconfig = hotbuildglobal;
     newSettings.hotbuildconfigkey = hotbuildglobalkey;
     newSettings.hotbuildconfigname = hotbuildglobalname;
