@@ -137,7 +137,6 @@ action_sets['hotbuild']['stop'] = function(event) {hotbuildCommandMode(-1)};
 action_sets['hotbuild']['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
 action_sets['hotbuild']['unload'] = function(event) {hotbuildCommandMode(9)};
 
-
 default_keybinds['hotbuild']['Toggle Energy'] = '';
 default_keybinds['hotbuild']['Lock Pole'] = '';
 default_keybinds['hotbuild']['Requeue'] = '';

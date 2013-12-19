@@ -21,85 +21,98 @@ if (isNaN(model.hotbuild_reset_time)) {
 
 
 function HotBuildViewModel(resetTime) {
-    this.cycleResetTime = resetTime; //time you have to press again to loop trough list
-    this.lastCycleTime = ko.observable(new Date())
-    this.lastkey = ko.observable(0);
-    this.cycleid = ko.observable(0);
-    this.hotbuilds = ko.observableArray([""]);
-    this.hotbuildPreviews = ko.observableArray([""]);
+    var self = this;
+    self.cycleResetTime = resetTime; //time you have to press again to loop trough list
+    self.lastCycleTime = ko.observable(new Date())
+    self.lastkey = ko.observable(0);
+    self.cycleid = ko.observable(0);
+    self.hotbuilds = ko.observableArray([""]);
+    self.hotbuildPreviews = ko.observableArray([""]);
+    self.hbtriggertime = ko.observable();
+    self.previewvisible = ko.observable(false);
     
-    this.debuginfo = ko.computed(function () {
-        if (this.hotbuilds() != undefined) {
-            return this.hotbuilds().length;
+    self.debuginfo = ko.computed(function () {
+        if (self.hotbuilds() != undefined) {
+            return self.hotbuilds().length;
         }
     }, this);
 
-    this.unitName = ko.observable("");
+    self.unitName = ko.observable("");
 
-
-    this.buildPreviewList = function (hbindex, hotbuilds) {
+    self.buildPreviewList = function (hbindex, hotbuilds) {
         //set the buildPreview list 
         if (hotbuilds != undefined) {
-            this.hotbuildPreviews([]);
+            self.hotbuildPreviews([]);
             for (i = hbindex; i < hotbuilds.length; i++) {
-                if (this.knowsBuildCommand(hotbuilds[i].json)) {
+                if (self.knowsBuildCommand(hotbuilds[i].json)) {
                     unitinfo = model.unitSpecs[hotbuilds[i].json];
                     if (unitinfo.buildStructure) {
-                        this.hotbuildPreviews.push(unitinfo.buildIcon);
+                        self.hotbuildPreviews.push(unitinfo.buildIcon);
                     }
                 }
             }
             for (j = 0; j < hbindex; j++) {
-                if (this.knowsBuildCommand(hotbuilds[j].json)) {
+                if (self.knowsBuildCommand(hotbuilds[j].json)) {
                     unitinfo = model.unitSpecs[hotbuilds[j].json];
                     if (unitinfo.buildStructure) {
-                        this.hotbuildPreviews.push(unitinfo.buildIcon);
+                        self.hotbuildPreviews.push(unitinfo.buildIcon);
                     }
                 }
             }
         }
     }
+    //hide preview
+    self.clean = function () {
+        var current_time = _.now();
+        if (current_time - self.hbtriggertime() > self.cycleResetTime) {
+            self.previewvisible(false);
+            self.previewvisible.notifySubscribers();
+        }
+    }
 
-    this.hotBuild = function (event, hotbuilds) {
-        this.hotbuilds(hotbuilds);
+    self.hotBuild = function (event, hotbuilds) {
+        
+        self.hotbuilds(hotbuilds);
         if (model['maybeSetBuildTarget']) {
-            if (this.knowsAnyBuildCommand()) {
+            if (self.knowsAnyBuildCommand()) {
                 var failDetect = 0;
                 do {
-                    this.doCycleId(this.hotbuilds().length, event.which);
+                    self.doCycleId(self.hotbuilds().length, event.which);
                     failDetect++;
                     if (failDetect > 1000) {
                         gameConsole.log("loop of death\n"); // I dont think this should ever happen...
                         return;
                     }
-                } while (!this.knowsBuildCommand(this.hotbuilds()[this.cycleid()].json) && this.knowsAnyBuildCommand());
-
-                if (model.unitSpecs[this.hotbuilds()[this.cycleid()].json].buildStructure) {
-                    model['maybeSetBuildTarget'](this.hotbuilds()[this.cycleid()].json);
+                } while (!self.knowsBuildCommand(self.hotbuilds()[self.cycleid()].json) && self.knowsAnyBuildCommand());
+                self.hbtriggertime(_.now());
+                setTimeout(self.clean, self.cycleResetTime + 1000 );
+                if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].buildStructure) {
+                    model['maybeSetBuildTarget'](self.hotbuilds()[self.cycleid()].json);
                 }
                 else {
-                    model.executeStartBuild(event, this.getBuildItemId())
+                    model.executeStartBuild(event, self.getBuildItemId())
                 }
-                this.unitName(model.unitSpecs[this.hotbuilds()[this.cycleid()].json].name);
-                this.buildPreviewList(this.cycleid(), this.hotbuilds());
+                self.unitName(model.unitSpecs[self.hotbuilds()[self.cycleid()].json].name);
+                self.buildPreviewList(self.cycleid(), self.hotbuilds());
+                self.previewvisible(true);
                 event.preventDefault();
             }
             else {
-                gameConsole.log('could not hotbuild item ' + this.debuginfo());
+                gameConsole.log('could not hotbuild item ' + self.debuginfo());
             }
         }
     }
 
-    this.knowsAnyBuildCommand = function () {
-        for (var i = 0; i < this.hotbuilds().length; i++) {
-            if (this.knowsBuildCommand(this.hotbuilds()[i].json)) {
+    self.knowsAnyBuildCommand = function () {
+        for (var i = 0; i < self.hotbuilds().length; i++) {
+            if (self.knowsBuildCommand(self.hotbuilds()[i].json)) {
                 return true;
             }
         }
         return false;
     }
 
-    this.knowsBuildCommand = function (cmd) {
+    self.knowsBuildCommand = function (cmd) {
         /*
         for (var i = 0; i < model.buildTabLists()[0].length; i++) {
             if (model.buildTabLists()[0][i].id == cmd) {
@@ -117,26 +130,26 @@ function HotBuildViewModel(resetTime) {
     }
 
     //move trough hotbuilds array when pushing multiple time the same key in a certain time interval
-    this.doCycleId = function (length, key) {
+    self.doCycleId = function (length, key) {
         var thisTime = new Date();
-        if (thisTime - this.lastCycleTime > this.cycleResetTime || key != myHotBuildViewModel.lastkey()) {
-            //if (key != this.lastkey()) {
-            this.cycleid(0);
+        if (thisTime - self.lastCycleTime > self.cycleResetTime || key != myHotBuildViewModel.lastkey()) {
+            //if (key != self.lastkey()) {
+            self.cycleid(0);
         } else {
-            this.cycleid(this.cycleid() + 1);
-            if (this.cycleid() == length) {
-                this.cycleid(0);
+            self.cycleid(self.cycleid() + 1);
+            if (self.cycleid() == length) {
+                self.cycleid(0);
             }
         }
-        this.lastCycleTime = thisTime;
-        this.lastkey(key);
+        self.lastCycleTime = thisTime;
+        self.lastkey(key);
 
     }
 
 
-    this.getBuildItemId = function () {
+    self.getBuildItemId = function () {
         for (var i = 0; i < model.buildItems().length; i++) {
-            if (model.buildItems()[i].id() == this.hotbuilds()[this.cycleid()].json) {
+            if (model.buildItems()[i].id() == self.hotbuilds()[self.cycleid()].json) {
                 return i;
             }
         }
@@ -198,7 +211,6 @@ function requeue(event) {
 //Standard CommandMode functionality
 
 function hotbuildCommandMode(cmd) {
-    debugger;
     if (model['setCommandIndex']) {
         model['setCommandIndex'](cmd);
     }
@@ -252,7 +264,7 @@ function apply_keybindsHotbuild(set, used_keybinds, conflicts, resolve) {
             binding = decode(localStorage['keybinding_' + key]);
 
         //console.log(key + ":" + (binding) ? binding : "unbound");
-
+        //debugger;
         if (resolve) {
             clear_conflict = true;
             for (i = 0; i < conflicts.length; i++) {

@@ -13,15 +13,12 @@ model.setCommandIndex = function(index) {
 	}
 };
 
-model.hotbuild_preview_enabled = ko.computed(function () {
-    return true;//settings.hotbuild_preview_display_val == 'ON';
-},this);
-
 createFloatingFrame('hotbuild_info_frame', 320, 70, {'offset': 'leftCenter', 'top': -200});
 
 $('#hotbuild_info_frame_content').append(
 //$('body').append(
-'<div id="hotbuild_info" class="ignoremouse" data-bind="Visible: model.hotbuild_preview_enabled , with: myHotBuildViewModel">' +
+'<div id="hotbuild_info" class="ignoremouse" data-bind="with: myHotBuildViewModel">' +
+'<div data-bind="visible:previewvisible">' +
     //'<div data-bind="text: lastkey"/>' +
     //'<div data-bind="text: cycleid"/>' +
     //'<div>Debug: <span data-bind="text: debuginfo"/>' +
@@ -33,6 +30,7 @@ $('#hotbuild_info_frame_content').append(
                 '<img class="hotbuild_selected_fab" src="" data-bind="attr: { src: $data }" border="0" />' +
                 '<span class="hotbuild_selected_text" data-bind="text: $index"/>' +
             '</div>' +
+        '</div>' +
         '</div>' +
 '</div>');
 ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
