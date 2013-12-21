@@ -18,26 +18,26 @@ model.settings = ko.computed(function () {
 });
 
 var hbkeydropdown = [
-        { hbid: "hotbuild1", info: hotbuildglobal["hotbuild1s"]},
-        { hbid: "hotbuild2", info: hotbuildglobal["hotbuild2s"]},
-        { hbid: "hotbuild3", info: hotbuildglobal["hotbuild3s"]},
-        { hbid: "hotbuild4", info: hotbuildglobal["hotbuild4s"]},
-        { hbid: "hotbuild5", info: hotbuildglobal["hotbuild5s"]},
-        { hbid: "hotbuild6", info: hotbuildglobal["hotbuild6s"]},
-        { hbid: "hotbuild7", info: hotbuildglobal["hotbuild7s"]},
-        { hbid: "hotbuild8", info: hotbuildglobal["hotbuild8s"]},
-        { hbid: "hotbuild9", info: hotbuildglobal["hotbuild9s"]},
-        { hbid: "hotbuild10", info: hotbuildglobal["hotbuild10s"]},
-        { hbid: "hotbuild11", info: hotbuildglobal["hotbuild11s"]},
-        { hbid: "hotbuild12", info: hotbuildglobal["hotbuild12s"]},
-        { hbid: "hotbuild13", info: hotbuildglobal["hotbuild13s"]},
-        { hbid: "hotbuild14", info: hotbuildglobal["hotbuild14s"]},
-        { hbid: "hotbuild15", info: hotbuildglobal["hotbuild15s"]},
-        { hbid: "hotbuild16", info: hotbuildglobal["hotbuild16s"]},
-        { hbid: "hotbuild17", info: hotbuildglobal["hotbuild17s"]},
-        { hbid: "hotbuild18", info: hotbuildglobal["hotbuild18s"]},
-        { hbid: "hotbuild19", info: hotbuildglobal["hotbuild19s"]},
-        { hbid: "hotbuild20", info: hotbuildglobal["hotbuild20s"]}
+        { hbid: "hotbuild1", info: hotbuildglobal.hotbuild1s},
+        { hbid: "hotbuild2", info: hotbuildglobal.hotbuild2s},
+        { hbid: "hotbuild3", info: hotbuildglobal.hotbuild3s},
+        { hbid: "hotbuild4", info: hotbuildglobal.hotbuild4s},
+        { hbid: "hotbuild5", info: hotbuildglobal.hotbuild5s},
+        { hbid: "hotbuild6", info: hotbuildglobal.hotbuild6s},
+        { hbid: "hotbuild7", info: hotbuildglobal.hotbuild7s},
+        { hbid: "hotbuild8", info: hotbuildglobal.hotbuild8s},
+        { hbid: "hotbuild9", info: hotbuildglobal.hotbuild9s},
+        { hbid: "hotbuild10", info: hotbuildglobal.hotbuild10s},
+        { hbid: "hotbuild11", info: hotbuildglobal.hotbuild11s},
+        { hbid: "hotbuild12", info: hotbuildglobal.hotbuild12s},
+        { hbid: "hotbuild13", info: hotbuildglobal.hotbuild13s},
+        { hbid: "hotbuild14", info: hotbuildglobal.hotbuild14s},
+        { hbid: "hotbuild15", info: hotbuildglobal.hotbuild15s},
+        { hbid: "hotbuild16", info: hotbuildglobal.hotbuild16s},
+        { hbid: "hotbuild17", info: hotbuildglobal.hotbuild17s},
+        { hbid: "hotbuild18", info: hotbuildglobal.hotbuild18s},
+        { hbid: "hotbuild19", info: hotbuildglobal.hotbuild19s},
+        { hbid: "hotbuild20", info: hotbuildglobal.hotbuild20s}
     ];
 //TODO read data from unit JSON files
 //Problem don't know how to know it's a a buildable unit / factory
@@ -189,6 +189,7 @@ function HotBuildSettingsViewModel()
     };
 
     self.duplicates = ko.computed(function () {
+        /*
         var dups = '';
         var map = {};
         var map2 = {};
@@ -219,6 +220,7 @@ function HotBuildSettingsViewModel()
             dups += ' | ';
         });
         return dups;
+        */
     },self);
 
     self.Save = function () {
@@ -227,7 +229,7 @@ function HotBuildSettingsViewModel()
     };
 
     self.ComunityDefaults = function () {
-				hotbuildglobal["hotbuild1s"] = [
+				hotbuildglobal.hotbuild1s = [
             { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
             { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
             { displayname: "Advanced Fabrication Bot", desc: "Advanced Fabrication Bot", factory: "abotfac", json: "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
@@ -239,7 +241,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Advanced Fabrication Ship", desc: "Advanced Fabrication Ship", factory: "anfac", json: "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" },
             { displayname: "Fabrication Ship", desc: "Fabrication Ship", factory: "nfac", json: "/pa/units/sea/fabrication_ship/fabrication_ship.json" }
         ];
-        hotbuildglobal["hotbuild2s"] = [
+        hotbuildglobal.hotbuild2s = [
 						{ displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
             { displayname: "Advanced Naval Factory", desc: "Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
             { displayname: "Air Factory", desc: "Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
@@ -254,7 +256,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Stingray", desc: "Missile Ship", factory: "anfac", json: "/pa/units/sea/missile_ship/missile_ship.json" },
             { displayname: "SXX-1304 Laser Platform", desc: "Mining Laser", factory: "ofac", json: "/pa/units/orbital/orbital_laser/orbital_laser.json" }
         ];
-        hotbuildglobal["hotbuild3s"] = [
+        hotbuildglobal.hotbuild3s = [
             { displayname: "Advanced Radar", desc: "Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
 						{ displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
             { displayname: "Dox", desc: "Assault Bot", factory: "botfac", json: "/pa/units/land/assault_bot/assault_bot.json" },
@@ -267,7 +269,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Leviathan", desc: "Advanced Destroyer", factory: "anfac", json: "/pa/units/sea/battleship/battleship.json" },
             { displayname: "Avenger", desc: "Orbital Fighter", factory: "ofac", json: "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }
         ];
-        hotbuildglobal["hotbuild4s"] = [
+        hotbuildglobal.hotbuild4s = [
             { displayname: "Advanced Vehicle Factory", desc: "Advanced Vehicle Factory", json: "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
             { displayname: "Advanced Bot Factory", desc: "Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
             { displayname: "Spinner", desc: "AA Tank", factory: "vecfac", json: "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
@@ -276,80 +278,79 @@ function HotBuildSettingsViewModel()
             { displayname: "Bumblebee", desc: "Bomber", factory: "airfac", json: "/pa/units/air/bomber/bomber.json" },
             { displayname: "Astraeus", desc: "Orbital Lander", factory: "ofac", json: "/pa/units/orbital/orbital_lander/orbital_lander.json" }
         ];
-        hotbuildglobal["hotbuild5s"] = [
+        hotbuildglobal.hotbuild5s = [
             { displayname: "Advanced Energy Plant", desc: "Advanced Energy Plant", json: "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
             { displayname: "Energy Plant", desc: "Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" },
             { displayname: "Solar Array", desc: "Solar Panel Satellite", factory: "ofac", json: "/pa/units/orbital/solar_array/solar_array.json" }
         ];
-        hotbuildglobal["hotbuild6s"] = [
+        hotbuildglobal.hotbuild6s = [
             { displayname: "Adv Metal Extractor", desc: "Advanced Metal Extractor", json: "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
             { displayname: "Metal Extractor", desc: "Metal Extractor", json: "/pa/units/land/metal_extractor/metal_extractor.json" }
         ];
-        hotbuildglobal["hotbuild7s"] = [
+        hotbuildglobal.hotbuild7s = [
             { displayname: "Advanced Laser Defense Tower", desc: "Triple Barrel Laser Tower", json: "/pa/units/land/laser_defense_adv/laser_defense_adv.json" },
             { displayname: "Laser Defense Tower", desc: "Dual Barrel Laser Tower", json: "/pa/units/land/laser_defense/laser_defense.json" },
             { displayname: "Single Laser Defense Tower", desc: "Single Barrel Laser Tower", json: "/pa/units/land/laser_defense_single/laser_defense_single.json" }
         ];
-        hotbuildglobal["hotbuild8s"] = [
+        hotbuildglobal.hotbuild8s = [
             { displayname: "Missile Defense Tower", desc: "Air Defense", json: "/pa/units/land/air_defense/air_defense.json" },
             { displayname: "Land Barrier", desc: "Wall", json: "/pa/units/land/land_barrier/land_barrier.json" }
         ];
-        hotbuildglobal["hotbuild9s"] = [
+        hotbuildglobal.hotbuild9s = [
 						{ displayname: "Catapult", desc: "Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
             { displayname: "Holkins", desc: "Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
             { displayname: "Pelter", desc: "Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" }
         ];
-        hotbuildglobal["hotbuild10s"] = [
+        hotbuildglobal.hotbuild10s = [
             { displayname: "Energy Storage", desc: "Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
             { displayname: "Metal Storage", desc: "Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" }
         ];
-        hotbuildglobal["hotbuild11s"] = [];
-        hotbuildglobal["hotbuild12s"] = [];
-        hotbuildglobal["hotbuild13s"] = [];
-        hotbuildglobal["hotbuild14s"] = [];
-        hotbuildglobal["hotbuild15s"] = [];
-        hotbuildglobal["hotbuild16s"] = [];
-        hotbuildglobal["hotbuild17s"] = [];
-        hotbuildglobal["hotbuild18s"] = [];
-        hotbuildglobal["hotbuild19s"] = [];
-        hotbuildglobal["hotbuild20s"] = [];
+        hotbuildglobal.hotbuild11s = [];
+        hotbuildglobal.hotbuild12s = [];
+        hotbuildglobal.hotbuild13s = [];
+        hotbuildglobal.hotbuild14s = [];
+        hotbuildglobal.hotbuild15s = [];
+        hotbuildglobal.hotbuild16s = [];
+        hotbuildglobal.hotbuild17s = [];
+        hotbuildglobal.hotbuild18s = [];
+        hotbuildglobal.hotbuild19s = [];
+        hotbuildglobal.hotbuild20s = [];
 
+        default_keybinds.hotbuild.hotbuild1 = '';
+				default_keybinds.hotbuild.hotbuild2 = '';
+				default_keybinds.hotbuild.hotbuild3 = '';
+				default_keybinds.hotbuild.hotbuild4 = '';
+				default_keybinds.hotbuild.hotbuild5 = '';
+				default_keybinds.hotbuild.hotbuild6 = '';
+				default_keybinds.hotbuild.hotbuild7 = '';
+				default_keybinds.hotbuild.hotbuild8 = '';
+				default_keybinds.hotbuild.hotbuild9 = '';
+				default_keybinds.hotbuild.hotbuild10 = '';
+      
+        hotbuildglobalkey.hotbuilds1 = 'w';
+        hotbuildglobalkey.hotbuilds2 = 'e';
+        hotbuildglobalkey.hotbuilds3 = 'r';
+        hotbuildglobalkey.hotbuilds4 = 't';
+        hotbuildglobalkey.hotbuilds5 = 'f';
+        hotbuildglobalkey.hotbuilds6 = 's';
+        hotbuildglobalkey.hotbuilds7 = 'x';
+        hotbuildglobalkey.hotbuilds8 = 'c';
+        hotbuildglobalkey.hotbuilds9 = 'v';
+        hotbuildglobalkey.hotbuilds10 = 'd';
 
-        default_keybinds['hotbuild']['hotbuild1'] = '';
-        default_keybinds['hotbuild']['hotbuild2'] = '';
-        default_keybinds['hotbuild']['hotbuild3'] = '';
-        default_keybinds['hotbuild']['hotbuild4'] = '';
-        default_keybinds['hotbuild']['hotbuild5'] = '';
-        default_keybinds['hotbuild']['hotbuild6'] = '';
-        default_keybinds['hotbuild']['hotbuild7'] = '';
-        default_keybinds['hotbuild']['hotbuild8'] = '';
-        default_keybinds['hotbuild']['hotbuild9'] = '';
-        default_keybinds['hotbuild']['hotbuild10'] = '';
-
-        hotbuildglobalkey["hotbuilds1"] = 'w';
-        hotbuildglobalkey["hotbuilds2"] = 'e';
-        hotbuildglobalkey["hotbuilds3"] = 'r';
-        hotbuildglobalkey["hotbuilds4"] = 't';
-        hotbuildglobalkey["hotbuilds5"] = 'f';
-        hotbuildglobalkey["hotbuilds6"] = 's';
-        hotbuildglobalkey["hotbuilds7"] = 'x';
-        hotbuildglobalkey["hotbuilds8"] = 'c';
-        hotbuildglobalkey["hotbuilds9"] = 'v';
-        hotbuildglobalkey["hotbuilds10"] = 'd';
-
-        default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
-        default_keybinds['hotbuild']['Lock Pole'] = '^';
-        default_keybinds['hotbuild']['Requeue'] = 'o';
-        default_keybinds['hotbuild']['View Notification'] = 'space';
-        default_keybinds['hotbuild']['move'] = 'm';
-        default_keybinds['hotbuild']['attack'] = 'a';
-        default_keybinds['hotbuild']['assist'] = 'i';
-        default_keybinds['hotbuild']['repair'] = '';
-        default_keybinds['hotbuild']['reclaim'] = '';
-        default_keybinds['hotbuild']['patrol'] = 'q';
-        default_keybinds['hotbuild']['stop'] = '';
-        default_keybinds['hotbuild']['select commie'] = 'c';
-        default_keybinds['hotbuild']['unload'] = 'u';
+        default_keybinds.hotbuild['Toggle Energy'] = 'tab';
+        default_keybinds.hotbuild['Lock Pole'] = '^';
+        default_keybinds.hotbuild['Requeue'] = 'o';
+        default_keybinds.hotbuild['View Notification'] = 'space';
+        default_keybinds.hotbuild['move'] = 'm';
+        default_keybinds.hotbuild['attack'] = 'a';
+        default_keybinds.hotbuild['assist'] = 'i';
+        default_keybinds.hotbuild['repair'] = '';
+        default_keybinds.hotbuild['reclaim'] = '';
+        default_keybinds.hotbuild['patrol'] = 'q';
+        default_keybinds.hotbuild['stop'] = '';
+        default_keybinds.hotbuild['select commie'] = 'c';
+        default_keybinds.hotbuild['unload'] = 'u';
         default_keybinds['gameplay']['command mode [move]'] = '';
         default_keybinds['gameplay']['command mode [attack]'] = '';
         default_keybinds['gameplay']['command mode [assist]'] = '';
@@ -370,17 +371,17 @@ function HotBuildSettingsViewModel()
 
         forgetFramePosition('hotbuild_info_frame');
 
-    }
+    };
     
     self.ComunityDefaultsWASD = function () {
-        hotbuildglobal["hotbuild1s"] = [
+        hotbuildglobal.hotbuild1s = [
             { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
             { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
             { displayname: "Skitter", desc: "Land Scout", factory: "vecfac", json: "/pa/units/land/land_scout/land_scout.json" },
             { displayname: "Firefly", desc: "Air Scout", factory: "airfac", json: "/pa/units/air/air_scout/air_scout.json" }
         ];
-        hotbuildglobal["hotbuild2s"] = [
-	        { displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+        hotbuildglobal.hotbuild2s = [
+						{ displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
             { displayname: "Advanced Naval Factory", desc: "Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
             { displayname: "Air Factory", desc: "Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
             { displayname: "Naval Factory", desc: "Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
@@ -389,25 +390,23 @@ function HotBuildSettingsViewModel()
             { displayname: "Dolphin", desc: "Attack Sub", factory: "nfac", json: "/pa/units/sea/attack_sub/attack_sub.json" },
             { displayname: "Stingray", desc: "Missile Ship", factory: "anfac", json: "/pa/units/sea/missile_ship/missile_ship.json" },
             { displayname: "SXX-1304 Laser Platform", desc: "Mining Laser", factory: "ofac", json: "/pa/units/orbital/orbital_laser/orbital_laser.json" }
-            
-
         ];
-        hotbuildglobal["hotbuild3s"] = [
+        hotbuildglobal.hotbuild3s = [
             { displayname: "Advanced Radar", desc: "Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
-	        { displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
-            { displayname: "Hummingbird", desc: "Fighter", factory: "airfac", json: "/pa/units/air/fighter/fighter.json" },	    
+						{ displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
+						{ displayname: "Hummingbird", desc: "Fighter", factory: "airfac", json: "/pa/units/air/fighter/fighter.json" },
             { displayname: "Peregrine", desc: "Advanced Fighter", factory: "aafac", json: "/pa/units/air/fighter_adv/fighter_adv.json" },
             { displayname: "Spinner", desc: "AA Tank", factory: "vecfac", json: "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
-	        { displayname: "Stinger", desc: "AA Bot", factory: "botfac", json: "/pa/units/land/bot_aa/bot_aa.json" },            
+						{ displayname: "Stinger", desc: "AA Bot", factory: "botfac", json: "/pa/units/land/bot_aa/bot_aa.json" },            
             { displayname: "Narwhal", desc: "AA Frigate", factory: "nfac", json: "/pa/units/sea/frigate/frigate.json" }            
         ];
-        hotbuildglobal["hotbuild4s"] = [
+        hotbuildglobal.hotbuild4s = [
             { displayname: "Advanced Vehicle Factory", desc: "Advanced Vehicle Factory", json: "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
             { displayname: "Advanced Bot Factory", desc: "Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
             { displayname: "Barracuda", desc: "Nuclear Sub", factory: "anfac", json: "/pa/units/sea/nuclear_sub/nuclear_sub.json" },
             { displayname: "Astraeus", desc: "Orbital Lander", factory: "ofac", json: "/pa/units/orbital/orbital_lander/orbital_lander.json" }
         ];
-        hotbuildglobal["hotbuild5s"] = [
+        hotbuildglobal.hotbuild5s = [
             { displayname: "Advanced Energy Plant", desc: "Advanced Energy Plant", json: "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
             { displayname: "Energy Plant", desc: "Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" },
             { displayname: "Dox", desc: "Assault Bot", factory: "botfac", json: "/pa/units/land/assault_bot/assault_bot.json" },
@@ -420,7 +419,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Leviathan", desc: "Advanced Destroyer", factory: "anfac", json: "/pa/units/sea/battleship/battleship.json" },
             { displayname: "Avenger", desc: "Orbital Fighter", factory: "ofac", json: "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }            
         ];
-        hotbuildglobal["hotbuild6s"] = [
+        hotbuildglobal.hotbuild6s = [
             { displayname: "Adv Metal Extractor", desc: "Advanced Metal Extractor", json: "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
             { displayname: "Metal Extractor", desc: "Metal Extractor", json: "/pa/units/land/metal_extractor/metal_extractor.json" },
             { displayname: "Advanced Fabrication Bot", desc: "Advanced Fabrication Bot", factory: "abotfac", json: "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
@@ -432,71 +431,71 @@ function HotBuildSettingsViewModel()
             { displayname: "Advanced Fabrication Ship", desc: "Advanced Fabrication Ship", factory: "anfac", json: "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" },
             { displayname: "Fabrication Ship", desc: "Fabrication Ship", factory: "nfac", json: "/pa/units/sea/fabrication_ship/fabrication_ship.json" }            
         ];
-        hotbuildglobal["hotbuild7s"] = [
+        hotbuildglobal.hotbuild7s = [
             { displayname: "Advanced Laser Defense Tower", desc: "Triple Barrel Laser Tower", json: "/pa/units/land/laser_defense_adv/laser_defense_adv.json" },
             { displayname: "Laser Defense Tower", desc: "Dual Barrel Laser Tower", json: "/pa/units/land/laser_defense/laser_defense.json" },
             { displayname: "Single Laser Defense Tower", desc: "Single Barrel Laser Tower", json: "/pa/units/land/laser_defense_single/laser_defense_single.json" }
         ];
-        hotbuildglobal["hotbuild8s"] = [
+        hotbuildglobal.hotbuild8s = [
             { displayname: "Missile Defense Tower", desc: "Air Defense", json: "/pa/units/land/air_defense/air_defense.json" },
             { displayname: "Land Barrier", desc: "Wall", json: "/pa/units/land/land_barrier/land_barrier.json" }
         ];
-        hotbuildglobal["hotbuild9s"] = [
+        hotbuildglobal.hotbuild9s = [
 						{ displayname: "Catapult", desc: "Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
             { displayname: "Holkins", desc: "Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
             { displayname: "Pelter", desc: "Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" }
         ];
-        hotbuildglobal["hotbuild10s"] = [
+        hotbuildglobal.hotbuild10s = [
             { displayname: "Energy Storage", desc: "Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
             { displayname: "Metal Storage", desc: "Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" }
         ];
-        hotbuildglobal["hotbuild11s"] = [];
-        hotbuildglobal["hotbuild12s"] = [];
-        hotbuildglobal["hotbuild13s"] = [];
-        hotbuildglobal["hotbuild14s"] = [];
-        hotbuildglobal["hotbuild15s"] = [];
-        hotbuildglobal["hotbuild16s"] = [];
-        hotbuildglobal["hotbuild17s"] = [];
-        hotbuildglobal["hotbuild18s"] = [];
-        hotbuildglobal["hotbuild19s"] = [];
-        hotbuildglobal["hotbuild20s"] = [];
+        hotbuildglobal.hotbuild11s = [];
+        hotbuildglobal.hotbuild12s = [];
+        hotbuildglobal.hotbuild13s = [];
+        hotbuildglobal.hotbuild14s = [];
+        hotbuildglobal.hotbuild15s = [];
+        hotbuildglobal.hotbuild16s = [];
+        hotbuildglobal.hotbuild17s = [];
+        hotbuildglobal.hotbuild18s = [];
+        hotbuildglobal.hotbuild19s = [];
+        hotbuildglobal.hotbuild20s = [];
 
-        hotbuildglobalkey["hotbuild1s"] = 'f';
-        hotbuildglobalkey["hotbuild2s"] = 'g';
-        hotbuildglobalkey["hotbuild3s"] = 't';
-        hotbuildglobalkey["hotbuild4s"] = 'h';
-        hotbuildglobalkey["hotbuild5s"] = 'r';
-        hotbuildglobalkey["hotbuild6s"] = 'e';
-        hotbuildglobalkey["hotbuild7s"] = 'x';
-        hotbuildglobalkey["hotbuild8s"] = 'c';
-        hotbuildglobalkey["hotbuild9s"] = 'v';
-        hotbuildglobalkey["hotbuild10s"] = 'z';
+        default_keybinds.hotbuild.hotbuild1 = '';
+				default_keybinds.hotbuild.hotbuild2 = '';
+				default_keybinds.hotbuild.hotbuild3 = '';
+				default_keybinds.hotbuild.hotbuild4 = '';
+				default_keybinds.hotbuild.hotbuild5 = '';
+				default_keybinds.hotbuild.hotbuild6 = '';
+				default_keybinds.hotbuild.hotbuild7 = '';
+				default_keybinds.hotbuild.hotbuild8 = '';
+				default_keybinds.hotbuild.hotbuild9 = '';
+				default_keybinds.hotbuild.hotbuild10 = '';
 
-        default_keybinds['hotbuild']['hotbuild1'] = '';
-        default_keybinds['hotbuild']['hotbuild2'] = '';
-        default_keybinds['hotbuild']['hotbuild3'] = '';
-        default_keybinds['hotbuild']['hotbuild4'] = '';
-        default_keybinds['hotbuild']['hotbuild5'] = '';
-        default_keybinds['hotbuild']['hotbuild6'] = '';
-        default_keybinds['hotbuild']['hotbuild7'] = '';
-        default_keybinds['hotbuild']['hotbuild8'] = '';
-        default_keybinds['hotbuild']['hotbuild9'] = '';
-        default_keybinds['hotbuild']['hotbuild10'] = '';
+        hotbuildglobalkey.hotbuild1s = 'f';
+        hotbuildglobalkey.hotbuild2s = 'g';
+        hotbuildglobalkey.hotbuild3s = 't';
+        hotbuildglobalkey.hotbuild4s = 'h';
+        hotbuildglobalkey.hotbuild5s = 'r';
+        hotbuildglobalkey.hotbuild6s = 'e';
+        hotbuildglobalkey.hotbuild7s = 'x';
+        hotbuildglobalkey.hotbuild8s = 'c';
+        hotbuildglobalkey.hotbuild9s = 'v';
+        hotbuildglobalkey.hotbuild10s = 'z';
 
 
-        default_keybinds['hotbuild']['Toggle Energy'] = 'tab';
-        default_keybinds['hotbuild']['Lock Pole'] = 'y';
-        default_keybinds['hotbuild']['Requeue'] = 'o';
-        default_keybinds['hotbuild']['View Notification'] = 'space';
-        default_keybinds['hotbuild']['move'] = 'm';
-        default_keybinds['hotbuild']['attack'] = '';
-        default_keybinds['hotbuild']['assist'] = 'i';
-        default_keybinds['hotbuild']['repair'] = '';
-        default_keybinds['hotbuild']['reclaim'] = '';
-        default_keybinds['hotbuild']['patrol'] = '';
-        default_keybinds['hotbuild']['stop'] = 'q';
-        default_keybinds['hotbuild']['select commie'] = 'b';
-        default_keybinds['hotbuild']['unload'] = 'u';
+        default_keybinds.hotbuild['Toggle Energy'] = 'tab';
+        default_keybinds.hotbuild['Lock Pole'] = 'y';
+        default_keybinds.hotbuild['Requeue'] = 'o';
+        default_keybinds.hotbuild['View Notification'] = 'space';
+        default_keybinds.hotbuild['move'] = 'm';
+        default_keybinds.hotbuild['attack'] = '';
+        default_keybinds.hotbuild['assist'] = 'i';
+        default_keybinds.hotbuild['repair'] = '';
+        default_keybinds.hotbuild['reclaim'] = '';
+        default_keybinds.hotbuild['patrol'] = '';
+        default_keybinds.hotbuild['stop'] = 'q';
+        default_keybinds.hotbuild['select commie'] = 'b';
+        default_keybinds.hotbuild['unload'] = 'u';
         default_keybinds['gameplay']['command mode [move]'] = '';
         default_keybinds['gameplay']['command mode [attack]'] = '';
         default_keybinds['gameplay']['command mode [assist]'] = '';
@@ -516,8 +515,7 @@ function HotBuildSettingsViewModel()
         model.restoreDefaultKeybinds();
 
         forgetFramePosition('hotbuild_info_frame');
-
-    }
+    };
 
 }
 var hbuisettings = new HotBuildSettingsViewModel();
