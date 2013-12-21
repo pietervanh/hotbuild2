@@ -40,6 +40,9 @@ var hbkeydropdown = [
         { hbid: "hotbuild19", info: hotbuildglobal["hotbuild19s"], name: hotbuildglobalname["hotbuild19s"] },
         { hbid: "hotbuild20", info: hotbuildglobal["hotbuild20s"], name: hotbuildglobalname["hotbuild20s"] }
     ];
+//TODO read data from unit JSON files
+//Problem don't know how to know it's a a buildable unit / factory
+//hbLoadUnitInfo();
 
 var hbbuildings = [
         { displayname: "Bot Factory", desc:"Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
@@ -121,7 +124,8 @@ function HotBuildSettingsViewModel()
 {
     var self = this;
     self.keyinfos = ko.observableArray(hbkeydropdown);
-    self.selectedhotbuild = ko.observableArray([{displayname:"",desc:"",json:""}]);
+    //self.selectedhotbuild = ko.observableArray([{displayname:"",desc:"",json:""}]);
+    self.selectedhotbuild = ko.observableArray([]);
     self.buildings = ko.observableArray(hbbuildings);
 	self.units = ko.observableArray(hbunits);
     self.selectedkeyinfo = ko.observable();
@@ -484,8 +488,7 @@ function HotBuildSettingsViewModel()
     }
 
     self.duplicates = ko.computed(function () {
-        /*debugger;
-
+        /*
         var hbtextkeys = [];
         for (hbkey in hotbuildglobalkey) {
             hbtextkeys.push(hotbuildglobalkey[hbkey]);
@@ -503,7 +506,6 @@ function HotBuildSettingsViewModel()
     }, this);
 
 }
-//todo read the json files dynamically but we can't :(
 var hbuisettings = new HotBuildSettingsViewModel();
 
 $("#game_settings").children(":first").append("<li class='game_settings'>" +
