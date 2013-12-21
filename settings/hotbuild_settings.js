@@ -49,17 +49,17 @@ var hbbuildings = [
         { displayname: "Air Factory", desc:"Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
         { displayname: "Naval Factory", desc:"Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
         { displayname: "Advanced Vehicle Factory", desc:"Advanced Vehicle Factory", json: "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
-	    { displayname: "Advanced Bot Factory", desc:"Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
-	    { displayname: "Advanced Air Factory", desc:"Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+				{ displayname: "Advanced Bot Factory", desc:"Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
+				{ displayname: "Advanced Air Factory", desc:"Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
         { displayname: "Advanced Naval Factory", desc:"Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
         { displayname: "Orbital Launcher", desc:"Orbital Launcher", json: "/pa/units/orbital/orbital_launcher/orbital_launcher.json" },
         { displayname: "Metal Extractor", desc:"Metal Extractor", json: "/pa/units/land/metal_extractor/metal_extractor.json" },
         { displayname: "Adv Metal Extractor", desc:"Advanced Metal Extractor", json: "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
-	    { displayname: "Metal Storage", desc:"Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" },
+				{ displayname: "Metal Storage", desc:"Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" },
         { displayname: "Energy Plant", desc:"Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" },
         { displayname: "Advanced Energy Plant", desc:"Advanced Energy Plant", json: "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
-	    { displayname: "Energy Storage", desc:"Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
-	    { displayname: "Catapult", desc:"Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
+				{ displayname: "Energy Storage", desc:"Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
+				{ displayname: "Catapult", desc:"Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
         { displayname: "Holkins", desc:"Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
         { displayname: "Pelter", desc:"Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" },
         { displayname: "Missile Defense Tower", desc:"Air Defense", json: "/pa/units/land/air_defense/air_defense.json" },
@@ -75,7 +75,7 @@ var hbbuildings = [
         { displayname: "Advanced Torpedo Launcher", desc:"Advanced Torpedo Launcher", json: "/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json" },
         { displayname: "Orbital and Deepspace Radar", desc:"Orbital and Deepspace Radar", json: "/pa/units/orbital/deep_space_radar/deep_space_radar.json" },
         { displayname: "Advanced Radar", desc:"Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
-	    { displayname: "Radar", desc:"Radar", json: "/pa/units/land/radar/radar.json" },
+				{ displayname: "Radar", desc:"Radar", json: "/pa/units/land/radar/radar.json" },
         { displayname: "Halley", desc:"Delta-V Engine", json: "/pa/units/orbital/delta_v_engine/delta_v_engine.json" },
         { displayname: "Anti-Nuke Launcher", desc:"Anti-Nuke Launcher", json: "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json" },
         { displayname: "Nuclear Missile Launcher", desc:"Nuclear Missile Launcher", json: "/pa/units/land/nuke_launcher/nuke_launcher.json" }
@@ -193,12 +193,12 @@ function HotBuildSettingsViewModel()
         var map = {};
         var map2 = {};
         $.each(hotbuildglobalkey, function (key, value) {
-            if (value != '') {
-                if (map[value] == null) {
+            if (value !== '') {
+                if (map[value] === null) {
                     map[value] = key;
                 }
                 else {
-                    if (map2[value] == null) {
+                    if (map2[value] === null) {
                         map2[value] = [map[value], key];
                     }
                     else {
@@ -209,7 +209,7 @@ function HotBuildSettingsViewModel()
 
         });
         if (map2 != {}) {
-            dups += ''
+            dups += '';
         }
         $.each(map2, function (key, value) {
             dups += key + ':';
@@ -227,7 +227,7 @@ function HotBuildSettingsViewModel()
     };
 
     self.ComunityDefaults = function () {
-        hotbuildglobal["hotbuild1s"] = [
+				hotbuildglobal["hotbuild1s"] = [
             { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
             { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
             { displayname: "Advanced Fabrication Bot", desc: "Advanced Fabrication Bot", factory: "abotfac", json: "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
@@ -240,7 +240,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Fabrication Ship", desc: "Fabrication Ship", factory: "nfac", json: "/pa/units/sea/fabrication_ship/fabrication_ship.json" }
         ];
         hotbuildglobal["hotbuild2s"] = [
-	        { displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+						{ displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
             { displayname: "Advanced Naval Factory", desc: "Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
             { displayname: "Air Factory", desc: "Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
             { displayname: "Naval Factory", desc: "Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
@@ -256,7 +256,7 @@ function HotBuildSettingsViewModel()
         ];
         hotbuildglobal["hotbuild3s"] = [
             { displayname: "Advanced Radar", desc: "Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
-	        { displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
+						{ displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
             { displayname: "Dox", desc: "Assault Bot", factory: "botfac", json: "/pa/units/land/assault_bot/assault_bot.json" },
             { displayname: "Slammer", desc: "Advanced Assault Bot", factory: "abotfac", json: "/pa/units/land/assault_bot_adv/assault_bot_adv.json" },
             { displayname: "Ant", desc: "Tank", factory: "vecfac", json: "/pa/units/land/tank_light_laser/tank_light_laser.json" },
@@ -295,7 +295,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Land Barrier", desc: "Wall", json: "/pa/units/land/land_barrier/land_barrier.json" }
         ];
         hotbuildglobal["hotbuild9s"] = [
-	    { displayname: "Catapult", desc: "Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
+						{ displayname: "Catapult", desc: "Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
             { displayname: "Holkins", desc: "Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
             { displayname: "Pelter", desc: "Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" }
         ];
@@ -442,7 +442,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Land Barrier", desc: "Wall", json: "/pa/units/land/land_barrier/land_barrier.json" }
         ];
         hotbuildglobal["hotbuild9s"] = [
-	    { displayname: "Catapult", desc: "Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
+						{ displayname: "Catapult", desc: "Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
             { displayname: "Holkins", desc: "Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
             { displayname: "Pelter", desc: "Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" }
         ];
@@ -527,3 +527,4 @@ $("#game_settings").children(":first").append("<li class='game_settings'>" +
             "</li>");
 $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
 loadHotBuildTemplate($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hbuisettings);
+

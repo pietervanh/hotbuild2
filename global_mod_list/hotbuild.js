@@ -23,7 +23,7 @@ if (isNaN(model.hotbuild_reset_time)) {
 function HotBuildViewModel(resetTime) {
     var self = this;
     self.cycleResetTime = resetTime; //time you have to press again to loop trough list
-    self.lastCycleTime = ko.observable(new Date())
+    self.lastCycleTime = ko.observable(new Date());
     self.lastkey = ko.observable(0);
     self.cycleid = ko.observable(0);
     self.hotbuilds = ko.observableArray([""]);
@@ -32,7 +32,7 @@ function HotBuildViewModel(resetTime) {
     self.previewvisible = ko.observable(false);
     
     self.debuginfo = ko.computed(function () {
-        if (self.hotbuilds() != undefined) {
+        if (self.hotbuilds() !== undefined) {
             return self.hotbuilds().length;
         }
     }, this);
@@ -41,7 +41,7 @@ function HotBuildViewModel(resetTime) {
 
     self.buildPreviewList = function (hbindex, hotbuilds) {
         //set the buildPreview list 
-        if (hotbuilds != undefined) {
+        if (hotbuilds !== undefined) {
             self.hotbuildPreviews([]);
             for (i = hbindex; i < hotbuilds.length; i++) {
                 if (self.knowsBuildCommand(hotbuilds[i].json)) {
@@ -60,7 +60,7 @@ function HotBuildViewModel(resetTime) {
                 }
             }
         }
-    }
+    };
     //hide preview
     self.clean = function () {
         var current_time = _.now();
@@ -68,10 +68,10 @@ function HotBuildViewModel(resetTime) {
             self.previewvisible(false);
             self.previewvisible.notifySubscribers();
         }
-    }
+    };
 
     self.hotBuild = function (event, hotbuilds) {
-        
+
         self.hotbuilds(hotbuilds);
         if (model['maybeSetBuildTarget']) {
             if (self.knowsAnyBuildCommand()) {
@@ -85,12 +85,12 @@ function HotBuildViewModel(resetTime) {
                     }
                 } while (!self.knowsBuildCommand(self.hotbuilds()[self.cycleid()].json) && self.knowsAnyBuildCommand());
                 self.hbtriggertime(_.now());
-                setTimeout(self.clean, self.cycleResetTime + 1000 );
+                setTimeout(self.clean, self.cycleResetTime + 1000);
                 if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].buildStructure) {
                     model['maybeSetBuildTarget'](self.hotbuilds()[self.cycleid()].json);
                 }
                 else {
-                    model.executeStartBuild(event, self.getBuildItemId())
+                    model.executeStartBuild(event, self.getBuildItemId());
                 }
                 self.unitName(model.unitSpecs[self.hotbuilds()[self.cycleid()].json].name);
                 self.buildPreviewList(self.cycleid(), self.hotbuilds());
@@ -101,7 +101,7 @@ function HotBuildViewModel(resetTime) {
                 gameConsole.log('could not hotbuild item ' + self.debuginfo());
             }
         }
-    }
+    };
 
     self.knowsAnyBuildCommand = function () {
         for (var i = 0; i < self.hotbuilds().length; i++) {
@@ -110,24 +110,23 @@ function HotBuildViewModel(resetTime) {
             }
         }
         return false;
-    }
+    };
 
     self.knowsBuildCommand = function (cmd) {
         /*
         for (var i = 0; i < model.buildTabLists()[0].length; i++) {
-            if (model.buildTabLists()[0][i].id == cmd) {
-                return true;
-            }
+        if (model.buildTabLists()[0][i].id == cmd) {
+        return true;
+        }
         }*/
 
-		for(var i = 0; i < model.buildItems().length; i++) {
-			if (model.buildItems()[i].id() == cmd) {
-				return true;
-			}
-		}
+        for (var i = 0; i < model.buildItems().length; i++) {
+            if (model.buildItems()[i].id() == cmd) {
+                return true;
+            }
+        }
         return false;
-
-    }
+    };
 
     //move trough hotbuilds array when pushing multiple time the same key in a certain time interval
     self.doCycleId = function (length, key) {
@@ -144,7 +143,7 @@ function HotBuildViewModel(resetTime) {
         self.lastCycleTime = thisTime;
         self.lastkey(key);
 
-    }
+    };
 
 
     self.getBuildItemId = function () {
@@ -154,7 +153,7 @@ function HotBuildViewModel(resetTime) {
             }
         }
         return -1;
-    }
+    };
 }
 
 //init hotbuildsystem
@@ -226,7 +225,6 @@ function hotbuildViewAlert() {
                 location: alert.location,
                 planet_id: alert.planet_id
             };
-            debugger;
             engine.call('camera.lookAt', JSON.stringify(target));
         }
     }
@@ -262,7 +260,7 @@ function hbLoadJSON(url) {
     req.open('GET', 'coui:/' + url, false);
     req.send('');
     var jdata = JSON.parse(req.responseText);
-    return jdata
+    return jdata;
 }
 
 //same as the one in media\ui\alpha\shared\js\inputmap.js
@@ -281,7 +279,7 @@ function apply_keybindsHotbuild(set, used_keybinds, conflicts, resolve) {
         if (e.preventDefault)
             e.preventDefault();
         return false;
-    }
+    };
 
     // kill bad chrome defaults. todo: get list of all default bindings
     Mousetrap.bind('backspace', squelch);
@@ -319,10 +317,11 @@ function apply_keybindsHotbuild(set, used_keybinds, conflicts, resolve) {
                     conflicts.push({ 'set': set, 'key': key, 'binding': binding });
                 else {
                     used_keybinds[binding] = true;
-                    binding = [binding,'shift+' + binding] //array with shift DIFFERENCE so both upper and lower case should work
+                    binding = [binding,'shift+' + binding]; //array with shift DIFFERENCE so both upper and lower case should work
                     Mousetrap.bind(binding, _.partial(function (callback, event, binding) { callback(event, binding); event.preventDefault(); }, action));
                 }
             }
         }
     }
 }
+
