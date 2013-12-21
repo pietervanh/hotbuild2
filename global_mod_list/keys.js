@@ -47,7 +47,6 @@ hotbuildglobalkey["hotbuild20s"] = "";
 var settings = decode(localStorage.settings);
 hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
 hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
-hotbuildglobalname = settings.hotbuildconfigname ? settings.hotbuildconfigname : hotbuildglobalname;
 
 //Special Actions
 action_sets['hotbuild']['Toggle Energy'] = function (event) { energyToggle(event) };

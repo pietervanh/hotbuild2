@@ -4,6 +4,7 @@
         <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaultsWASD">Set Community Defaults (WASD)</button>
         &nbsp;&nbsp;Please give comments/ideas on the forum
     </p>
+    <div data-bind="text: duplicates"></div>
     <!--Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: \'hbid\', optionsText: function(item) {if(item.name != \'\' && item.name != undefined){ return item.name } else { return item.hbid }},optionsCaption: \'Select an key...\',click:$root.selectKey"></select>-->
     Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: 'hbid', optionsText: 'hbid', optionsCaption: 'Select an key...',click:$root.selectKey"></select>
     &nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;"/><br/>

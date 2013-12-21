@@ -14,31 +14,30 @@ model.settings = ko.computed(function () {
     //check hotbuildconfigkey conflicts ?
     newSettings.hotbuildconfig = hotbuildglobal;
     newSettings.hotbuildconfigkey = hotbuildglobalkey;
-    newSettings.hotbuildconfigname = hotbuildglobalname;
     return newSettings;
 });
 
 var hbkeydropdown = [
-        { hbid: "hotbuild1", info: hotbuildglobal["hotbuild1s"], name: hotbuildglobalname["hotbuild1s"] },
-        { hbid: "hotbuild2", info: hotbuildglobal["hotbuild2s"], name: hotbuildglobalname["hotbuild2s"] },
-        { hbid: "hotbuild3", info: hotbuildglobal["hotbuild3s"], name: hotbuildglobalname["hotbuild3s"] },
-        { hbid: "hotbuild4", info: hotbuildglobal["hotbuild4s"], name: hotbuildglobalname["hotbuild4s"] },
-        { hbid: "hotbuild5", info: hotbuildglobal["hotbuild5s"], name: hotbuildglobalname["hotbuild5s"] },
-        { hbid: "hotbuild6", info: hotbuildglobal["hotbuild6s"], name: hotbuildglobalname["hotbuild6s"] },
-        { hbid: "hotbuild7", info: hotbuildglobal["hotbuild7s"], name: hotbuildglobalname["hotbuild7s"] },
-        { hbid: "hotbuild8", info: hotbuildglobal["hotbuild8s"], name: hotbuildglobalname["hotbuild8s"] },
-        { hbid: "hotbuild9", info: hotbuildglobal["hotbuild9s"], name: hotbuildglobalname["hotbuild9s"] },
-        { hbid: "hotbuild10", info: hotbuildglobal["hotbuild10s"], name: hotbuildglobalname["hotbuild10s"] },
-        { hbid: "hotbuild11", info: hotbuildglobal["hotbuild11s"], name: hotbuildglobalname["hotbuild11s"] },
-        { hbid: "hotbuild12", info: hotbuildglobal["hotbuild12s"], name: hotbuildglobalname["hotbuild12s"] },
-        { hbid: "hotbuild13", info: hotbuildglobal["hotbuild13s"], name: hotbuildglobalname["hotbuild13s"] },
-        { hbid: "hotbuild14", info: hotbuildglobal["hotbuild14s"], name: hotbuildglobalname["hotbuild14s"] },
-        { hbid: "hotbuild15", info: hotbuildglobal["hotbuild15s"], name: hotbuildglobalname["hotbuild15s"] },
-        { hbid: "hotbuild16", info: hotbuildglobal["hotbuild16s"], name: hotbuildglobalname["hotbuild16s"] },
-        { hbid: "hotbuild17", info: hotbuildglobal["hotbuild17s"], name: hotbuildglobalname["hotbuild17s"] },
-        { hbid: "hotbuild18", info: hotbuildglobal["hotbuild18s"], name: hotbuildglobalname["hotbuild18s"] },
-        { hbid: "hotbuild19", info: hotbuildglobal["hotbuild19s"], name: hotbuildglobalname["hotbuild19s"] },
-        { hbid: "hotbuild20", info: hotbuildglobal["hotbuild20s"], name: hotbuildglobalname["hotbuild20s"] }
+        { hbid: "hotbuild1", info: hotbuildglobal["hotbuild1s"]},
+        { hbid: "hotbuild2", info: hotbuildglobal["hotbuild2s"]},
+        { hbid: "hotbuild3", info: hotbuildglobal["hotbuild3s"]},
+        { hbid: "hotbuild4", info: hotbuildglobal["hotbuild4s"]},
+        { hbid: "hotbuild5", info: hotbuildglobal["hotbuild5s"]},
+        { hbid: "hotbuild6", info: hotbuildglobal["hotbuild6s"]},
+        { hbid: "hotbuild7", info: hotbuildglobal["hotbuild7s"]},
+        { hbid: "hotbuild8", info: hotbuildglobal["hotbuild8s"]},
+        { hbid: "hotbuild9", info: hotbuildglobal["hotbuild9s"]},
+        { hbid: "hotbuild10", info: hotbuildglobal["hotbuild10s"]},
+        { hbid: "hotbuild11", info: hotbuildglobal["hotbuild11s"]},
+        { hbid: "hotbuild12", info: hotbuildglobal["hotbuild12s"]},
+        { hbid: "hotbuild13", info: hotbuildglobal["hotbuild13s"]},
+        { hbid: "hotbuild14", info: hotbuildglobal["hotbuild14s"]},
+        { hbid: "hotbuild15", info: hotbuildglobal["hotbuild15s"]},
+        { hbid: "hotbuild16", info: hotbuildglobal["hotbuild16s"]},
+        { hbid: "hotbuild17", info: hotbuildglobal["hotbuild17s"]},
+        { hbid: "hotbuild18", info: hotbuildglobal["hotbuild18s"]},
+        { hbid: "hotbuild19", info: hotbuildglobal["hotbuild19s"]},
+        { hbid: "hotbuild20", info: hotbuildglobal["hotbuild20s"]}
     ];
 //TODO read data from unit JSON files
 //Problem don't know how to know it's a a buildable unit / factory
@@ -188,6 +187,39 @@ function HotBuildSettingsViewModel()
         }
         self.Save();
     };
+
+    self.duplicates = ko.computed(function () {
+        var dups = '';
+        var map = {};
+        var map2 = {};
+        $.each(hotbuildglobalkey, function (key, value) {
+            if (value != '') {
+                if (map[value] == null) {
+                    map[value] = key;
+                }
+                else {
+                    if (map2[value] == null) {
+                        map2[value] = [map[value], key];
+                    }
+                    else {
+                        map2[value].push(key);
+                    }
+                }
+            }
+
+        });
+        if (map2 != {}) {
+            dups += ''
+        }
+        $.each(map2, function (key, value) {
+            dups += key + ':';
+            for (i = 0; i < value.length; i++) {
+                dups += value[i] + ' ';
+            }
+            dups += ' | ';
+        });
+        return dups;
+    },self);
 
     self.Save = function () {
         hotbuildglobal[self.selectedkeyinfo()] = self.selectedhotbuild();
@@ -486,24 +518,6 @@ function HotBuildSettingsViewModel()
         forgetFramePosition('hotbuild_info_frame');
 
     }
-
-    self.duplicates = ko.computed(function () {
-        /*
-        var hbtextkeys = [];
-        for (hbkey in hotbuildglobalkey) {
-            hbtextkeys.push(hotbuildglobalkey[hbkey]);
-        }
-
-        // work with compiled hash (not necessary)
-        var duplicates = [];
-        for (var key in hotbuildglobalkey){
-            if (hotbuildglobalkey.hasOwnProperty(key) && hotbuildglobalkey[key].length > 1){
-                duplicates.push(key);
-            }
-        }    
-        console.log(duplicates);
-            */
-    }, this);
 
 }
 var hbuisettings = new HotBuildSettingsViewModel();
