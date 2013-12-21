@@ -13,29 +13,15 @@ model.setCommandIndex = function(index) {
 	}
 };
 
-createFloatingFrame('hotbuild_info_frame', 320, 70, {'offset': 'leftCenter', 'top': -200});
+createFloatingFrame('hotbuild_info_frame', 220, 70, {'offset': 'leftCenter', 'top': -200});
+loadHotBuildTemplate($('#hotbuild_info_frame_content'), '../../mods/hotbuild2/live_game/hotbuild_live.html', myHotBuildViewModel);
 
-$('#hotbuild_info_frame_content').append(
-//$('body').append(
-'<div id="hotbuild_info" class="ignoremouse" data-bind="with: myHotBuildViewModel">' +
-'<div data-bind="visible:previewvisible">' +
-    //'<div data-bind="text: lastkey"/>' +
-    //'<div data-bind="text: cycleid"/>' +
-    //'<div>Debug: <span data-bind="text: debuginfo"/>' +
-    '<div data-bind="text: unitName"/>' +
-    //'<div data-bind="foreach: hotbuilds"><div data-bind="text: $data"/></div>' +
-    '<div class="hotbuild_fab_info_cont">' +
-        '<div class="hotbuild_current_fab_info_cont" data-bind="foreach: hotbuildPreviews">' +
-            '<div class="hotbuild_fab_selection">' +
-                '<img class="hotbuild_selected_fab" src="" data-bind="attr: { src: $data }" border="0" />' +
-                '<span class="hotbuild_selected_text" data-bind="text: $index"/>' +
-            '</div>' +
-        '</div>' +
-        '</div>' +
-'</div>');
-ko.applyBindings(myHotBuildViewModel, $('#hotbuild_info')[0]);
-
-apply_keybindsHotbuild('hotbuild');
+// hijack some method that is in the right place to execute our engine calls
+var hotbuildapplyUIDisplaySettings = model.applyUIDisplaySettings;
+model.applyUIDisplaySettings = function() {
+       apply_keybindsHotbuild('hotbuild');
+       hotbuildapplyUIDisplaySettings();
+};
 
 //fix for allowing multiple bindings per key
 //for example stop = s / build mex = s

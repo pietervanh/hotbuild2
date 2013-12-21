@@ -47,17 +47,17 @@ var hbbuildings = [
         { displayname: "Air Factory", desc:"Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
         { displayname: "Naval Factory", desc:"Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
         { displayname: "Advanced Vehicle Factory", desc:"Advanced Vehicle Factory", json: "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
-	{ displayname: "Advanced Bot Factory", desc:"Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
-	{ displayname: "Advanced Air Factory", desc:"Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+	    { displayname: "Advanced Bot Factory", desc:"Advanced Bot Factory", json: "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
+	    { displayname: "Advanced Air Factory", desc:"Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
         { displayname: "Advanced Naval Factory", desc:"Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
         { displayname: "Orbital Launcher", desc:"Orbital Launcher", json: "/pa/units/orbital/orbital_launcher/orbital_launcher.json" },
         { displayname: "Metal Extractor", desc:"Metal Extractor", json: "/pa/units/land/metal_extractor/metal_extractor.json" },
         { displayname: "Adv Metal Extractor", desc:"Advanced Metal Extractor", json: "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
-	{ displayname: "Metal Storage", desc:"Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" },
+	    { displayname: "Metal Storage", desc:"Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" },
         { displayname: "Energy Plant", desc:"Energy Plant", json: "/pa/units/land/energy_plant/energy_plant.json" },
         { displayname: "Advanced Energy Plant", desc:"Advanced Energy Plant", json: "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
-	{ displayname: "Energy Storage", desc:"Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
-	{ displayname: "Catapult", desc:"Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
+	    { displayname: "Energy Storage", desc:"Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
+	    { displayname: "Catapult", desc:"Tactical Missile Launcher", json: "/pa/units/land/tactical_missle_launcher/tactical_missle_launcher.json" },
         { displayname: "Holkins", desc:"Long Range Artillery", json: "/pa/units/land/artillery_long/artillery_long.json" },
         { displayname: "Pelter", desc:"Short Range Artillery", json: "/pa/units/land/artillery_short/artillery_short.json" },
         { displayname: "Missile Defense Tower", desc:"Air Defense", json: "/pa/units/land/air_defense/air_defense.json" },
@@ -73,7 +73,7 @@ var hbbuildings = [
         { displayname: "Advanced Torpedo Launcher", desc:"Advanced Torpedo Launcher", json: "/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json" },
         { displayname: "Orbital and Deepspace Radar", desc:"Orbital and Deepspace Radar", json: "/pa/units/orbital/deep_space_radar/deep_space_radar.json" },
         { displayname: "Advanced Radar", desc:"Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
-	{ displayname: "Radar", desc:"Radar", json: "/pa/units/land/radar/radar.json" },
+	    { displayname: "Radar", desc:"Radar", json: "/pa/units/land/radar/radar.json" },
         { displayname: "Halley", desc:"Delta-V Engine", json: "/pa/units/orbital/delta_v_engine/delta_v_engine.json" },
         { displayname: "Anti-Nuke Launcher", desc:"Anti-Nuke Launcher", json: "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json" },
         { displayname: "Nuclear Missile Launcher", desc:"Nuclear Missile Launcher", json: "/pa/units/land/nuke_launcher/nuke_launcher.json" }
@@ -138,25 +138,7 @@ function HotBuildSettingsViewModel()
         },
         owner: self
     });
-
-    self.hbname = ko.computed({
-        read: function () {
-            return hotbuildglobalname[self.selectedkeyinfo() + "s"];
-        },
-        write: function (value) {
-            hotbuildglobalname[self.selectedkeyinfo() + "s"] = value;
-        },
-        owner: self
-    });
-
-    /*
-    self.bindkey = ko.computed(function () {
-        if (self.selectedkeyinfo() != undefined) {
-            return eval("localStorage.keybinding_" + self.selectedkeyinfo());
-        }
-    }, this);
-    */
-    
+   
     self.selectedbuilding = ko.observable();
     
     self.selectedunit = ko.observable();
@@ -222,7 +204,7 @@ function HotBuildSettingsViewModel()
             { displayname: "Fabrication Ship", desc: "Fabrication Ship", factory: "nfac", json: "/pa/units/sea/fabrication_ship/fabrication_ship.json" }
         ];
         hotbuildglobal["hotbuild2s"] = [
-	    { displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+	        { displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
             { displayname: "Advanced Naval Factory", desc: "Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
             { displayname: "Air Factory", desc: "Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
             { displayname: "Naval Factory", desc: "Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
@@ -238,7 +220,7 @@ function HotBuildSettingsViewModel()
         ];
         hotbuildglobal["hotbuild3s"] = [
             { displayname: "Advanced Radar", desc: "Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
-	    { displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
+	        { displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
             { displayname: "Dox", desc: "Assault Bot", factory: "botfac", json: "/pa/units/land/assault_bot/assault_bot.json" },
             { displayname: "Slammer", desc: "Advanced Assault Bot", factory: "abotfac", json: "/pa/units/land/assault_bot_adv/assault_bot_adv.json" },
             { displayname: "Ant", desc: "Tank", factory: "vecfac", json: "/pa/units/land/tank_light_laser/tank_light_laser.json" },
@@ -354,7 +336,7 @@ function HotBuildSettingsViewModel()
 
     }
     
-self.ComunityDefaultsWASD = function () {
+    self.ComunityDefaultsWASD = function () {
         hotbuildglobal["hotbuild1s"] = [
             { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
             { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
@@ -362,7 +344,7 @@ self.ComunityDefaultsWASD = function () {
             { displayname: "Firefly", desc: "Air Scout", factory: "airfac", json: "/pa/units/air/air_scout/air_scout.json" }
         ];
         hotbuildglobal["hotbuild2s"] = [
-	    { displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+	        { displayname: "Advanced Air Factory", desc: "Advanced Air Factory", json: "/pa/units/air/air_factory_adv/air_factory_adv.json" },
             { displayname: "Advanced Naval Factory", desc: "Advanced Naval Factory", json: "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
             { displayname: "Air Factory", desc: "Air Factory", json: "/pa/units/air/air_factory/air_factory.json" },
             { displayname: "Naval Factory", desc: "Naval Factory", json: "/pa/units/sea/naval_factory/naval_factory.json" },
@@ -376,11 +358,11 @@ self.ComunityDefaultsWASD = function () {
         ];
         hotbuildglobal["hotbuild3s"] = [
             { displayname: "Advanced Radar", desc: "Advanced Radar", json: "/pa/units/land/radar_adv/radar_adv.json" },
-	    { displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
+	        { displayname: "Radar", desc: "Radar", json: "/pa/units/land/radar/radar.json" },
             { displayname: "Hummingbird", desc: "Fighter", factory: "airfac", json: "/pa/units/air/fighter/fighter.json" },	    
             { displayname: "Peregrine", desc: "Advanced Fighter", factory: "aafac", json: "/pa/units/air/fighter_adv/fighter_adv.json" },
             { displayname: "Spinner", desc: "AA Tank", factory: "vecfac", json: "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
-	    { displayname: "Stinger", desc: "AA Bot", factory: "botfac", json: "/pa/units/land/bot_aa/bot_aa.json" },            
+	        { displayname: "Stinger", desc: "AA Bot", factory: "botfac", json: "/pa/units/land/bot_aa/bot_aa.json" },            
             { displayname: "Narwhal", desc: "AA Frigate", factory: "nfac", json: "/pa/units/sea/frigate/frigate.json" }            
         ];
         hotbuildglobal["hotbuild4s"] = [
@@ -499,7 +481,27 @@ self.ComunityDefaultsWASD = function () {
 
         forgetFramePosition('hotbuild_info_frame');
 
-    }    
+    }
+
+    self.duplicates = ko.computed(function () {
+        /*debugger;
+
+        var hbtextkeys = [];
+        for (hbkey in hotbuildglobalkey) {
+            hbtextkeys.push(hotbuildglobalkey[hbkey]);
+        }
+
+        // work with compiled hash (not necessary)
+        var duplicates = [];
+        for (var key in hotbuildglobalkey){
+            if (hotbuildglobalkey.hasOwnProperty(key) && hotbuildglobalkey[key].length > 1){
+                duplicates.push(key);
+            }
+        }    
+        console.log(duplicates);
+            */
+    }, this);
+
 }
 //todo read the json files dynamically but we can't :(
 var hbuisettings = new HotBuildSettingsViewModel();
@@ -507,30 +509,5 @@ var hbuisettings = new HotBuildSettingsViewModel();
 $("#game_settings").children(":first").append("<li class='game_settings'>" +
                 "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
             "</li>");
-$("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs" data-bind="with: hbuisettings" style="height: 400px; overflow: scroll; overflow-x:hidden;">' +
-                '<p>' +
-                '<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.ComunityDefaults">Set Community Defaults</button>' +
-                '<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: \'default\', rollover_sound: \'default\',click:$root.ComunityDefaultsWASD">Set Community Defaults (WASD)</button>' +
-                '&nbsp;&nbsp;Please give comments/ideas on the forum</p>' +
-                //'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: \'hbid\', optionsText: function(item) {if(item.name != \'\' && item.name != undefined){ return item.name } else { return item.hbid }},optionsCaption: \'Select an key...\',click:$root.selectKey"></select>' + 
-                'Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: \'hbid\', optionsText: \'hbid\',optionsCaption: \'Select an key...\',click:$root.selectKey"></select>' + 
-                '&nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;"/>' +
-                '&nbsp; Name: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbname" id=hbuihotbuildname"/><br/>' +
-                //'&nbsp;<span data-bind="text: bindkey"/><br/>' +
-                'Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:\'displayname\', optionsCaption: \'Select an Building...\'"></select>' +
-                '<button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: \'default\', rollover_sound: \'default\',click:$root.addBuilding">Add</button></br>' +
-                'Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:\'displayname\', optionsCaption: \'Select a unit...\'"></select>' +
-                '<button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: \'default\', rollover_sound: \'default\',click:$root.addUnit">Add</button></br>' +
-                '<hr>' +
-                '<table class="tbl_hotbuildsui">' +
-                '<thead><tr class="hotbuildsui_row_header"><th>Sequence</th><th>DisplayName</th><th>Description</th><th>Options</th></tr></thead>' +
-                '<tbody data-bind="foreach: selectedhotbuild">' +
-                '<tr><td data-bind="text: $index"></td><td data-bind="text: displayname"></td><td data-bind="text: desc"></td><td>'+
-                '<button id="hbuplist" type="submit" data-bind="click: $parent.upList">Up</button>' +
-                '<button id="hbdownlist" type="submit" data-bind="click: $parent.downList">Down</button>' +
-                '<button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">Delete</button></td></tr>' +
-                '</tbody>' +
-                '</table>' +
-            '</div>');
-
-ko.applyBindings(hbuisettings, $('#tab_hotbuildprefs')[0]);
+$("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
+loadHotBuildTemplate($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hbuisettings);

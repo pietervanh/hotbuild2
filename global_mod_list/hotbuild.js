@@ -219,17 +219,25 @@ function hotbuildCommandMode(cmd) {
 function hotbuildViewAlert() {
     if (model.unitAlertModel.alerts().length > 0) {
         for (i = 0; i < model.unitAlertModel.alerts().length; i++) {
-            console.log(model.unitAlertModel.alerts()[i]);
+            //console.log(model.unitAlertModel.alerts()[i]);
             var alert = model.unitAlertModel.alerts()[i];
             var target = {
                 location: alert.location,
                 planet_id: alert.planet_id
             };
-
+            debugger;
             engine.call('camera.lookAt', JSON.stringify(target));
         }
     }
 }
+
+function loadHotBuildTemplate(element, url, model) {
+    element.load(url, function () {
+        console.log("Loading html " + url);
+        ko.applyBindings(model, element.get(0));
+    });
+}
+
 //same as the one in media\ui\alpha\shared\js\inputmap.js
 //problem default you can't give in the arrays with upper and lower keys
 //this version automaticaly gives in [binding,binding+shift] wich solves the problem

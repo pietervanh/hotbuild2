@@ -1,0 +1,34 @@
+<div data-bind="with: hbuisettings" style="height: 400px; overflow: scroll; overflow-x:hidden;">
+    <p>
+        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaults">Set Community Defaults</button>
+        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaultsWASD">Set Community Defaults (WASD)</button>
+        &nbsp;&nbsp;Please give comments/ideas on the forum
+    </p>
+    <!--Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: \'hbid\', optionsText: function(item) {if(item.name != \'\' && item.name != undefined){ return item.name } else { return item.hbid }},optionsCaption: \'Select an key...\',click:$root.selectKey"></select>-->
+    Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: 'hbid', optionsText: 'hbid', optionsCaption: 'Select an key...',click:$root.selectKey"></select>
+    &nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;"/><br/>
+    Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select an Building...'"></select>
+    <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
+    Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
+    <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
+    <hr>
+    <table class="tbl_hotbuildsui">
+        <thead>
+            <tr class="hotbuildsui_row_header">
+                <th>Sequence</th><th>DisplayName</th><th>Description</th><th>Options</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: selectedhotbuild">
+            <tr>
+                <td data-bind="text: $index"></td>
+                <td data-bind="text: displayname"></td>
+                <td data-bind="text: desc"></td>
+                <td>
+                    <button id="hbuplist" type="submit" data-bind="click: $parent.upList">Up</button>
+                    <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">Down</button>
+                    <button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
