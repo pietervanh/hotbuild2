@@ -327,16 +327,16 @@ function HotBuildSettingsViewModel()
 				default_keybinds.hotbuild.hotbuild9 = '';
 				default_keybinds.hotbuild.hotbuild10 = '';
       
-        hotbuildglobalkey.hotbuilds1 = 'w';
-        hotbuildglobalkey.hotbuilds2 = 'e';
-        hotbuildglobalkey.hotbuilds3 = 'r';
-        hotbuildglobalkey.hotbuilds4 = 't';
-        hotbuildglobalkey.hotbuilds5 = 'f';
-        hotbuildglobalkey.hotbuilds6 = 's';
-        hotbuildglobalkey.hotbuilds7 = 'x';
-        hotbuildglobalkey.hotbuilds8 = 'c';
-        hotbuildglobalkey.hotbuilds9 = 'v';
-        hotbuildglobalkey.hotbuilds10 = 'd';
+        hotbuildglobalkey.hotbuild1s = 'w';
+        hotbuildglobalkey.hotbuild2s = 'e';
+        hotbuildglobalkey.hotbuild3s = 'r';
+        hotbuildglobalkey.hotbuild4s = 't';
+        hotbuildglobalkey.hotbuild5s = 'f';
+        hotbuildglobalkey.hotbuild6s = 's';
+        hotbuildglobalkey.hotbuild7s = 'x';
+        hotbuildglobalkey.hotbuild8s = 'c';
+        hotbuildglobalkey.hotbuild9s = 'v';
+        hotbuildglobalkey.hotbuild10s = 'd';
 
         default_keybinds.hotbuild['Toggle Energy'] = 'tab';
         default_keybinds.hotbuild['Lock Pole'] = '^';
