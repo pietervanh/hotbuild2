@@ -49,6 +49,7 @@ hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglo
 hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
 
 //Special Actions
+
 action_sets.hotbuild['Toggle Energy'] = function (event) { energyToggle(event); };
 action_sets.hotbuild['Lock Pole'] = function (event) { polelockToggle(event); };
 action_sets.hotbuild['Requeue'] = function (event) { requeue(event); };
@@ -63,6 +64,7 @@ action_sets.hotbuild['patrol'] = function(event) {hotbuildCommandMode(5);};
 action_sets.hotbuild['stop'] = function(event) {hotbuildCommandMode(-1);};
 action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
 action_sets.hotbuild['unload'] = function(event) {hotbuildCommandMode(9);};
+
 
 default_keybinds.hotbuild['Toggle Energy'] = '';
 default_keybinds.hotbuild['Lock Pole'] = '';
