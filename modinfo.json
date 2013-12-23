@@ -24,8 +24,8 @@
         "coui://ui/mods/hotbuild2/settings/hotbuild_settings.css"
     ],
     "global_mod_list": [
-        "coui://ui/mods/hotbuild2/global_mod_list/keys.js",
-        "coui://ui/mods/hotbuild2/global_mod_list/hotbuild.js"
+        "coui://ui/mods/hotbuild2/global_mod_list/hotbuild.js",
+        "coui://ui/mods/hotbuild2/global_mod_list/keys.js"
     ],
     "requires": [
         "rFloatFrame",
