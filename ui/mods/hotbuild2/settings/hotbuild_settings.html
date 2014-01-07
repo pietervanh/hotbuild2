@@ -5,13 +5,58 @@
         &nbsp;&nbsp;Please give comments/ideas on the forum
     </p>
     <div data-bind="text: duplicates"></div>
-    <!--Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: \'hbid\', optionsText: function(item) {if(item.name != \'\' && item.name != undefined){ return item.name } else { return item.hbid }},optionsCaption: \'Select an key...\',click:$root.selectKey"></select>-->
-    Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: 'hbid', optionsText: 'hbid', optionsCaption: 'Select a key...'"></select>
-    &nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;"/><br/>
-    Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
-    <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
-    Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
-    <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
+    <div id="keyboardcontainer">
+        <ul id="keyboard">
+            <li class="tab">tab</li>
+            <li class="letter">q</li>
+            <li class="letter">w</li>
+            <li class="letter">e</li>
+            <li class="letter">r</li>
+            <li class="letter">t</li>
+            <li class="letter">y</li>
+            <li class="letter">u</li>
+            <li class="letter">i</li>
+            <li class="letter">o</li>
+            <li class="letter">p</li>
+            <li class="symbol">[</li>
+            <li class="symbol">]</li>
+            <li class="symbol lastitem">\</li>
+            <li class="capslock">caps lock</li>
+            <li class="letter">a</li>
+            <li class="letter">s</li>
+            <li class="letter">d</li>
+            <li class="letter">f</li>
+            <li class="letter">g</li>
+            <li class="letter">h</li>
+            <li class="letter">j</li>
+            <li class="letter">k</li>
+            <li class="letter">l</li>
+            <li class="symbol">;</li>
+            <li class="symbol">'</li>
+            <li class="return lastitem">return</li>
+            <li class="left-shift">shift</li>
+            <li class="letter">z</li>
+            <li class="letter">x</li>
+            <li class="letter">c</li>
+            <li class="letter">v</li>
+            <li class="letter">b</li>
+            <li class="letter">n</li>
+            <li class="letter">m</li>
+            <li class="symbol">,</li>
+            <li class="symbol">.</li>
+            <li class="symbol">/</li>
+            <li class="right-shift lastitem">shift</li>
+        </ul>
+    </div>
+    <div id="moresettings">
+       
+        <!--Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: 'hbid', optionsText: 'hbid', optionsCaption: 'Select a key...'"></select>
+        &nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;" /><br />-->
+        Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
+        <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
+        Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
+        <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
+    </div>
     <hr>
     <table class="tbl_hotbuildsui">
         <thead>
