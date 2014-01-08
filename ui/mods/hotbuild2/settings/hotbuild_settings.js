@@ -117,9 +117,9 @@ function HotBuildSettingsViewModel() {
     self.keyboardkey.subscribe(function (value) {
         var keyindex = _.indexOf(_.keys(_.invert(hotbuildglobalkey)), value);
         var hotbuildkey = _.keys(hotbuildglobalkey)[keyindex];
-        if (hotbuildkey != undefined)
+        if (hotbuildkey !== undefined)
         {
-            self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1))
+            self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
         }
         else
         {
@@ -127,18 +127,17 @@ function HotBuildSettingsViewModel() {
             //select it 
             keyindex = _.indexOf(_.keys(_.invert(hotbuildglobalkey)), "");
             hotbuildkey = _.keys(hotbuildglobalkey)[keyindex];
-            self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1))
+            self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
         }
         //get uberkey info
         var fuberkey = false;
         _.forEach(model.keybindGroups(), function (o) {
             _.forEach(o.keybinds(), function (k) {
-                if(k.binding() == value)
-                {
+                if (k.binding() == value) {
                     fuberkey = true;
                     self.uberkey(k.action());
                 }
-            })
+            });
         });
         if(!fuberkey)
         {
@@ -185,7 +184,7 @@ function HotBuildSettingsViewModel() {
     self.remFromList = function (item) {
         self.selectedhotbuild.remove(item);
         self.Save();
-        if (self.selectedhotbuild().length == 0)
+        if (self.selectedhotbuild().length === 0)
         {
             hotbuildglobalkey[self.selectedkeyinfo() + "s"] = "";
             self.InitKeyboard();
@@ -220,9 +219,9 @@ function HotBuildSettingsViewModel() {
         _.forEach(model.keybindGroups(), function (o) {
             _.forEach(o.keybinds(), function (k) {
                 uberkeys.push(k.binding());
-            })
+            });
         });
-        var diskeys = ['caps lock', 'shift', 'return']
+        var diskeys = ['caps lock', 'shift', 'return'];
         if (model.camera_key_pan_style() == "WASD") {
             diskeys = diskeys.concat(['w', 'a', 's', 'd']);
         }

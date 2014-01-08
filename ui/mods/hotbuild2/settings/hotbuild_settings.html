@@ -71,9 +71,9 @@
         <!--Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: 'hbid', optionsText: 'hbid', optionsCaption: 'Select a key...'"></select>
         &nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;" /><br />-->
         Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
-        <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
+        <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
         Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
-        <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
+        <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
     </div>
     <hr>
     <table class="tbl_hotbuildsui">
