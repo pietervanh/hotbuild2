@@ -17,32 +17,9 @@ model.settings = ko.computed(function () {
     return newSettings;
 });
 
-var hbkeydropdown = [
-        { hbid: "hotbuild1", info: hotbuildglobal.hotbuild1s },
-        { hbid: "hotbuild2", info: hotbuildglobal.hotbuild2s },
-        { hbid: "hotbuild3", info: hotbuildglobal.hotbuild3s },
-        { hbid: "hotbuild4", info: hotbuildglobal.hotbuild4s },
-        { hbid: "hotbuild5", info: hotbuildglobal.hotbuild5s },
-        { hbid: "hotbuild6", info: hotbuildglobal.hotbuild6s },
-        { hbid: "hotbuild7", info: hotbuildglobal.hotbuild7s },
-        { hbid: "hotbuild8", info: hotbuildglobal.hotbuild8s },
-        { hbid: "hotbuild9", info: hotbuildglobal.hotbuild9s },
-        { hbid: "hotbuild10", info: hotbuildglobal.hotbuild10s },
-        { hbid: "hotbuild11", info: hotbuildglobal.hotbuild11s },
-        { hbid: "hotbuild12", info: hotbuildglobal.hotbuild12s },
-        { hbid: "hotbuild13", info: hotbuildglobal.hotbuild13s },
-        { hbid: "hotbuild14", info: hotbuildglobal.hotbuild14s },
-        { hbid: "hotbuild15", info: hotbuildglobal.hotbuild15s },
-        { hbid: "hotbuild16", info: hotbuildglobal.hotbuild16s },
-        { hbid: "hotbuild17", info: hotbuildglobal.hotbuild17s },
-        { hbid: "hotbuild18", info: hotbuildglobal.hotbuild18s },
-        { hbid: "hotbuild19", info: hotbuildglobal.hotbuild19s },
-        { hbid: "hotbuild20", info: hotbuildglobal.hotbuild20s }
-];
 //TODO read data from unit JSON files
 //Problem don't know how to know it's a a buildable unit / factory
 //hbLoadUnitInfo();
-
 var hbbuildings = [
         { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
         { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
@@ -119,10 +96,9 @@ var hbunits = [
         { displayname: "Advanced Radar Satellite", desc: "Advanced Radar Satellite", factory: "ofac", json: "/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json" },
         { displayname: "Solar Array", desc: "Solar Panel Satellite", factory: "ofac", json: "/pa/units/orbital/solar_array/solar_array.json" }
 ];
+
 function HotBuildSettingsViewModel() {
     var self = this;
-    self.keyinfos = ko.observableArray(hbkeydropdown);
-    //self.selectedhotbuild = ko.observableArray([{displayname:"",desc:"",json:""}]);
     self.selectedhotbuild = ko.observableArray([]);
     self.buildings = ko.observableArray(hbbuildings);
     self.units = ko.observableArray(hbunits);
@@ -131,7 +107,6 @@ function HotBuildSettingsViewModel() {
     self.selectedkeyinfo = ko.observable();
     self.selectKey = function () {
         self.selectedhotbuild(hotbuildglobal[self.selectedkeyinfo() + "s"]);
-        //self.InitKeyboard();
     };
 
     self.selectedkeyinfo.subscribe(function(value)
@@ -190,6 +165,7 @@ function HotBuildSettingsViewModel() {
         hotbuildglobalkey[self.selectedkeyinfo() + "s"] = self.keyboardkey();
         self.Save();
     };
+
     self.addUnit = function () {
         //if(self.selectedhotbuild contains already a unit with the same factory ignore)
         var unitCheck = true;
@@ -236,10 +212,61 @@ function HotBuildSettingsViewModel() {
 
     self.Save = function () {
         hotbuildglobal[self.selectedkeyinfo()] = self.selectedhotbuild();
-        self.keyinfos(hbkeydropdown);
+    };
+
+    self.InitKeyboard = function () {
+        var arrkeys = _.keys(_.invert(hotbuildglobalkey));
+        var uberkeys = [];
+        _.forEach(model.keybindGroups(), function (o) {
+            _.forEach(o.keybinds(), function (k) {
+                uberkeys.push(k.binding());
+            })
+        });
+        var diskeys = ['caps lock', 'shift', 'return']
+        if (model.camera_key_pan_style() == "WASD") {
+            diskeys = diskeys.concat(['w', 'a', 's', 'd']);
+        }
+        $('#keyboard li').each(function (index) {
+            if ($(this).hasClass('hbk')) {
+                $(this).removeClass('hbk');
+            }
+            if ($(this).hasClass('uber')) {
+                $(this).removeClass('uber');
+            }
+            if ($(this).hasClass('dis')) {
+                $(this).removeClass('dis');
+            }
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+            }
+        });
+        self.selectedkeyinfo(undefined);
+        $('#keyboard li').each(function (index) {
+            for (i = 0; i < arrkeys.length; i++) {
+                if ($(this).html() == arrkeys[i]) {
+                    $(this).toggleClass('hbk');
+                }
+            }
+            for (i = 0; i < uberkeys.length; i++) {
+                if ($(this).html() == uberkeys[i]) {
+                    $(this).toggleClass('uber');
+                }
+            }
+            for (i = 0; i < diskeys.length; i++) {
+                if ($(this).html() == diskeys[i]) {
+                    $(this).toggleClass('dis');
+                }
+            }
+        });
+
     };
 
     self.ComunityDefaults = function () {
+        for (i = 1; i < 21; i++) {
+            eval("hotbuildglobal.hotbuild" + i + "s = []");
+            eval("default_keybinds.hotbuild.hotbuild" + i + "= ''");
+            eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
+        }
         hotbuildglobal.hotbuild1s = [
             { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
             { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
@@ -316,27 +343,6 @@ function HotBuildSettingsViewModel() {
             { displayname: "Energy Storage", desc: "Energy Storage", json: "/pa/units/land/energy_storage/energy_storage.json" },
             { displayname: "Metal Storage", desc: "Metal Storage", json: "/pa/units/land/metal_storage/metal_storage.json" }
         ];
-        hotbuildglobal.hotbuild11s = [];
-        hotbuildglobal.hotbuild12s = [];
-        hotbuildglobal.hotbuild13s = [];
-        hotbuildglobal.hotbuild14s = [];
-        hotbuildglobal.hotbuild15s = [];
-        hotbuildglobal.hotbuild16s = [];
-        hotbuildglobal.hotbuild17s = [];
-        hotbuildglobal.hotbuild18s = [];
-        hotbuildglobal.hotbuild19s = [];
-        hotbuildglobal.hotbuild20s = [];
-
-        default_keybinds.hotbuild.hotbuild1 = '';
-        default_keybinds.hotbuild.hotbuild2 = '';
-        default_keybinds.hotbuild.hotbuild3 = '';
-        default_keybinds.hotbuild.hotbuild4 = '';
-        default_keybinds.hotbuild.hotbuild5 = '';
-        default_keybinds.hotbuild.hotbuild6 = '';
-        default_keybinds.hotbuild.hotbuild7 = '';
-        default_keybinds.hotbuild.hotbuild8 = '';
-        default_keybinds.hotbuild.hotbuild9 = '';
-        default_keybinds.hotbuild.hotbuild10 = '';
 
         hotbuildglobalkey.hotbuild1s = 'w';
         hotbuildglobalkey.hotbuild2s = 'e';
@@ -382,10 +388,15 @@ function HotBuildSettingsViewModel() {
         model.camera_key_pan_style('ARROW');
         forgetFramePosition('hotbuild_info_frame');
         self.InitKeyboard();
-
     };
 
     self.ComunityDefaultsWASD = function () {
+        for (i = 1; i < 21; i++)
+        {
+            eval("hotbuildglobal.hotbuild" + i + "s = []") ;
+            eval("default_keybinds.hotbuild.hotbuild" + i + "= ''");
+            eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
+        }
         hotbuildglobal.hotbuild1s = [
             { displayname: "Vehicle Factory", desc: "Vehicle Factory", json: "/pa/units/land/vehicle_factory/vehicle_factory.json" },
             { displayname: "Bot Factory", desc: "Bot Factory", json: "/pa/units/land/bot_factory/bot_factory.json" },
@@ -463,28 +474,7 @@ function HotBuildSettingsViewModel() {
             { displayname: "Nuclear Missile Launcher", desc:"Nuclear Missile Launcher", json: "/pa/units/land/nuke_launcher/nuke_launcher.json" },
             { displayname: "Anti-Nuke Launcher", desc:"Anti-Nuke Launcher", json: "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json" },
         ];
-        hotbuildglobal.hotbuild11s = [];
-        hotbuildglobal.hotbuild12s = [];
-        hotbuildglobal.hotbuild13s = [];
-        hotbuildglobal.hotbuild14s = [];
-        hotbuildglobal.hotbuild15s = [];
-        hotbuildglobal.hotbuild16s = [];
-        hotbuildglobal.hotbuild17s = [];
-        hotbuildglobal.hotbuild18s = [];
-        hotbuildglobal.hotbuild19s = [];
-        hotbuildglobal.hotbuild20s = [];
-
-        default_keybinds.hotbuild.hotbuild1 = '';
-        default_keybinds.hotbuild.hotbuild2 = '';
-        default_keybinds.hotbuild.hotbuild3 = '';
-        default_keybinds.hotbuild.hotbuild4 = '';
-        default_keybinds.hotbuild.hotbuild5 = '';
-        default_keybinds.hotbuild.hotbuild6 = '';
-        default_keybinds.hotbuild.hotbuild7 = '';
-        default_keybinds.hotbuild.hotbuild8 = '';
-        default_keybinds.hotbuild.hotbuild9 = '';
-        default_keybinds.hotbuild.hotbuild10 = '';
-
+        
         hotbuildglobalkey.hotbuild1s = 'f';
         hotbuildglobalkey.hotbuild2s = 'g';
         hotbuildglobalkey.hotbuild3s = 't';
@@ -495,10 +485,6 @@ function HotBuildSettingsViewModel() {
         hotbuildglobalkey.hotbuild8s = 'c';
         hotbuildglobalkey.hotbuild9s = 'v';
         hotbuildglobalkey.hotbuild10s = 'z';
-        hotbuildglobalkey.hotbuild11s = '';
-        hotbuildglobalkey.hotbuild12s = '';
-        hotbuildglobalkey.hotbuild13s = '';
-
 
         default_keybinds.hotbuild['Toggle Energy'] = 'tab';
         default_keybinds.hotbuild['Lock Pole'] = 'y';
@@ -533,58 +519,7 @@ function HotBuildSettingsViewModel() {
         model.camera_key_pan_style('WASD');
         forgetFramePosition('hotbuild_info_frame');
         self.InitKeyboard();
-    };
-
-    self.InitKeyboard = function () {
-        var arrkeys = _.keys(_.invert(hotbuildglobalkey));        
-        var uberkeys = [];
-        _.forEach(model.keybindGroups(), function (o) {
-            _.forEach(o.keybinds(), function (k) {
-                uberkeys.push(k.binding());
-            })           
-        });
-        var diskeys = ['caps lock', 'shift', 'return']
-        if (model.camera_key_pan_style() == "WASD")
-        {
-            diskeys = diskeys.concat(['w','a','s','d']);
-        }
-        $('#keyboard li').each(function (index) {
-            if($(this).hasClass('hbk'))
-            {
-                $(this).removeClass('hbk');
-            }
-            if ($(this).hasClass('uber')) {
-                $(this).removeClass('uber');
-            }
-            if($(this).hasClass('dis'))
-            {
-                $(this).removeClass('dis');
-            }
-            if($(this).hasClass('active'))
-            {
-                $(this).removeClass('active');
-            }
-        });
-        self.selectedkeyinfo(undefined);
-        $('#keyboard li').each(function (index) {
-            for (i = 0; i < arrkeys.length; i++) {
-                if ($(this).html() == arrkeys[i]) {
-                    $(this).toggleClass('hbk');
-                }
-            }
-            for (i = 0; i < uberkeys.length; i++) {
-                if ($(this).html() == uberkeys[i]) {
-                    $(this).toggleClass('uber');
-                }
-            }
-            for (i = 0; i < diskeys.length; i++) {
-                if ($(this).html() == diskeys[i]) {
-                    $(this).toggleClass('dis');
-                }
-            }
-        });
-
-    }
+    };    
 }
 
 function loadHotBuildSettings(element, url, model) {
