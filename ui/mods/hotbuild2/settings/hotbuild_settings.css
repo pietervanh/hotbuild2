@@ -115,6 +115,10 @@ width: 570px;
    border-color: #00FF4C !important;
 }
 
+.uberkey {
+    color: #00FF4C;
+}
+
 #keyboard li:hover {
    position: relative;
    top: 1px;
