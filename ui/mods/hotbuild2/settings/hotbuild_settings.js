@@ -123,8 +123,7 @@ function HotBuildSettingsViewModel() {
         }
         else
         {
-            //find first unused hotbuildkey
-            //select it 
+            //find first unused hotbuildkey and select it 
             keyindex = _.indexOf(_.keys(_.invert(hotbuildglobalkey)), "");
             hotbuildkey = _.keys(hotbuildglobalkey)[keyindex];
             self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
