@@ -128,6 +128,7 @@ function HotBuildSettingsViewModel() {
     self.buildings = ko.observableArray(hbbuildings);
     self.units = ko.observableArray(hbunits);
     self.keyboardkey = ko.observable();
+    self.uberkey = ko.observable();
     self.selectedkeyinfo = ko.observable();
     self.selectKey = function () {
         self.selectedhotbuild(hotbuildglobal[self.selectedkeyinfo() + "s"]);
@@ -157,6 +158,22 @@ function HotBuildSettingsViewModel() {
             //debugger;
             self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1))
             //self.selectedhotbuild(hotbuildglobal[hotbuildkey]);
+        }
+        //get uberkey info
+        var fuberkey = false;
+        _.forEach(model.keybindGroups(), function (o) {
+            _.forEach(o.keybinds(), function (k) {
+                if(k.binding() == value)
+                {
+                    //debugger;
+                    fuberkey = true;
+                    self.uberkey(k.action());
+                }
+            })
+        });
+        if(!fuberkey)
+        {
+            self.uberkey(undefined);
         }
     });
 
@@ -224,41 +241,6 @@ function HotBuildSettingsViewModel() {
         }
         self.Save();
     };
-
-    self.duplicates = ko.computed(function () {
-        /*
-        var dups = '';
-        var map = {};
-        var map2 = {};
-        $.each(hotbuildglobalkey, function (key, value) {
-            if (value !== '') {
-                if (map[value] === null) {
-                    map[value] = key;
-                }
-                else {
-                    if (map2[value] === null) {
-                        map2[value] = [map[value], key];
-                    }
-                    else {
-                        map2[value].push(key);
-                    }
-                }
-            }
-
-        });
-        if (map2 != {}) {
-            dups += '';
-        }
-        $.each(map2, function (key, value) {
-            dups += key + ':';
-            for (i = 0; i < value.length; i++) {
-                dups += value[i] + ' ';
-            }
-            dups += ' | ';
-        });
-        return dups;
-        */
-    }, self);
 
     self.Save = function () {
         hotbuildglobal[self.selectedkeyinfo()] = self.selectedhotbuild();
@@ -568,14 +550,9 @@ function HotBuildSettingsViewModel() {
             })           
         });
         var diskeys = ['caps lock', 'shift', 'return']
-        //check wasd
-        //debugger;
         if (model.camera_key_pan_style() == "WASD")
         {
-            diskeys.push('w');
-            diskeys.push('a');
-            diskeys.push('s');
-            diskeys.push('d');
+            diskeys.concat(['w','a','s','d']);
         }
         $('#keyboard li').each(function (index) {
             if($(this).hasClass('hbk'))
@@ -584,9 +561,6 @@ function HotBuildSettingsViewModel() {
             }
             if ($(this).hasClass('uber')) {
                 $(this).removeClass('uber');
-            }
-            if ($(this).hasClass('uhbk')) {
-                $(this).removeClass('uhbk');
             }
             if($(this).hasClass('dis'))
             {

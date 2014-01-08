@@ -10,98 +10,115 @@
 }
 
 #keyboardcontainer {
-width: 688px;
+width: 570px;
 }
 #moresettings{
     clear:both;
 }
 
 #keyboard {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+   margin: 0;
+   padding: 0;
+   list-style: none;
 }
 
 #keyboard li {
-    float: left;
-    margin: 0 5px 5px 0;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    background: #0F1F3D;
-    border: 1px solid #f9f9f9;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    color: #00FFCC;
+   float: left;
+   margin: 0 5px 5px 0;
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   background: #000504;
+   border: 1px solid #CBFFF4;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   color: #00FFCC;
+}
+
+#legend {
+   padding-left: 50px;
+   list-style: none;
+}
+
+
+#legend li {
+   float: left;
+   margin: 0 5px 5px 0;
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   background: #000504;
+   border: 1px solid #CBFFF4;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   color: #00FFCC;
 }
 
 .capslock, .tab, .left-shift {
-    clear: left;
+   clear: left;
 }
 
 #keyboard .tab, #keyboard .delete {
-    width: 70px;
+   width: 80px;
 }
 
 #keyboard .capslock {
-    width: 80px;
+   width: 80px;
 }
 
 #keyboard .return {
-    width: 77px;
+   width: 67px;
 }
 
 #keyboard .left-shift {
-    width: 95px;
+   width: 85px;
 }
 
 #keyboard .right-shift {
-    width: 109px;
+   width: 99px;
 }
 
 .lastitem {
-    margin-right: 0;
+   margin-right: 0;
 }
 
 .uppercase {
-    text-transform: uppercase;
+   text-transform: uppercase;
 }
 
 #keyboard .space {
-    clear: left;
-    width: 681px;
+   clear: left;
+   width: 560px;
 }
 
 .on {
-    display: none;
+   display: none;
 }
 
 .dis {
-    border: 1px solid red !important;
+   border-color: #FF4C00 !important;
 }
 
 .active {
-    //background: #eee !important;
-    border: 1px solid white !important;
-    font-weight: bolder;
-    color: white !important;
-    text-transform: uppercase;
+   outline: #CBFFF4 solid thin !important;
+   font-weight: bolder;
+   text-transform: uppercase;
 }
 
 .hbk {
-    background: #798292 !important;
-    /*border: 1px solid orange !important;*/
+   background: #006551 !important;
 }
 
 .uber {
-    background: #0F3D21 !important;
+   border-color: #00FF4C !important;
 }
 
 #keyboard li:hover {
-    position: relative;
-    top: 1px;
-    left: 1px;
-    border-color: #e5e5e5;
-    cursor: pointer;
+   position: relative;
+   top: 1px;
+   left: 1px;
+   border-color: #CBFFF4;
+   cursor: pointer;
 }

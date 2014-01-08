@@ -4,7 +4,6 @@
         <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaultsWASD">Set Community Defaults (WASD)</button>
         &nbsp;&nbsp;Please give comments/ideas on the forum
     </p>
-    <div data-bind="text: duplicates"></div>
     <div id="keyboardcontainer">
         <ul id="keyboard">
             <li class="tab">tab</li>
@@ -46,10 +45,29 @@
             <li class="symbol">.</li>
             <li class="symbol">/</li>
             <li class="right-shift lastitem">shift</li>
+            <li class="space lastitem">space</li>  
         </ul>
     </div>
+    <div id="legend">
+        <table>
+            <tr>
+                <td colspan="2">Legend:</td>
+            </tr>
+            <tr>
+                <td><ul><li class="letter hbk">a</li></ul></td>
+                <td>Hotbuild key</td>
+            </tr>
+            <tr>
+                <td><ul><li class="letter uber">a</li></ul></td>
+                <td>Keyboard Tab key: <span data-bind="text: uberkey"></span></td>
+            </tr>
+            <tr>
+                <td><ul><li class="letter dis">a</li></ul></td>
+                <td>Unbindable Key</td>
+            </tr>
+        </table>
+    </div>
     <div id="moresettings">
-       
         <!--Select Hotbuild key: <select name="uihotbuildkey" data-bind="options: keyinfos, value: selectedkeyinfo, optionsValue: 'hbid', optionsText: 'hbid', optionsCaption: 'Select a key...'"></select>
         &nbsp; Key: <input type="text" data-bind="disable: selectedkeyinfo() == undefined,value: hbkey" id="hbuihotbuildkey" style="width: 60px; margin-left: 10px;" /><br />-->
         Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
