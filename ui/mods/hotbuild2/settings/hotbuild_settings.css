@@ -33,7 +33,7 @@ width: 570px;
    border: 1px solid #CBFFF4;
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
-   color: #00FFCC;
+   color: #00FFFF;
 }
 
 #legend {
@@ -49,11 +49,11 @@ width: 570px;
    height: 30px;
    line-height: 30px;
    text-align: center;
-   background: #000504;
-   border: 1px solid #CBFFF4;
+   background: #000505;
+   border: 1px solid #CBFFFF;
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
-   color: #00FFCC;
+   color: rgba(0,255,255,1);
 }
 
 .capslock, .tab, .left-shift {
@@ -98,35 +98,31 @@ width: 570px;
 }
 
 .dis {
-   border-color: #FF4C00 !important;
+   border-color: #FF7F00 !important;
 }
 
 .active {
-   outline: #CBFFF4 solid thin !important;
+   outline: #CBFFFF solid thin !important;
    font-weight: bolder;
    text-transform: uppercase;
 }
 
 .hbk {
-   background: #006551 !important;
+   background: rgba(0,255,255,.5) !important;
 }
 
 .uber {
-   border-color: #00FF4C !important;
-}
-
-.uberkey {
-    color: #00FF4C;
+   border-color: #00FF7F !important;
 }
 
 #keyboard li:hover {
    position: relative;
    top: 1px;
    left: 1px;
-   border-color: #CBFFF4;
+   border-color: #CBFFFF;
    cursor: pointer;
 }
 
 .vecfac, .botfac, .airfac, .nfac, .avecfac, .abotfac, .aafac, .anfac, .ofac {
-    background:#006551;
+    background:#006565;
 }
