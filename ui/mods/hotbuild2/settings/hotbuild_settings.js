@@ -12,7 +12,6 @@ model.oldSettingsBeforeHotbuild = model.settings;
 
 model.settings = ko.computed(function () {
     var newSettings = model.oldSettingsBeforeHotbuild();
-    //check hotbuildconfigkey conflicts ?
     newSettings.hotbuildconfig = hotbuildglobal;
     newSettings.hotbuildconfigkey = hotbuildglobalkey;
     return newSettings;
@@ -141,13 +140,11 @@ function HotBuildSettingsViewModel() {
     });
 
     self.keyboardkey.subscribe(function (value) {
-        //debugger;
         var keyindex = _.indexOf(_.keys(_.invert(hotbuildglobalkey)), value);
         var hotbuildkey = _.keys(hotbuildglobalkey)[keyindex];
         if (hotbuildkey != undefined)
         {
             self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1))
-            //self.selectedhotbuild(hotbuildglobal[hotbuildkey]);
         }
         else
         {
@@ -155,9 +152,7 @@ function HotBuildSettingsViewModel() {
             //select it 
             keyindex = _.indexOf(_.keys(_.invert(hotbuildglobalkey)), "");
             hotbuildkey = _.keys(hotbuildglobalkey)[keyindex];
-            //debugger;
             self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1))
-            //self.selectedhotbuild(hotbuildglobal[hotbuildkey]);
         }
         //get uberkey info
         var fuberkey = false;
@@ -165,7 +160,6 @@ function HotBuildSettingsViewModel() {
             _.forEach(o.keybinds(), function (k) {
                 if(k.binding() == value)
                 {
-                    //debugger;
                     fuberkey = true;
                     self.uberkey(k.action());
                 }
@@ -215,13 +209,11 @@ function HotBuildSettingsViewModel() {
     self.remFromList = function (item) {
         self.selectedhotbuild.remove(item);
         self.Save();
-        //debugger;
         if (self.selectedhotbuild().length == 0)
         {
             hotbuildglobalkey[self.selectedkeyinfo() + "s"] = "";
             self.InitKeyboard();
         }
-        
     };
 
     self.upList = function (item) {
@@ -552,7 +544,7 @@ function HotBuildSettingsViewModel() {
         var diskeys = ['caps lock', 'shift', 'return']
         if (model.camera_key_pan_style() == "WASD")
         {
-            diskeys.concat(['w','a','s','d']);
+            diskeys = diskeys.concat(['w','a','s','d']);
         }
         $('#keyboard li').each(function (index) {
             if($(this).hasClass('hbk'))
@@ -600,8 +592,7 @@ function loadHotBuildSettings(element, url, model) {
         hbuisettings.InitKeyboard();
         $('#keyboard li').click(function () {
             var $this = $(this);
-            var character = $this.html(); // If it's a lowercase letter, nothing happens to this variable
-            //debugger;
+            var character = $this.html();
             if (!$this.hasClass('dis')) {
                 hbuisettings.InitKeyboard();
                 $('#keyboard li').each(function (index) {
@@ -611,9 +602,6 @@ function loadHotBuildSettings(element, url, model) {
                 });
 
                 $this.addClass('active');
-
-                // Add the character
-                //$selectedkey.html(character);
                 hbuisettings.keyboardkey(character);
             }
         });
