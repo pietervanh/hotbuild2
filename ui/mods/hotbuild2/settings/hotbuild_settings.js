@@ -198,14 +198,14 @@ function HotBuildSettingsViewModel() {
         self.selectedhotbuild.push(self.selectedbuilding());
         hotbuildglobalkey[self.selectedkeyinfo() + "s"] = self.keyboardkey();
         self.Save();
-        //self.InitKeyboard();
+        !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
     };
 
     self.addUnit = function () {
         //if(self.selectedhotbuild contains already a unit with the same factory ignore)
         var unitCheck = true;
         for (var i = 0; i < self.selectedhotbuild().length; i++) {
-            if (self.selectedhotbuild()[i].factory == self.selectedunit().factory) {
+            if (self.selectedhotbuild()[i].factory() == self.selectedunit().factory()) {
                 unitCheck = false;
                 break;
             }
@@ -215,7 +215,7 @@ function HotBuildSettingsViewModel() {
             self.selectedhotbuild.push(self.selectedunit());
         }
         self.Save();
-        //self.InitKeyboard();
+        !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
     };
 
     self.remFromList = function (item) {
@@ -252,6 +252,7 @@ function HotBuildSettingsViewModel() {
     };
 
     self.InitKeyboard = function () {
+        self.selectedkeyinfo(undefined);
         var arrkeys = _.keys(_.invert(hotbuildglobalkey));
         var uberkeys = [];
         _.forEach(model.keybindGroups(), function (o) {
@@ -277,7 +278,6 @@ function HotBuildSettingsViewModel() {
                 $(this).removeClass('active');
             }
         });
-        self.selectedkeyinfo(undefined);
         $('#keyboard li').each(function (index) {
             for (i = 0; i < arrkeys.length; i++) {
                 if ($(this).html() == arrkeys[i]) {
