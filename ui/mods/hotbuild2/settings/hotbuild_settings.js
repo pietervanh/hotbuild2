@@ -97,6 +97,39 @@ var hbunits = [
         { displayname: "Solar Array", desc: "Solar Panel Satellite", factory: "ofac", json: "/pa/units/orbital/solar_array/solar_array.json" }
 ];
 
+var hbbuildingstst = [ 
+	new hbListItem("/pa/units/land/bot_factory/bot_factory.json"),
+	new hbListItem("/pa/units/land/vehicle_factory/vehicle_factory.json")
+];
+
+var hbunitstst = [ 
+	new hbListItem("/pa/units/land/fabrication_bot/fabrication_bot.json"),
+	new hbListItem("/pa/units/land/bot_aa/bot_aa.json")
+];
+
+function hbListItem(jsonpayload)
+{
+	//TODO
+	var self = this;
+	self.json = ko.observable(jsonpayload);
+	self.desc = ko.observable();
+	self.displayname = ko.observable();
+	self.factory = ko.observable(); //css based on factory ?
+	self.image = ko.observable(); //get image of unit / building
+	self.json.subscribe(function(value){
+		//fetch from json file the data	
+		var unitdata = hbLoadJSON(value);
+		debugger;
+		//write to listitem props();
+		/*
+		unitdata.description != undefined ? self.desc(unitdata.description) : self.desc('');
+		unitdata.displayname != undefined ? self.displayname(unitdata.displayname) : self.displayname('');
+		unitdata.factory != undefined ? self.factory(unitdata.factory) : self.factory('');
+		*/
+	});
+	
+};
+
 function HotBuildSettingsViewModel() {
     var self = this;
     self.selectedhotbuild = ko.observableArray([]);
@@ -190,6 +223,7 @@ function HotBuildSettingsViewModel() {
         }
     };
 
+    //Maybe replace this with dragging ? 
     self.upList = function (item) {
         var i = self.selectedhotbuild.indexOf(item);
         if (i >= 1 && i <= self.selectedhotbuild().length) {
