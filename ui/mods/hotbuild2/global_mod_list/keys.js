@@ -1,48 +1,11 @@
 //set empty defaults
 var hotbuildglobal = {};
-hotbuildglobal.hotbuild1s = [];
-hotbuildglobal.hotbuild2s = [];
-hotbuildglobal.hotbuild3s = [];
-hotbuildglobal.hotbuild4s = [];
-hotbuildglobal.hotbuild5s = [];
-hotbuildglobal.hotbuild6s = [];
-hotbuildglobal.hotbuild7s = [];
-hotbuildglobal.hotbuild8s = [];
-hotbuildglobal.hotbuild9s = [];
-hotbuildglobal.hotbuild10s = [];
-hotbuildglobal.hotbuild11s = [];
-hotbuildglobal.hotbuild12s = [];
-hotbuildglobal.hotbuild13s = [];
-hotbuildglobal.hotbuild14s = [];
-hotbuildglobal.hotbuild15s = [];
-hotbuildglobal.hotbuild16s = [];
-hotbuildglobal.hotbuild17s = [];
-hotbuildglobal.hotbuild18s = [];
-hotbuildglobal.hotbuild19s = [];
-hotbuildglobal.hotbuild20s = [];
-
 var hotbuildglobalkey = {};
-hotbuildglobalkey.hotbuild1s = "";
-hotbuildglobalkey.hotbuild2s = "";
-hotbuildglobalkey.hotbuild3s = "";
-hotbuildglobalkey.hotbuild4s = "";
-hotbuildglobalkey.hotbuild5s = "";
-hotbuildglobalkey.hotbuild6s = "";
-hotbuildglobalkey.hotbuild7s = "";
-hotbuildglobalkey.hotbuild8s = "";
-hotbuildglobalkey.hotbuild9s = "";
-hotbuildglobalkey.hotbuild10s = "";
-hotbuildglobalkey.hotbuild11s = "";
-hotbuildglobalkey.hotbuild12s = "";
-hotbuildglobalkey.hotbuild13s = "";
-hotbuildglobalkey.hotbuild14s = "";
-hotbuildglobalkey.hotbuild15s = "";
-hotbuildglobalkey.hotbuild16s = "";
-hotbuildglobalkey.hotbuild17s = "";
-hotbuildglobalkey.hotbuild18s = "";
-hotbuildglobalkey.hotbuild19s = "";
-hotbuildglobalkey.hotbuild20s = "";
-
+for (i = 1; i < 21; i++) {
+    eval("hotbuildglobal.hotbuild" + i + "s = []");
+    eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
+    eval("default_keybinds.hotbuild.hotbuild" + i + "= ''"); //remove in future is cleanup previous versions
+}
 //load hotbuildconfig from settings
 var settings = decode(localStorage.settings);
 hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
