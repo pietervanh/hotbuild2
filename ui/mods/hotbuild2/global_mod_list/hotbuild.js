@@ -256,6 +256,7 @@ function hbLoadUnitsInfo() {
 }
 
 function hbLoadJSON(url) {
+    //console.log("loading " + url);
     var req = new XMLHttpRequest();
     req.open('GET', 'coui:/' + url, false);
     req.send('');
