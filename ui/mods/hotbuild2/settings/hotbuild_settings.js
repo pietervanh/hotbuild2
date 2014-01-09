@@ -332,6 +332,15 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/land/radar_adv/radar_adv.json"),
             new hbListItem().json("/pa/units/land/radar/radar.json"),
             new hbListItem().json("/pa/units/orbital/deep_space_radar/deep_space_radar.json"),
+            new hbListItem().json("/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json"),
+            new hbListItem().json("/pa/units/sea/frigate/frigate.json"),
+            new hbListItem().json("/pa/units/sea/nuclear_sub/nuclear_sub.json"),
+            new hbListItem().json("/pa/units/air/bomber/bomber.json"),
+            new hbListItem().json("/pa/units/orbital/orbital_lander/orbital_lander.json")
+        ];
+        hotbuildglobal.hotbuild4s = [
+            new hbListItem().json("/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"),
+            new hbListItem().json("/pa/units/land/bot_factory_adv/bot_factory_adv.json"),
             new hbListItem().json("/pa/units/land/assault_bot_adv/assault_bot_adv.json"),
             new hbListItem().json("/pa/units/land/tank_light_laser/tank_light_laser.json"),
             new hbListItem().json("/pa/units/land/tank_laser_adv/tank_laser_adv.json"),
@@ -340,10 +349,6 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/sea/destroyer/destroyer.json"),
             new hbListItem().json("/pa/units/sea/battleship/battleship.json"),
             new hbListItem().json("/pa/units/orbital/orbital_fighter/orbital_fighter.json")
-        ];
-        hotbuildglobal.hotbuild4s = [
-            new hbListItem().json("/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"),
-            new hbListItem().json("/pa/units/land/bot_factory_adv/bot_factory_adv.json"),
         ];
         hotbuildglobal.hotbuild5s = [
             new hbListItem().json("/pa/units/land/energy_plant_adv/energy_plant_adv.json"),
