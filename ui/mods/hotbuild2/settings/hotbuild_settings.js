@@ -105,30 +105,31 @@ function hbListItem()
 	self.factory = ko.observable(); //css based on factory ?
 	self.image = ko.observable(); //get image of unit / building
 	self.json.subscribe(function(value){
-		//fetch from json file the data	
-		var unitdata = hbLoadJSON(value);
-		//write to listitem props();
-		unitdata.description != undefined ? self.desc(unitdata.description) : self.desc('');
-		unitdata.display_name != undefined ? self.displayname(unitdata.display_name) : self.displayname('');
-		if(_.contains(unitdata.unit_types,'UNITTYPE_Mobile'))
-		{
-		    if(_.contains(unitdata.unit_types,'UNITTYPE_Basic'))
-		    {
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? self.factory('botfac') : '';
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? self.factory('vecfac') : '';
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? self.factory('afac') : '';
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? self.factory('nfac') : '';
-		    }
-		    else
-		    {
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? self.factory('abotfac') : '';
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? self.factory('avecfac') : '';
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? self.factory('aafac') : '';
-		        _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? self.factory('anfac') : '';
-		    }
-		    _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? self.factory('ofac') : '';
-		    //console.log(self.factory());
-		}
+	    //fetch from json file the data	
+	    $.getJSON('coui:/' + value, function (unitdata) {
+	        //write to listitem props();
+	        unitdata.description != undefined ? self.desc(unitdata.description) : self.desc('');
+	        unitdata.display_name != undefined ? self.displayname(unitdata.display_name) : self.displayname('');
+	        if(_.contains(unitdata.unit_types,'UNITTYPE_Mobile'))
+	        {
+	            if(_.contains(unitdata.unit_types,'UNITTYPE_Basic'))
+	            {
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? self.factory('botfac') : '';
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? self.factory('vecfac') : '';
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? self.factory('afac') : '';
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? self.factory('nfac') : '';
+	            }
+	            else
+	            {
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? self.factory('abotfac') : '';
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? self.factory('avecfac') : '';
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? self.factory('aafac') : '';
+	                _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? self.factory('anfac') : '';
+	            }
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? self.factory('ofac') : '';
+	            //console.log(self.factory());
+	        }
+	    });
 	});
 	
 };

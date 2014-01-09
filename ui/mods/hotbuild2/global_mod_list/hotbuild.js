@@ -238,32 +238,6 @@ function loadHotBuildTemplate(element, url, model) {
     });
 }
 
-function hbUnitinfo(path,info)
-{
-    return { path: path, info: info};
-}
-function hbLoadUnitsInfo() {
-    var units = [];
-    var req = new XMLHttpRequest();
-    req.open('GET', 'coui://pa/units/unit_list.json', false);
-    req.send('');
-    var unitpaths = JSON.parse(req.responseText);
-    for (var i = 0; i < unitpaths.units.length; i++) {
-        units.push(hbUnitinfo(unitpaths.units[i],loadJSON(unitpaths.units[i])));
-    }
-    console.log(units);
-    return units;
-}
-
-function hbLoadJSON(url) {
-    //console.log("loading " + url);
-    var req = new XMLHttpRequest();
-    req.open('GET', 'coui:/' + url, false);
-    req.send('');
-    var jdata = JSON.parse(req.responseText);
-    return jdata;
-}
-
 //same as the one in media\ui\alpha\shared\js\inputmap.js
 //problem default you can't give in the arrays with upper and lower keys
 //this version automaticaly gives in [binding,binding+shift] wich solves the problem
