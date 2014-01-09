@@ -296,7 +296,6 @@ function HotBuildSettingsViewModel() {
     self.ComunityDefaults = function () {
         for (i = 1; i < 21; i++) {
             eval("hotbuildglobal.hotbuild" + i + "s = []");
-            eval("default_keybinds.hotbuild.hotbuild" + i + "= ''");
             eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
         }
         hotbuildglobal.hotbuild1s = [
@@ -426,7 +425,6 @@ function HotBuildSettingsViewModel() {
         for (i = 1; i < 21; i++)
         {
             eval("hotbuildglobal.hotbuild" + i + "s = []") ;
-            eval("default_keybinds.hotbuild.hotbuild" + i + "= ''");
             eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
         }
         hotbuildglobal.hotbuild1s = [
