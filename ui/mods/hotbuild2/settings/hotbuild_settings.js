@@ -195,6 +195,7 @@ function HotBuildSettingsViewModel() {
         self.selectedhotbuild.push(self.selectedbuilding());
         hotbuildglobalkey[self.selectedkeyinfo() + "s"] = self.keyboardkey();
         self.Save();
+        self.InitKeyboard();
     };
 
     self.addUnit = function () {
@@ -211,6 +212,7 @@ function HotBuildSettingsViewModel() {
             self.selectedhotbuild.push(self.selectedunit());
         }
         self.Save();
+        self.InitKeyboard();
     };
 
     self.remFromList = function (item) {
