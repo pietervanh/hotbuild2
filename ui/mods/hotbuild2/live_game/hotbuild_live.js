@@ -23,6 +23,15 @@ model.applyUIDisplaySettings = function() {
        hotbuildapplyUIDisplaySettings();
 };
 
+
+if (settings.hotbuild_show_key_on_buildbar === "ON") {
+    //Show key on buildbar
+    $('.div_build_item img').replaceWith(
+    '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
+    '<span class="hbbuildbarkey" data-bind="text: hbgetBuildBarKey($data.id())"></span>');
+}
+
+
 //fix for allowing multiple bindings per key
 //for example stop = s / build mex = s
 // stop = s = default mousetrap binding
@@ -33,7 +42,6 @@ $(document).keydown(function (e) {
         return;
 
     var value = String.fromCharCode(e.keyCode).toLowerCase();
-
     for (i = 1; i <= 20; i++) {
         if (hotbuildglobalkey["hotbuild" + i + "s"] == value) {
             myHotBuildViewModel.hotBuild(e, hotbuildglobal["hotbuild" + i + "s"]);
@@ -42,35 +50,3 @@ $(document).keydown(function (e) {
     }
 
 });
-
-function hbgetBuildBarKey(id)
-{
-    var result = '';
-    var hbpos = 1;
-    _.forEach(hotbuildglobal, function (hbkey) {
-        _.forEach(hbkey, function (hbitem) {
-            //debugger;
-            if (hbitem.json === id)
-            {
-                result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
-                return false;
-            }
-        });
-        hbpos += 1;
-    });
-    return result;	
-};
-
-if(settings.hotbuild_show_key_on_buildbar === "ON")
-{
-//Show key on buildbar
-$('.div_build_item').replaceWith(
-    '<div class="div_build_item" id="bld1" data-bind="event: { mouseover: function () { $parent.setBuildHover($index()) }, ' +
-    '                                                          mousedown: function (data,event) { $parent.executeStartBuild(event, $index())} }">' +
-    '<span class="span_build_count" data-bind="text: count, visible: count() > 0"></span>' +
-    '<a href="#" data-bind="rollover_sound_exclusive: { sound: \'default\', group: $index()}">' + 
-    '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
-    '<span class="hbbuildbarkey" data-bind="text: hbgetBuildBarKey($data.id())"></span>' +
-    '</a></div>');
-}
-

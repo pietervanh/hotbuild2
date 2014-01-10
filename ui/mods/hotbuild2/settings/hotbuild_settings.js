@@ -96,44 +96,47 @@ var hbunits = [
 	new hbListItem().json("/pa/units/orbital/solar_array/solar_array.json")
 ];
 
-function hbListItem()
-{
-	//TODO
-	var self = this;
-	self.json = ko.observable();
-	self.desc = ko.observable();
-	self.displayname = ko.observable();
-	self.factory = ko.observable(); //css based on factory ?
-	self.image = ko.observable(); //get image of unit / building
-	self.json.subscribe(function(value){
-	    //fetch from json file the data	
-	    $.getJSON('coui:/' + value, function (unitdata) {
-	        //write to listitem props();
-	        unitdata.description != undefined ? self.desc(unitdata.description) : self.desc('');
-	        unitdata.display_name != undefined ? self.displayname(unitdata.display_name) : self.displayname('');
-	        if(_.contains(unitdata.unit_types,'UNITTYPE_Mobile'))
-	        {
-	            if(_.contains(unitdata.unit_types,'UNITTYPE_Basic'))
-	            {
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? self.factory('botfac') : '';
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? self.factory('vecfac') : '';
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? self.factory('afac') : '';
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? self.factory('nfac') : '';
-	            }
-	            else
-	            {
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? self.factory('abotfac') : '';
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? self.factory('avecfac') : '';
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? self.factory('aafac') : '';
-	                _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? self.factory('anfac') : '';
-	            }
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? self.factory('ofac') : '';
-	            //console.log(self.factory());
-	        }
-	    });
-	});
-	
+function hbListItem() {
+    //TODO
+    var self = this;
+    self.json = ko.observable();
+    
+    self.desc = ko.observable("loading");
+    self.displayname = ko.observable("loading");
+    self.factory = ko.observable(); //css based on factory ?
+    self.image = ""; //get image of unit / building
+    self.json.subscribe(function (value) {
+        self.json(value);
+        self.json2 = value;
+        //fetch from json file the data	
+        $.getJSON('coui:/' + value, function (unitdata) {
+            onunitload(unitdata, self);
+        });
+    });
 };
+
+function onunitload(unitdata, listitem)
+{
+    unitdata.description != undefined ? listitem.desc(unitdata.description) : listitem.desc('not found');
+    unitdata.display_name != undefined ? listitem.displayname(unitdata.display_name) : listitem.displayname('not found');
+    if (_.contains(unitdata.unit_types, 'UNITTYPE_Mobile')) {
+        if (_.contains(unitdata.unit_types, 'UNITTYPE_Basic')) {
+            _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('botfac') : '';
+            _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('vecfac') : '';
+            _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('afac') : '';
+            _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('nfac') : '';
+        }
+        else {
+            _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('abotfac') : '';
+            _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('avecfac') : '';
+            _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('aafac') : '';
+            _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
+        }
+        _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
+        //console.log(listitem.factory());
+    }
+    //listitem = ko.toJS(listitem);
+}
 
 function HotBuildSettingsViewModel() {
     var self = this;
@@ -307,8 +310,7 @@ function HotBuildSettingsViewModel() {
             eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
         }
         hotbuildglobal.hotbuild1s = [
-            new hbListItem().json("/pa/units/land/vehicle_factory/vehicle_factory.json"),
-            new hbListItem().json("/pa/units/land/bot_factory/bot_factory.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory/bot_factory.json"})),
             new hbListItem().json("/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json"),
             new hbListItem().json("/pa/units/land/fabrication_bot/fabrication_bot.json"),
             new hbListItem().json("/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json"),
@@ -318,11 +320,11 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/sea/fabrication_ship/fabrication_ship.json")
         ];
         hotbuildglobal.hotbuild2s = [
-            new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
-			new hbListItem().json("/pa/units/air/air_factory_adv/air_factory_adv.json"),
-            new hbListItem().json("/pa/units/sea/naval_factory/naval_factory.json"),
-            new hbListItem().json("/pa/units/sea/naval_factory_adv/naval_factory_adv.json"),
-            new hbListItem().json("/pa/units/orbital/orbital_launcher/orbital_launcher.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory/air_factory.json"})),
+			ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory_adv/air_factory_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory/naval_factory.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory_adv/naval_factory_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/orbital_launcher/orbital_launcher.json"})),
             new hbListItem().json("/pa/units/land/land_scout/land_scout.json"),
             new hbListItem().json("/pa/units/air/air_scout/air_scout.json"),
             new hbListItem().json("/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json"),
@@ -331,9 +333,9 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/orbital/orbital_laser/orbital_laser.json")
         ];
         hotbuildglobal.hotbuild3s = [
-            new hbListItem().json("/pa/units/land/radar_adv/radar_adv.json"),
-            new hbListItem().json("/pa/units/land/radar/radar.json"),
-            new hbListItem().json("/pa/units/orbital/deep_space_radar/deep_space_radar.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar_adv/radar_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar/radar.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/deep_space_radar/deep_space_radar.json"})),
             new hbListItem().json("/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json"),
             new hbListItem().json("/pa/units/sea/frigate/frigate.json"),
             new hbListItem().json("/pa/units/sea/nuclear_sub/nuclear_sub.json"),
@@ -341,8 +343,8 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/orbital/orbital_lander/orbital_lander.json")
         ];
         hotbuildglobal.hotbuild4s = [
-            new hbListItem().json("/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"),
-            new hbListItem().json("/pa/units/land/bot_factory_adv/bot_factory_adv.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory_adv/bot_factory_adv.json"})),
             new hbListItem().json("/pa/units/land/assault_bot_adv/assault_bot_adv.json"),
             new hbListItem().json("/pa/units/land/tank_light_laser/tank_light_laser.json"),
             new hbListItem().json("/pa/units/land/tank_laser_adv/tank_laser_adv.json"),
@@ -353,30 +355,30 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/orbital/orbital_fighter/orbital_fighter.json")
         ];
         hotbuildglobal.hotbuild5s = [
-            new hbListItem().json("/pa/units/land/energy_plant_adv/energy_plant_adv.json"),
-            new hbListItem().json("/pa/units/land/energy_plant/energy_plant.json")
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant_adv/energy_plant_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant/energy_plant.json"}))
         ];
         hotbuildglobal.hotbuild6s = [
-            new hbListItem().json("/pa/units/land/metal_extractor_adv/metal_extractor_adv.json"),
-            new hbListItem().json("/pa/units/land/metal_extractor/metal_extractor.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor/metal_extractor.json"})),
         ];
         hotbuildglobal.hotbuild7s = [
-            new hbListItem().json("/pa/units/land/laser_defense_adv/laser_defense_adv.json"),
-            new hbListItem().json("/pa/units/land/laser_defense/laser_defense.json"),
-            new hbListItem().json("/pa/units/land/laser_defense_single/laser_defense_single.json")
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_adv/laser_defense_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense/laser_defense.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_single/laser_defense_single.json"}))
         ];
         hotbuildglobal.hotbuild8s = [
-            new hbListItem().json("/pa/units/land/air_defense/air_defense.json"),
-            new hbListItem().json("/pa/units/land/land_barrier/land_barrier.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/air_defense/air_defense.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/land_barrier/land_barrier.json"})),
         ];
         hotbuildglobal.hotbuild9s = [
-            new hbListItem().json("/pa/units/land/artillery_short/artillery_short.json"),
-            new hbListItem().json("/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"),
-            new hbListItem().json("/pa/units/land/artillery_long/artillery_long.json")
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_short/artillery_short.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_long/artillery_long.json"}))
         ];
         hotbuildglobal.hotbuild10s = [
-            new hbListItem().json("/pa/units/land/energy_storage/energy_storage.json"),
-            new hbListItem().json("/pa/units/land/metal_storage/metal_storage.json")
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_storage/energy_storage.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_storage/metal_storage.json"}))
         ];
 
         hotbuildglobalkey.hotbuild1s = 'w';
@@ -418,11 +420,11 @@ function HotBuildSettingsViewModel() {
         default_keybinds['gameplay']['select idle fabbers'] = '';
         default_keybinds['gameplay']['track selection with camera'] = '';
         default_keybinds['camera']['zoom to celestial'] = '';
-
         model.restoreDefaultKeybinds();
         model.camera_key_pan_style('ARROW');
         forgetFramePosition('hotbuild_info_frame');
         self.InitKeyboard();
+        
     };
 
     self.ComunityDefaultsWASD = function () {
@@ -432,26 +434,30 @@ function HotBuildSettingsViewModel() {
             eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
         }
         hotbuildglobal.hotbuild1s = [
-            new hbListItem().json("/pa/units/land/vehicle_factory/vehicle_factory.json"),
-            new hbListItem().json("/pa/units/land/bot_factory/bot_factory.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory/vehicle_factory.json" })),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory/bot_factory.json" })),
+            /*
             new hbListItem().json("/pa/units/land/land_scout/land_scout.json"),
             new hbListItem().json("/pa/units/air/air_scout/air_scout.json")
+            */
         ];
         hotbuildglobal.hotbuild2s = [
-            new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
-			new hbListItem().json("/pa/units/air/air_factory_adv/air_factory_adv.json"),
-            new hbListItem().json("/pa/units/sea/naval_factory/naval_factory.json"),
-            new hbListItem().json("/pa/units/sea/naval_factory_adv/naval_factory_adv.json"),
-            new hbListItem().json("/pa/units/orbital/orbital_launcher/orbital_launcher.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory/air_factory.json"})),
+			ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory_adv/air_factory_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory/naval_factory.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory_adv/naval_factory_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/orbital_launcher/orbital_launcher.json"})),
+
             new hbListItem().json("/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json"),
             new hbListItem().json("/pa/units/sea/attack_sub/attack_sub.json"),
             new hbListItem().json("/pa/units/sea/missile_ship/missile_ship.json"),
             new hbListItem().json("/pa/units/orbital/orbital_laser/orbital_laser.json")
         ];
         hotbuildglobal.hotbuild3s = [
-            new hbListItem().json("/pa/units/land/radar_adv/radar_adv.json"),
-            new hbListItem().json("/pa/units/land/radar/radar.json"),
-            new hbListItem().json("/pa/units/orbital/deep_space_radar/deep_space_radar.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar_adv/radar_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar/radar.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/deep_space_radar/deep_space_radar.json"})),
+
 			new hbListItem().json("/pa/units/air/fighter/fighter.json"),
             new hbListItem().json("/pa/units/air/fighter_adv/fighter_adv.json"),
             new hbListItem().json("/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json"),
@@ -459,14 +465,16 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/sea/frigate/frigate.json")
         ];
         hotbuildglobal.hotbuild4s = [
-            new hbListItem().json("/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"),
-            new hbListItem().json("/pa/units/land/bot_factory_adv/bot_factory_adv.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory_adv/bot_factory_adv.json"})),
+
             new hbListItem().json("/pa/units/sea/nuclear_sub/nuclear_sub.json"),
             new hbListItem().json("/pa/units/orbital/orbital_lander/orbital_lander.json")
         ];
         hotbuildglobal.hotbuild5s = [
-            new hbListItem().json("/pa/units/land/energy_plant_adv/energy_plant_adv.json"),
-            new hbListItem().json("/pa/units/land/energy_plant/energy_plant.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant_adv/energy_plant_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant/energy_plant.json"})),
+
             new hbListItem().json("/pa/units/land/assault_bot/assault_bot.json"),
             new hbListItem().json("/pa/units/land/assault_bot_adv/assault_bot_adv.json"),
             new hbListItem().json("/pa/units/land/tank_light_laser/tank_light_laser.json"),
@@ -478,8 +486,9 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/orbital/orbital_fighter/orbital_fighter.json")
         ];
         hotbuildglobal.hotbuild6s = [
-            new hbListItem().json("/pa/units/land/metal_extractor_adv/metal_extractor_adv.json"),
-            new hbListItem().json("/pa/units/land/metal_extractor/metal_extractor.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor/metal_extractor.json"})),
+
             new hbListItem().json("/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json"),
             new hbListItem().json("/pa/units/land/fabrication_bot/fabrication_bot.json"),
             new hbListItem().json("/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json"),
@@ -489,24 +498,24 @@ function HotBuildSettingsViewModel() {
             new hbListItem().json("/pa/units/sea/fabrication_ship/fabrication_ship.json")
         ];
         hotbuildglobal.hotbuild7s = [
-            new hbListItem().json("/pa/units/land/laser_defense_adv/laser_defense_adv.json"),
-            new hbListItem().json("/pa/units/land/laser_defense/laser_defense.json"),
-            new hbListItem().json("/pa/units/land/laser_defense_single/laser_defense_single.json")
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_adv/laser_defense_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense/laser_defense.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_single/laser_defense_single.json"}))
         ];
         hotbuildglobal.hotbuild8s = [
-            new hbListItem().json("/pa/units/land/air_defense/air_defense.json"),
-            new hbListItem().json("/pa/units/land/land_barrier/land_barrier.json"),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/air_defense/air_defense.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/land_barrier/land_barrier.json"})),
         ];
         hotbuildglobal.hotbuild9s = [
-            new hbListItem().json("/pa/units/land/artillery_short/artillery_short.json"),
-            new hbListItem().json("/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"),
-            new hbListItem().json("/pa/units/land/artillery_long/artillery_long.json")
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_short/artillery_short.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_long/artillery_long.json"}))
         ];
         hotbuildglobal.hotbuild10s = [
-            new hbListItem().json("/pa/units/land/energy_storage/energy_storage.json"),
-            new hbListItem().json("/pa/units/land/metal_storage/metal_storage.json"),
-            new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json"),
-            new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher.json")
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_storage/energy_storage.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_storage/metal_storage.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/nuke_launcher/nuke_launcher.json" }))
         ];
         
         hotbuildglobalkey.hotbuild1s = 'f';
@@ -548,7 +557,6 @@ function HotBuildSettingsViewModel() {
         default_keybinds['gameplay']['select idle fabbers'] = '';
         default_keybinds['gameplay']['track selection with camera'] = '';
         default_keybinds['camera']['zoom to celestial'] = '';
-
         model.restoreDefaultKeybinds();
         model.camera_key_pan_style('WASD');
         forgetFramePosition('hotbuild_info_frame');

@@ -20,7 +20,6 @@ if (isNaN(model.hotbuild_reset_time)) {
     model.hotbuild_reset_time = 2000;
 }
 
-
 function HotBuildViewModel(resetTime) {
     var self = this;
     self.cycleResetTime = resetTime; //time you have to press again to loop trough list
@@ -72,7 +71,6 @@ function HotBuildViewModel(resetTime) {
     };
 
     self.hotBuild = function (event, hotbuilds) {
-
         self.hotbuilds(hotbuilds);
         if (model['maybeSetBuildTarget']) {
             if (self.knowsAnyBuildCommand()) {
@@ -230,6 +228,22 @@ function hotbuildViewAlert() {
         }
     }
 }
+//get key for buildbar
+function hbgetBuildBarKey(id) {
+    var result = '';
+    var hbpos = 1;
+    _.forEach(hotbuildglobal, function (hbkey) {
+        _.forEach(hbkey, function (hbitem) {
+            //debugger;
+            if (hbitem.json === id) {
+                result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                return false;
+            }
+        });
+        hbpos += 1;
+    });
+    return result;
+};
 
 //load html dynamically
 function loadHotBuildTemplate(element, url, model) {
