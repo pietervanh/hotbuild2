@@ -56,9 +56,9 @@ border-radius:4px;
 .hbbuildbarkey {
 	color: rgba(255,255,255,1);
     position: absolute;
-	top: 15px;
+	top: 0;
     display: block;
-    background: rgba(255,127,0,.5);
+    background: rgba(255,127,0,.3);
     padding: 2px;
     border-radius: 2px;
     font-size: 12px;
