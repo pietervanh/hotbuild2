@@ -225,7 +225,8 @@ function HotBuildSettingsViewModel() {
         if (self.selectedhotbuild().length === 0)
         {
             hotbuildglobalkey[self.selectedkeyinfo() + "s"] = "";
-            self.InitKeyboard();
+            // self.InitKeyboard();
+			$('.active').hasClass('hbk') ? $('.active').removeClass('hbk') : '';
         }
     };
 

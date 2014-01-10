@@ -38,7 +38,7 @@ width: 570px;
    border: rgba(0,255,255,1) solid thin;
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
-   color: #00FFFF;
+   color: rgba(0,255,255,1);
 }
 
 #legend {
@@ -55,7 +55,7 @@ width: 570px;
    line-height: 30px;
    text-align: center;
    background: #000505;
-   border: 1px solid #CBFFFF;
+   border: rgba(0,255,255,1) solid thin;
    -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
    color: rgba(0,255,255,1);
