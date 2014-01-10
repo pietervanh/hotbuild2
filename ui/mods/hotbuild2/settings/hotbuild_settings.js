@@ -437,10 +437,10 @@ function HotBuildSettingsViewModel() {
         hotbuildglobal.hotbuild1s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory/vehicle_factory.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory/bot_factory.json" })),
-            /*
-            new hbListItem().json("/pa/units/land/land_scout/land_scout.json"),
-            new hbListItem().json("/pa/units/air/air_scout/air_scout.json")
-            */
+
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/land_scout/land_scout.json"})),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/air_scout/air_scout.json"}))
+            
         ];
         hotbuildglobal.hotbuild2s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory/air_factory.json"})),
