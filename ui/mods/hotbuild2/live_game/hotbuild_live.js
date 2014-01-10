@@ -43,4 +43,21 @@ $(document).keydown(function (e) {
 
 });
 
+function hbgetBuildBarKey(id)
+{
+	return 'A';	
+};
+var showBuildbarinfo = true;
+if(showBuildbarinfo)
+{
+//Show key on buildbar
+$('.div_build_item').replaceWith(
+    '<div class="div_build_item" id="bld1" data-bind="event: { mouseover: function () { $parent.setBuildHover($index()) }, ' +
+    '                                                          mousedown: function (data,event) { $parent.executeStartBuild(event, $index())} }">' +
+    '<span class="span_build_count" data-bind="text: count, visible: count() > 0"></span>' +
+    '<a href="#" data-bind="rollover_sound_exclusive: { sound: \'default\', group: $index()}">' + 
+    '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
+    '<span class="hbbuildbarkey" data-bind="text: hbgetBuildBarKey($data.id())"></span>' +
+    '</a></div>');
+}
 
