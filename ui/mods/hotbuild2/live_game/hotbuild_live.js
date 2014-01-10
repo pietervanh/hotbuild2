@@ -45,7 +45,19 @@ $(document).keydown(function (e) {
 
 function hbgetBuildBarKey(id)
 {
-	return 'A';	
+    var result = '';
+    var hbpos = 1;
+    _.forEach(hotbuildglobal, function (hbkey) {
+        _.forEach(hbkey, function (hbitem) {
+            if (hbitem.json() === id)
+            {
+                result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                return false;
+            }
+        });
+        hbpos += 1;
+    });
+    return result;	
 };
 var showBuildbarinfo = true;
 if(showBuildbarinfo)
