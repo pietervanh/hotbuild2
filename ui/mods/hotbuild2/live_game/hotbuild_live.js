@@ -49,7 +49,8 @@ function hbgetBuildBarKey(id)
     var hbpos = 1;
     _.forEach(hotbuildglobal, function (hbkey) {
         _.forEach(hbkey, function (hbitem) {
-            if (hbitem.json() === id)
+            //debugger;
+            if (hbitem.json === id)
             {
                 result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
                 return false;
