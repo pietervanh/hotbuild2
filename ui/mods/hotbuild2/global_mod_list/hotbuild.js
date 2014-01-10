@@ -236,8 +236,10 @@ function hbgetBuildBarKey(id) {
         _.forEach(hbkey, function (hbitem) {
             //debugger;
             if (hbitem.json === id) {
-                result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
-                return false;
+                if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
+                    result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                    return false;
+                }
             }
         });
         hbpos += 1;
