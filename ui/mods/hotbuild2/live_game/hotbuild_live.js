@@ -59,8 +59,8 @@ function hbgetBuildBarKey(id)
     });
     return result;	
 };
-var showBuildbarinfo = true;
-if(showBuildbarinfo)
+
+if(settings.hotbuild_show_key_on_buildbar === "ON")
 {
 //Show key on buildbar
 $('.div_build_item').replaceWith(
