@@ -40,7 +40,7 @@ function HotBuildViewModel(resetTime) {
     self.buildPreviewList = function (hbindex, hotbuilds) {
         //set the buildPreview list 
         if (hotbuilds !== undefined) {
-            self.hotbuildPreviews([]);
+            self.hotbuildPreviews([{'icon':'','json':''}]);
             for (i = hbindex; i < hotbuilds.length; i++) {
                 if (self.knowsBuildCommand(hotbuilds[i].json)) {
                     unitinfo = model.unitSpecs[hotbuilds[i].json];
