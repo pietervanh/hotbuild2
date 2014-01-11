@@ -26,14 +26,14 @@ model.applyUIDisplaySettings = function() {
 
 if (settings.hotbuild_show_key_on_buildbar === "ON") {
     //Show key on buildbar
-	/*
+	
     $('.div_build_item img').replaceWith(
     '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
     '<span class="hbbuildbarkey" data-bind="visible: hbgetBuildBarKey($data.id()) != \'\' , text: hbgetBuildBarKey($data.id())"></span>');
-	*/
+	/*
 	$('.div_build_item img').append(
     '<span class="hbbuildbarkey" data-bind="visible: hbgetBuildBarKey($data.id()) != \'\' , text: hbgetBuildBarKey($data.id())"></span>');
-	
+	*/
 }
 
 
