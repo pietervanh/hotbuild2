@@ -305,6 +305,8 @@ function HotBuildSettingsViewModel() {
     };
 
     self.ComunityDefaults = function () {
+        hotbuildglobal = {};
+        hotbuildglobalkey = {};
         for (i = 1; i < 21; i++) {
             eval("hotbuildglobal.hotbuild" + i + "s = []");
             eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
@@ -318,7 +320,8 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"})),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json"})),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fabrication_aircraft/fabrication_aircraft.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/fabrication_ship/fabrication_ship.json" }))
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/fabrication_ship/fabrication_ship.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json"}))
         ];
         hotbuildglobal.hotbuild2s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory/air_factory.json"})),
@@ -327,30 +330,28 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory_adv/naval_factory_adv.json"})),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/orbital_launcher/orbital_launcher.json"})),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/land_scout/land_scout.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/air_scout/air_scout.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/attack_sub/attack_sub.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/missile_ship/missile_ship.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_laser/orbital_laser.json" }))
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/air_scout/air_scout.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/sea_scout/sea_scout.json" }))
         ];
         hotbuildglobal.hotbuild3s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar_adv/radar_adv.json"})),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar/radar.json"})),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/deep_space_radar/deep_space_radar.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/frigate/frigate.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/nuclear_sub/nuclear_sub.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/bomber/bomber.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_lander/orbital_lander.json" }))
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fighter/fighter.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fighter_adv/fighter_adv.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" })),
+			ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_aa/bot_aa.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/frigate/frigate.json"}))
         ];
         hotbuildglobal.hotbuild4s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"})),
-            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory_adv/bot_factory_adv.json"})),
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory_adv/bot_factory_adv.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/assault_bot/assault_bot.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/assault_bot_adv/assault_bot_adv.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/tank_light_laser/tank_light_laser.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/tank_laser_adv/tank_laser_adv.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/bomber/bomber.json"})),
-            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/bomber_adv/bomber_adv.json"})),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/tank_laser_adv/tank_laser_adv.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/tank_light_laser/tank_light_laser.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/bomber_adv/bomber_adv.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/bomber/bomber.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/destroyer/destroyer.json"})),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/battleship/battleship.json"})),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }))
@@ -375,7 +376,11 @@ function HotBuildSettingsViewModel() {
         hotbuildglobal.hotbuild9s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_short/artillery_short.json"})),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"})),
-            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_long/artillery_long.json"}))
+            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_long/artillery_long.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_artillery_adv/bot_artillery_adv.json" })),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json"})),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/missile_ship/missile_ship.json"})),
+            ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_laser/orbital_laser.json" }))
         ];
         hotbuildglobal.hotbuild10s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_storage/energy_storage.json"})),
@@ -410,7 +415,7 @@ function HotBuildSettingsViewModel() {
         default_keybinds.hotbuild['reclaim'] = '';
         default_keybinds.hotbuild['patrol'] = 'q';
         default_keybinds.hotbuild['stop'] = '';
-        default_keybinds.hotbuild['select commie'] = 'c';
+        default_keybinds.hotbuild['select commie'] = 'b';
         default_keybinds.hotbuild['unload'] = 'u';
         default_keybinds['gameplay']['command mode [move]'] = '';
         default_keybinds['gameplay']['command mode [attack]'] = '';
@@ -435,6 +440,8 @@ function HotBuildSettingsViewModel() {
     };
 
     self.ComunityDefaultsWASD = function () {
+        hotbuildglobal = {};
+        hotbuildglobalkey = {};
         for (i = 1; i < 21; i++)
         {
             eval("hotbuildglobal.hotbuild" + i + "s = []") ;

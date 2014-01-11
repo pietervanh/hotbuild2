@@ -4,13 +4,11 @@
 
 action_sets.hotbuild = {}; //adds a hotbuildgroup item to keys settings
 default_keybinds.hotbuild = {}; 
-//for the default keys and actions check the xxxkeys.js files
 
 //Make sure settings are set / if not set defaults
 initialSettingValue('hotbuild_reset_time',2000);
 initialSettingValue('hotbuild_requeue_amount',50);
 initialSettingValue('hotbuild_show_key_on_buildbar','ON');
-//initialSettingValue('hotbuild_preview_display','ON');
 
 var settings = decode(localStorage.settings);
 
@@ -207,7 +205,6 @@ function requeue(event) {
 }
 
 //Standard CommandMode functionality
-
 function hotbuildCommandMode(cmd) {
     if (model['setCommandIndex']) {
         model['setCommandIndex'](cmd);

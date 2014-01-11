@@ -12,7 +12,6 @@ hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglo
 hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
 
 //Special Actions
-
 action_sets.hotbuild['Toggle Energy'] = function (event) { energyToggle(event); };
 action_sets.hotbuild['Lock Pole'] = function (event) { polelockToggle(event); };
 action_sets.hotbuild['Requeue'] = function (event) { requeue(event); };
