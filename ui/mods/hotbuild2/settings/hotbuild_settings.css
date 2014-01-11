@@ -12,6 +12,7 @@
 #keyboardcontainer {
 width: 570px;
 }
+
 #moresettings{
     clear:both;
 }
@@ -28,6 +29,7 @@ width: 570px;
 }
 
 #keyboard li {
+   font-family: 'DIN Medium';
    float: left;
    margin: 0 5px 5px 0;
    width: 30px;
@@ -42,6 +44,7 @@ width: 570px;
 }
 
 #legend {
+   font-family: 'DIN Medium';
    float:left;
    list-style: none;
 }

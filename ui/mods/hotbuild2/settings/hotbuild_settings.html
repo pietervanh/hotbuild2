@@ -1,4 +1,4 @@
-<div data-bind="with: hbuisettings" style="height: 400px; overflow: scroll; overflow-x:hidden;">
+<div data-bind="with: hbuisettings" style="height: 600px; overflow: scroll; overflow-x:hidden;">
     <p>
         <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaults">Set Community Defaults</button>
         <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaultsWASD">Set Community Defaults (WASD)</button>
@@ -85,10 +85,10 @@
                 <td data-bind="text: $index"></td>
                 <td data-bind="text: displayname"></td>
                 <td data-bind="text: desc"></td>
-                <td>
-                    <button id="hbuplist" type="submit" data-bind="click: $parent.upList">Up</button>
-                    <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">Down</button>
-                    <button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">Delete</button>
+                <td data-bind="click_sound: 'default', rollover_sound: 'default'">
+                    <button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button>
+                    <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>
+                    <button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">X</button>
                 </td>
             </tr>
         </tbody>
