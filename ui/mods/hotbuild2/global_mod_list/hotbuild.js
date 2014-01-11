@@ -45,7 +45,7 @@ function HotBuildViewModel(resetTime) {
                 if (self.knowsBuildCommand(hotbuilds[i].json)) {
                     unitinfo = model.unitSpecs[hotbuilds[i].json];
                     if (unitinfo.buildStructure) {
-                        self.hotbuildPreviews.push(unitinfo.buildIcon);
+                        self.hotbuildPreviews.push({'icon':unitinfo.buildIcon,'json':hotbuilds[i].json});
                     }
                 }
             }
@@ -53,7 +53,7 @@ function HotBuildViewModel(resetTime) {
                 if (self.knowsBuildCommand(hotbuilds[j].json)) {
                     unitinfo = model.unitSpecs[hotbuilds[j].json];
                     if (unitinfo.buildStructure) {
-                        self.hotbuildPreviews.push(unitinfo.buildIcon);
+                        self.hotbuildPreviews.push({'icon':unitinfo.buildIcon,'json':hotbuilds[i].json});
                     }
                 }
             }

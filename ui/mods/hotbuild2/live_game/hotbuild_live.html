@@ -7,8 +7,8 @@
             <!--<div data-bind="foreach: hotbuilds"><div data-bind="text: $data"/></div>-->
             <div class="hotbuild_fab_info_cont">
                 <div class="hotbuild_current_fab_info_cont" data-bind="foreach: hotbuildPreviews">
-                    <div class="hotbuild_fab_selection">
-                        <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: $data }" alt="hbpreview" />
+					<div class="hotbuild_fab_selection">
+                        <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: $data.icon }" alt="hbpreview" />
                         <span class="hotbuild_selected_text" data-bind="text: $index"></span>
                     </div>
                 </div>
