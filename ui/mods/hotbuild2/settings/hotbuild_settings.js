@@ -104,10 +104,10 @@ function hbListItem() {
         {
             case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
                 self.desc("Nuclear Missle");
-                self.displayname("Nuclear Missile");
+                self.displayname("Nuclear Missile Ammo");
                 break;
             case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
-                self.desc("Anti-Nuclear Missile");
+                self.desc("Anti-Nuclear Missile Ammo");
                 self.displayname("Anti-Nuclear Missile");
                 break;
             default:
