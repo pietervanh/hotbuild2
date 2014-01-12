@@ -105,14 +105,17 @@ function hbListItem() {
             case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
                 self.desc("Nuclear Missle");
                 self.displayname("Nuclear Missile");
+                break;
             case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
                 self.desc("Anti-Nuclear Missile");
                 self.displayname("Anti-Nuclear Missile");
+                break;
             default:
             //fetch from json file the data	
-            $.getJSON('coui:/' + value, function (unitdata) {
-                onunitload(unitdata, self);
-            });
+                $.getJSON('coui:/' + value, function (unitdata) {
+                    onunitload(unitdata, self);
+                });
+                break;
         }
     });
 };
