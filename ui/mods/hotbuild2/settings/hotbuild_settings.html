@@ -74,6 +74,7 @@
         <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
     </div>
     <hr>
+    <!--
     <table class="tbl_hotbuildsui">
         <thead>
             <tr class="hotbuildsui_row_header">
@@ -85,6 +86,33 @@
                 <td data-bind="text: $index"></td>
                 <td data-bind="text: displayname"></td>
                 <td data-bind="text: desc"></td>
+                <td data-bind="click_sound: 'default', rollover_sound: 'default'">
+                    <button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button>
+                    <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>
+                    <button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    -->
+    <table class="tbl_hotbuildsui">
+        <thead>
+            <tr class="hotbuildsui_row_header">
+                <th>Sequence</th>
+                <th>DisplayName</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: selectedhotbuild">
+            <tr>
+                <td class="hotbuild_fab_selection">
+                    <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+                    <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
+                </td>
+                <td>
+                    <span data-bind="text: displayname"></span><br/>
+                    <span data-bind="text: desc"></span>
+                </td>
                 <td data-bind="click_sound: 'default', rollover_sound: 'default'">
                     <button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button>
                     <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>

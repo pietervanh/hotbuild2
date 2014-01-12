@@ -117,6 +117,9 @@ function hbListItem() {
                 });
                 break;
         }
+        var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
+        var end = /[.]json$/;
+        self.image = '../live_game/img/build_bar/units/' + value.substring(value.search(start), value.search(end)) + '.png';
     });
 };
 
