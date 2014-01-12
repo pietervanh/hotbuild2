@@ -100,10 +100,20 @@ function hbListItem() {
     self.json.subscribe(function (value) {
         self.json2 = value;
         self.json(value);
-        //fetch from json file the data	
-        $.getJSON('coui:/' + value, function (unitdata) {
-            onunitload(unitdata, self);
-        });
+        switch(value)
+        {
+            case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
+                self.desc("Nuclear Missle");
+                self.displayname("Nuclear Missile");
+            case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
+                self.desc("Anti-Nuclear Missile");
+                self.displayname("Anti-Nuclear Missile");
+            default:
+            //fetch from json file the data	
+            $.getJSON('coui:/' + value, function (unitdata) {
+                onunitload(unitdata, self);
+            });
+        }
     });
 };
 
