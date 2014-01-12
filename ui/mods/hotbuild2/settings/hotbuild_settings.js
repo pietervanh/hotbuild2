@@ -310,6 +310,52 @@ function HotBuildSettingsViewModel(hbglobal,hbglobalkey) {
 
     };
 
+    self.showingDefaultPrompt = ko.observable(false);
+    self.showingDefaultWASDPrompt = ko.observable(false);
+
+    self.showCommunityDefaultPrompt = function () {
+        self.showingDefaultPrompt(true);
+        $("#comdefaultsDlg").dialog({
+            dialogClass: "no-close",
+            draggable: false,
+            resizable: false,
+            modal: true,
+            complete: function (data, textStatus) { }
+        });
+        $("#setComDefaults").click(function () {
+            console.log("set Community Defaults");
+            self.ComunityDefaults();
+            self.showingDefaultPrompt(false);
+            $("#comdefaultsDlg").dialog("close");
+        });
+        $("#ignoreComDefaults").click(function () {
+            self.showingDefaultPrompt(false);
+            $("#comdefaultsDlg").dialog("close");
+        });
+    };
+
+    self.showCommunityDefaultWASDPrompt = function () {
+        //debugger;
+        self.showingDefaultWASDPrompt(true);
+        $("#comdefaultsWASDDlg").dialog({
+            dialogClass: "no-close",
+            draggable: false,
+            resizable: false,
+            modal: true,
+            complete: function (data, textStatus) { }
+        });
+        $("#setComDefaultsWASD").click(function () {
+            console.log("set Community Defaults WASD");
+            self.ComunityDefaultsWASD();
+            self.showingDefaultWASDPrompt(false);
+            $("#comdefaultsWASDDlg").dialog("close");
+        });
+        $("#ignoreComDefaultsWASD").click(function () {
+            self.showingDefaultWASDPrompt(false);
+            $("#comdefaultsWASDDlg").dialog("close");
+        });
+    };
+
     self.ComunityDefaults = function () {
         self.hotbuildglobal({});
         self.hotbuildglobalkey({});

@@ -1,7 +1,7 @@
 <div data-bind="with: hbuisettings" style="height: 600px; overflow: scroll; overflow-x:hidden;">
     <p>
-        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaults">Set Community Defaults</button>
-        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.ComunityDefaultsWASD">Set Community Defaults (WASD)</button>
+        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt">Set Community Defaults</button>
+        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt">Set Community Defaults (WASD)</button>
         &nbsp;&nbsp;Please give comments/ideas on the forum
     </p>
     <div id="keyboardcontainer">
@@ -93,4 +93,20 @@
             </tr>
         </tbody>
     </table>
+    <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
+        <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
+        <div id="tutorialBtnGroup" style="margin-top: 10px">
+            <button id="setComDefaults" type="submit" style="width: 45%">YES</button>
+            <button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+        </div>
+    </div>
+
+    <div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
+        <div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
+        <div id="tutorialBtnGroup" style="margin-top: 10px">
+            <button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
+            <button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+        </div>
+    </div>
 </div>
+
