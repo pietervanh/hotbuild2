@@ -38,7 +38,8 @@ function HotBuildViewModel(resetTime) {
     self.unitName = ko.observable("");
 
     self.buildPreviewList = function (hbindex, hotbuilds) {
-        //set the buildPreview list 
+        //set the buildPreview list
+        //debugger;
         if (hotbuilds !== undefined) {
             self.hotbuildPreviews([{'icon':'','json':''}]);
             for (i = hbindex; i < hotbuilds.length; i++) {
@@ -53,7 +54,7 @@ function HotBuildViewModel(resetTime) {
                 if (self.knowsBuildCommand(hotbuilds[j].json)) {
                     unitinfo = model.unitSpecs[hotbuilds[j].json];
                     if (unitinfo.buildStructure) {
-                        self.hotbuildPreviews.push({'icon':unitinfo.buildIcon,'json':hotbuilds[i].json});
+                        self.hotbuildPreviews.push({'icon':unitinfo.buildIcon,'json':hotbuilds[j].json});
                     }
                 }
             }
@@ -110,15 +111,8 @@ function HotBuildViewModel(resetTime) {
     };
 
     self.knowsBuildCommand = function (cmd) {
-        /*
-        for (var i = 0; i < model.buildTabLists()[0].length; i++) {
-        if (model.buildTabLists()[0][i].id == cmd) {
-        return true;
-        }
-        }*/
-
-        for (var i = 0; i < model.buildItems().length; i++) {
-            if (model.buildItems()[i].id() == cmd) {
+        for (var i = 0; i < model.buildTabLists()[model.selectedBuildTabIndex()].length; i++) {
+            if (model.buildTabLists()[model.selectedBuildTabIndex()][i].id == cmd) {
                 return true;
             }
         }

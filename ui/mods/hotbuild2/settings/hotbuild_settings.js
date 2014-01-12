@@ -9,15 +9,6 @@ model.addSetting_Text('Hotbuild Requeue Amount', 'hotbuild_requeue_amount', 'UI'
 model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0);
 model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
-model.oldSettingsBeforeHotbuild = model.settings;
-
-model.settings = ko.computed(function () {
-    var newSettings = model.oldSettingsBeforeHotbuild();
-    newSettings.hotbuildconfig = hotbuildglobal;
-    newSettings.hotbuildconfigkey = hotbuildglobalkey;
-    return newSettings;
-});
-
 //Problem don't know how to know it's a a buildable unit / factory  so can't dynamically fill buildings and units
 var hbbuildings = [
         new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
@@ -102,14 +93,13 @@ function hbListItem() {
     //TODO
     var self = this;
     self.json = ko.observable();
-
     self.desc = ko.observable("loading");
     self.displayname = ko.observable("loading");
     self.factory = ko.observable(); //css based on factory ?
     self.image = ""; //get image of unit / building
     self.json.subscribe(function (value) {
-        self.json(value);
         self.json2 = value;
+        self.json(value);
         //fetch from json file the data	
         $.getJSON('coui:/' + value, function (unitdata) {
             onunitload(unitdata, self);
@@ -136,11 +126,14 @@ function onunitload(unitdata, listitem) {
         _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
         //console.log(listitem.factory());
     }
+    //if(unitdata.json() != '')
     //listitem = ko.toJS(listitem);
 }
 
-function HotBuildSettingsViewModel() {
+function HotBuildSettingsViewModel(hbglobal,hbglobalkey) {
     var self = this;
+    self.hotbuildglobal = ko.observable(hbglobal);
+    self.hotbuildglobalkey = ko.observable(hbglobalkey);
     self.selectedhotbuild = ko.observableArray([]);
     self.buildings = ko.observableArray(hbbuildings);
     self.units = ko.observableArray(hbunits);
@@ -148,7 +141,7 @@ function HotBuildSettingsViewModel() {
     self.uberkey = ko.observable();
     self.selectedkeyinfo = ko.observable();
     self.selectKey = function () {
-        self.selectedhotbuild(hotbuildglobal[self.selectedkeyinfo() + "s"]);
+        self.selectedhotbuild(self.hotbuildglobal()[self.selectedkeyinfo() + "s"]);
     };
 
     self.selectedkeyinfo.subscribe(function (value) {
@@ -156,18 +149,20 @@ function HotBuildSettingsViewModel() {
     });
 
     self.keyboardkey.subscribe(function (value) {
-        var keyindex = _.indexOf(_.keys(_.invert(hotbuildglobalkey)), value);
-        var hotbuildkey = _.keys(hotbuildglobalkey)[keyindex];
+        //debugger;
+        var keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), value);
+        var hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
         if (hotbuildkey !== undefined) {
             self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
         }
         else {
             //find first unused hotbuildkey and select it 
-            keyindex = _.indexOf(_.keys(_.invert(hotbuildglobalkey)), "");
-            hotbuildkey = _.keys(hotbuildglobalkey)[keyindex];
+            keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), "");
+            hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
             self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
         }
         //get uberkey info
+       
         var fuberkey = false;
         _.forEach(model.keybindGroups(), function (o) {
             _.forEach(o.keybinds(), function (k) {
@@ -184,10 +179,10 @@ function HotBuildSettingsViewModel() {
 
     self.hbkey = ko.computed({
         read: function () {
-            return hotbuildglobalkey[self.selectedkeyinfo() + "s"];
+            return self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"];
         },
         write: function (value) {
-            hotbuildglobalkey[self.selectedkeyinfo() + "s"] = value;
+            self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = value;
         },
         owner: self
     });
@@ -198,7 +193,7 @@ function HotBuildSettingsViewModel() {
 
     self.addBuilding = function () {
         self.selectedhotbuild.push(self.selectedbuilding());
-        hotbuildglobalkey[self.selectedkeyinfo() + "s"] = self.keyboardkey();
+        self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = self.keyboardkey();
         self.Save();
         !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
     };
@@ -213,7 +208,7 @@ function HotBuildSettingsViewModel() {
             }
         }
         if (unitCheck) {
-            hotbuildglobalkey[self.selectedkeyinfo() + "s"] = self.keyboardkey();
+            self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = self.keyboardkey();
             self.selectedhotbuild.push(self.selectedunit());
         }
         self.Save();
@@ -224,7 +219,7 @@ function HotBuildSettingsViewModel() {
         self.selectedhotbuild.remove(item);
         self.Save();
         if (self.selectedhotbuild().length === 0) {
-            hotbuildglobalkey[self.selectedkeyinfo() + "s"] = "";
+            self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = "";
             // self.InitKeyboard();
             $('.active').hasClass('hbk') ? $('.active').removeClass('hbk') : '';
         }
@@ -250,12 +245,14 @@ function HotBuildSettingsViewModel() {
     };
 
     self.Save = function () {
-        hotbuildglobal[self.selectedkeyinfo()] = self.selectedhotbuild();
+        model.hotbuildconfig = self.hotbuildglobal();
+        model.hotbuildconfigkey = self.hotbuildglobalkey();
+        self.hotbuildglobal()[self.selectedkeyinfo()] = self.selectedhotbuild();
     };
 
     self.InitKeyboard = function () {
         self.selectedkeyinfo(undefined);
-        var arrkeys = _.keys(_.invert(hotbuildglobalkey));
+        var arrkeys = _.keys(_.invert(self.hotbuildglobalkey()));
         var uberkeys = [];
         _.forEach(model.keybindGroups(), function (o) {
             _.forEach(o.keybinds(), function (k) {
@@ -301,13 +298,13 @@ function HotBuildSettingsViewModel() {
     };
 
     self.ComunityDefaults = function () {
-        hotbuildglobal = {};
-        hotbuildglobalkey = {};
+        self.hotbuildglobal({});
+        self.hotbuildglobalkey({});
         for (i = 1; i < 21; i++) {
-            eval("hotbuildglobal.hotbuild" + i + "s = []");
-            eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
+            eval("self.hotbuildglobal().hotbuild" + i + "s = []");
+            eval("self.hotbuildglobalkey().hotbuild" + i + "s = ''");
         }
-        hotbuildglobal.hotbuild1s = [
+        self.hotbuildglobal().hotbuild1s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory/vehicle_factory.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory/bot_factory.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" })),
@@ -319,7 +316,7 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/fabrication_ship/fabrication_ship.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" }))
         ];
-        hotbuildglobal.hotbuild2s = [
+        self.hotbuildglobal().hotbuild2s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory/air_factory.json" })),
 	        ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory_adv/air_factory_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory/naval_factory.json" })),
@@ -329,7 +326,7 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/air_scout/air_scout.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/sea_scout/sea_scout.json" }))
         ];
-        hotbuildglobal.hotbuild3s = [
+        self.hotbuildglobal().hotbuild3s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar_adv/radar_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar/radar.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/deep_space_radar/deep_space_radar.json" })),
@@ -339,7 +336,7 @@ function HotBuildSettingsViewModel() {
 			ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_aa/bot_aa.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/frigate/frigate.json" }))
         ];
-        hotbuildglobal.hotbuild4s = [
+        self.hotbuildglobal().hotbuild4s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory_adv/bot_factory_adv.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/assault_bot/assault_bot.json" })),
@@ -352,24 +349,24 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/battleship/battleship.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }))
         ];
-        hotbuildglobal.hotbuild5s = [
+        self.hotbuildglobal().hotbuild5s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant_adv/energy_plant_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant/energy_plant.json" }))
         ];
-        hotbuildglobal.hotbuild6s = [
+        self.hotbuildglobal().hotbuild6s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor/metal_extractor.json" })),
         ];
-        hotbuildglobal.hotbuild7s = [
+        self.hotbuildglobal().hotbuild7s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_adv/laser_defense_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense/laser_defense.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_single/laser_defense_single.json" }))
         ];
-        hotbuildglobal.hotbuild8s = [
+        self.hotbuildglobal().hotbuild8s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/air_defense/air_defense.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/land_barrier/land_barrier.json" })),
         ];
-        hotbuildglobal.hotbuild9s = [
+        self.hotbuildglobal().hotbuild9s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_short/artillery_short.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_long/artillery_long.json" })),
@@ -378,27 +375,27 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/missile_ship/missile_ship.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_laser/orbital_laser.json" }))
         ];
-        hotbuildglobal.hotbuild10s = [
+        self.hotbuildglobal().hotbuild10s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_storage/energy_storage.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_storage/metal_storage.json" }))
         ];
 
-        hotbuildglobal.hotbuild11s = [
+        self.hotbuildglobal().hotbuild11s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/ion_defense/ion_defense.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/delta_v_engine/delta_v_engine.json" }))
         ];
 
-        hotbuildglobalkey.hotbuild1s = 'w';
-        hotbuildglobalkey.hotbuild2s = 'e';
-        hotbuildglobalkey.hotbuild3s = 'r';
-        hotbuildglobalkey.hotbuild4s = 't';
-        hotbuildglobalkey.hotbuild5s = 'f';
-        hotbuildglobalkey.hotbuild6s = 's';
-        hotbuildglobalkey.hotbuild7s = 'x';
-        hotbuildglobalkey.hotbuild8s = 'c';
-        hotbuildglobalkey.hotbuild9s = 'v';
-        hotbuildglobalkey.hotbuild10s = 'd';
-        hotbuildglobalkey.hotbuild11s = 'g';
+        self.hotbuildglobalkey().hotbuild1s = 'w';
+        self.hotbuildglobalkey().hotbuild2s = 'e';
+        self.hotbuildglobalkey().hotbuild3s = 'r';
+        self.hotbuildglobalkey().hotbuild4s = 't';
+        self.hotbuildglobalkey().hotbuild5s = 'f';
+        self.hotbuildglobalkey().hotbuild6s = 's';
+        self.hotbuildglobalkey().hotbuild7s = 'x';
+        self.hotbuildglobalkey().hotbuild8s = 'c';
+        self.hotbuildglobalkey().hotbuild9s = 'v';
+        self.hotbuildglobalkey().hotbuild10s = 'd';
+        self.hotbuildglobalkey().hotbuild11s = 'g';
 
         default_keybinds.hotbuild['Toggle Energy'] = 'tab';
         default_keybinds.hotbuild['Lock Pole'] = '^';
@@ -436,13 +433,14 @@ function HotBuildSettingsViewModel() {
     };
 
     self.ComunityDefaultsWASD = function () {
-        hotbuildglobal = {};
-        hotbuildglobalkey = {};
+        //debugger;
+        self.hotbuildglobal({});
+        self.hotbuildglobalkey({});
         for (i = 1; i < 21; i++) {
-            eval("hotbuildglobal.hotbuild" + i + "s = []");
-            eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
+            eval("self.hotbuildglobal().hotbuild" + i + "s = []");
+            eval("self.hotbuildglobalkey().hotbuild" + i + "s = ''");
         }
-        hotbuildglobal.hotbuild1s = [
+        self.hotbuildglobal().hotbuild1s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory/vehicle_factory.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory/bot_factory.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/land_scout/land_scout.json" })),
@@ -450,7 +448,7 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/sea_scout/sea_scout.json" }))
 
         ];
-        hotbuildglobal.hotbuild2s = [
+        self.hotbuildglobal().hotbuild2s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory/air_factory.json" })),
 	        ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory_adv/air_factory_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory/naval_factory.json" })),
@@ -462,7 +460,7 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/missile_ship/missile_ship.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_laser/orbital_laser.json" }))
         ];
-        hotbuildglobal.hotbuild3s = [
+        self.hotbuildglobal().hotbuild3s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar_adv/radar_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar/radar.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/deep_space_radar/deep_space_radar.json" })),
@@ -472,13 +470,13 @@ function HotBuildSettingsViewModel() {
 			ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_aa/bot_aa.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/frigate/frigate.json" }))
         ];
-        hotbuildglobal.hotbuild4s = [
+        self.hotbuildglobal().hotbuild4s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/bot_factory_adv/bot_factory_adv.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/nuclear_sub/nuclear_sub.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_lander/orbital_lander.json" }))
         ];
-        hotbuildglobal.hotbuild5s = [
+        self.hotbuildglobal().hotbuild5s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant_adv/energy_plant_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_plant/energy_plant.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/assault_bot/assault_bot.json" })),
@@ -491,7 +489,7 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/battleship/battleship.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }))
         ];
-        hotbuildglobal.hotbuild6s = [
+        self.hotbuildglobal().hotbuild6s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_extractor/metal_extractor.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" })),
@@ -503,21 +501,21 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/fabrication_ship/fabrication_ship.json" })),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" }))
         ];
-        hotbuildglobal.hotbuild7s = [
+        self.hotbuildglobal().hotbuild7s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_adv/laser_defense_adv.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense/laser_defense.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/laser_defense_single/laser_defense_single.json" }))
         ];
-        hotbuildglobal.hotbuild8s = [
+        self.hotbuildglobal().hotbuild8s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/air_defense/air_defense.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/land_barrier/land_barrier.json" })),
         ];
-        hotbuildglobal.hotbuild9s = [
+        self.hotbuildglobal().hotbuild9s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_short/artillery_short.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/artillery_long/artillery_long.json" }))
         ];
-        hotbuildglobal.hotbuild10s = [
+        self.hotbuildglobal().hotbuild10s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/energy_storage/energy_storage.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/metal_storage/metal_storage.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json" })),
@@ -525,23 +523,22 @@ function HotBuildSettingsViewModel() {
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json"})),
             ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"}))
         ];
-
-        hotbuildglobal.hotbuild11s = [
+        self.hotbuildglobal().hotbuild11s = [
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/ion_defense/ion_defense.json" })),
             ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/delta_v_engine/delta_v_engine.json" }))
         ];
 
-        hotbuildglobalkey.hotbuild1s = 'f';
-        hotbuildglobalkey.hotbuild2s = 'g';
-        hotbuildglobalkey.hotbuild3s = 't';
-        hotbuildglobalkey.hotbuild4s = 'h';
-        hotbuildglobalkey.hotbuild5s = 'r';
-        hotbuildglobalkey.hotbuild6s = 'e';
-        hotbuildglobalkey.hotbuild7s = 'x';
-        hotbuildglobalkey.hotbuild8s = 'c';
-        hotbuildglobalkey.hotbuild9s = 'v';
-        hotbuildglobalkey.hotbuild10s = 'z';
-        hotbuildglobalkey.hotbuild11s = 'j';
+        self.hotbuildglobalkey().hotbuild1s = 'f';
+        self.hotbuildglobalkey().hotbuild2s = 'g';
+        self.hotbuildglobalkey().hotbuild3s = 't';
+        self.hotbuildglobalkey().hotbuild4s = 'h';
+        self.hotbuildglobalkey().hotbuild5s = 'r';
+        self.hotbuildglobalkey().hotbuild6s = 'e';
+        self.hotbuildglobalkey().hotbuild7s = 'x';
+        self.hotbuildglobalkey().hotbuild8s = 'c';
+        self.hotbuildglobalkey().hotbuild9s = 'v';
+        self.hotbuildglobalkey().hotbuild10s = 'z';
+        self.hotbuildglobalkey().hotbuild11s = 'j';
 
         default_keybinds.hotbuild['Toggle Energy'] = 'tab';
         default_keybinds.hotbuild['Lock Pole'] = 'y';
@@ -601,10 +598,19 @@ function loadHotBuildSettings(element, url, model) {
     });
 }
 
-var hbuisettings = new HotBuildSettingsViewModel();
+var hbuisettings = new HotBuildSettingsViewModel(hotbuildglobal,hotbuildglobalkey);
 $("#game_settings").children(":first").append("<li class='game_settings'>" +
             "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
         "</li>");
 $("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
 loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hbuisettings);
 
+
+model.oldSettingsBeforeHotbuild = model.settings;
+
+model.settings = ko.computed(function () {
+    var newSettings = model.oldSettingsBeforeHotbuild();
+    newSettings.hotbuildconfig = hbuisettings.hotbuildglobal();
+    newSettings.hotbuildconfigkey = hbuisettings.hotbuildglobalkey();
+    return newSettings;
+});
