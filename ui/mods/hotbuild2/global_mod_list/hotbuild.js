@@ -40,7 +40,8 @@ var hotbuild2 = (function () {
             //debugger;
             if (hotbuilds !== undefined) {
                 self.hotbuildPreviews([{'icon':'','json':''}]);
-                for (i = hbindex; i < hotbuilds.length; i++) {
+                var unitinfo;
+                for (var i = hbindex; i < hotbuilds.length; i++) {
                     if (self.knowsBuildCommand(hotbuilds[i].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[i].json];
                         if (unitinfo.buildStructure) {
@@ -48,7 +49,7 @@ var hotbuild2 = (function () {
                         }
                     }
                 }
-                for (j = 0; j < hbindex; j++) {
+                for (var j = 0; j < hbindex; j++) {
                     if (self.knowsBuildCommand(hotbuilds[j].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[j].json];
                         if (unitinfo.buildStructure) {
@@ -76,7 +77,7 @@ var hotbuild2 = (function () {
                         self.doCycleId(self.hotbuilds().length, event.which);
                         failDetect++;
                         if (failDetect > 1000) {
-                            gameConsole.log("loop of death\n"); // I dont think this should ever happen...
+                            console.log("loop of death\n"); // I dont think this should ever happen...
                             return;
                         }
                     } while (!self.knowsBuildCommand(self.hotbuilds()[self.cycleid()].json) && self.knowsAnyBuildCommand());
@@ -94,7 +95,7 @@ var hotbuild2 = (function () {
                     event.preventDefault();
                 }
                 else {
-                    gameConsole.log('could not hotbuild item ' + self.debuginfo());
+                    console.log('could not hotbuild item ' + self.debuginfo());
                 }
             }
         };
@@ -120,7 +121,7 @@ var hotbuild2 = (function () {
         //move trough hotbuilds array when pushing multiple time the same key in a certain time interval
         self.doCycleId = function (length, key) {
             var thisTime = new Date();
-            if (thisTime - self.lastCycleTime > self.cycleResetTime || key != myHotBuildViewModel.lastkey()) {
+            if (thisTime - self.lastCycleTime > self.cycleResetTime || key != self.lastkey()) {
                 //if (key != self.lastkey()) {
                 self.cycleid(0);
             } else {
@@ -152,6 +153,7 @@ var hotbuild2 = (function () {
 //Pause / Unpause energy
     hotbuild2.energyToggle = function(event) {
         var currentOrder = model.selectedEnergyOrderIndex();
+        var eOrder;
         if (currentOrder === 0) {
             eOrder = 'conserve';
         } else {
@@ -207,7 +209,7 @@ var hotbuild2 = (function () {
     // View Event
     hotbuild2.viewAlert = function() {
         if (model.unitAlertModel.alerts().length > 0) {
-            for (i = 0; i < model.unitAlertModel.alerts().length; i++) {
+            for (var i = 0; i < model.unitAlertModel.alerts().length; i++) {
                 //console.log(model.unitAlertModel.alerts()[i]);
                 var alert = model.unitAlertModel.alerts()[i];
                 var target = {
