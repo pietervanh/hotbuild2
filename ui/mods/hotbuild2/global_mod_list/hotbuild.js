@@ -161,7 +161,7 @@ var hotbuild2 = (function () {
         model.endFabMode();
         engine.call('set_order_state', 'energy', eOrder);
         event.preventDefault();
-    }
+    };
 
 //Pole Lock on/off
     hotbuild2.polelockToggle = function(event) {
