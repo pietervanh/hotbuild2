@@ -219,33 +219,6 @@ var hotbuild2 = (function () {
         }
     };
 
-//get key for buildbar
-    hotbuild2.hbgetBuildBarKey = function(id) {
-        var result = '';
-        var hbpos = 1;
-        _.forEach(hotbuildglobal, function (hbkey) {
-            _.forEach(hbkey, function (hbitem) {
-                //debugger;
-                if (hbitem.json === id) {
-                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
-                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
-                        return false;
-                    }
-                }
-            });
-            hbpos += 1;
-        });
-        return result;
-    };
-
-//load html dynamically
-    hotbuild2.loadHotBuildTemplate = function(element, url, model) {
-        element.load(url, function () {
-            console.log("Loading html " + url);
-            ko.applyBindings(model, element.get(0));
-        });
-    };
-
     //same as the one in media\ui\alpha\shared\js\inputmap.js
     //problem default you can't give in the arrays with upper and lower keys
     //this version automaticaly gives in [binding,binding+shift] wich solves the problem
