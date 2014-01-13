@@ -315,6 +315,8 @@ var hotbuild2 = (function () {
     default_keybinds.hotbuild['patrol'] = '';
     default_keybinds.hotbuild['stop'] = '';
     default_keybinds.hotbuild['select commie'] = '';
-    default_keybinds.hotbuild['unload'] = '';   
+    default_keybinds.hotbuild['unload'] = '';
 
-});
+    return hotbuild2;
+
+})();

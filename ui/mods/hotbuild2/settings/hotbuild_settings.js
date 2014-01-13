@@ -3,45 +3,45 @@
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 
-(function () {
+var hotbuildsettings = (function () {
 	
 	//Problem don't know how to know it's a a buildable unit / factory  so can't dynamically fill buildings and units
 	var hbbuildings = [
-	        new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
+new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 		new hbListItem().json("/pa/units/air/air_factory_adv/air_factory_adv.json"),
 		new hbListItem().json("/pa/units/land/vehicle_factory/vehicle_factory.json"),
-	        new hbListItem().json("/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"),
-	        new hbListItem().json("/pa/units/land/bot_factory/bot_factory.json"),
-	        new hbListItem().json("/pa/units/land/bot_factory_adv/bot_factory_adv.json"),
-	        new hbListItem().json("/pa/units/land/metal_extractor/metal_extractor.json"),
-	        new hbListItem().json("/pa/units/land/metal_extractor_adv/metal_extractor_adv.json"),
-	        new hbListItem().json("/pa/units/land/metal_storage/metal_storage.json"),
-	        new hbListItem().json("/pa/units/land/energy_plant/energy_plant.json"),
-	        new hbListItem().json("/pa/units/land/energy_plant_adv/energy_plant_adv.json"),
-	        new hbListItem().json("/pa/units/land/energy_storage/energy_storage.json"),
-	        new hbListItem().json("/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"),
-	        new hbListItem().json("/pa/units/land/artillery_long/artillery_long.json"),
-	        new hbListItem().json("/pa/units/land/artillery_short/artillery_short.json"),
-	        new hbListItem().json("/pa/units/land/air_defense/air_defense.json"),
-	        new hbListItem().json("/pa/units/land/land_barrier/land_barrier.json"),
-	        new hbListItem().json("/pa/units/land/laser_defense_adv/laser_defense_adv.json"),
-	        new hbListItem().json("/pa/units/land/laser_defense/laser_defense.json"),
-	        new hbListItem().json("/pa/units/land/laser_defense_single/laser_defense_single.json"),
-	        new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher.json"),
-	        new hbListItem().json("/pa/units/land/radar_adv/radar_adv.json"),
-	        new hbListItem().json("/pa/units/land/radar/radar.json"),
-	        new hbListItem().json("/pa/units/orbital/deep_space_radar/deep_space_radar.json"),
-	        new hbListItem().json("/pa/units/orbital/delta_v_engine/delta_v_engine.json"),
-	        new hbListItem().json("/pa/units/orbital/orbital_launcher/orbital_launcher.json"),
-	        new hbListItem().json("/pa/units/orbital/ion_defense/ion_defense.json"),
-	        new hbListItem().json("/pa/units/sea/naval_factory/naval_factory.json"),
-	        new hbListItem().json("/pa/units/sea/naval_factory_adv/naval_factory_adv.json"),
-	        new hbListItem().json("/pa/units/sea/sea_mine/sea_mine.json"),
-	        new hbListItem().json("/pa/units/sea/sonar/sonar.json"),
-	        new hbListItem().json("/pa/units/sea/sonar_adv/sonar_adv.json"),
-	        new hbListItem().json("/pa/units/sea/torpedo_launcher/torpedo_launcher.json"),
-	        new hbListItem().json("/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json"),
-	        new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json")
+		new hbListItem().json("/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"),
+		new hbListItem().json("/pa/units/land/bot_factory/bot_factory.json"),
+		new hbListItem().json("/pa/units/land/bot_factory_adv/bot_factory_adv.json"),
+		new hbListItem().json("/pa/units/land/metal_extractor/metal_extractor.json"),
+		new hbListItem().json("/pa/units/land/metal_extractor_adv/metal_extractor_adv.json"),
+		new hbListItem().json("/pa/units/land/metal_storage/metal_storage.json"),
+		new hbListItem().json("/pa/units/land/energy_plant/energy_plant.json"),
+		new hbListItem().json("/pa/units/land/energy_plant_adv/energy_plant_adv.json"),
+		new hbListItem().json("/pa/units/land/energy_storage/energy_storage.json"),
+		new hbListItem().json("/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"),
+		new hbListItem().json("/pa/units/land/artillery_long/artillery_long.json"),
+		new hbListItem().json("/pa/units/land/artillery_short/artillery_short.json"),
+		new hbListItem().json("/pa/units/land/air_defense/air_defense.json"),
+		new hbListItem().json("/pa/units/land/land_barrier/land_barrier.json"),
+		new hbListItem().json("/pa/units/land/laser_defense_adv/laser_defense_adv.json"),
+		new hbListItem().json("/pa/units/land/laser_defense/laser_defense.json"),
+		new hbListItem().json("/pa/units/land/laser_defense_single/laser_defense_single.json"),
+		new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher.json"),
+		new hbListItem().json("/pa/units/land/radar_adv/radar_adv.json"),
+		new hbListItem().json("/pa/units/land/radar/radar.json"),
+		new hbListItem().json("/pa/units/orbital/deep_space_radar/deep_space_radar.json"),
+		new hbListItem().json("/pa/units/orbital/delta_v_engine/delta_v_engine.json"),
+		new hbListItem().json("/pa/units/orbital/orbital_launcher/orbital_launcher.json"),
+		new hbListItem().json("/pa/units/orbital/ion_defense/ion_defense.json"),
+		new hbListItem().json("/pa/units/sea/naval_factory/naval_factory.json"),
+		new hbListItem().json("/pa/units/sea/naval_factory_adv/naval_factory_adv.json"),
+		new hbListItem().json("/pa/units/sea/sea_mine/sea_mine.json"),
+		new hbListItem().json("/pa/units/sea/sonar/sonar.json"),
+		new hbListItem().json("/pa/units/sea/sonar_adv/sonar_adv.json"),
+		new hbListItem().json("/pa/units/sea/torpedo_launcher/torpedo_launcher.json"),
+		new hbListItem().json("/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json"),
+		new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json")
 	];
 	
 	var hbunits = [
@@ -382,7 +382,7 @@
 	        ];
 	        self.hotbuildglobal().hotbuild2s = [
 	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory/air_factory.json" })),
-		    ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory_adv/air_factory_adv.json" })),
+	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/air/air_factory_adv/air_factory_adv.json" })),
 	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory/naval_factory.json" })),
 	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" })),
 	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/orbital_launcher/orbital_launcher.json" })),
@@ -397,7 +397,7 @@
 	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fighter/fighter.json" })),
 	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fighter_adv/fighter_adv.json" })),
 	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" })),
-		    ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_aa/bot_aa.json" })),
+	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_aa/bot_aa.json" })),
 	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/frigate/frigate.json" }))
 	        ];
 	        self.hotbuildglobal().hotbuild4s = [
@@ -460,7 +460,7 @@
 	        self.hotbuildglobalkey().hotbuild9s = 'v';
 	        self.hotbuildglobalkey().hotbuild10s = 'd';
 	        self.hotbuildglobalkey().hotbuild11s = 'g';
-	
+	        default_keybinds.hotbuild = {};
 	        default_keybinds.hotbuild['Toggle Energy'] = 'tab';
 	        default_keybinds.hotbuild['Lock Pole'] = '^';
 	        default_keybinds.hotbuild['Requeue'] = 'o';
@@ -528,10 +528,10 @@
 	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar_adv/radar_adv.json" })),
 	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/land/radar/radar.json" })),
 	            ko.toJS(_.find(hbbuildings, { "json2": "/pa/units/orbital/deep_space_radar/deep_space_radar.json" })),
-		    ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fighter/fighter.json" })),
+	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fighter/fighter.json" })),
 	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/air/fighter_adv/fighter_adv.json" })),
 	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" })),
-		    ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_aa/bot_aa.json" })),
+	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/land/bot_aa/bot_aa.json" })),
 	            ko.toJS(_.find(hbunits, { "json2": "/pa/units/sea/frigate/frigate.json" }))
 	        ];
 	        self.hotbuildglobal().hotbuild4s = [
@@ -603,7 +603,7 @@
 	        self.hotbuildglobalkey().hotbuild9s = 'v';
 	        self.hotbuildglobalkey().hotbuild10s = 'z';
 	        self.hotbuildglobalkey().hotbuild11s = 'j';
-	
+	        default_keybinds.hotbuild = {};
 	        default_keybinds.hotbuild['Toggle Energy'] = 'tab';
 	        default_keybinds.hotbuild['Lock Pole'] = 'y';
 	        default_keybinds.hotbuild['Requeue'] = 'o';
@@ -639,58 +639,72 @@
 	    };
 	}
 	
-	function loadHotBuildSettings(element, url, model) {
-	    element.load(url, function () {
-	        console.log("Loading html " + url);
-	        ko.applyBindings(model, element.get(0));
-	        hbuisettings.InitKeyboard();
-	        $('#keyboard li').click(function () {
-	            var $this = $(this);
-	            var character = $this.html();
-	            if (!$this.hasClass('dis')) {
-	                hbuisettings.InitKeyboard();
-	                $('#keyboard li').each(function (index) {
-	                    if ($(this).hasClass('active')) {
-	                        $(this).toggleClass('active');
-	                    }
-	                });
-	
-	                $this.addClass('active');
-	                hbuisettings.keyboardkey(character);
-	            }
-	        });
-	    });
-	}
-	
 	var hotbuildglobal = {};
-        var hotbuildglobalkey = {};
-        for (var i = 1; i < 21; i++) {
-                eval("hotbuildglobal.hotbuild" + i + "s = []");
-                eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
-        }
-        hotbuildglobal = model.settings.hotbuildconfig ? model.settings.hotbuildconfig : hotbuildglobal;
-        hotbuildglobalkey = model.settings.hotbuildconfigkey ? model.settings.hotbuildconfigkey : hotbuildglobalkey;   
-	
-	var hbuisettings = new HotBuildSettingsViewModel(hotbuildglobal,hotbuildglobalkey);
-	
-	//is this needed ? 	
-	model.oldSettingsBeforeHotbuild = model.settings;
-	model.settings = ko.computed(function () {
-	    var newSettings = model.oldSettingsBeforeHotbuild();
-	    newSettings.hotbuildconfig = hbuisettings.hotbuildglobal();
-	    newSettings.hotbuildconfigkey = hbuisettings.hotbuildglobalkey();
-	    return newSettings;
-	});
-	
+    var hotbuildglobalkey = {};
+    for (var i = 1; i < 21; i++) {
+            eval("hotbuildglobal.hotbuild" + i + "s = []");
+            eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
+    }
+    var settings = decode(localStorage.settings);
+    hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
+    hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
+
+    var hbuisettings = new HotBuildSettingsViewModel(hotbuildglobal, hotbuildglobalkey);
+	var hotbuildsettings = {};
+	hotbuildsettings.viewmodel = hbuisettings;
+
 	model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000);
 	model.addSetting_Text('Hotbuild Requeue Amount', 'hotbuild_requeue_amount', 'UI', 'Number', 50);
 	model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0);
 	model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 	
-	$("#game_settings").children(":first").append("<li class='game_settings'>" +
+	return hotbuildsettings;
+
+
+})();
+
+(function () {
+
+    //model.hotbuildsettings = hotbuildsettings;
+
+    //is this needed ? 	
+    model.oldSettingsBeforeHotbuild = model.settings;
+    model.settings = ko.computed(function () {
+        var newSettings = model.oldSettingsBeforeHotbuild();
+        newSettings.hotbuildconfig = hotbuildsettings.viewmodel.hotbuildglobal();
+        newSettings.hotbuildconfigkey = hotbuildsettings.viewmodel.hotbuildglobal();
+        return newSettings;
+    });
+    
+    function loadHotBuildSettings(element, url, model) {
+        element.load(url, function () {
+            console.log("Loading html " + url);
+            ko.applyBindings(model, element.get(0));
+            hotbuildsettings.viewmodel.InitKeyboard();
+            $('#keyboard li').click(function () {
+                var $this = $(this);
+                var character = $this.html();
+                if (!$this.hasClass('dis')) {
+                    hotbuildsettings.viewmodel.InitKeyboard();
+                    $('#keyboard li').each(function (index) {
+                        if ($(this).hasClass('active')) {
+                            $(this).toggleClass('active');
+                        }
+                    });
+
+                    $this.addClass('active');
+                    hotbuildsettings.viewmodel.keyboardkey(character);
+                }
+            });
+        });
+    }
+
+
+    var $gamesettings = $("#game_settings");
+    $gamesettings.children(":first").append("<li class='game_settings'>" +
 	            "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
 	        "</li>");
-	$("#game_settings").append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
-	loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hbuisettings);
+    $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
+    loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
 
 })();
