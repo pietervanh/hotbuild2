@@ -127,8 +127,8 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        switch(value)
 	        {
 	            case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
-	                self.desc("Nuclear Missle");
-	                self.displayname("Nuclear Missile Ammo");
+	                self.desc("Nuclear Missile Ammo");
+	                self.displayname("Nuclear Missile");
 	                break;
 	            case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
 	                self.desc("Anti-Nuclear Missile Ammo");
@@ -270,6 +270,22 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        model.hotbuildconfigkey = self.hotbuildglobalkey();
 	        self.hotbuildglobal()[self.selectedkeyinfo()] = self.selectedhotbuild();
 	    };
+
+	    self.keyboardclickhandler = function () {
+	        var $this = $(this);
+	        var character = $this.html();
+	        if (!$this.hasClass('dis')) {
+	            self.InitKeyboard();
+	            $('#keyboard li').each(function (index) {
+	                if ($(this).hasClass('active')) {
+	                    $(this).toggleClass('active');
+	                }
+	            });
+
+	            $this.addClass('active');
+	            self.keyboardkey(character);
+	        }
+	    };
 	
 	    self.InitKeyboard = function () {
 	        self.selectedkeyinfo(undefined);
@@ -333,10 +349,12 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        $("#setComDefaults").click(function () {
 	            console.log("set Community Defaults");
 	            //disable osk
+	            $("#keyboard li").unbind("click", self.keyboardclickhandler);
 	            self.ComunityDefaults();
 	            self.showingDefaultPrompt(false);
 	            $("#comdefaultsDlg").dialog("close");
 	            //enable osk
+	            $("#keyboard li").bind("click", self.keyboardclickhandler);
 	        });
 	        $("#ignoreComDefaults").click(function () {
 	            self.showingDefaultPrompt(false);
@@ -355,11 +373,13 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        });
 	        $("#setComDefaultsWASD").click(function () {
 	            console.log("set Community Defaults WASD");
-	            $("#keyboardcontainer").//disable osk
+	            //disable osk
+	            $("#keyboard li").unbind("click", self.keyboardclickhandler);
 	            self.ComunityDefaultsWASD();
 	            self.showingDefaultWASDPrompt(false);
 	            $("#comdefaultsWASDDlg").dialog("close");
 	            //enable osk
+	            $("#keyboard li").bind("click", self.keyboardclickhandler);
 	        });
 	        $("#ignoreComDefaultsWASD").click(function () {
 	            self.showingDefaultWASDPrompt(false);
@@ -644,6 +664,8 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        self.InitKeyboard();
 	    };
 	}
+
+
 	
 	var hotbuildglobal = {};
     var hotbuildglobalkey = {};
@@ -679,30 +701,15 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
         newSettings.hotbuildconfigkey = hotbuildsettings.viewmodel.hotbuildglobalkey();
         return newSettings;
     });
-    
+
     function loadHotBuildSettings(element, url, model) {
         element.load(url, function () {
             console.log("Loading html " + url);
             ko.applyBindings(model, element.get(0));
             hotbuildsettings.viewmodel.InitKeyboard();
-            $('#keyboard li').click(function () {
-                var $this = $(this);
-                var character = $this.html();
-                if (!$this.hasClass('dis')) {
-                    hotbuildsettings.viewmodel.InitKeyboard();
-                    $('#keyboard li').each(function (index) {
-                        if ($(this).hasClass('active')) {
-                            $(this).toggleClass('active');
-                        }
-                    });
-
-                    $this.addClass('active');
-                    hotbuildsettings.viewmodel.keyboardkey(character);
-                }
-            });
+            $("#keyboard li").bind("click", hotbuildsettings.viewmodel.keyboardclickhandler);
         });
     }
-
 
     var $gamesettings = $("#game_settings");
     $gamesettings.children(":first").append("<li class='game_settings'>" +
@@ -710,5 +717,5 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        "</li>");
     $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
     loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
-
+    
 })();
