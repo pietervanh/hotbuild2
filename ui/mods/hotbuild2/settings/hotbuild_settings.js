@@ -85,6 +85,30 @@
 		new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"),
 	];
 	
+	
+	function onunitload(unitdata, listitem) {
+	    unitdata.description !== undefined ? listitem.desc(unitdata.description) : listitem.desc('not found');
+	    unitdata.display_name !== undefined ? listitem.displayname(unitdata.display_name) : listitem.displayname('not found');
+	    if (_.contains(unitdata.unit_types, 'UNITTYPE_Mobile')) {
+	        if (_.contains(unitdata.unit_types, 'UNITTYPE_Basic')) {
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('botfac') : '';
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('vecfac') : '';
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('afac') : '';
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('nfac') : '';
+	        }
+	        else {
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('abotfac') : '';
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('avecfac') : '';
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('aafac') : '';
+	            _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
+	        }
+	        _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
+	        //console.log(listitem.factory());
+	    }
+	    //if(unitdata.json() != '')
+	    //listitem = ko.toJS(listitem);
+	}
+	
 	function hbListItem() {
 	    //TODO
 	    var self = this;
@@ -117,30 +141,9 @@
 	        var end = /[.]json$/;
 	        self.image = '../live_game/img/build_bar/units/' + value.substring(value.search(start), value.search(end)) + '.png';
 	    });
-	};
-	
-	function onunitload(unitdata, listitem) {
-	    unitdata.description != undefined ? listitem.desc(unitdata.description) : listitem.desc('not found');
-	    unitdata.display_name != undefined ? listitem.displayname(unitdata.display_name) : listitem.displayname('not found');
-	    if (_.contains(unitdata.unit_types, 'UNITTYPE_Mobile')) {
-	        if (_.contains(unitdata.unit_types, 'UNITTYPE_Basic')) {
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('botfac') : '';
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('vecfac') : '';
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('afac') : '';
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('nfac') : '';
-	        }
-	        else {
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('abotfac') : '';
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('avecfac') : '';
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('aafac') : '';
-	            _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
-	        }
-	        _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
-	        //console.log(listitem.factory());
-	    }
-	    //if(unitdata.json() != '')
-	    //listitem = ko.toJS(listitem);
 	}
+	
+
 	
 	function HotBuildSettingsViewModel(hbglobal,hbglobalkey) {
 	    var self = this;
@@ -290,17 +293,17 @@
 	            }
 	        });
 	        $('#keyboard li').each(function (index) {
-	            for (i = 0; i < arrkeys.length; i++) {
+	            for (var i = 0; i < arrkeys.length; i++) {
 	                if ($(this).html() == arrkeys[i]) {
 	                    $(this).toggleClass('hbk');
 	                }
 	            }
-	            for (i = 0; i < uberkeys.length; i++) {
+	            for (var i = 0; i < uberkeys.length; i++) {
 	                if ($(this).html() == uberkeys[i]) {
 	                    $(this).toggleClass('uber');
 	                }
 	            }
-	            for (i = 0; i < diskeys.length; i++) {
+	            for (var i = 0; i < diskeys.length; i++) {
 	                if ($(this).html() == diskeys[i]) {
 	                    $(this).toggleClass('dis');
 	                }
@@ -361,7 +364,7 @@
 	    self.ComunityDefaults = function () {
 	        self.hotbuildglobal({});
 	        self.hotbuildglobalkey({});
-	        for (i = 1; i < 21; i++) {
+	        for (var i = 1; i < 21; i++) {
 	            eval("self.hotbuildglobal().hotbuild" + i + "s = []");
 	            eval("self.hotbuildglobalkey().hotbuild" + i + "s = ''");
 	        }
@@ -497,7 +500,7 @@
 	        //debugger;
 	        self.hotbuildglobal({});
 	        self.hotbuildglobalkey({});
-	        for (i = 1; i < 21; i++) {
+	        for (var i = 1; i < 21; i++) {
 	            eval("self.hotbuildglobal().hotbuild" + i + "s = []");
 	            eval("self.hotbuildglobalkey().hotbuild" + i + "s = ''");
 	        }
@@ -661,7 +664,7 @@
 	
 	var hotbuildglobal = {};
         var hotbuildglobalkey = {};
-        for (i = 1; i < 21; i++) {
+        for (var i = 1; i < 21; i++) {
                 eval("hotbuildglobal.hotbuild" + i + "s = []");
                 eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
         }
