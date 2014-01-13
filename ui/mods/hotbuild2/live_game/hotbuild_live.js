@@ -1,7 +1,7 @@
 //IntelliSense for WebMatrix /VS
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
-(function () {
+var hotbuild2live = (function () {
 	
 	//load html dynamically
         loadHotBuildTemplate = function(element, url, model) {
@@ -14,7 +14,7 @@
 	//set empty defaults
 	var hotbuildglobal = {};
 	var hotbuildglobalkey = {};
-	for (i = 1; i < 21; i++) {
+	for (var i = 1; i < 21; i++) {
 		eval("hotbuildglobal.hotbuild" + i + "s = []");
 		eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
 	}
@@ -49,7 +49,8 @@
 	    //Show key on buildbar
 	    
 	   //get key for buildbar
-           hbgetBuildBarKey = function(id) {
+	    hotbuild2live = {};
+            hotbuild2live.hbgetBuildBarKey = function(id) {
 	        var result = '';
 	        var hbpos = 1;
 	        _.forEach(hotbuildglobal, function (hbkey) {
@@ -70,7 +71,7 @@
 		
 	    $('.div_build_item img').replaceWith(
 	    '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
-	    '<span class="hbbuildbarkey" data-bind="visible: hbgetBuildBarKey($data.id()) != \'\' , text: hbgetBuildBarKey($data.id())"></span>');
+	    '<span class="hbbuildbarkey" data-bind="visible: hotbuild2live.hbgetBuildBarKey($data.id()) != \'\' , text: hbgetBuildBarKey($data.id())"></span>');
 		/*
 		$('.div_build_item img').append(
 	    '<span class="hbbuildbarkey" data-bind="visible: hbgetBuildBarKey($data.id()) != \'\' , text: hbgetBuildBarKey($data.id())"></span>');
@@ -88,7 +89,7 @@
 	        return;
 	
 	    var value = String.fromCharCode(e.keyCode).toLowerCase();
-	    for (i = 1; i <= 20; i++) {
+	    for (var i = 1; i <= 20; i++) {
 	        if (hotbuildglobalkey["hotbuild" + i + "s"] == value) {
 	            hotbuild2.hotbuildManager.hotBuild(e, hotbuildglobal["hotbuild" + i + "s"]);
 	            break;
