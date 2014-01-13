@@ -323,9 +323,11 @@
 	        });
 	        $("#setComDefaults").click(function () {
 	            console.log("set Community Defaults");
+	            //disable osk
 	            self.ComunityDefaults();
 	            self.showingDefaultPrompt(false);
 	            $("#comdefaultsDlg").dialog("close");
+	            //enable osk
 	        });
 	        $("#ignoreComDefaults").click(function () {
 	            self.showingDefaultPrompt(false);
@@ -334,7 +336,6 @@
 	    };
 	
 	    self.showCommunityDefaultWASDPrompt = function () {
-	        //debugger;
 	        self.showingDefaultWASDPrompt(true);
 	        $("#comdefaultsWASDDlg").dialog({
 	            dialogClass: "no-close",
@@ -345,9 +346,11 @@
 	        });
 	        $("#setComDefaultsWASD").click(function () {
 	            console.log("set Community Defaults WASD");
+	            //disable osk
 	            self.ComunityDefaultsWASD();
 	            self.showingDefaultWASDPrompt(false);
 	            $("#comdefaultsWASDDlg").dialog("close");
+	            //enable osk
 	        });
 	        $("#ignoreComDefaultsWASD").click(function () {
 	            self.showingDefaultWASDPrompt(false);
