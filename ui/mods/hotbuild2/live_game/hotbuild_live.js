@@ -2,6 +2,15 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 (function () {
+	
+	//load html dynamically
+        loadHotBuildTemplate = function(element, url, model) {
+	        element.load(url, function () {
+	            console.log("Loading html " + url);
+	            ko.applyBindings(model, element.get(0));
+	        });
+	};	    
+
 	//set empty defaults
 	var hotbuildglobal = {};
 	var hotbuildglobalkey = {};
@@ -38,6 +47,26 @@
 	
 	if (settings.hotbuild_show_key_on_buildbar === "ON") {
 	    //Show key on buildbar
+	    
+	   //get key for buildbar
+           hbgetBuildBarKey = function(id) {
+	        var result = '';
+	        var hbpos = 1;
+	        _.forEach(hotbuildglobal, function (hbkey) {
+	            _.forEach(hbkey, function (hbitem) {
+	                //debugger;
+	                if (hbitem.json === id) {
+	                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
+	                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+	                        return false;
+	                    }
+	                }
+	            });
+	            hbpos += 1;
+	        });
+	        return result;
+	    };
+
 		
 	    $('.div_build_item img').replaceWith(
 	    '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
