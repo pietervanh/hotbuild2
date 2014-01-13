@@ -2,8 +2,6 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 (function () {
-	var settings = decode(localStorage.settings);
-
 	//set empty defaults
 	var hotbuildglobal = {};
 	var hotbuildglobalkey = {};
