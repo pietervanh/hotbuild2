@@ -177,32 +177,32 @@ var hotbuild2 = (function () {
         allSettings.camera_pole_lock = nextSetting.toUpperCase();
         localStorage.settings = encode(allSettings);
         event.preventDefault();
-    }
+    };
 
     //ReQueue Functionality
-    var recentQueueCommands = [];
+    hotbuild2.recentQueueCommands = [];
     
     var oldApiUnitBuild = api.unit.build;
     api.unit.build = function (itemId, cnt, ctrK) {
-        recentQueueCommands.push({ "id": itemId, "count": cnt, "ctrl": ctrK });
+        hotbuild2.recentQueueCommands.push({ "id": itemId, "count": cnt, "ctrl": ctrK });
         return oldApiUnitBuild(itemId, cnt, ctrK);
     };
 
     hotbuild2.requeue = function(event) {
         for (var x = 0; x < settings.hotbuild_requeue_amount; x++) {
-            for (var i = 0; i < recentQueueCommands.length; i++) {
-                var cmd = recentQueueCommands[i];
+            for (var i = 0; i < hotbuild2.recentQueueCommands.length; i++) {
+                var cmd = hotbuild2.recentQueueCommands[i];
                 oldApiUnitBuild(cmd["id"], cmd["count"], cmd["ctrl"]);
             }
         }
-    }
+    };
 
     //Standard CommandMode functionality
     hotbuild2.CommandMode = function(cmd) {
         if (model['setCommandIndex']) {
             model['setCommandIndex'](cmd);
         }
-    }
+    };
 
     // View Event
     hotbuild2.viewAlert() {
@@ -217,7 +217,7 @@ var hotbuild2 = (function () {
                 engine.call('camera.lookAt', JSON.stringify(target));
             }
         }
-    }
+    };
 
 //get key for buildbar
     hotbuild2.hbgetBuildBarKey = function(id) {
@@ -244,7 +244,7 @@ var hotbuild2 = (function () {
             console.log("Loading html " + url);
             ko.applyBindings(model, element.get(0));
         });
-    }
+    };
 
     //same as the one in media\ui\alpha\shared\js\inputmap.js
     //problem default you can't give in the arrays with upper and lower keys
@@ -306,7 +306,7 @@ var hotbuild2 = (function () {
                 }
             }
         }
-    }
+    };
     
     //keyboard tab keys under hotbuild title
     action_sets.hotbuild = {}; 
