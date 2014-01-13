@@ -68,12 +68,10 @@
         </table>
     </div>
     <div id="moresettings">
-        Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
-        <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
-        Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
-        <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
+
     </div>
     <hr>
+<!--
     <table class="tbl_hotbuildsui">
         <thead>
             <tr class="hotbuildsui_row_header">
@@ -100,6 +98,41 @@
             </tr>
         </tbody>
     </table>
+-->
+    <table>
+        <tr>
+            <td style="width:566px">&nbsp;
+                <div data-bind="foreach: selectedhotbuild">
+                    <div class="hotbuild_list_item">
+                        <div class="hotbuild_fab_selection">
+                            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+                            <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
+                        </div>
+                        <div class="hotbuild_list_buttons" data-bind="click_sound: 'default', rollover_sound: 'default'">
+                            <button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button><br />
+                            <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>
+                            <button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">X</button>
+                        </div>
+                        <div class="hotbuild_list_desc">
+                            <span data-bind="text: displayname"></span><br />
+                            <span data-bind="text: desc"></span>
+                        </div>
+                    </div>
+                </div>        
+            </td>
+            <td>
+                <div class="hotbuild_addlist">
+                    <br/>
+                    Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
+                    <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
+                    Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
+                    <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
     <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
         <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
         <div id="tutorialBtnGroup" style="margin-top: 10px">

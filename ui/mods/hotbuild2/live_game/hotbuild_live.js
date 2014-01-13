@@ -4,11 +4,11 @@
 var hotbuild2live = (function () {
 	
 	//load html dynamically
-        loadHotBuildTemplate = function(element, url, model) {
-	        element.load(url, function () {
-	            console.log("Loading html " + url);
-	            ko.applyBindings(model, element.get(0));
-	        });
+    loadHotBuildTemplate = function(element, url, model) {
+        element.load(url, function () {
+	        console.log("Loading html " + url);
+	        ko.applyBindings(model, element.get(0));
+        });
 	};	    
 
 	//set empty defaults
@@ -66,7 +66,6 @@ var hotbuild2live = (function () {
 	
 	if (settings.hotbuild_show_key_on_buildbar === "ON") {
 	    //Show key on buildbar
-
 	    $('.div_build_item img').replaceWith(
 	    '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
 	    '<span class="hbbuildbarkey" data-bind="visible: hotbuild2live.hbgetBuildBarKey($data.id()) != \'\' , text: hotbuild2live.hbgetBuildBarKey($data.id())"></span>');

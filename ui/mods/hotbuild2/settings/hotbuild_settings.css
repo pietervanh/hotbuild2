@@ -178,3 +178,24 @@ hr {
     z-index:100;
     color: rgb(255, 127, 0);
 }
+
+.hotbuild_list_item {
+    clear:both;
+}
+.hotbuild_list_buttons {
+    float:left;
+    height:48px;
+    width:80px;
+}
+.hotbuild_list_desc {
+    float:left;
+    height:48px;
+    width:350px;
+    margin:1px;
+}
+.hotbuild_addlist {
+    float:right;
+    height:300px;
+    width:460px;
+    margin:1px;
+}

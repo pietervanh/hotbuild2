@@ -355,7 +355,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        });
 	        $("#setComDefaultsWASD").click(function () {
 	            console.log("set Community Defaults WASD");
-	            //disable osk
+	            $("#keyboardcontainer").//disable osk
 	            self.ComunityDefaultsWASD();
 	            self.showingDefaultWASDPrompt(false);
 	            $("#comdefaultsWASDDlg").dialog("close");
