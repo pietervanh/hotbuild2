@@ -4,9 +4,9 @@
     "display_name": "Hotbuild2",
     "description": "Map 1 Key to multiple build actions and more... (See forum link for screenshots and instructions.)",
     "author": "proeleert",
-    "version": "1.9.8",
+    "version": "1.9.9",
     "build": "58772",
-    "date": "2014/01/12",
+    "date": "2014/01/13"
     "signature": "not yet implemented",
     "forum": "https://forums.uberent.com/threads/rel-hotbuild2-57703.54561/",
     "category": [
@@ -24,8 +24,7 @@
         "coui://ui/mods/hotbuild2/settings/hotbuild_settings.css"
     ],
     "global_mod_list": [
-        "coui://ui/mods/hotbuild2/global_mod_list/hotbuild.js",
-        "coui://ui/mods/hotbuild2/global_mod_list/keys.js"
+        "coui://ui/mods/hotbuild2/global_mod_list/hotbuild.js"
     ],
     "requires": [
         "rFloatFrame",
