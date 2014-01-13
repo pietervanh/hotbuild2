@@ -205,7 +205,7 @@ var hotbuild2 = (function () {
     };
 
     // View Event
-    hotbuild2.viewAlert() {
+    hotbuild2.viewAlert = function() {
         if (model.unitAlertModel.alerts().length > 0) {
             for (i = 0; i < model.unitAlertModel.alerts().length; i++) {
                 //console.log(model.unitAlertModel.alerts()[i]);
