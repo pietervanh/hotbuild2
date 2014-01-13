@@ -645,6 +645,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
             eval("hotbuildglobal.hotbuild" + i + "s = []");
             eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
     }
+    debugger;
     var settings = decode(localStorage.settings);
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
@@ -664,15 +665,12 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 })();
 
 (function () {
-
-    //model.hotbuildsettings = hotbuildsettings;
-
-    //is this needed ? 	
+	
     model.oldSettingsBeforeHotbuild = model.settings;
     model.settings = ko.computed(function () {
         var newSettings = model.oldSettingsBeforeHotbuild();
         newSettings.hotbuildconfig = hotbuildsettings.viewmodel.hotbuildglobal();
-        newSettings.hotbuildconfigkey = hotbuildsettings.viewmodel.hotbuildglobal();
+        newSettings.hotbuildconfigkey = hotbuildsettings.viewmodel.hotbuildglobalkey();
         return newSettings;
     });
     
