@@ -105,6 +105,10 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
 	        //console.log(listitem.factory());
 	    }
+	    if(listitem.factory() === undefined)
+	    {
+	        listitem.factory('');
+	    }
 	    //if(unitdata.json() != '')
 	    //listitem = ko.toJS(listitem);
 	}
@@ -207,7 +211,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	    self.selectedunit = ko.observable();
 	
 	    self.addBuilding = function () {
-	        self.selectedhotbuild.push(self.selectedbuilding());
+	        self.selectedhotbuild.push(ko.toJS(self.selectedbuilding()));
 	        self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = self.keyboardkey();
 	        self.Save();
 	        !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
@@ -216,15 +220,17 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	    self.addUnit = function () {
 	        //if(self.selectedhotbuild contains already a unit with the same factory ignore)
 	        var unitCheck = true;
+	        //debugger;
+	        var selectedunit = ko.toJS(self.selectedunit());
 	        for (var i = 0; i < self.selectedhotbuild().length; i++) {
-	            if (self.selectedhotbuild()[i].factory() == self.selectedunit().factory()) {
+	            if (self.selectedhotbuild()[i].factory == selectedunit.factory) {
 	                unitCheck = false;
 	                break;
 	            }
 	        }
 	        if (unitCheck) {
 	            self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = self.keyboardkey();
-	            self.selectedhotbuild.push(self.selectedunit());
+	            self.selectedhotbuild.push(selectedunit);
 	        }
 	        self.Save();
 	        !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
@@ -645,7 +651,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
             eval("hotbuildglobal.hotbuild" + i + "s = []");
             eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
     }
-    debugger;
+    
     var settings = decode(localStorage.settings);
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
