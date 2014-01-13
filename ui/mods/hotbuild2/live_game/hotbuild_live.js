@@ -14,12 +14,13 @@
 	hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
 	hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;	
 	
+	//requeue overrides
 	// take care of deleting all contents in the requeue array on any "stop" command
 	var hotBuildOldSetCmd = model.setCommandIndex;
 	model.setCommandIndex = function(index) {
 		hotBuildOldSetCmd(index);
 		if (index == -1) {
-			recentQueueCommands = [];
+			hotbuild2.recentQueueCommands = [];
 		}
 	};
 	
