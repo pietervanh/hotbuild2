@@ -274,16 +274,16 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	    self.keyboardclickhandler = function () {
 	        var $this = $(this);
 	        var character = $this.html();
-	        if (!$this.hasClass('dis')) {
+	        //debugger;
+	        if ((!$this.hasClass('dis')) && (!$this.hasClass('active'))) {
 	            self.InitKeyboard();
 	            $('#keyboard li').each(function (index) {
 	                if ($(this).hasClass('active')) {
 	                    $(this).toggleClass('active');
 	                }
 	            });
-
 	            $this.addClass('active');
-	            self.keyboardkey(character);
+	            self.keyboardkey(character.toLowerCase());
 	        }
 	    };
 	
@@ -349,12 +349,12 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        $("#setComDefaults").click(function () {
 	            console.log("set Community Defaults");
 	            //disable osk
-	            $("#keyboard li").unbind("click", self.keyboardclickhandler);
+	            //$("#keyboard li").unbind("click dblclick", self.keyboardclickhandler);
 	            self.ComunityDefaults();
 	            self.showingDefaultPrompt(false);
 	            $("#comdefaultsDlg").dialog("close");
 	            //enable osk
-	            $("#keyboard li").bind("click", self.keyboardclickhandler);
+	            //$("#keyboard li").bind("click dblclick", self.keyboardclickhandler);
 	        });
 	        $("#ignoreComDefaults").click(function () {
 	            self.showingDefaultPrompt(false);
@@ -374,12 +374,12 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        $("#setComDefaultsWASD").click(function () {
 	            console.log("set Community Defaults WASD");
 	            //disable osk
-	            $("#keyboard li").unbind("click", self.keyboardclickhandler);
+	            //$("#keyboard li").unbind("click dblclick", self.keyboardclickhandler);
 	            self.ComunityDefaultsWASD();
 	            self.showingDefaultWASDPrompt(false);
 	            $("#comdefaultsWASDDlg").dialog("close");
 	            //enable osk
-	            $("#keyboard li").bind("click", self.keyboardclickhandler);
+	            //$("#keyboard li").bind("click dblclick", self.keyboardclickhandler);
 	        });
 	        $("#ignoreComDefaultsWASD").click(function () {
 	            self.showingDefaultWASDPrompt(false);
@@ -388,6 +388,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	    };
 	
 	    self.ComunityDefaults = function () {
+	        self.keyboardkey();
 	        self.hotbuildglobal({});
 	        self.hotbuildglobalkey({});
 	        for (var i = 1; i < 21; i++) {
@@ -524,6 +525,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	
 	    self.ComunityDefaultsWASD = function () {
 	        //debugger;
+	        self.keyboardkey();
 	        self.hotbuildglobal({});
 	        self.hotbuildglobalkey({});
 	        for (var i = 1; i < 21; i++) {
@@ -662,6 +664,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        model.camera_key_pan_style('WASD');
 	        forgetFramePosition('hotbuild_info_frame');
 	        self.InitKeyboard();
+	        //console.log("Community Defaults Set");
 	    };
 	}
 
@@ -707,7 +710,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
             console.log("Loading html " + url);
             ko.applyBindings(model, element.get(0));
             hotbuildsettings.viewmodel.InitKeyboard();
-            $("#keyboard li").bind("click", hotbuildsettings.viewmodel.keyboardclickhandler);
+            $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
         });
     }
 
