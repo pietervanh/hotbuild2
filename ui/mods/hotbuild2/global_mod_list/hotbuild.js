@@ -3,15 +3,10 @@
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 var hotbuild2 = (function () {
     
-    action_sets.hotbuild = {}; //adds a hotbuildgroup item to keys settings
-    default_keybinds.hotbuild = {}; 
-    
     //Make sure settings are set / if not set defaults
     initialSettingValue('hotbuild_reset_time',2000);
     initialSettingValue('hotbuild_requeue_amount',50);
     initialSettingValue('hotbuild_show_key_on_buildbar','ON');
-    
-    
     
     var settings = decode(localStorage.settings);
 
@@ -21,8 +16,6 @@ var hotbuild2 = (function () {
         model.hotbuild_reset_time = 2000;
     }
     
-
-
     function hbManager(resetTime) {
         var self = this;
         self.cycleResetTime = resetTime; //time you have to press again to loop trough list
@@ -205,14 +198,14 @@ var hotbuild2 = (function () {
     }
 
     //Standard CommandMode functionality
-    hotbuild2.hotbuildCommandMode = function(cmd) {
+    hotbuild2.CommandMode = function(cmd) {
         if (model['setCommandIndex']) {
             model['setCommandIndex'](cmd);
         }
     }
 
-// View Event
-    hotbuild2.ViewAlert() {
+    // View Event
+    hotbuild2.viewAlert() {
         if (model.unitAlertModel.alerts().length > 0) {
             for (i = 0; i < model.unitAlertModel.alerts().length; i++) {
                 //console.log(model.unitAlertModel.alerts()[i]);
@@ -314,5 +307,39 @@ var hotbuild2 = (function () {
             }
         }
     }
+    
+    //keyboard tab keys under hotbuild title
+    action_sets.hotbuild = {}; 
+    //Special Actions
+    action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };
+    action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
+    action_sets.hotbuild['Requeue'] = function (event) { hotbuild2.requeue(event); };
+    action_sets.hotbuild['View Notification'] = function (event) { hotbuild2.viewAlert(); };
+    //Fixes for Uber Casesensitive keybinds
+    action_sets.hotbuild['move'] = function(event) {hotbuild2.CommandMode(0);};
+    action_sets.hotbuild['attack'] = function(event) {hotbuild2.CommandMode(1);};
+    action_sets.hotbuild['assist'] = function(event) {hotbuild2.CommandMode(2);};
+    action_sets.hotbuild['repair'] = function(event) {hotbuild2.CommandMode(3);};
+    action_sets.hotbuild['reclaim'] = function(event) {hotbuild2.CommandMode(4);};
+    action_sets.hotbuild['patrol'] = function(event) {hotbuild2.CommandMode(5);};
+    action_sets.hotbuild['stop'] = function(event) {hotbuild2.CommandMode(-1);};
+    action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
+    action_sets.hotbuild['unload'] = function(event) {hotbuild2.CommandMode(9);};    
+    //set defaults for when you click on the set defaults button in settings
+    // here we set them empty click community defaults buttons for better defaults
+    default_keybinds.hotbuild = {}; 
+    default_keybinds.hotbuild['Toggle Energy'] = '';
+    default_keybinds.hotbuild['Lock Pole'] = '';
+    default_keybinds.hotbuild['Requeue'] = '';
+    default_keybinds.hotbuild['View Notification'] = '';
+    default_keybinds.hotbuild['move'] = '';
+    default_keybinds.hotbuild['attack'] = '';
+    default_keybinds.hotbuild['assist'] = '';
+    default_keybinds.hotbuild['repair'] = '';
+    default_keybinds.hotbuild['reclaim'] = '';
+    default_keybinds.hotbuild['patrol'] = '';
+    default_keybinds.hotbuild['stop'] = '';
+    default_keybinds.hotbuild['select commie'] = '';
+    default_keybinds.hotbuild['unload'] = '';   
 
 });
