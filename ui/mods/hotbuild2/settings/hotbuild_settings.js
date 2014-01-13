@@ -668,8 +668,8 @@
                 eval("hotbuildglobal.hotbuild" + i + "s = []");
                 eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
         }
-        var hotbuildglobal = model.settings.hotbuildconfig ? model.settings.hotbuildconfig : hotbuildglobal;
-        var hotbuildglobalkey = model.settings.hotbuildconfigkey ? model.settings.hotbuildconfigkey : hotbuildglobalkey;   
+        hotbuildglobal = model.settings.hotbuildconfig ? model.settings.hotbuildconfig : hotbuildglobal;
+        hotbuildglobalkey = model.settings.hotbuildconfigkey ? model.settings.hotbuildconfigkey : hotbuildglobalkey;   
 	
 	var hbuisettings = new HotBuildSettingsViewModel(hotbuildglobal,hotbuildglobalkey);
 	
