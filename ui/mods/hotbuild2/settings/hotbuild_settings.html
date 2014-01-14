@@ -1,10 +1,10 @@
-<div data-bind="with: hotbuildsettings.viewmodel" style="height: 600px; overflow: scroll; overflow-x:hidden;">
+<div id="hotbuild2" data-bind="with: hotbuildsettings.viewmodel">
     <div id="defs">
 		<div id="comments">Please give comments/ideas on the forum.&nbsp;&nbsp;If you have issues click on a community default then save and close.</div>
         <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt">Set Community Defaults</button>
         <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt">Set Community Defaults (WASD)</button>
 	</div>
-	<div id="centered">
+	<div id="selections">
 		<div id="keyboardcontainer">
 			<ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
 				<li class="tab">tab</li>
@@ -98,7 +98,7 @@
             </tr>
         </tbody>
     </table>
--->
+-->	<div id="sequences">
     <table>
         <tr>
             <td style="width:566px">&nbsp;
@@ -130,6 +130,7 @@
             </td>
         </tr>
     </table>
+	</div>
 
 
     <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">

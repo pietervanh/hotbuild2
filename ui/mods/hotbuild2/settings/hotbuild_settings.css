@@ -29,12 +29,18 @@ float: right;
 clear: right;
 }
 
-#centered{
+#selections{
   position: relative;
   width: 732px;
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+#sequences{
+	height: 400px;
+	overflow: scroll;
+	overflow-x: hidden;
 }
 
 #moresettings{
