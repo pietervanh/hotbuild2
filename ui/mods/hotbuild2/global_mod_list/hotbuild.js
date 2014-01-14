@@ -138,7 +138,7 @@ var hotbuild2 = (function () {
     
         self.getBuildItemId = function () {
             for (var i = 0; i < model.buildItems().length; i++) {
-                if (model.buildItems()[i].id() == self.hotbuilds()[self.cycleid()].json) {
+                if (model.buildItems()[i].id() === self.hotbuilds()[self.cycleid()].json) {
                     return i;
                 }
             }
