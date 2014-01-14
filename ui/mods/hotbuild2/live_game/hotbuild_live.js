@@ -146,7 +146,7 @@ var hotbuild2live = (function () {
 
 	    console.log(value);
 	    for (var i = 1; i <= 20; i++) {
-	        if (hotbuildglobalkey["hotbuild" + i + "s"] == value) {
+	        if (hotbuildglobalkey["hotbuild" + i + "s"] === value) {
 	            hotbuild2.hotbuildManager.hotBuild(e, hotbuildglobal["hotbuild" + i + "s"]);
 	            break;
 	        }

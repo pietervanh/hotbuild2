@@ -297,7 +297,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	            });
 	        });
 	        var diskeys = ['caps lock', 'shift', 'return'];
-	        if (model.camera_key_pan_style() == "WASD") {
+	        if (model.camera_key_pan_style() === "WASD") {
 	            diskeys = diskeys.concat(['w', 'a', 's', 'd']);
 	        }
 	        $('#keyboard li').each(function (index) {
