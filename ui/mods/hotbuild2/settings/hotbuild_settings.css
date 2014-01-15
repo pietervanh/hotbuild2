@@ -31,16 +31,22 @@ clear: right;
 
 #selections{
   position: relative;
-  width: 732px;
+  width: 740px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
+#bottom {
+height: 400px;
+position: relative;
+}
 
 #sequences{
-	height: 400px;
-	overflow: scroll;
-	overflow-x: hidden;
+	text-align: left;
+	height: 380px;
+	float: left;
+	position: relative;
+	direction: ltr;
 }
 
 #moresettings{
@@ -93,7 +99,6 @@ clear: left;
    text-align: center;
    background: #000505;
    border: rgba(0,255,255,1) solid thin;
-   -moz-border-radius: 5px;
    -webkit-border-radius: 5px;
    color: rgba(0,255,255,1);
 }
@@ -185,6 +190,7 @@ hr {
 }
 
 .hotbuild_fab_selection {
+/*
 	height: 48px;
     width: 48px;
     border: 1px solid rgba(255,127,0,.7);
@@ -194,6 +200,25 @@ hr {
     position:relative;
     background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%); 
     box-shadow: inset 0 0 30px rgb(153, 76, 0);
+*/
+	height: 48px;
+    width: 48px;
+    border: 1px solid rgba(0,255,255,.5);
+    border-radius:2px; 
+    float:left;
+    margin:1px 1px 1px 18px;
+    position:relative;
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%); 
+    box-shadow: inset 0 0 30px rgb(0, 100, 100);
+	display: table-cell;
+
+}
+
+#sequencelist{
+	display: table;
+	min-width: 75%;
+	position: relative;
+	float: left;
 }
 
 .hotbuild_selected_fab {
@@ -210,30 +235,52 @@ hr {
     bottom:0;
     right:0;
     z-index:100;
-    color: rgb(255, 127, 0);
+    color: rgb(0, 255, 255);
 }
 
 .hotbuild_list_item {
-    clear:both;
+	vertical-align: middle;
+	display: table-row;
 }
 .hotbuild_list_buttons {
-    float:left;
-    height:48px;
-    width:80px;
+	display: table-cell;
+	vertical-align: middle;
 }
 .hotbuild_list_desc {
-    float:left;
     height:48px;
-    width:350px;
-    margin:1px;
+	display: table-cell;
+	vertical-align: middle;
+	border-bottom: 1px solid #333;
+	min-width: 500px
 }
 .hotbuild_addlist {
-	padding-top: 10px;
-	display: block;
 	text-align: right;
 	position: relative;
-    float:right;
     height:300px;
-    width:460px;
-    margin:1px;
+    margin: 1px;
+	float: right;
+	clear: none;
+		min-width: 25%;
+}
+
+.custom-scroll {
+	margin-top: 20px;
+	padding-right: 24px;
+    overflow: scroll;
+	direction: rtl;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb   {
+    background-color: rgba(0,255,255,0.5);
+	-webkit-border-radius: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-corner   {
+    background-color: rgba(0,0,0,0);
+}
+
+#trashcan{
+    height:48px;
+	display: table-cell;
+	vertical-align: middle;
 }
