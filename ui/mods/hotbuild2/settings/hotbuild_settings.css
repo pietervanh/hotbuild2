@@ -10,21 +10,37 @@
 }
 #defs{
 position: relative;
-width: 100%;
-height: 48px;
-display: block;
+width: 800px;
+height: 40px;
+display: table;
+float: left;
+margin-top: 16px;
 }
 
 #comments{
 position: relative;
 float: left;
-display: block;
-vertical-align: middle;
+}
+
+.ui-icon-comment{
+position: relative;
+float: left;
+}
+
+#troubles{
+position: relative;
+float: right;
+}
+
+.ui-icon-info{
+position: relative;
+float: right;
+
 }
 
 #hbuicommunitydefaults{
 position: relative;
-display: block;
+width: 180px;
 float: right;
 clear: right;
 }
@@ -35,6 +51,7 @@ clear: right;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  clear: both;
 }
 #bottom {
 height: 400px;
@@ -70,7 +87,6 @@ clear: left;
 }
 
 #keyboard li {
-   font-family: 'DIN Medium';
    float: left;
    margin: 0 5px 5px 0;
    width: 30px;
@@ -81,17 +97,33 @@ clear: left;
    border: rgba(0,255,255,1) solid thin;
    -webkit-border-radius: 5px;
    color: rgba(0,255,255,1);
+
 }
 
 #legend {
-   font-family: 'DIN Medium';
-   float:left;
-   list-style: none;
+   display: table;
+   position: relative;
+   width: 50px;
+}
+#legend tlabel{
+	position: relative;
+	display: block;
+	margin-bottom: 10px;
+	float: right;
+	clear: right;
+}
 }
 
+#legend label{
+	position: relative;
+	display: table-cell;
+    vertical-align: middle;
+
+}
 
 #legend li {
    float: left;
+   clear: left;
    margin: 0 5px 5px 0;
    width: 30px;
    height: 30px;
@@ -100,11 +132,12 @@ clear: left;
    background: #000505;
    border: rgba(0,255,255,1) solid thin;
    -webkit-border-radius: 5px;
-   color: rgba(0,255,255,1);
+   display: table-row;
+   vertical-align: center;
 }
 
-#legend td {
-  padding-bottom: 5px;
+#legend ul {
+margin: 5px;
 }
 
 .capslock, .tab, .left-shift {
@@ -283,4 +316,26 @@ hr {
     height:48px;
 	display: table-cell;
 	vertical-align: middle;
+}
+
+select {
+ width: 220px;
+ margin-left: 10px;
+}
+
+#buttoninfo{
+display: table;
+position: relative;
+width: 500px;
+height: 16px;
+}
+
+#kbselection{
+display: table-row;
+position: relative;
+}
+
+.ui-icon-circle-arrow-s  .ui-icon-grip-dotted-horizontal{
+position: relative;
+display: table-cell;
 }

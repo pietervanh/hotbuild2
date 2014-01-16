@@ -1,9 +1,10 @@
 <div id="hotbuild2" data-bind="with: hotbuildsettings.viewmodel">
     <div id="defs">
-		<div id="comments">Please give comments/ideas on the forum.&nbsp;&nbsp;If you have issues click on a community default then save and close.</div>
-        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt">Set Community Defaults</button>
-        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt">Set Community Defaults (WASD)</button>
+		<span class="ui-icon ui-icon-comment"/><div id="comments">Please give comments/ideas on the forum</div>	
+		<div id="troubles">ISSUES? Please select a COMMUNITY DEFAULT then "SAVE AND CLOSE"</div><span class="ui-icon ui-icon-info"/>
 	</div>
+			<button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt">Community Defaults (&#8593;&#8592;&#8595;&#8594;)</button>
+        <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt">Community Defaults (WASD)</button>
 	<div id="selections">
 		<div id="keyboardcontainer">
 			<ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
@@ -50,62 +51,39 @@
 			</ul>
 		</div>		
 		<div id="legend">
-			<table>
-				<tr>
-					<td colspan="2">Legend:</td>
-				</tr>
-				<tr>
-					<td><ul><li class="letter hbk"></li></ul></td>
-					<td style="font-family:'DINPRO-LIGHT'">Hotbuild key</td>
-				</tr>
-				<tr>
-					<td><ul><li class="letter uber"></li></ul></td>
-					<td style="font-family:'DINPRO-LIGHT'">Keyboard Tab key: <span data-bind="text: uberkey" class="uberkey"></span></td>
-				</tr>
-				<tr>
-					<td><ul><li class="letter dis"></li></ul></td>
-					<td style="font-family:'DINPRO-LIGHT'">Unbindable Key</td>
-				</tr>
-			</table>
+			<ul>
+
+					<div id="tlabel">Legend</div>
+				
+				<li class="letter hbk">
+					<div id="label">Hotbuild</div>
+				</li>
+				<li class="letter uber">
+					<div id="label">Uber</div>
+				</li>				
+				<li class="letter dis">
+					<div id="label">Reserved</div>
+				</li>
+			</ul>
 		</div>
 	</div>	
 	
     <div id="moresettings"/>
-<!--
-    <table class="tbl_hotbuildsui">
-        <thead>
-            <tr class="hotbuildsui_row_header">
-                <th>Sequence</th>
-                <th>DisplayName</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: selectedhotbuild">
-            <tr>
-                <td class="hotbuild_fab_selection">
-                    <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
-                    <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
-                </td>
-                <td>
-                    <span data-bind="text: displayname"></span><br/>
-                    <span data-bind="text: desc"></span>
-                </td>
-                <td data-bind="click_sound: 'default', rollover_sound: 'default'">
-                    <button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button>
-                    <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>
-                    <button id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList">X</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-	
 
--->	<div id="bottom">
+<div id="bottom">
+
+<div id="buttoninfo">
+	<div id="kbselection" data-bind="text: keyboardkey"></div>
+
+		<span class="ui-icon ui-icon-circle-arrow-s">Hotbuild Sequence<div class="ui-icon ui-icon-circle-arrow-s"/></div></span>
+		<div class="uberkeyinfo"><span class="ui-icon ui-icon-grip-dotted-horizontal"/>Uber Keybind: <span data-bind="text: uberkey" class="uberkey"/></div>
+</div>
+
 
 	<div class="hotbuild_addlist">
-                    Add Building to key: <select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
+                    Add Building<select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
                     <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
-                    Add Unit to key: <select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
+                    Add Unit<select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
                     <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
                 </div>
 
@@ -126,7 +104,7 @@
 					<span data-bind="text: displayname"></span><br />
 					<span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
 				</div>
-				<div id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"><span class="ui-icon ui-icon-trash"></span></div>
+				<div id="hbremovefromlist" type="submit" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"><span class="ui-icon ui-icon-trash"/></div>
 			</div>
 		</div>
 		</span>
