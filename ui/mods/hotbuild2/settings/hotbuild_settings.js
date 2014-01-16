@@ -666,6 +666,33 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        self.InitKeyboard();
 	        //console.log("Community Defaults Set");
 	    };
+
+	    self.export = function () {
+	        console.log('export');
+	        var keyboardsettings = {}
+	        keyboardsettings.uber = {};
+	        for (var key in localStorage) {
+	            if (localStorage.hasOwnProperty(key) && key.indexOf('keybinding') === 0) {
+	                keyboardsettings.uber[key] = localStorage[key];
+	            }
+	        }
+	        keyboardsettings.hotbuildglobalkey = self.hotbuildglobalkey();
+	        keyboardsettings.hotbuildglobal = self.hotbuildglobal();
+	        $("#ieport").val(JSON.stringify(keyboardsettings));
+	    };
+
+	    self.import = function () {
+	        console.log('import');
+	        var imported = JSON.parse($("#ieport").val());
+	        for (var key in imported.uber) {
+	            if (imported.hasOwnProperty(key)) {
+	                localStorage[key] = imported[key];
+	            }
+	        }
+	        self.hotbuildglobalkey(imported.hotbuildglobalkey);
+	        self.hotbuildglobal(imported.hotbuildglobal);
+	        self.InitKeyboard();
+	    };
 	}
 
 
