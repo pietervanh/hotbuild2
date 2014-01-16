@@ -9,49 +9,49 @@
     color: #0FF;
 }
 
-#defs {
-    position: relative;
-    width: 800px;
-    height: 40px;
-    display: table;
-    float: left;
-    margin-top: 16px;
+.div_settings_graphics_cont{
+      margin:12px;
 }
 
-#comments {
-    position: relative;
-    float: left;
+#block{
+    display: block;
+    clear: both;
 }
 
-.ui-icon-comment {
-    position: relative;
+#comments ,.ui-icon-comment{
     float: left;
 }
 
-#troubles {
-    position: relative;
+#troubles,.ui-icon-info{
     float: right;
 }
 
-.ui-icon-info {
-    position: relative;
+#communitydefaults{
     float: right;
 }
 
-#hbuicommunitydefaults {
-    position: relative;
-    width: 180px;
+#communitydefaults input{
+	margin-left: 24px;
+	width: 180px;
     float: right;
     clear: right;
 }
 
-#selections {
-    position: relative;
-    width: 740px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    clear: both;
+#keyboard li {
+   float: left;
+   margin: 0 5px 5px 0;
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   background: #000505;
+   border: rgba(0,255,255,1) solid thin;
+   -webkit-border-radius: 5px;
+   color: rgba(0,255,255,1);
+}
+
+#legend{
+    display: inline-block;
 }
 
 #bottom {
@@ -104,40 +104,6 @@
     display: table;
     position: relative;
     width: 50px;
-}
-
-#legend tlabel {
-    position: relative;
-    display: block;
-    margin-bottom: 10px;
-    float: right;
-    clear: right;
-}
-
-
-#legend label {
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-}
-
-#legend li {
-    float: left;
-    clear: left;
-    margin: 0 5px 5px 0;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background: #000505;
-    border: rgba(0,255,255,1) solid thin;
-    -webkit-border-radius: 5px;
-    display: table-row;
-    vertical-align: center;
-}
-
-#legend ul {
-    margin: 5px;
 }
 
 .capslock, .tab, .left-shift {

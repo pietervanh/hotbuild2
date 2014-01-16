@@ -1,70 +1,77 @@
-<div id="hotbuild2" data-bind="with: hotbuildsettings.viewmodel">
-    <div id="defs">
-        <span class="ui-icon ui-icon-comment" /><div id="comments">Please give comments/ideas on the forum</div>
-        <div id="troubles">ISSUES? Please select a COMMUNITY DEFAULT then "SAVE AND CLOSE"</div><span class="ui-icon ui-icon-info" />
-    </div>
-    <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt">Community Defaults (&#8593;&#8592;&#8595;&#8594;)</button>
-    <button id="hbuicommunitydefaults" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt">Community Defaults (WASD)</button>
-    <div id="selections">
-        <div id="keyboardcontainer">
-            <ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
-                <li class="tab">tab</li>
-                <li class="letter">q</li>
-                <li class="letter">w</li>
-                <li class="letter">e</li>
-                <li class="letter">r</li>
-                <li class="letter">t</li>
-                <li class="letter">y</li>
-                <li class="letter">u</li>
-                <li class="letter">i</li>
-                <li class="letter">o</li>
-                <li class="letter">p</li>
-                <li class="symbol">[</li>
-                <li class="symbol">]</li>
-                <li class="symbol lastitem">\</li>
-                <li class="capslock">caps lock</li>
-                <li class="letter">a</li>
-                <li class="letter">s</li>
-                <li class="letter">d</li>
-                <li class="letter">f</li>
-                <li class="letter">g</li>
-                <li class="letter">h</li>
-                <li class="letter">j</li>
-                <li class="letter">k</li>
-                <li class="letter">l</li>
-                <li class="symbol">;</li>
-                <li class="symbol">'</li>
-                <li class="return lastitem">return</li>
-                <li class="left-shift">shift</li>
-                <li class="letter">z</li>
-                <li class="letter">x</li>
-                <li class="letter">c</li>
-                <li class="letter">v</li>
-                <li class="letter">b</li>
-                <li class="letter">n</li>
-                <li class="letter">m</li>
-                <li class="symbol">,</li>
-                <li class="symbol">.</li>
-                <li class="symbol">/</li>
-                <li class="right-shift lastitem">shift</li>
-                <li class="space lastitem">space</li>
-            </ul>
-        </div>
-        <div id="legend">
-            <div id="tlabel">Legend</div>
-            <ul>
-                <li class="letter hbk">
-                    <div id="label">Hotbuild</div>
-                </li>
-                <li class="letter uber">
-                    <div id="label">Uber</div>
-                </li>
-                <li class="letter dis">
-                    <div id="label">Reserved</div>
-                </li>
-            </ul>
-        </div>
-    </div>
+<div class="div_settings_graphics_cont">
+	<div id="block">
+        <span class="ui-icon ui-icon-comment"></span>
+		<span id="comments">Please give comments/ideas on the forum</span>   
+		<span id="communitydefaults">
+			<input type="button" value="Community Defaults (&#8593;&#8592;&#8595;&#8594;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
+			<input type="button" value="Community Defaults (WASD)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
+		</span>		
+        <span id="troubles">Issues? Please select a "Community Default" then "Save and Close"</span>
+		<span class="ui-icon ui-icon-info"></span>
+    </div>     
+</div>
+
+<div id="block">
+	<div id="keyboardcontainer">
+		<ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
+			<li class="tab">tab</li>
+			<li class="letter">q</li>
+			<li class="letter">w</li>
+			<li class="letter">e</li>
+			<li class="letter">r</li>
+			<li class="letter">t</li>
+			<li class="letter">y</li>
+			<li class="letter">u</li>
+			<li class="letter">i</li>
+			<li class="letter">o</li>
+			<li class="letter">p</li>
+			<li class="symbol">[</li>
+			<li class="symbol">]</li>
+			<li class="symbol lastitem">\</li>
+			<li class="capslock">caps lock</li>
+			<li class="letter">a</li>
+			<li class="letter">s</li>
+			<li class="letter">d</li>
+			<li class="letter">f</li>
+			<li class="letter">g</li>
+			<li class="letter">h</li>
+			<li class="letter">j</li>
+			<li class="letter">k</li>
+			<li class="letter">l</li>
+			<li class="symbol">;</li>
+			<li class="symbol">'</li>
+			<li class="return lastitem">return</li>
+			<li class="left-shift">shift</li>
+			<li class="letter">z</li>
+			<li class="letter">x</li>
+			<li class="letter">c</li>
+			<li class="letter">v</li>
+			<li class="letter">b</li>
+			<li class="letter">n</li>
+			<li class="letter">m</li>
+			<li class="symbol">,</li>
+			<li class="symbol">.</li>
+			<li class="symbol">/</li>
+			<li class="right-shift lastitem">shift</li>
+			<li class="space lastitem">space</li>  
+		</ul>
+	</div>                
+	<div id="legend">
+		<div id="keyboard">Legend
+			<ul>
+				<li class="letter hbk">
+					<div id="label">Hotbuild</div>
+				</li>
+				<li class="letter uber">
+					<div id="label">Uber</div>
+				</li>                                
+				<li class="letter dis">
+					<div id="label">Reserved</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
 
     <div id="moresettings" />
 
