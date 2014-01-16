@@ -8,222 +8,221 @@
     border-bottom: 1px solid #888;
     color: #0FF;
 }
-#defs{
-position: relative;
-width: 800px;
-height: 40px;
-display: table;
-float: left;
-margin-top: 16px;
+
+#defs {
+    position: relative;
+    width: 800px;
+    height: 40px;
+    display: table;
+    float: left;
+    margin-top: 16px;
 }
 
-#comments{
-position: relative;
-float: left;
+#comments {
+    position: relative;
+    float: left;
 }
 
-.ui-icon-comment{
-position: relative;
-float: left;
+.ui-icon-comment {
+    position: relative;
+    float: left;
 }
 
-#troubles{
-position: relative;
-float: right;
+#troubles {
+    position: relative;
+    float: right;
 }
 
-.ui-icon-info{
-position: relative;
-float: right;
-
+.ui-icon-info {
+    position: relative;
+    float: right;
 }
 
-#hbuicommunitydefaults{
-position: relative;
-width: 180px;
-float: right;
-clear: right;
+#hbuicommunitydefaults {
+    position: relative;
+    width: 180px;
+    float: right;
+    clear: right;
 }
 
-#selections{
-  position: relative;
-  width: 740px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  clear: both;
+#selections {
+    position: relative;
+    width: 740px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
 }
+
 #bottom {
-height: 400px;
-position: relative;
+    height: 100px;
+    position: relative;
 }
 
-#sequences{
-	text-align: left;
-	height: 380px;
-	float: left;
-	position: relative;
-	direction: ltr;
+#sequences {
+    text-align: left;
+    height: 380px;
+    float: left;
+    position: relative;
+    direction: ltr;
 }
 
-#moresettings{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	display: block;
+#moresettings {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: block;
     border-bottom: 1px solid #333;
-position: relative;
-clear: left;
+    position: relative;
+    clear: left;
 }
 
 #keyboardcontainer {
-   float:left;
-   margin-right: 10px;
+    float: left;
+    margin-right: 10px;
 }
 
 #keyboard {
-   margin: 0;
-   padding: 0;
-   list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 #keyboard li {
-   float: left;
-   margin: 0 5px 5px 0;
-   width: 30px;
-   height: 30px;
-   line-height: 30px;
-   text-align: center;
-   background: #000505;
-   border: rgba(0,255,255,1) solid thin;
-   -webkit-border-radius: 5px;
-   color: rgba(0,255,255,1);
-
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #000505;
+    border: rgba(0,255,255,1) solid thin;
+    -webkit-border-radius: 5px;
+    color: rgba(0,255,255,1);
 }
 
 #legend {
-   display: table;
-   position: relative;
-   width: 50px;
-}
-#legend tlabel{
-	position: relative;
-	display: block;
-	margin-bottom: 10px;
-	float: right;
-	clear: right;
-}
+    display: table;
+    position: relative;
+    width: 50px;
 }
 
-#legend label{
-	position: relative;
-	display: table-cell;
+#legend tlabel {
+    position: relative;
+    display: block;
+    margin-bottom: 10px;
+    float: right;
+    clear: right;
+}
+
+
+#legend label {
+    position: relative;
+    display: table-cell;
     vertical-align: middle;
-
 }
 
 #legend li {
-   float: left;
-   clear: left;
-   margin: 0 5px 5px 0;
-   width: 30px;
-   height: 30px;
-   line-height: 30px;
-   text-align: center;
-   background: #000505;
-   border: rgba(0,255,255,1) solid thin;
-   -webkit-border-radius: 5px;
-   display: table-row;
-   vertical-align: center;
+    float: left;
+    clear: left;
+    margin: 0 5px 5px 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #000505;
+    border: rgba(0,255,255,1) solid thin;
+    -webkit-border-radius: 5px;
+    display: table-row;
+    vertical-align: center;
 }
 
 #legend ul {
-margin: 5px;
+    margin: 5px;
 }
 
 .capslock, .tab, .left-shift {
-   clear: left;
+    clear: left;
 }
 
 #keyboard .tab, #keyboard .delete {
-   width: 80px;
+    width: 80px;
 }
 
 #keyboard .capslock {
-   width: 80px;
+    width: 80px;
 }
 
 #keyboard .return {
-   width: 67px;
+    width: 67px;
 }
 
 #keyboard .left-shift {
-   width: 85px;
+    width: 85px;
 }
 
 #keyboard .right-shift {
-   width: 99px;
+    width: 99px;
 }
 
 .lastitem {
-   margin-right: 0;
+    margin-right: 0;
 }
 
 .uppercase {
-   text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 #keyboard .space {
-   clear: left;
-   width: 560px;
+    clear: left;
+    width: 560px;
 }
 
 .on {
-   display: none;
+    display: none;
 }
 
 .dis {
-   border-color: #FF7F00 !important;
+    border-color: #FF7F00 !important;
 }
 
 .active {
-   position: relative;
-   top: 1px;
-   left: 1px;
-   box-shadow: 0px 0px 2px 2px rgba(0,255,255,.7) ! important;
-   font-weight: bolder !important;
-   text-transform: uppercase !important;
+    position: relative;
+    top: 1px;
+    left: 1px;
+    box-shadow: 0px 0px 2px 2px rgba(0,255,255,.7) !important;
+    font-weight: bolder !important;
+    text-transform: uppercase !important;
 }
 
 .hbk {
-   background: rgba(0,255,255,.5) !important;
+    background: rgba(0,255,255,.5) !important;
 }
 
 .uber {
-   border-color: #00FF7F !important;
+    border-color: #00FF7F !important;
 }
 
 .uberkey {
-  color: rgba(0,255,255,1);
+    color: rgba(0,255,255,1);
 }
 
-
 #keyboard li:hover {
-   position: relative;
-   top: 1px;
-   left: 1px;
-   cursor: pointer;
+    position: relative;
+    top: 1px;
+    left: 1px;
+    cursor: pointer;
 }
 
 .vecfac, .botfac, .airfac, .nfac, .avecfac, .abotfac, .aafac, .anfac, .ofac {
-    background:#006565;
+    background: #006565;
 }
 
 hr {
-  border-color: #b8b8b8;
+    border-color: #b8b8b8;
 }
 
 .hotbuild_fab_selection {
-/*
+    /*
 	height: 48px;
     width: 48px;
     border: 1px solid rgba(255,127,0,.7);
@@ -234,108 +233,125 @@ hr {
     background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%); 
     box-shadow: inset 0 0 30px rgb(153, 76, 0);
 */
-	height: 48px;
+    height: 48px;
     width: 48px;
     border: 1px solid rgba(0,255,255,.5);
-    border-radius:2px; 
-    float:left;
-    margin:1px 1px 1px 18px;
-    position:relative;
-    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%); 
+    border-radius: 2px;
+    float: left;
+    margin: 1px 1px 1px 18px;
+    position: relative;
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%);
     box-shadow: inset 0 0 30px rgb(0, 100, 100);
-	display: table-cell;
-
+    display: table-cell;
 }
 
-#sequencelist{
-	display: table;
-	min-width: 75%;
-	position: relative;
-	float: left;
+#sequencelist {
+    display: table;
+    min-width: 75%;
+    position: relative;
+    float: left;
 }
 
 .hotbuild_selected_fab {
     height: 36px;
     width: 36px;
-    position:absolute;
-    top:4px;
-    left:4px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
 }
+
 .hotbuild_selected_text {
     padding: 2px;
     font-size: 12px;
-    position:absolute;
-    bottom:0;
-    right:0;
-    z-index:100;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
     color: rgb(0, 255, 255);
 }
 
 .hotbuild_list_item {
-	vertical-align: middle;
-	display: table-row;
+    vertical-align: middle;
+    display: table-row;
 }
+
 .hotbuild_list_buttons {
-	display: table-cell;
-	vertical-align: middle;
+    display: table-cell;
+    vertical-align: middle;
 }
+
 .hotbuild_list_desc {
-    height:48px;
-	display: table-cell;
-	vertical-align: middle;
-	border-bottom: 1px solid #333;
-	min-width: 500px
+    height: 48px;
+    display: table-cell;
+    vertical-align: middle;
+    border-bottom: 1px solid #333;
+    min-width: 500px;
 }
+
 .hotbuild_addlist {
-	text-align: right;
-	position: relative;
-    height:300px;
+    text-align: right;
+    position: relative;
+    height: 300px;
     margin: 1px;
-	float: right;
-	clear: none;
-		min-width: 25%;
+    float: right;
+    clear: none;
+    min-width: 25%;
 }
 
 .custom-scroll {
-	margin-top: 20px;
-	padding-right: 24px;
+    margin-top: 20px;
+    padding-right: 24px;
     overflow: scroll;
-	direction: rtl;
+    direction: rtl;
 }
 
-.custom-scroll::-webkit-scrollbar-thumb   {
+.custom-scroll::-webkit-scrollbar-thumb {
     background-color: rgba(0,255,255,0.5);
-	-webkit-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 
-.custom-scroll::-webkit-scrollbar-corner   {
+.custom-scroll::-webkit-scrollbar-corner {
     background-color: rgba(0,0,0,0);
 }
 
-#trashcan{
-    height:48px;
-	display: table-cell;
-	vertical-align: middle;
+#trashcan {
+    height: 48px;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 select {
- width: 220px;
- margin-left: 10px;
+    width: 220px;
+    margin-left: 10px;
 }
 
-#buttoninfo{
-display: table;
-position: relative;
-width: 500px;
-height: 16px;
+#buttoninfo {
+    display: table;
+    position: relative;
+    width: 500px;
+    height: 16px;
 }
 
-#kbselection{
-display: table-row;
-position: relative;
+#kbselection {
+    /*
+    display: table-row;
+    position: relative;
+    */
+    float: left;
+    clear: left;
+    margin: 0 5px 5px 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #000505;
+    border: rgba(0,255,255,1) solid thin;
+    -webkit-border-radius: 5px;
+    display: table-row;
+    vertical-align: center;
 }
 
-.ui-icon-circle-arrow-s  .ui-icon-grip-dotted-horizontal{
-position: relative;
-display: table-cell;
+.ui-icon-circle-arrow-s .ui-icon-grip-dotted-horizontal {
+    position: relative;
+    display: table-cell;
 }
