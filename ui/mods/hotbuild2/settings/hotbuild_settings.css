@@ -100,6 +100,19 @@
     color: rgba(0,255,255,1);
 }
 
+#kbselection li {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #000505;
+    border: rgba(0,255,255,1) solid thin;
+    -webkit-border-radius: 5px;
+    color: rgba(0,255,255,1);
+}
+
 #legend {
     display: table;
     position: relative;
@@ -292,17 +305,19 @@ select {
 }
 
 #buttoninfo {
+    /*
     display: table;
     position: relative;
     width: 500px;
     height: 16px;
+    */
 }
 
 #kbselection {
     /*
     display: table-row;
     position: relative;
-    */
+    
     float: left;
     clear: left;
     margin: 0 5px 5px 0;
@@ -315,6 +330,7 @@ select {
     -webkit-border-radius: 5px;
     display: table-row;
     vertical-align: center;
+        */
 }
 
 .ui-icon-circle-arrow-s .ui-icon-grip-dotted-horizontal {

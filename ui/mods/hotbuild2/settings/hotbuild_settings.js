@@ -283,6 +283,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	                }
 	            });
 	            $this.addClass('active');
+                $('#kbselection').html($($this.clone()))
 	            self.keyboardkey(character.toLowerCase());
 	        }
 	    };
