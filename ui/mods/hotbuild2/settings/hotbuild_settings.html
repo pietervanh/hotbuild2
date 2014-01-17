@@ -1,17 +1,19 @@
-<div class="div_settings_graphics_cont">
+<div id="div_settings_hotbuild_cont">
 	<div id="block">
         <span class="ui-icon ui-icon-comment"></span>
 		<span id="comments">Please give comments/ideas on the forum</span>   
 		<span id="communitydefaults">
-			<input type="button" value="Community Defaults (&#8593;&#8592;&#8595;&#8594;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
+			<input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
 			<input type="button" value="Community Defaults (WASD)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
+			<input id="importer" type="button" value="Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.import" />
+			<input id="exporter" type="button" value="Import" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.export" />
+			<textarea id="ieport"></textarea>
 		</span>		
         <span id="troubles">Issues? Please select a "Community Default" then "Save and Close"</span>
 		<span class="ui-icon ui-icon-info"></span>
     </div>     
-</div>
 
-<div id="block">
+	<div id="block">
 	<div id="keyboardcontainer">
 		<ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
 			<li class="tab">tab</li>
@@ -73,64 +75,74 @@
 	</div>
 </div>
 
-    <div id="moresettings" />
+	<div id="ruler" />
 
-    <div id="bottom">
-        <div id="buttoninfo">
-            <ul id ="kbselection"></ul>
-            <span class="ui-icon ui-icon-circle-arrow-s">Hotbuild Sequence<span class="ui-icon ui-icon-circle-arrow-s" /></span>
-            <span class="ui-icon ui-icon-grip-dotted-horizontal" />Uber Keybind: <span data-bind="text: uberkey" class="uberkey" />
-        </div>
-    </div>
+	<div id="block">
+		<span id="buttoninfo">
+			<ul>
+				<li id="kbselection">&nbsp;</li>
+			</ul>
+		</span>
+		<div id="uberlabel">
+			<span class="ui-icon ui-icon-circle-arrow-e"></span>
+			<span id="heading">Uber Keybind</span>
+			<span class="ui-icon ui-icon-circle-arrow-e"></span>
+			<span data-bind="text: uberkey" class="uberkey"></span>
+		</div>
+		<div id="hblabel">
+			<span class="ui-icon ui-icon-circle-arrow-s"></span>
+			<span id="heading">Hotbuild Sequence</span>
+			<span class="ui-icon ui-icon-circle-arrow-s"></span>
+		<!--	<span class="ui-icon ui-icon-grip-dotted-horizontal"></span>	-->
+		</div>
 
-    <div class="hotbuild_addlist">
+		
+	    <div class="hotbuild_addlist">
         Add Building<select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
         <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
         Add Unit<select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
         <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
-        <button id="hbexport" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.export">Export</button>
-        <button id="hbimport" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.import">Import</button></br>
-        <textarea id="ieport"></textarea>
-    </div>
+		</div>
 
-    <div class="custom-scroll">
-        <div id="sequences">
-            <div id="sequencelist">
-                <div data-bind="foreach: selectedhotbuild">
-                    <div class="hotbuild_list_item">
-                        <div class="hotbuild_fab_selection">
-                            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
-                            <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
-                        </div>
-                        <div class="hotbuild_list_buttons" data-bind="click_sound: 'default', rollover_sound: 'default'">
-                            <button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button><br />
-                            <button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>
-                        </div>
-                        <div class="hotbuild_list_desc">
-                            <span data-bind="text: displayname"></span><br />
-                            <span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
-                        </div>
-                        <div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"><span class="ui-icon ui-icon-trash" /></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="custom-scroll">
+			<div id="sequence">
+				<div id="sequencelist">
+					<div data-bind="foreach: selectedhotbuild">
+						<div class="hotbuild_list_item">
+							<div class="hotbuild_fab_selection">
+								<img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+								<span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
+							</div>
+							<div class="hotbuild_list_buttons" data-bind="click_sound: 'default', rollover_sound: 'default'">
+								<button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button><br />
+								<button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>
+							</div>
+							<div class="hotbuild_list_desc">
+								<span data-bind="text: displayname"></span><br />
+								<span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
+							</div>
+							<div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"><span class="ui-icon ui-icon-trash" /></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
-        <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
-        <div id="tutorialBtnGroup" style="margin-top: 10px">
-            <button id="setComDefaults" type="submit" style="width: 45%">YES</button>
-            <button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
-        </div>
-    </div>
+	<div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
+		<div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
+		<div id="tutorialBtnGroup" style="margin-top: 10px">
+			<button id="setComDefaults" type="submit" style="width: 45%">YES</button>
+			<button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+		</div>
+	</div>
 
-    <div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
-        <div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
-        <div id="tutorialBtnGroup" style="margin-top: 10px">
-            <button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
-            <button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
-        </div>
-    </div>
+	<div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
+		<div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
+		<div id="tutorialBtnGroup" style="margin-top: 10px">
+			<button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
+			<button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+		</div>
+	</div>
 
 </div>

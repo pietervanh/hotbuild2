@@ -1,3 +1,8 @@
+
+#importer, #exporter, textarea{
+	display: none;
+}
+
 .tbl_hotbuildsui {
     width: 100%;
     text-align: left;
@@ -9,8 +14,16 @@
     color: #0FF;
 }
 
-.div_settings_graphics_cont{
-      margin:12px;
+#div_settings_hotbuild_cont{
+
+	height: 600px;
+}
+
+#ruler{
+	display: block;
+	margin: 12px 0 12px 0;
+	border-bottom: 1px solid #333;
+    clear: both;
 }
 
 #block{
@@ -18,15 +31,33 @@
     clear: both;
 }
 
-#comments ,.ui-icon-comment{
+#comments, .ui-icon-comment, .ui-icon-circle-arrow-s, .ui-icon-circle-arrow-e{
     float: left;
+	
 }
 
-#troubles,.ui-icon-info{
-    float: right;
+.ui-icon-grip-dotted-horizontal{
+	float: left;
+	margin: 0 0 0 1em;
 }
 
-#communitydefaults{
+#heading, #buttoninfo {
+	float: left;
+	margin: 0 1em 0 1em;
+	height: 30px;
+}
+
+#uberlabel{
+display: inline-block;
+clear: right;
+}
+
+#hblabel{
+display: block;
+clear: left;
+}
+
+#troubles,#communitydefaults,.ui-icon-info{
     float: right;
 }
 
@@ -35,6 +66,25 @@
 	width: 180px;
     float: right;
     clear: right;
+}
+
+#keyboardcontainer {
+    width: 720px;
+	height: 128px;
+	margin: auto;
+}
+
+#keyboard {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#keyboard li:hover {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    cursor: pointer;
 }
 
 #keyboard li {
@@ -50,59 +100,9 @@
    color: rgba(0,255,255,1);
 }
 
-#legend{
-    display: inline-block;
-}
-
-#bottom {
-    height: 100px;
-    position: relative;
-}
-
-#sequences {
-    text-align: left;
-    height: 380px;
-    float: left;
-    position: relative;
-    direction: ltr;
-}
-
-#moresettings {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: block;
-    border-bottom: 1px solid #333;
-    position: relative;
-    clear: left;
-}
-
-#keyboardcontainer {
-    float: left;
-    margin-right: 10px;
-}
-
-#keyboard {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-#keyboard li {
-    float: left;
-    margin: 0 5px 5px 0;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background: #000505;
-    border: rgba(0,255,255,1) solid thin;
-    -webkit-border-radius: 5px;
-    color: rgba(0,255,255,1);
-}
-
 #kbselection li {
     float: left;
-    margin: 0 5px 5px 0;
+    margin: 0 1em 0 1em;
     width: 30px;
     height: 30px;
     line-height: 30px;
@@ -111,12 +111,6 @@
     border: rgba(0,255,255,1) solid thin;
     -webkit-border-radius: 5px;
     color: rgba(0,255,255,1);
-}
-
-#legend {
-    display: table;
-    position: relative;
-    width: 50px;
 }
 
 .capslock, .tab, .left-shift {
@@ -183,21 +177,49 @@
 
 .uberkey {
     color: rgba(0,255,255,1);
+	margin-left: 1em;
 }
 
-#keyboard li:hover {
-    position: relative;
-    top: 1px;
-    left: 1px;
-    cursor: pointer;
+#legend{
+    display: inline-block;
 }
+
+
 
 .vecfac, .botfac, .airfac, .nfac, .avecfac, .abotfac, .aafac, .anfac, .ofac {
     background: #006565;
 }
 
-hr {
-    border-color: #b8b8b8;
+.custom-scroll {
+	clear: left;
+    margin-top: 20px;
+    padding-right: 24px;
+    overflow: scroll;
+    direction: rtl;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0,255,255,0.5);
+    -webkit-border-radius: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-corner {
+    background-color: rgba(0,0,0,0);
+}
+
+#sequence {
+    text-align: left;
+    float: left;
+	position: relative;
+    direction: ltr;
+	height: 320px;
+}
+
+#sequencelist {
+    display: table;
+    min-width: 75%;
+    position: relative;
+    float: left;
 }
 
 .hotbuild_fab_selection {
@@ -219,16 +241,16 @@ hr {
     float: left;
     margin: 1px 1px 1px 18px;
     position: relative;
-    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%);
+
     box-shadow: inset 0 0 30px rgb(0, 100, 100);
     display: table-cell;
 }
 
-#sequencelist {
-    display: table;
-    min-width: 75%;
-    position: relative;
-    float: left;
+
+
+.hotbuild_list_item {
+    vertical-align: middle;
+    display: table-row;
 }
 
 .hotbuild_selected_fab {
@@ -249,11 +271,6 @@ hr {
     color: rgb(0, 255, 255);
 }
 
-.hotbuild_list_item {
-    vertical-align: middle;
-    display: table-row;
-}
-
 .hotbuild_list_buttons {
     display: table-cell;
     vertical-align: middle;
@@ -268,29 +285,14 @@ hr {
 }
 
 .hotbuild_addlist {
-    text-align: right;
-    position: relative;
-    height: 300px;
-    margin: 1px;
     float: right;
+    text-align: right;
+ /*    position: relative;
+    height: 300px; 
+    margin: 1px;
+
     clear: none;
-    min-width: 25%;
-}
-
-.custom-scroll {
-    margin-top: 20px;
-    padding-right: 24px;
-    overflow: scroll;
-    direction: rtl;
-}
-
-.custom-scroll::-webkit-scrollbar-thumb {
-    background-color: rgba(0,255,255,0.5);
-    -webkit-border-radius: 5px;
-}
-
-.custom-scroll::-webkit-scrollbar-corner {
-    background-color: rgba(0,0,0,0);
+    min-width: 25%;*/
 }
 
 #trashcan {
@@ -302,38 +304,4 @@ hr {
 select {
     width: 220px;
     margin-left: 10px;
-}
-
-#buttoninfo {
-    /*
-    display: table;
-    position: relative;
-    width: 500px;
-    height: 16px;
-    */
-}
-
-#kbselection {
-    /*
-    display: table-row;
-    position: relative;
-    
-    float: left;
-    clear: left;
-    margin: 0 5px 5px 0;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background: #000505;
-    border: rgba(0,255,255,1) solid thin;
-    -webkit-border-radius: 5px;
-    display: table-row;
-    vertical-align: center;
-        */
-}
-
-.ui-icon-circle-arrow-s .ui-icon-grip-dotted-horizontal {
-    position: relative;
-    display: table-cell;
 }
