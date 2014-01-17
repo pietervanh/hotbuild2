@@ -182,6 +182,7 @@ var hotbuild2 = (function () {
     };
 
     //ReQueue Functionality
+    /*
     hotbuild2.recentQueueCommands = [];
     
     var oldApiUnitBuild = api.unit.build;
@@ -197,6 +198,11 @@ var hotbuild2 = (function () {
                 oldApiUnitBuild(cmd["id"], cmd["count"], cmd["ctrl"]);
             }
         }
+    };
+    */
+    
+    hotbuild2.requeue = function(event) {
+        //TODO toggle
     };
 
     //Standard CommandMode functionality
