@@ -80,6 +80,7 @@ clear: right;
 }
 
 #keyboard {
+    float: left;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -94,6 +95,24 @@ clear: right;
 
 #keyboard li {
    float: left;
+   margin: 0 5px 5px 0;
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   background: #000505;
+   border: rgba(0,255,255,1) solid thin;
+   -webkit-border-radius: 5px;
+   color: rgba(0,255,255,1);
+}
+
+#legend {
+   float: left;
+}
+
+#legend li {
+   float: left;
+   clear: left;
    margin: 0 5px 5px 0;
    width: 30px;
    height: 30px;
@@ -184,12 +203,6 @@ clear: right;
     color: rgba(0,255,255,1);
 	margin-left: 1em;
 }
-
-#legend{
-    display: inline-block;
-}
-
-
 
 .vecfac, .botfac, .airfac, .nfac, .avecfac, .abotfac, .aafac, .anfac, .ofac {
     background: #006565;
