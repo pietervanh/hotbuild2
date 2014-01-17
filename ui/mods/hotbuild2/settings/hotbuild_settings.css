@@ -1,8 +1,3 @@
-
-#importer, #exporter, textarea{
-	display: none;
-}
-
 .tbl_hotbuildsui {
     width: 100%;
     text-align: left;
@@ -15,13 +10,12 @@
 }
 
 #div_settings_hotbuild_cont{
-
 	height: 600px;
 }
 
 #ruler{
 	display: block;
-	margin: 12px 0 12px 0;
+	margin: 5px 0 12px 0;
 	border-bottom: 1px solid #333;
     clear: both;
 }
@@ -41,21 +35,47 @@
 	margin: 0 0 0 1em;
 }
 
-#heading, #buttoninfo {
+#heading {
 	float: left;
 	margin: 0 1em 0 1em;
 	height: 30px;
 }
 
+#buttoninfo {
+	float: left;
+	height: 48px;
+}
+
+#kbselection li {
+    /*float: left;*/
+    margin: 0 0em 0 0em;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #000505;
+    border: rgba(0,255,255,1) solid thin;
+    -webkit-border-radius: 5px;
+    color: rgba(0,255,255,1);
+}
+
 #uberlabel, #hblabel{
 float: left;
 clear: left;
+height: 30px;
 }
 
-#hblabel{    
-float: left;
-clear: left;
+.hotbuild_addlist {
+    float: right;
+    text-align: right;
+ /*    position: relative;
+    height: 300px; 
+    margin: 1px;
+
+    clear: none;
+    min-width: 25%;*/
 }
+
 
 #legendlabel{
 float: left;
@@ -124,18 +144,7 @@ clear: right;
    color: rgba(0,255,255,1);
 }
 
-#kbselection li {
-    float: left;
-    margin: 0 1em 0 1em;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background: #000505;
-    border: rgba(0,255,255,1) solid thin;
-    -webkit-border-radius: 5px;
-    color: rgba(0,255,255,1);
-}
+
 
 .capslock, .tab, .left-shift {
     clear: left;
@@ -209,7 +218,7 @@ clear: right;
 }
 
 .custom-scroll {
-	clear: left;
+	clear: both;
     margin-top: 20px;
     padding-right: 24px;
     overflow: scroll;
@@ -230,7 +239,7 @@ clear: right;
     float: left;
 	position: relative;
     direction: ltr;
-	height: 320px;
+	height: 265px;
 }
 
 #sequencelist {
@@ -292,6 +301,7 @@ clear: right;
 .hotbuild_list_buttons {
     display: table-cell;
     vertical-align: middle;
+    width: 22px;
 }
 
 .hotbuild_list_desc {
@@ -300,17 +310,6 @@ clear: right;
     vertical-align: middle;
     border-bottom: 1px solid #333;
     min-width: 500px;
-}
-
-.hotbuild_addlist {
-    float: right;
-    text-align: right;
- /*    position: relative;
-    height: 300px; 
-    margin: 1px;
-
-    clear: none;
-    min-width: 25%;*/
 }
 
 #trashcan {

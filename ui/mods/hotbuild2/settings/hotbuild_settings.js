@@ -273,14 +273,16 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
             var $this = $(this);
             var character = $this.html();
             //debugger;
-            if ((!$this.hasClass('dis')) && (!$this.hasClass('active'))) {
-                self.InitKeyboard();
-                $('#keyboard li').each(function (index) {
-                    if ($(this).hasClass('active')) {
-                        $(this).toggleClass('active');
-                    }
-                });
-                $this.addClass('active');
+            if (!$this.hasClass('dis')) {
+                //self.InitKeyboard();
+                if(!$this.hasClass('active')){
+                    $('#keyboard li').each(function (index) {
+                        if ($(this).hasClass('active')) {
+                            $(this).toggleClass('active');
+                        }
+                    });
+                    $this.addClass('active');
+                }
                 $('#kbselection').html($($this.clone()))
                 self.keyboardkey(character.toLowerCase());
             }
@@ -418,15 +420,20 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 
         self.import = function () {
             console.log('import');
-            var imported = JSON.parse($("#ieport").val());
-            for (var key in imported.uber) {
-                if (imported.hasOwnProperty(key)) {
-                    localStorage[key] = imported[key];
+            if ($("#ieport").val() !== ''){
+                var imported = JSON.parse($("#ieport").val());
+                for (var key in imported.uber) {
+                    if (imported.hasOwnProperty(key)) {
+                        localStorage[key] = imported[key];
+                    }
                 }
+                self.hotbuildglobalkey(imported.hotbuildglobalkey);
+                self.hotbuildglobal(imported.hotbuildglobal);
+                self.InitKeyboard();
             }
-            self.hotbuildglobalkey(imported.hotbuildglobalkey);
-            self.hotbuildglobal(imported.hotbuildglobal);
-            self.InitKeyboard();
+            else {
+                //alert("Please input Text to import in textbox");
+            }
         };
 
         self.importfromfile = function (importfile) {
@@ -440,6 +447,28 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
                 self.InitKeyboard();
+            });
+        };
+
+        self.showingImportExportDialog = ko.observable(false);
+
+        self.showImportExportDialog = function () {
+            self.showingImportExportDialog(true);
+            $('#importexportDlg').dialog({
+                height: 300,
+                width: 450,
+                modal: true,
+                buttons: {
+                    "Import": function () { self.import() },
+                    "Export": function () { self.export() }
+                },
+                close: function () {
+                    self.showingImportExportDialog(false);
+                }
+            });
+            $('#closeImportExport').click(function () {
+                $("#importexportDlg").dialog("close");
+                self.showingImportExportDialog(false);
             });
         };
     }
