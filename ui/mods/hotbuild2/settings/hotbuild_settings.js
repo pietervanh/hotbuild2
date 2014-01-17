@@ -390,6 +390,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	
 	    self.ComunityDefaults = function () {
 	        self.keyboardkey();
+	        //self.importfromfile("/ui/mods/hotbuild2/defaults/ARROW.json");
 	        self.hotbuildglobal({});
 	        self.hotbuildglobalkey({});
 	        for (var i = 1; i < 21; i++) {
@@ -527,6 +528,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	    self.ComunityDefaultsWASD = function () {
 	        //debugger;
 	        self.keyboardkey();
+	        //self.importfromfile("/ui/mods/hotbuild2/defaults/WASD.json");
 	        self.hotbuildglobal({});
 	        self.hotbuildglobalkey({});
 	        for (var i = 1; i < 21; i++) {
@@ -693,6 +695,20 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 	        self.hotbuildglobalkey(imported.hotbuildglobalkey);
 	        self.hotbuildglobal(imported.hotbuildglobal);
 	        self.InitKeyboard();
+	    };
+	    
+	    self.importfromfile = function(importfile) {
+	    	console.log('importing importfile');
+                $.getJSON('coui:/' + importfile, function (imported) {
+	                for (var key in imported.uber) {
+		            if (imported.hasOwnProperty(key)) {
+		                localStorage[key] = imported[key];
+		            }
+		        }
+		        self.hotbuildglobalkey(imported.hotbuildglobalkey);
+		        self.hotbuildglobal(imported.hotbuildglobal);
+		        self.InitKeyboard();    
+                });	    	
 	    };
 	}
 
