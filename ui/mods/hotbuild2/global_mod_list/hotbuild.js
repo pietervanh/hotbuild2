@@ -202,7 +202,7 @@ var hotbuild2 = (function () {
     */
     
     hotbuild2.requeue = function(event) {
-        //TODO toggle
+        model.toggleBuildStanceOrderIndex();
     };
 
     //Standard CommandMode functionality
