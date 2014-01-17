@@ -47,14 +47,19 @@
 	height: 30px;
 }
 
-#uberlabel{
-display: inline-block;
-clear: right;
+#uberlabel, #hblabel{
+float: left;
+clear: left;
 }
 
-#hblabel{
-display: block;
+#hblabel{    
+float: left;
 clear: left;
+}
+
+#legendlabel{
+float: left;
+clear: right;
 }
 
 #troubles,#communitydefaults,.ui-icon-info{

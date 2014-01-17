@@ -1,79 +1,71 @@
 <div id="div_settings_hotbuild_cont">
 	<div id="block">
-        <span class="ui-icon ui-icon-comment"></span>
-		<span id="comments">Please give comments/ideas on the forum</span>   
-		<span id="communitydefaults">
-			<input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
-			<input type="button" value="Community Defaults (WASD)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
-			<input id="importer" type="button" value="Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.import" />
-			<input id="exporter" type="button" value="Import" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.export" />
-			<textarea id="ieport"></textarea>
-		</span>		
-        <span id="troubles">Issues? Please select a "Community Default" then "Save and Close"</span>
-		<span class="ui-icon ui-icon-info"></span>
-    </div>     
+		<span class="ui-icon ui-icon-comment"></span>
+			<span id="comments">Please give comments/ideas on the forum</span>   
+			<span id="communitydefaults">
+				<input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
+				<input type="button" value="Community Defaults (WASD)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
+				<input id="importer" type="button" value="Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.import" />
+				<input id="exporter" type="button" value="Import" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.export" />
+				<textarea id="ieport"></textarea>
+			</span>		
+		<span id="troubles">Issues? Please select a "Community Default" then "Save and Close"</span>
+			<span class="ui-icon ui-icon-info"></span>
+	</div>     
 
 	<div id="block">
-	<div id="keyboardcontainer">
-		<ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
-			<li class="tab">tab</li>
-			<li class="letter">q</li>
-			<li class="letter">w</li>
-			<li class="letter">e</li>
-			<li class="letter">r</li>
-			<li class="letter">t</li>
-			<li class="letter">y</li>
-			<li class="letter">u</li>
-			<li class="letter">i</li>
-			<li class="letter">o</li>
-			<li class="letter">p</li>
-			<li class="symbol">[</li>
-			<li class="symbol">]</li>
-			<li class="symbol lastitem">\</li>
-			<li class="capslock">caps lock</li>
-			<li class="letter">a</li>
-			<li class="letter">s</li>
-			<li class="letter">d</li>
-			<li class="letter">f</li>
-			<li class="letter">g</li>
-			<li class="letter">h</li>
-			<li class="letter">j</li>
-			<li class="letter">k</li>
-			<li class="letter">l</li>
-			<li class="symbol">;</li>
-			<li class="symbol">'</li>
-			<li class="return lastitem">return</li>
-			<li class="left-shift">shift</li>
-			<li class="letter">z</li>
-			<li class="letter">x</li>
-			<li class="letter">c</li>
-			<li class="letter">v</li>
-			<li class="letter">b</li>
-			<li class="letter">n</li>
-			<li class="letter">m</li>
-			<li class="symbol">,</li>
-			<li class="symbol">.</li>
-			<li class="symbol">/</li>
-			<li class="right-shift lastitem">shift</li>
-			<li class="space lastitem">space</li>  
-		</ul>
-	</div>                
-	<div id="legend">
-		<div id="keyboard">Legend
-			<ul>
-				<li class="letter hbk">
-					<div id="label">Hotbuild</div>
-				</li>
-				<li class="letter uber">
-					<div id="label">Uber</div>
-				</li>                                
-				<li class="letter dis">
-					<div id="label">Reserved</div>
-				</li>
+		<div id="keyboardcontainer">
+			<ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
+				<li class="tab">tab</li>
+				<li class="letter">q</li>
+				<li class="letter">w</li>
+				<li class="letter">e</li>
+				<li class="letter">r</li>
+				<li class="letter">t</li>
+				<li class="letter">y</li>
+				<li class="letter">u</li>
+				<li class="letter">i</li>
+				<li class="letter">o</li>
+				<li class="letter">p</li>
+				<li class="symbol">[</li>
+				<li class="symbol">]</li>
+				<li class="symbol lastitem">\</li>
+				<li class="capslock">caps lock</li>
+				<li class="letter">a</li>
+				<li class="letter">s</li>
+				<li class="letter">d</li>
+				<li class="letter">f</li>
+				<li class="letter">g</li>
+				<li class="letter">h</li>
+				<li class="letter">j</li>
+				<li class="letter">k</li>
+				<li class="letter">l</li>
+				<li class="symbol">;</li>
+				<li class="symbol">'</li>
+				<li class="return lastitem">return</li>
+				<li class="left-shift">shift</li>
+				<li class="letter">z</li>
+				<li class="letter">x</li>
+				<li class="letter">c</li>
+				<li class="letter">v</li>
+				<li class="letter">b</li>
+				<li class="letter">n</li>
+				<li class="letter">m</li>
+				<li class="symbol">,</li>
+				<li class="symbol">.</li>
+				<li class="symbol">/</li>
+				<li class="right-shift lastitem">shift</li>
+				<li class="space lastitem">space</li>  
 			</ul>
+			<div id="legend">
+				<ul>
+				<li class="letter hbk"></li><div id="legendlabel">Hotbuild</div>
+				<li class="letter uber"></li><div id="legendlabel">Uber</div>
+				<li class="letter dis"></li><div id="legendlabel">Reserved</div>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
 
 	<div id="ruler" />
 
@@ -97,11 +89,11 @@
 		</div>
 
 		
-	    <div class="hotbuild_addlist">
-        Add Building<select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
-        <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button></br>
-        Add Unit<select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
-        <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button></br>
+		<div class="hotbuild_addlist">
+			Add Building<select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
+			<button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button>
+			Add Unit<select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
+			<button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button>
 		</div>
 
 		<div class="custom-scroll">
@@ -114,14 +106,16 @@
 								<span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
 							</div>
 							<div class="hotbuild_list_buttons" data-bind="click_sound: 'default', rollover_sound: 'default'">
-								<button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button><br />
+								<button id="hbuplist" type="submit" data-bind="click: $parent.upList">&#x25B2</button>
 								<button id="hbdownlist" type="submit" data-bind="click: $parent.downList">&#x25BC</button>
 							</div>
 							<div class="hotbuild_list_desc">
-								<span data-bind="text: displayname"></span><br />
+								<span data-bind="text: displayname"></span>
 								<span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
 							</div>
-							<div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"><span class="ui-icon ui-icon-trash" /></div>
+							<div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'">
+								<span class="ui-icon ui-icon-trash" />
+							</div>
 						</div>
 					</div>
 				</div>
