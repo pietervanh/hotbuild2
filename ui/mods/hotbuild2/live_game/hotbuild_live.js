@@ -23,17 +23,6 @@ var hotbuild2live = (function () {
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
 
-    //requeue overrides
-    // take care of deleting all contents in the requeue array on any "stop" command
-    /*
-    var hotBuildOldSetCmd = model.setCommandIndex;
-    model.setCommandIndex = function (index) {
-        hotBuildOldSetCmd(index);
-        if (index == -1) {
-            hotbuild2.recentQueueCommands = [];
-        }
-    };
-    */
 
     createFloatingFrame('hotbuild_info_frame', 220, 70, { 'offset': 'leftCenter', 'top': -200 });
     loadHotBuildTemplate($('#hotbuild_info_frame_content'), '../../mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);

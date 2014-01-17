@@ -165,7 +165,7 @@ var hotbuild2 = (function () {
         event.preventDefault();
     };
 
-//Pole Lock on/off
+    //Pole Lock on/off
     hotbuild2.polelockToggle = function(event) {
         var allSettings = decode(localStorage.settings);
         var currentPoleLock = allSettings.camera_pole_lock.toLowerCase(); // the settings store this upper case, the engine processes it in lowercase... wtf
@@ -181,26 +181,7 @@ var hotbuild2 = (function () {
         event.preventDefault();
     };
 
-    //ReQueue Functionality
-    /*
-    hotbuild2.recentQueueCommands = [];
-    
-    var oldApiUnitBuild = api.unit.build;
-    api.unit.build = function (itemId, cnt, ctrK) {
-        hotbuild2.recentQueueCommands.push({ "id": itemId, "count": cnt, "ctrl": ctrK });
-        return oldApiUnitBuild(itemId, cnt, ctrK);
-    };
-
-    hotbuild2.requeue = function(event) {
-        for (var x = 0; x < settings.hotbuild_requeue_amount; x++) {
-            for (var i = 0; i < hotbuild2.recentQueueCommands.length; i++) {
-                var cmd = hotbuild2.recentQueueCommands[i];
-                oldApiUnitBuild(cmd["id"], cmd["count"], cmd["ctrl"]);
-            }
-        }
-    };
-    */
-    
+    //ReQueue Functionality   
     hotbuild2.requeue = function(event) {
         model.toggleBuildStanceOrderIndex();
     };
@@ -212,7 +193,7 @@ var hotbuild2 = (function () {
         }
     };
 
-    // View Event
+    //View Event
     hotbuild2.viewAlert = function() {
         if (model.unitAlertModel.alerts().length > 0) {
             for (var i = 0; i < model.unitAlertModel.alerts().length; i++) {
