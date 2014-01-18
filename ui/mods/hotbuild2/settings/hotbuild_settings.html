@@ -1,13 +1,15 @@
 <div id="div_settings_hotbuild_cont">
     <div id="block">
-        <span class="ui-icon ui-icon-comment"></span>
-        <span id="comments" style="font-family:'DINPRO-LIGHT'">Please give comments/ideas on the forum</span>
-        <span id="communitydefaults">
+        <div class="ui-icon ui-icon-comment"></div>
+        <div id="comments" style="font-family:'DINPRO-LIGHT'">Please give comments/ideas on the forum</div>
+		        <div id="communitydefaults">
             <input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
             <input type="button" value="Community Defaults (WASD)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
-        </span>
-        <span id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</span>
-        <span class="ui-icon ui-icon-info"></span>
+        </div>
+		<div id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</div>
+		<div class="ui-icon ui-icon-info"></div>
+
+        
 
 
 
@@ -65,12 +67,13 @@
 				<div id="legendlabel">Reserved</div>
 			</ul>
         </div>
-
+		
 		<div id="imexporter">
         <input type="button" value="Import - Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog" />
         </div>
-
 	</div>
+	
+
 		
     <div id="ruler" />
 
@@ -80,7 +83,7 @@
 				<li id="kbselection">&nbsp;</li>
 			</ul>
 		</div>
-		<div id= selectedlabels>
+		<div id="selectedlabels">
 			<div id="uberlabel">
 				<span class="ui-icon ui-icon-circle-arrow-e"></span>
 				<span id="heading">Uber Keybind</span>

@@ -10,44 +10,46 @@
 }
 
 #div_settings_hotbuild_cont{
-	height: 600px;
+	height: 400px;
 }
 
 #ruler{
 	display: block;
-	margin: 12px 0 12px 0;
+	margin: 6px 0 6px 0;
 	border-bottom: 1px solid #333;
     clear: both;
 }
 
 #block{
     display: block;
-    clear: both;
+	clear: both;
+	overflow:auto;
 }
 
 #comments, .ui-icon-comment, .ui-icon-circle-arrow-s, .ui-icon-circle-arrow-e{
     float: left;
 }
 
-.ui-icon-grip-dotted-horizontal{
+/*.ui-icon-grip-dotted-horizontal{
 	float: left;
 	margin: 0 0 0 1em;
-}
+}*/
 
 #heading {
-	float: left;
-	margin: 0 1em 0 1em;
-	height: 30px;
+	float: left;/*
+	margin: 0 1em 0 1em; */
+	margin-left: 1em;
+	/*height: 30px; */
 }
 
 #buttoninfo {
 	float: left;
-	height: 48px;
+/*	height: 30px; */
 }
 
 #kbselection{
-	zoom: 150%;
-    /*float: left;*/
+	    /*zoom: 150%;
+float: left;*/
    width: 30px;
    height: 30px;
    line-height: 30px;
@@ -67,13 +69,16 @@ margin-left: 1em;
 #uberlabel{
 float: left;
 clear: right;
-height: 30px;
+/* height: 30px; */
+border-bottom: 1px solid #333;
+min-width: 12em;
 }
 
 #hblabel{
+margin-top: 1px;
 float: left;
 clear: left;
-height: 30px;
+/* height: 30px;*/
 }
 
 #legendlabel{
@@ -81,34 +86,43 @@ float: left;
 clear: right;
 }
 
-#troubles,#communitydefaults,.ui-icon-info{
+#troubles,.ui-icon-info{
     float: right;
+	display: inline-block;
+}
+
+#communitydefaults{
+    float: right;
+	display: inline-block;
+	clear: none;
+	margin-left: 1em;
+}
+
+
+#communitydefaults input{
+float: right;
+display: inline-block;
+clear: right;
+width: 180px;
 }
 
 #imexporter{
-position: relative;
+	display: inline-block;
 	float: right;
-	margin-bottom: 12px;
-}
-
-#communitydefaults input{
-	margin-left: 24px;
-	width: 180px;
-    float: right;
-    clear: right;
-	display: block;
 	position: relative;
+	bottom: 0px;
 }
 
 #keyboardcontainer {
-	clear: right;
-    width: 760px;
-	height: 128px;
-	margin: auto;
+	width: 760px;
+	height: 124px;
+	margin-top: 2em;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 #keyboard,#legend {
-float: left;
+	float: left;
 }
 
 #keyboard li:hover {
@@ -219,7 +233,7 @@ float: left;
 
 .custom-scroll {
 	clear: both;
-    margin-top: 20px;
+    margin-top: 6px;
     padding-right: 24px;
     overflow: scroll;
     direction: rtl;
@@ -239,7 +253,7 @@ float: left;
     float: left;
 	position: relative;
     direction: ltr;
-	height: 320px;
+	height: 162px;
 }
 
 #sequencelist {
@@ -273,7 +287,7 @@ float: left;
     height: 36px;
     width: 36px;
     position: absolute;
-    top: 4px;
+/*    top: 4px; */
     left: 4px;
 }
 
