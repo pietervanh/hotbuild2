@@ -15,7 +15,7 @@
 
 #ruler{
 	display: block;
-	margin: 5px 0 12px 0;
+	margin: 12px 0 12px 0;
 	border-bottom: 1px solid #333;
     clear: both;
 }
@@ -27,7 +27,6 @@
 
 #comments, .ui-icon-comment, .ui-icon-circle-arrow-s, .ui-icon-circle-arrow-e{
     float: left;
-	
 }
 
 .ui-icon-grip-dotted-horizontal{
@@ -46,36 +45,36 @@
 	height: 48px;
 }
 
-#kbselection li {
+#kbselection{
+	zoom: 150%;
     /*float: left;*/
-    margin: 0 0em 0 0em;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background: #000505;
-    border: rgba(0,255,255,1) solid thin;
-    -webkit-border-radius: 5px;
-    color: rgba(0,255,255,1);
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   border: rgba(0,255,255,.1) solid thin;
+   border-radius: 5px;
+   -webkit-border-radius: 5px;
+   color: rgba(0,255,255,1);
 }
 
-#uberlabel, #hblabel{
+#selectedlabels{
+display: inline-block;	
+float: left;
+margin-left: 1em;
+}
+
+#uberlabel{
+float: left;
+clear: right;
+height: 30px;
+}
+
+#hblabel{
 float: left;
 clear: left;
 height: 30px;
 }
-
-.hotbuild_addlist {
-    float: right;
-    text-align: right;
- /*    position: relative;
-    height: 300px; 
-    margin: 1px;
-
-    clear: none;
-    min-width: 25%;*/
-}
-
 
 #legendlabel{
 float: left;
@@ -86,34 +85,39 @@ clear: right;
     float: right;
 }
 
+#imexporter{
+position: relative;
+	float: right;
+	margin-bottom: 12px;
+}
+
 #communitydefaults input{
 	margin-left: 24px;
 	width: 180px;
     float: right;
     clear: right;
+	display: block;
+	position: relative;
 }
 
 #keyboardcontainer {
-    width: 720px;
+	clear: right;
+    width: 760px;
 	height: 128px;
 	margin: auto;
 }
 
-#keyboard {
-    float: left;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+#keyboard,#legend {
+float: left;
 }
 
 #keyboard li:hover {
-    position: relative;
     top: 1px;
     left: 1px;
     cursor: pointer;
 }
 
-#keyboard li {
+#keyboard li{
    float: left;
    margin: 0 5px 5px 0;
    width: 30px;
@@ -122,15 +126,12 @@ clear: right;
    text-align: center;
    background: #000505;
    border: rgba(0,255,255,1) solid thin;
+   border-radius: 5px;
    -webkit-border-radius: 5px;
    color: rgba(0,255,255,1);
 }
 
-#legend {
-   float: left;
-}
-
-#legend li {
+#legend li{
    float: left;
    clear: left;
    margin: 0 5px 5px 0;
@@ -140,11 +141,10 @@ clear: right;
    text-align: center;
    background: #000505;
    border: rgba(0,255,255,1) solid thin;
+   border-radius: 5px;
    -webkit-border-radius: 5px;
    color: rgba(0,255,255,1);
 }
-
-
 
 .capslock, .tab, .left-shift {
     clear: left;
@@ -239,7 +239,7 @@ clear: right;
     float: left;
 	position: relative;
     direction: ltr;
-	height: 265px;
+	height: 320px;
 }
 
 #sequencelist {
@@ -250,17 +250,6 @@ clear: right;
 }
 
 .hotbuild_fab_selection {
-    /*
-	height: 48px;
-    width: 48px;
-    border: 1px solid rgba(255,127,0,.7);
-    border-radius:2px; 
-    float:left;
-    margin:1px;
-    position:relative;
-    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 10%,rgba(0,0,0,0.9) 35%,rgba(0,0,0,0.8) 100%); 
-    box-shadow: inset 0 0 30px rgb(153, 76, 0);
-*/
     height: 48px;
     width: 48px;
     border: 1px solid rgba(0,255,255,.5);
@@ -320,5 +309,13 @@ clear: right;
 
 select {
     width: 220px;
-    margin-left: 10px;
+    margin-left: 1em;
+	position: relative;
 }
+
+#addunit, #addbuilding {
+	float: right;
+	clear: right;
+}
+
+
