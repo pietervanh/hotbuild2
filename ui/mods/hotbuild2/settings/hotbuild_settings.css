@@ -10,7 +10,7 @@
 }
 
 #div_settings_hotbuild_cont{
-	height: 400px;
+	height: 500px;
 }
 
 #ruler{
@@ -253,7 +253,7 @@ width: 180px;
     float: left;
 	position: relative;
     direction: ltr;
-	height: 162px;
+	height: 262px;
 }
 
 #sequencelist {
