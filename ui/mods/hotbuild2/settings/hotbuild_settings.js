@@ -7,7 +7,7 @@ var hotbuildsettings = (function () {
 
     //Problem don't know how to know it's a a buildable unit / factory  so can't dynamically fill buildings and units
     var hbbuildings = [
-new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
+        new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 		new hbListItem().json("/pa/units/air/air_factory_adv/air_factory_adv.json"),
 		new hbListItem().json("/pa/units/land/vehicle_factory/vehicle_factory.json"),
 		new hbListItem().json("/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"),
@@ -74,7 +74,6 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 		new hbListItem().json("/pa/units/air/fighter_adv/fighter_adv.json"),
         new hbListItem().json("/pa/units/air/gunship/gunship.json"),
 		new hbListItem().json("/pa/units/sea/fabrication_ship/fabrication_ship.json"),
-		new hbListItem().json("/pa/units/sea/fabrication_sub/fabrication_sub.json"),
 		new hbListItem().json("/pa/units/sea/sea_scout/sea_scout.json"),
 		new hbListItem().json("/pa/units/sea/attack_sub/attack_sub.json"),
 		new hbListItem().json("/pa/units/sea/frigate/frigate.json"),
@@ -82,19 +81,18 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 		new hbListItem().json("/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json"),
 		new hbListItem().json("/pa/units/sea/battleship/battleship.json"),
 		new hbListItem().json("/pa/units/sea/missile_ship/missile_ship.json"),
-		new hbListItem().json("/pa/units/sea/nuclear_sub/nuclear_sub.json"),
-		new hbListItem().json("/pa/units/orbital/orbital_fighter/orbital_fighter.json"),
         new hbListItem().json("/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json"),
         new hbListItem().json("/pa/units/orbital/defense_sattelite/defense_satellite.json"),
 		new hbListItem().json("/pa/units/orbital/orbital_lander/orbital_lander.json"),
-		new hbListItem().json("/pa/units/orbital/orbital_laser/orbital_laser.json"),
-		new hbListItem().json("/pa/units/orbital/radar_satellite/radar_satellite.json"),
+        new hbListItem().json("/pa/units/orbital/radar_satellite/radar_satellite.json"),
+        new hbListItem().json("/pa/units/orbital/orbital_fighter/orbital_fighter.json"),
+        new hbListItem().json("/pa/units/orbital/orbital_laser/orbital_laser.json"),
 		new hbListItem().json("/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json"),
 		new hbListItem().json("/pa/units/orbital/solar_array/solar_array.json"),
-	    	new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher_ammo.json"),
+        new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher_ammo.json"),
 		new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"),
     ];
-
+    //debugger;
 
     function onunitload(unitdata, listitem) {
         unitdata.description !== undefined ? listitem.desc(unitdata.description) : listitem.desc('not found');
@@ -105,15 +103,17 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
                 _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('vecfac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('afac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('nfac') : '';
+                _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
             }
             else {
                 _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('abotfac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('avecfac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('aafac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
+                _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('aofac') : '';
             }
-            _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
-            //console.log(listitem.factory());
+            
+            console.log(listitem.factory());
         }
         if (listitem.factory() === undefined) {
             listitem.factory('');
@@ -285,7 +285,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
             //debugger;
             if (!$this.hasClass('dis')) {
                 //self.InitKeyboard();
-                if(!$this.hasClass('active')){
+                if (!$this.hasClass('active')) {
                     $('#keyboard li').each(function (index) {
                         if ($(this).hasClass('active')) {
                             $(this).toggleClass('active');
@@ -293,10 +293,58 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
                     });
                     $this.addClass('active');
                 }
-                $('#kbselection').html($($this.clone()))
+                var $kbselection = $('#kbselection');
+                $kbselection.html($($this.clone()));
+                $kbselection.click(function () {
+                    $('#changeKeyDlg').dialog({
+                        height: 150,
+                        width: 150,
+                        modal: true,
+                        buttons: {
+                            "Change Key": function () { self.swapKey(); self.InitKeyboard(); $(this).dialog("close"); }
+                        },
+                        close: function () {
+                        }
+                    });
+
+                });
+
                 self.keyboardkey(character.toLowerCase());
             }
         };
+
+        self.swapKey = function () {
+            swapto = $("#swapkey").val();
+
+            if(self.keyboardkey() !== "" && swapto !== "")
+            {
+                if (self.keyboardkey() !== swapto) {
+                    var swapposition;
+                    var currentposition;
+                    //find swap position
+                    for (var i = 1; i <= 20; i++) {
+                        if (hotbuildglobalkey["hotbuild" + i + "s"] === swapto) {
+                            swapposition = i;
+                            break;
+                        }
+                    }
+                    //find current key position
+                    for (var i = 1; i <= 20; i++) {
+                        if (hotbuildglobalkey["hotbuild" + i + "s"] === self.keyboardkey()) {
+                            currentposition = i;
+                            break;
+                        }
+                    }
+                    if (swapposition !== undefined) {
+                        hotbuildglobalkey["hotbuild" + currentposition + "s"] = swapto;
+                        hotbuildglobalkey["hotbuild" + swapposition + "s"] = self.keyboardkey();
+                    }
+                    else {
+                        hotbuildglobalkey["hotbuild" + currentposition + "s"] = swapto;
+                    }
+                }
+            }
+        }
 
         self.InitKeyboard = function () {
             self.selectedkeyinfo(undefined);
@@ -430,7 +478,7 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
 
         self.import = function () {
             console.log('import');
-            if ($("#ieport").val() !== ''){
+            if ($("#ieport").val() !== '') {
                 var imported = JSON.parse($("#ieport").val());
                 for (var key in imported.uber) {
                     if (imported.hasOwnProperty(key)) {
@@ -475,10 +523,6 @@ new hbListItem().json("/pa/units/air/air_factory/air_factory.json"),
                 close: function () {
                     self.showingImportExportDialog(false);
                 }
-            });
-            $('#closeImportExport').click(function () {
-                $("#importexportDlg").dialog("close");
-                self.showingImportExportDialog(false);
             });
         };
     }

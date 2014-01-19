@@ -9,10 +9,6 @@
 		<div id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</div>
 		<div class="ui-icon ui-icon-info"></div>
 
-        
-
-
-
         <div id="keyboardcontainer">
             <ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
                 <li class="tab">tab</li>
@@ -156,6 +152,12 @@
         <div><p>Before exporting make sure you have pressed save and close</p>
             <p>Copy text into/from textarea below</p>
             <textarea id="ieport" style="width:400px" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details">
+        <div>
+            Change<span class="uberkey" data-bind="text: keyboardkey"/> to <input id="swapkey" type="text" style="width:10px;" />
         </div>
     </div>
 
