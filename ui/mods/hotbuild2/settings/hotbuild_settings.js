@@ -35,6 +35,10 @@ var hotbuildsettings = (function () {
 		new hbListItem().json("/pa/units/orbital/delta_v_engine/delta_v_engine.json"),
 		new hbListItem().json("/pa/units/orbital/orbital_launcher/orbital_launcher.json"),
 		new hbListItem().json("/pa/units/orbital/ion_defense/ion_defense.json"),
+        new hbListItem().json("/pa/units/orbital/orbital_fighter/orbital_fighter.json"),
+        new hbListItem().json("/pa/units/orbital/orbital_laser/orbital_laser.json"),
+		new hbListItem().json("/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json"),
+		new hbListItem().json("/pa/units/orbital/solar_array/solar_array.json"),
 		new hbListItem().json("/pa/units/sea/naval_factory/naval_factory.json"),
 		new hbListItem().json("/pa/units/sea/naval_factory_adv/naval_factory_adv.json"),
 		new hbListItem().json("/pa/units/sea/sea_mine/sea_mine.json"),
@@ -85,10 +89,6 @@ var hotbuildsettings = (function () {
         new hbListItem().json("/pa/units/orbital/defense_sattelite/defense_satellite.json"),
 		new hbListItem().json("/pa/units/orbital/orbital_lander/orbital_lander.json"),
         new hbListItem().json("/pa/units/orbital/radar_satellite/radar_satellite.json"),
-        new hbListItem().json("/pa/units/orbital/orbital_fighter/orbital_fighter.json"),
-        new hbListItem().json("/pa/units/orbital/orbital_laser/orbital_laser.json"),
-		new hbListItem().json("/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json"),
-		new hbListItem().json("/pa/units/orbital/solar_array/solar_array.json"),
         new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher_ammo.json"),
 		new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"),
     ];
@@ -103,16 +103,26 @@ var hotbuildsettings = (function () {
                 _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('vecfac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('afac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('nfac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('ofac') : '';
             }
             else {
                 _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('abotfac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('avecfac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('aafac') : '';
                 _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Orbital') ? listitem.factory('aofac') : '';
             }
-            
+            //Orbital is changing rapidly so hacky fixes here
+            if (listitem.json2 === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json"){
+                listitem.factory('ofac');
+            }
+            if (listitem.json2 === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
+                listitem.factory('ofac');
+            }
+            if (listitem.json2 === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
+                listitem.factory('ofac');
+            }
+            if (listitem.json2 === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
+                listitem.factory('ofac');
+            }
             console.log(listitem.factory());
         }
         if (listitem.factory() === undefined) {
