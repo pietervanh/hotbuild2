@@ -554,9 +554,9 @@ var hotbuildsettings = (function () {
     var hotbuildsettings = {};
     hotbuildsettings.viewmodel = hbuisettings;
 
-    model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000);
-    model.addSetting_Text('Hotbuild Requeue Amount', 'hotbuild_requeue_amount', 'UI', 'Number', 50);
-    model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0);
+    model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000,'Hotbuild2');
+    model.addSetting_Text('Hotbuild Requeue Amount', 'hotbuild_requeue_amount', 'UI', 'Number', 50,'Hotbuild2');
+    model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0,'Hotbuild2');
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
     return hotbuildsettings;
