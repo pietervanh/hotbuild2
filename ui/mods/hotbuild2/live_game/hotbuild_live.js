@@ -120,7 +120,7 @@ var hotbuild2live = (function () {
             return;
 
         var value;
-        console.log(e.keyCode);
+        //console.log(e.keyCode);
         if (e.which >= 48 && e.which <= 90) {
 
             /* grab letters */
@@ -131,7 +131,7 @@ var hotbuild2live = (function () {
             value = keycodes[e.which];
         }
 
-        console.log(value);
+        //console.log(value);
         for (var i = 1; i <= 20; i++) {
             if (hotbuildglobalkey["hotbuild" + i + "s"] === value) {
                 hotbuild2.hotbuildManager.hotBuild(e, hotbuildglobal["hotbuild" + i + "s"]);
