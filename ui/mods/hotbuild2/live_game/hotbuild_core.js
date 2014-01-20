@@ -433,6 +433,7 @@ var hotbuild2 = (function () {
     action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
     action_sets.hotbuild['Requeue'] = function (event) { hotbuild2.requeue(event); };
     action_sets.hotbuild['View Notification'] = function (event) { hotbuild2.viewAlert(); };
+    action_sets.hotbuild['Build Template'] = function (event) { hotbuild2.buildTemplates.chooseBuildTemplate(); };
     //Fixes for Uber Casesensitive keybinds
     action_sets.hotbuild['move'] = function (event) { hotbuild2.CommandMode(0); };
     action_sets.hotbuild['attack'] = function (event) { hotbuild2.CommandMode(1); };
@@ -443,7 +444,7 @@ var hotbuild2 = (function () {
     action_sets.hotbuild['stop'] = function (event) { hotbuild2.CommandMode(-1); };
     action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
     action_sets.hotbuild['unload'] = function (event) { hotbuild2.CommandMode(9); };
-    action_sets.hotbuild['imbawall'] = function (event) { hotbuild2.buildTemplates.chooseBuildTemplate();};
+    
 
 
     return hotbuild2;

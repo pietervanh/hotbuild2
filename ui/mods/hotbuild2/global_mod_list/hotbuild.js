@@ -15,6 +15,7 @@
     action_sets.hotbuild['Lock Pole'] = function (event) { };
     action_sets.hotbuild['Requeue'] = function (event) { };
     action_sets.hotbuild['View Notification'] = function (event) { };
+    action_sets.hotbuild['Build Template'] = function (event) { };
     //Fixes for Uber Casesensitive keybinds
     action_sets.hotbuild['move'] = function (event) { };
     action_sets.hotbuild['attack'] = function (event) { };
@@ -25,7 +26,7 @@
     action_sets.hotbuild['stop'] = function (event) { };
     action_sets.hotbuild['select commie'] = function (event) { };
     action_sets.hotbuild['unload'] = function (event) { };
-    action_sets.hotbuild['imbawall'] = function (event) { };
+    
     //set defaults for when you click on the set defaults button in settings
     // here we set them empty click community defaults buttons for better defaults
     default_keybinds.hotbuild = {}; 
@@ -33,6 +34,7 @@
     default_keybinds.hotbuild['Lock Pole'] = '';
     default_keybinds.hotbuild['Requeue'] = '';
     default_keybinds.hotbuild['View Notification'] = '';
+    default_keybinds.hotbuild['Build Template'] = '';
     default_keybinds.hotbuild['move'] = '';
     default_keybinds.hotbuild['attack'] = '';
     default_keybinds.hotbuild['assist'] = '';
@@ -42,5 +44,5 @@
     default_keybinds.hotbuild['stop'] = '';
     default_keybinds.hotbuild['select commie'] = '';
     default_keybinds.hotbuild['unload'] = '';
-    default_keybinds.hotbuild['imbawall'] = '';
+    
 })();
