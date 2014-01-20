@@ -208,6 +208,9 @@ var hotbuild2 = (function () {
         }
     };
 
+
+
+
     //same as the one in media\ui\alpha\shared\js\inputmap.js
     //problem default you can't give in the arrays with upper and lower keys
     //this version automaticaly gives in [binding,binding+shift] wich solves the problem
@@ -286,7 +289,8 @@ var hotbuild2 = (function () {
     action_sets.hotbuild['patrol'] = function(event) {hotbuild2.CommandMode(5);};
     action_sets.hotbuild['stop'] = function(event) {hotbuild2.CommandMode(-1);};
     action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
-    action_sets.hotbuild['unload'] = function(event) {hotbuild2.CommandMode(9);};    
+    action_sets.hotbuild['unload'] = function (event) { hotbuild2.CommandMode(9); };
+    action_sets.hotbuild['imbawall'] = function (event) { };
     //set defaults for when you click on the set defaults button in settings
     // here we set them empty click community defaults buttons for better defaults
     default_keybinds.hotbuild = {}; 
@@ -303,6 +307,7 @@ var hotbuild2 = (function () {
     default_keybinds.hotbuild['stop'] = '';
     default_keybinds.hotbuild['select commie'] = '';
     default_keybinds.hotbuild['unload'] = '';
+    default_keybinds.hotbuild['imbawall'] = '';
 
     return hotbuild2;
 
