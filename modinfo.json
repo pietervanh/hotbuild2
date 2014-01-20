@@ -17,6 +17,7 @@
     "priority": 100,
     "live_game": [
         "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
+		"coui://ui/mods/hotbuild2/live_game/hotbuild_core.js",
         "coui://ui/mods/hotbuild2/live_game/hotbuild_live.js"
     ],
     "settings": [
