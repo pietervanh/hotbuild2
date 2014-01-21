@@ -3,11 +3,6 @@
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 var hotbuild2 = (function () {
 
-    //Make sure settings are set / if not set defaults
-    initialSettingValue('hotbuild_reset_time', 2000);
-    initialSettingValue('hotbuild_requeue_amount', 50);
-    initialSettingValue('hotbuild_show_key_on_buildbar', 'ON');
-
     var settings = decode(localStorage.settings);
 
     model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
@@ -427,7 +422,7 @@ var hotbuild2 = (function () {
         }
     };
 
-
+    //Hook up Real Functions to Keyboard Keys
     //Special Actions
     action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };
     action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
