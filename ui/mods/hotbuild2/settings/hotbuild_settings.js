@@ -58,6 +58,7 @@ var hotbuildsettings = (function () {
 		new hbListItem().json("/pa/units/land/bot_aa/bot_aa.json"),
 		new hbListItem().json("/pa/units/land/assault_bot/assault_bot.json"),
 		new hbListItem().json("/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json"),
+		new hbListItem().json("/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json"),		
 		new hbListItem().json("/pa/units/land/assault_bot_adv/assault_bot_adv.json"),
 		new hbListItem().json("/pa/units/land/bot_artillery_adv/bot_artillery_adv.json"),
 		new hbListItem().json("/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"),
