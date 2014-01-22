@@ -1,6 +1,7 @@
 //IntelliSense for WebMatrix /VS
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
+/// <reference path="../.vsdoc/lodash-2.4.1.js" />
 var hotbuild2 = (function () {
 
     var settings = decode(localStorage.settings);
@@ -12,6 +13,8 @@ var hotbuild2 = (function () {
     }
 
     var hotbuild2 = {};
+
+    var imbawallclick = "nobuild";
 
     function hbManager(resetTime) {
         var self = this;
@@ -31,6 +34,11 @@ var hotbuild2 = (function () {
         }, this);
 
         self.unitName = ko.observable("");
+        self.imbawallers = ko.observableArray(["/pa/units/land/laser_defense/laser_defense.json",
+                                                "/pa/units/land/laser_defense_single/laser_defense_single.json",
+                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json",
+                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json",
+                                                "/pa/units/land/air_defense/air_defense.json"]);
 
         self.buildPreviewList = function (hbindex, hotbuilds) {
             //set the buildPreview list
@@ -82,8 +90,10 @@ var hotbuild2 = (function () {
                     setTimeout(self.clean, self.cycleResetTime + 1000);
                     if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].buildStructure) {
                         //check if it' needs to be ImbaWalled
-                        //self.wallbuilder.imbaWall(true, self.hotbuilds()[self.cycleid()].json);
                         model['maybeSetBuildTarget'](self.hotbuilds()[self.cycleid()].json);
+                        if (self.imbawallers.indexOf(self.hotbuilds()[self.cycleid()].json) !== -1) {
+                            imbawallclick = "build";
+                        }
                     }
                     else {
                         model.executeStartBuild(event, self.getBuildItemId());
@@ -278,6 +288,34 @@ var hotbuild2 = (function () {
             }
         };
 
+        buildTemplates.imbaWall2 = function (queue,mX,mY) {
+            //var mX = mouseX;
+            //var mY = mouseY;
+            var wall = "/pa/units/land/land_barrier/land_barrier.json";
+
+            window.setTimeout(function () {
+                api.arch.beginFabMode(wall).then(function (ok) {
+                    // the callback of the callback of the callback of the oh wtf
+                    tryInLine(mX, mY, ["up"], function () {
+                        tryInLine(mX, mY, ["down"], function () {
+                            tryInLine(mX, mY, ["right"], function () {
+                                tryInLine(mX, mY, ["left"], function () {
+                                    tryInLine(mX, mY, ["up", "left"], function () {
+                                        tryInLine(mX, mY, ["up", "right"], function () {
+                                            tryInLine(mX, mY, ["down", "left"], function () {
+                                                tryInLine(mX, mY, ["down", "right"]);
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            }, 750);
+        };
+
+
         buildTemplates.chooseBuildTemplate = function () {
             buildTemplates.popupVisible(true);
             $("#hotbuildTemplatesDlg").dialog({
@@ -439,7 +477,17 @@ var hotbuild2 = (function () {
     action_sets.hotbuild['stop'] = function (event) { hotbuild2.CommandMode(-1); };
     action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
     action_sets.hotbuild['unload'] = function (event) { hotbuild2.CommandMode(9); };
-    
+
+    var $holodeck = $('.holodeck');
+    var holodeckModeMouseDown = {};
+    $holodeck.mousedown(function (mdevent) {
+        if (mdevent.button === 0 && imbawallclick === "build") {
+            var startx = mdevent.offsetX;
+            var starty = mdevent.offsetY;
+            hotbuild2.buildTemplates.imbaWall2(true,startx,starty);
+            imbawallclick = "nobuild";
+        }
+    });
 
 
     return hotbuild2;
