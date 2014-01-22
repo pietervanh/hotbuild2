@@ -538,7 +538,16 @@ var hotbuildsettings = (function () {
         };
     }
 
-
+    self.getTemplate = function (hblistitem) {
+        if(hblistitem.factory === "")
+        {
+            return "structureTemplate";
+        }
+        else
+        {
+            return "mobileTemplate";
+        }
+    }
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
