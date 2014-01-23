@@ -477,12 +477,11 @@ var hotbuild2 = (function () {
     var $holodeck = $('.holodeck');
     var holodeckModeMouseDown = {};
     $holodeck.mousedown(function (mdevent) {
-        if (mdevent.button === 0 && imbawallclick === "build") {
+        if (mdevent.button === 0 && imbawallclick === "build" && mdevent.altKey === true) {
             var startx = mdevent.offsetX;
             var starty = mdevent.offsetY;
-            var queue = mdevent.shiftKey; // check if it captures shift key (live_game 1769)
-            //input.capture(function(event){if(event.type === 'keypress') && (event.keyCode === ))( //imbaWall)};
-            hotbuild2.buildTemplates.imbaWall2(true,startx,starty);
+            var queue = mdevent.shiftKey; 
+            hotbuild2.buildTemplates.imbaWall2(queue,startx,starty);
             imbawallclick = "nobuild";
         }
     });
