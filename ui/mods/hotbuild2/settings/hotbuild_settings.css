@@ -1,16 +1,11 @@
-.tbl_hotbuildsui {
-    width: 100%;
-    text-align: left;
-}
-
-.tr_hotbuildsui_row_header {
-    text-align: left;
-    border-bottom: 1px solid #888;
-    color: #0FF;
-}
-
 #div_settings_hotbuild_cont{
 	height: 500px;
+}
+
+#block{
+    display: block;
+	clear: both;
+	overflow:auto;
 }
 
 #ruler{
@@ -20,75 +15,9 @@
     clear: both;
 }
 
-#block{
-    display: block;
-	clear: both;
-	overflow:auto;
-}
 
 #comments, .ui-icon-comment, .ui-icon-circle-arrow-s, .ui-icon-circle-arrow-e{
     float: left;
-}
-
-/*.ui-icon-grip-dotted-horizontal{
-	float: left;
-	margin: 0 0 0 1em;
-}*/
-
-#heading {
-	float: left;/*
-	margin: 0 1em 0 1em; */
-	margin-left: 1em;
-	/*height: 30px; */
-}
-
-#buttoninfo {
-	float: left;
-/*	height: 30px; */
-}
-
-#kbselection{
-	    /*zoom: 150%;
-float: left;*/
-   width: 30px;
-   height: 30px;
-   line-height: 30px;
-   text-align: center;
-   border: rgba(0,255,255,.1) solid thin;
-   border-radius: 5px;
-   -webkit-border-radius: 5px;
-   color: rgba(0,255,255,1);
-}
-
-#selectedlabels{
-display: inline-block;	
-float: left;
-margin-left: 1em;
-}
-
-#uberlabel{
-float: left;
-clear: right;
-/* height: 30px; */
-border-bottom: 1px solid #333;
-min-width: 12em;
-}
-
-#hblabel{
-margin-top: 1px;
-float: left;
-clear: left;
-/* height: 30px;*/
-}
-
-#legendlabel{
-float: left;
-clear: right;
-}
-
-#troubles,.ui-icon-info{
-    float: right;
-	display: inline-block;
 }
 
 #communitydefaults{
@@ -106,11 +35,9 @@ clear: right;
 width: 180px;
 }
 
-#imexporter{
+#troubles,.ui-icon-info{
+    float: right;
 	display: inline-block;
-	float: right;
-	position: relative;
-	bottom: 0px;
 }
 
 #keyboardcontainer {
@@ -121,14 +48,8 @@ width: 180px;
 	margin-left: auto;
 }
 
-#keyboard,#legend {
-	float: left;
-}
-
-#keyboard li:hover {
-    top: 1px;
-    left: 1px;
-    cursor: pointer;
+#legend {
+    display: inline-block;
 }
 
 #keyboard li{
@@ -145,19 +66,11 @@ width: 180px;
    color: rgba(0,255,255,1);
 }
 
-#legend li{
-   float: left;
-   clear: left;
-   margin: 0 5px 5px 0;
-   width: 30px;
-   height: 30px;
-   line-height: 30px;
-   text-align: center;
-   background: #000505;
-   border: rgba(0,255,255,1) solid thin;
-   border-radius: 5px;
-   -webkit-border-radius: 5px;
-   color: rgba(0,255,255,1);
+#keyboard li:hover{
+    position: relative;
+    top: 1px;
+    left: 1px;
+    cursor: pointer;
 }
 
 .capslock, .tab, .left-shift {
@@ -209,7 +122,6 @@ width: 180px;
     position: relative;
     top: 1px;
     left: 1px;
-    box-shadow: 0px 0px 2px 2px rgba(0,255,255,.7) !important;
     font-weight: bolder !important;
     text-transform: uppercase !important;
 }
@@ -220,6 +132,80 @@ width: 180px;
 
 .uber {
     border-color: #00FF7F !important;
+}
+
+#legend li{
+   float: left;
+   clear: left;
+   margin: 0 5px 5px 0;
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   background: #000505;
+   border: rgba(0,255,255,1) solid thin;
+   border-radius: 5px;
+   -webkit-border-radius: 5px;
+   color: rgba(0,255,255,1);
+}
+
+#heading {
+	float: left;/*
+	margin: 0 1em 0 1em; */
+	margin-left: 1em;
+	/*height: 30px; */
+}
+
+#buttoninfo {
+	float: left;
+/*	height: 30px; */
+}
+
+#kbselection{
+	    /*zoom: 150%;
+float: left;*/
+   min-width: 30px;
+   height: 30px;
+   line-height: 30px;
+   text-align: center;
+   border: rgba(0,255,255,.1) solid thin;
+   border-radius: 5px;
+   -webkit-border-radius: 5px;
+   color: rgba(0,255,255,1);
+}
+
+#selectedlabels{
+display: inline-block;	
+float: left;
+margin-left: 1em;
+}
+
+#uberlabel{
+float: left;
+clear: right;
+/* height: 30px; */
+border-bottom: 1px solid #333;
+min-width: 12em;
+}
+
+#hblabel{
+margin-top: 1px;
+float: left;
+clear: left;
+/* height: 30px;*/
+}
+
+#legendlabel{
+float: left;
+clear: right;
+}
+
+
+#imexporter{
+	display: inline-block;
+	float: right;
+	position: relative;
+	bottom: 0px;
 }
 
 .uberkey {
@@ -333,3 +319,13 @@ select {
 }
 
 
+.tbl_hotbuildsui {
+    width: 100%;
+    text-align: left;
+}
+
+.tr_hotbuildsui_row_header {
+    text-align: left;
+    border-bottom: 1px solid #888;
+    color: #0FF;
+}

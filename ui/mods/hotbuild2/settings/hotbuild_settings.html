@@ -2,12 +2,12 @@
     <div id="block">
         <div class="ui-icon ui-icon-comment"></div>
         <div id="comments" style="font-family:'DINPRO-LIGHT'">Please give comments/ideas on the forum</div>
-		        <div id="communitydefaults">
+        <div id="communitydefaults">
             <input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
             <input type="button" value="Community Defaults (WASD)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
         </div>
-		<div id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</div>
-		<div class="ui-icon ui-icon-info"></div>
+        <div id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</div>
+        <div class="ui-icon ui-icon-info"></div>
 
         <div id="keyboardcontainer">
             <ul id="keyboard" data-bind="click_sound: 'default', rollover_sound: 'default'">
@@ -52,58 +52,59 @@
                 <li class="right-shift lastitem">shift</li>
                 <li class="space lastitem">space</li>
             </ul>
-			<ul id="legend">
-				<li class="letter">&nbsp;</li>
-				<div id="legendlabel">Unassigned</div>
-				<li class="letter hbk">&nbsp;</li>
-				<div id="legendlabel">Hotbuild</div>
-				<li class="letter uber">&nbsp;</li>
-				<div id="legendlabel">Uber</div>
-				<li class="letter dis">&nbsp;</li>
-				<div id="legendlabel">Reserved</div>
-			</ul>
-        </div>
-		
-		<div id="imexporter">
-        <input type="button" value="Import - Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog" />
-        </div>
-	</div>
-	
+            <ul id="legend">
+                <li class="letter">&nbsp;</li>
+                <div id="legendlabel">Unassigned</div>
+                <li class="letter hbk">&nbsp;</li>
+                <div id="legendlabel">Hotbuild</div>
+                <li class="letter uber">&nbsp;</li>
+                <div id="legendlabel">Uber</div>
+                <li class="letter dis">&nbsp;</li>
+                <div id="legendlabel">Reserved</div>
+            </ul>
 
-		
+        </div>
+
+        <div id="imexporter">
+            <input type="button" value="Import - Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog" />
+        </div>
+    </div>
+
+
+
     <div id="ruler" />
 
     <div id="block">
-		<div id="buttoninfo">
-			<ul>
-				<li id="kbselection">&nbsp;</li>
-			</ul>
-		</div>
-		<div id="selectedlabels">
-			<div id="uberlabel">
-				<span class="ui-icon ui-icon-circle-arrow-e"></span>
-				<span id="heading">Uber Keybind</span>
-				<span class="ui-icon ui-icon-circle-arrow-e"></span>
-				<span data-bind="text: uberkey" class="uberkey"></span>
-			</div>
-			<div id="hblabel">
-				<span class="ui-icon ui-icon-circle-arrow-s"></span>
-				<span id="heading">Hotbuild Sequence</span>
-				<span class="ui-icon ui-icon-circle-arrow-s"></span>
-				<!--	<span class="ui-icon ui-icon-grip-dotted-horizontal"></span>	-->
-			</div>
-		</div>
+        <div id="buttoninfo">
+            <ul>
+                <li id="kbselection">&nbsp;</li>
+            </ul>
+        </div>
+        <div id="selectedlabels">
+            <div id="uberlabel">
+                <span class="ui-icon ui-icon-circle-arrow-e"></span>
+                <span id="heading">Uber Keybind</span>
+                <span class="ui-icon ui-icon-circle-arrow-e"></span>
+                <span data-bind="text: uberkey" class="uberkey"></span>
+            </div>
+            <div id="hblabel">
+                <span class="ui-icon ui-icon-circle-arrow-s"></span>
+                <span id="heading">Hotbuild Sequence</span>
+                <span class="ui-icon ui-icon-circle-arrow-s"></span>
+                <!--	<span class="ui-icon ui-icon-grip-dotted-horizontal"></span>	-->
+            </div>
+        </div>
 
         <div class="hotbuild_addlist">
-			<div id="addbuilding">
-				Add Building<select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
-				<button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button>
+            <div id="addbuilding">
+                Add Building<select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>
+                <button id="hbuiaddbuilding" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedbuilding() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addBuilding">Add</button>
             </div>
-			<div id="addunit">
-			Add Unit<select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
-            <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button>
-			</div>
-		</div>
+            <div id="addunit">
+                Add Unit<select name="uihotbuildunit" data-bind="options: units, value: selectedunit, optionsText:'displayname', optionsCaption: 'Select a unit...'"></select>
+                <button id="hbuiaddunit" type="submit" data-bind="disable: selectedkeyinfo() == undefined || selectedunit() == undefined,click_sound: 'default', rollover_sound: 'default',click:$root.addUnit">Add</button>
+            </div>
+        </div>
 
         <div class="custom-scroll">
             <div id="sequence">
@@ -155,7 +156,7 @@
             </div>
         </div>
     </script>
-    
+
 
 
     <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
@@ -175,7 +176,8 @@
     </div>
 
     <div id="importexportDlg" data-bind="visible: showingImportExportDialog" title="Import/Export">
-        <div><p>Before exporting make sure you have pressed save and close</p>
+        <div>
+            <p>Before exporting make sure you have pressed save and close</p>
             <p>Copy text into/from textarea below</p>
             <textarea id="ieport" style="width:400px" rows="5"></textarea>
         </div>
@@ -183,7 +185,7 @@
 
     <div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details">
         <div>
-            Change<span class="uberkey" data-bind="text: keyboardkey"/> to <input id="swapkey" type="text" style="width:10px;" />
+            Change<span class="uberkey" data-bind="text: keyboardkey" /> to <input id="swapkey" type="text" style="width:10px;" />
         </div>
     </div>
 
