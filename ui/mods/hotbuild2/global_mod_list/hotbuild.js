@@ -15,7 +15,7 @@
     action_sets.hotbuild['Lock Pole'] = function (event) { };
     action_sets.hotbuild['Requeue'] = function (event) { };
     action_sets.hotbuild['View Notification'] = function (event) { };
-    action_sets.hotbuild['Build Template'] = function (event) { };
+    //action_sets.hotbuild['Build Template'] = function (event) { };
     //Fixes for Uber Casesensitive keybinds
     action_sets.hotbuild['move'] = function (event) { };
     action_sets.hotbuild['attack'] = function (event) { };
@@ -34,7 +34,7 @@
     default_keybinds.hotbuild['Lock Pole'] = '';
     default_keybinds.hotbuild['Requeue'] = '';
     default_keybinds.hotbuild['View Notification'] = '';
-    default_keybinds.hotbuild['Build Template'] = '';
+    //default_keybinds.hotbuild['Build Template'] = '';
     default_keybinds.hotbuild['move'] = '';
     default_keybinds.hotbuild['attack'] = '';
     default_keybinds.hotbuild['assist'] = '';
