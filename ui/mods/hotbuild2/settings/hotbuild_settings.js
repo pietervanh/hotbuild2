@@ -80,7 +80,6 @@ var hotbuildsettings = (function () {
         new hbListItem().json("/pa/units/air/gunship/gunship.json"),
 		new hbListItem().json("/pa/units/sea/fabrication_ship/fabrication_ship.json"),
 		new hbListItem().json("/pa/units/sea/sea_scout/sea_scout.json"),
-		new hbListItem().json("/pa/units/sea/attack_sub/attack_sub.json"),
 		new hbListItem().json("/pa/units/sea/frigate/frigate.json"),
 		new hbListItem().json("/pa/units/sea/destroyer/destroyer.json"),
 		new hbListItem().json("/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json"),
