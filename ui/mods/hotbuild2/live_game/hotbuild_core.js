@@ -36,9 +36,7 @@ var hotbuild2 = (function () {
         self.unitName = ko.observable("");
         self.imbawallers = ko.observableArray(["/pa/units/land/laser_defense/laser_defense.json",
                                                 "/pa/units/land/laser_defense_single/laser_defense_single.json",
-                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json",
-                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json",
-                                                "/pa/units/land/air_defense/air_defense.json"]);
+                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json"]);
 
         self.buildPreviewList = function (hbindex, hotbuilds) {
             //set the buildPreview list
@@ -289,8 +287,6 @@ var hotbuild2 = (function () {
         };
 
         buildTemplates.imbaWall2 = function (queue,mX,mY) {
-            //var mX = mouseX;
-            //var mY = mouseY;
             var wall = "/pa/units/land/land_barrier/land_barrier.json";
 
             window.setTimeout(function () {
@@ -466,7 +462,7 @@ var hotbuild2 = (function () {
     action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
     action_sets.hotbuild['Requeue'] = function (event) { hotbuild2.requeue(event); };
     action_sets.hotbuild['View Notification'] = function (event) { hotbuild2.viewAlert(); };
-    action_sets.hotbuild['Build Template'] = function (event) { hotbuild2.buildTemplates.chooseBuildTemplate(); };
+    //action_sets.hotbuild['Build Template'] = function (event) { hotbuild2.buildTemplates.chooseBuildTemplate(); };
     //Fixes for Uber Casesensitive keybinds
     action_sets.hotbuild['move'] = function (event) { hotbuild2.CommandMode(0); };
     action_sets.hotbuild['attack'] = function (event) { hotbuild2.CommandMode(1); };
@@ -484,6 +480,8 @@ var hotbuild2 = (function () {
         if (mdevent.button === 0 && imbawallclick === "build") {
             var startx = mdevent.offsetX;
             var starty = mdevent.offsetY;
+            var queue = mdevent.shiftKey; // check if it captures shift key (live_game 1769)
+            //input.capture(function(event){if(event.type === 'keypress') && (event.keyCode === ))( //imbaWall)};
             hotbuild2.buildTemplates.imbaWall2(true,startx,starty);
             imbawallclick = "nobuild";
         }
