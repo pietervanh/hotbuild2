@@ -81,20 +81,20 @@
             </ul>
         </div>
         <div id="selectedlabels">
-            <div id="uberlabel">
+            <div>
                 <span class="ui-icon ui-icon-circle-arrow-e"></span>
-                <span id="heading">Uber Keybind</span>
+                <span id="uberlabel">Uber Keybind</span>
                 <span class="ui-icon ui-icon-circle-arrow-e"></span>
+                <span id="uspacer"></span>
                 <span data-bind="text: uberkey" class="uberkey"></span>
             </div>
-            <div id="hblabel">
+            <div>
                 <span class="ui-icon ui-icon-circle-arrow-s"></span>
-                <span id="heading">Hotbuild Sequence</span>
+                <span id="hblabel">Hotbuild Sequence</span>
                 <span class="ui-icon ui-icon-circle-arrow-s"></span>
                 <!--	<span class="ui-icon ui-icon-grip-dotted-horizontal"></span>	-->
             </div>
         </div>
-
         <div class="hotbuild_addlist">
             <div id="addbuilding">
                 Add Building<select name="uihotbuildbuilding" data-bind="options: buildings, value: selectedbuilding, optionsText:'displayname', optionsCaption: 'Select a Building...'"></select>

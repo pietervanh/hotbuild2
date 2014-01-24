@@ -1,3 +1,14 @@
+.tbl_hotbuildsui {
+    width: 100%;
+    text-align: left;
+}
+
+.tr_hotbuildsui_row_header {
+    text-align: left;
+    border-bottom: 1px solid #888;
+    color: #0FF;
+}
+
 #div_settings_hotbuild_cont{
 	height: 500px;
 }
@@ -16,7 +27,7 @@
 }
 
 
-#comments, .ui-icon-comment, .ui-icon-circle-arrow-s, .ui-icon-circle-arrow-e{
+#comments, .ui-icon-comment {
     float: left;
 }
 
@@ -149,16 +160,15 @@ width: 180px;
    color: rgba(0,255,255,1);
 }
 
-#heading {
-	float: left;/*
-	margin: 0 1em 0 1em; */
-	margin-left: 1em;
-	/*height: 30px; */
+#legendlabel{
+float: left;
+clear: right;
 }
 
 #buttoninfo {
+    position: relative;
 	float: left;
-/*	height: 30px; */
+    display: inline-block;
 }
 
 #kbselection{
@@ -175,31 +185,34 @@ float: left;*/
 }
 
 #selectedlabels{
-display: inline-block;	
-float: left;
-margin-left: 1em;
+    float: left;
+    padding-left: 1em;
+    display: table;
+    border-spacing: 0px 1px;
 }
 
 #uberlabel{
-float: left;
-clear: right;
-/* height: 30px; */
-border-bottom: 1px solid #333;
-min-width: 12em;
+display: table-cell;
+width: 140px;
+    text-align: center;
+        border-bottom: 1px solid #333;
 }
 
 #hblabel{
-margin-top: 1px;
-float: left;
-clear: left;
-/* height: 30px;*/
+display: table-cell;
+width: 140px;
+    text-align: center;
 }
 
-#legendlabel{
-float: left;
-clear: right;
+.ui-icon-circle-arrow-e{
+display: table-cell;
+    border-bottom: 1px solid #333;
 }
 
+
+.ui-icon-circle-arrow-s{
+    display: table-cell;
+}
 
 #imexporter{
 	display: inline-block;
@@ -208,9 +221,16 @@ clear: right;
 	bottom: 0px;
 }
 
+#uspacer {
+    display: table-cell;
+    min-width: 1em;
+}
+
 .uberkey {
     color: rgba(0,255,255,1);
-	margin-left: 1em;
+        border-bottom: 1px solid #333;
+display: table-cell;
+text-align: right;
 }
 
 .vecfac, .botfac, .airfac, .nfac, .avecfac, .abotfac, .aafac, .anfac, .ofac {
@@ -261,7 +281,6 @@ clear: right;
     box-shadow: inset 0 0 30px rgb(0, 100, 100);
     display: table-cell;
 }
-
 
 
 .hotbuild_list_item {
@@ -316,16 +335,4 @@ select {
 #addunit, #addbuilding {
 	float: right;
 	clear: right;
-}
-
-
-.tbl_hotbuildsui {
-    width: 100%;
-    text-align: left;
-}
-
-.tr_hotbuildsui_row_header {
-    text-align: left;
-    border-bottom: 1px solid #888;
-    color: #0FF;
 }
