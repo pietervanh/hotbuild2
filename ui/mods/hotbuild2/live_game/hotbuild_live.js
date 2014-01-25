@@ -1,3 +1,4 @@
+/// <reference path="hotbuild_live.js" />
 //IntelliSense for WebMatrix /VS
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
@@ -26,7 +27,7 @@ var hotbuild2live = (function () {
         $('.div_unit_selection img').replaceWith(
         '<img class="img_selected_unit" src="" data-bind="attr: { src: $data.icon }" style="-webkit-transform: scaleX(-1);"/>' +
         //'<span class="hbbuildbarkey" data-bind="blah: console.log($data.type)"></span>');
-        '<span class="hbbuildbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
+        '<span class="hbselectionbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
     }
 
     //Hook up Real Functions to Keyboard Keys
