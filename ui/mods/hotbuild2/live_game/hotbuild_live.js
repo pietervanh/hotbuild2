@@ -23,6 +23,10 @@ var hotbuild2live = (function () {
         $('.div_build_item img').replaceWith(
         '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
         '<span class="hbbuildbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.id()) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.id())"></span>');
+        $('.div_unit_selection img').replaceWith(
+        '<img class="img_selected_unit" src="" data-bind="attr: { src: $data.icon }" style="-webkit-transform: scaleX(-1);"/>' +
+        //'<span class="hbbuildbarkey" data-bind="blah: console.log($data.type)"></span>');
+        '<span class="hbbuildbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
     }
 
     //Hook up Real Functions to Keyboard Keys

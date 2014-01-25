@@ -80,6 +80,7 @@ var hotbuild2 = (function () {
         self.hotBuild = function (event, hotbuilds) {
             self.hotbuilds(hotbuilds);
             if (model['maybeSetBuildTarget']) {
+                
                 if (self.knowsAnyBuildCommand()) {
                     var failDetect = 0;
                     do {
@@ -108,7 +109,32 @@ var hotbuild2 = (function () {
                     event.preventDefault();
                 }
                 else {
-                    console.log('could not hotbuild item ' + self.debuginfo());
+                    //check if units are selected ?
+                    //
+                    debugger;
+                    for (var i = 0; i < self.hotbuilds().length; i++)
+                    {
+                        var typeindex = _.findIndex(model.selectionList(), { 'type': self.hotbuilds()[i].json });
+                        if (typeindex !== -1) {
+                            //var e = jQuery.Event("click");
+                            if (event.ctrlKey) {
+                                var e = new MouseEvent('click', {
+                                    'button': 2
+                                });
+                                model.onSelectionDisplayClick(typeindex, e);
+                            }
+                            else
+                            {
+                                var e = new MouseEvent('click', {
+                                    'button': 1
+                                });
+                                model.onSelectionDisplayClick(typeindex, e);
+                            }
+                            break;
+                        }
+
+                    }
+                    console.log('could not hotbuild item ' + self.debuginfo() + self.hotbuilds()[self.cycleid()].json);
                 }
             }
         };
@@ -123,9 +149,12 @@ var hotbuild2 = (function () {
         };
 
         self.knowsBuildCommand = function (cmd) {
-            for (var i = 0; i < model.buildTabLists()[model.selectedBuildTabIndex()].length; i++) {
-                if (model.buildTabLists()[model.selectedBuildTabIndex()][i].id == cmd) {
-                    return true;
+            //check on buildtablist empty
+            if (model.buildTabLists().length > 0){
+                for (var i = 0; i < model.buildTabLists()[model.selectedBuildTabIndex()].length; i++) {
+                    if (model.buildTabLists()[model.selectedBuildTabIndex()][i].id == cmd) {
+                        return true;
+                    }
                 }
             }
             return false;
