@@ -169,8 +169,10 @@ var hotbuildsettings = (function () {
 
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
         var self = this;
-        self.hotbuildglobal = ko.observable(hbglobal);
+        self.hotbuildglobal = ko.observable(hbglobal).extend({ notify: 'always' });;
         self.hotbuildglobalkey = ko.observable(hbglobalkey);
+        self.cleanhotbuildglobal = ko.observable(hbglobal);
+        self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
         self.selectedhotbuild = ko.observableArray([]);
         self.buildings = ko.observableArray(hbbuildings);
         self.units = ko.observableArray(hbunits);
@@ -186,7 +188,7 @@ var hotbuildsettings = (function () {
         });
 
         self.keyboardkey.subscribe(function (value) {
-            //debugger; 
+
             var keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), value);
             var hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
             if (hotbuildkey !== undefined) {
@@ -195,9 +197,14 @@ var hotbuildsettings = (function () {
             else {
                 //TODO check if it works if no empty hotbuildglobalkeys"" ones are there
                 //find first unused hotbuildkey and select it 
-                keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), "");
-                hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
-                self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
+                var lastindex = _.keys(self.hotbuildglobalkey()).length + 1;
+                self.hotbuildglobalkey()['hotbuild' + lastindex + 's'] = value;
+                self.hotbuildglobal()['hotbuild' + lastindex + 's'] = [];
+                self.selectedkeyinfo('hotbuild' + lastindex);
+                self.Save();
+                //keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), "");
+                //hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
+                //self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
             }
             //get uberkey info
 
@@ -251,18 +258,20 @@ var hotbuildsettings = (function () {
                 self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = self.keyboardkey();
                 self.selectedhotbuild.push(selectedunit);
             }
-            self.Save();
             !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
+            self.Save();
         };
 
         self.remFromList = function (item) {
             self.selectedhotbuild.remove(item);
-            self.Save();
             if (self.selectedhotbuild().length === 0) {
-                self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = "";
-                // self.InitKeyboard();
+                //self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = "";
                 $('.active').hasClass('hbk') ? $('.active').removeClass('hbk') : '';
+                //self.cleanUpafterEmptyKey();
+                //self.keyboardkey();
+                // self.InitKeyboard();
             }
+            self.Save();
         };
 
         //Maybe replace this with dragging ? 
@@ -285,9 +294,35 @@ var hotbuildsettings = (function () {
         };
 
         self.Save = function () {
-            model.hotbuildconfig = self.hotbuildglobal();
-            model.hotbuildconfigkey = self.hotbuildglobalkey();
-            self.hotbuildglobal()[self.selectedkeyinfo()] = self.selectedhotbuild();
+            //is this needed ? 
+            //model.hotbuildconfig = self.hotbuildglobal();
+            //model.hotbuildconfigkey = self.hotbuildglobalkey();
+            //do cleanup of empty props
+            var viewmodelconfigkey = self.hotbuildglobalkey();
+            var viewmodelconfig = self.hotbuildglobal();
+            for (var hotkey in viewmodelconfigkey) {
+                if (viewmodelconfig[hotkey].length === 0) {
+                    delete viewmodelconfigkey[hotkey];
+                    delete viewmodelconfig[hotkey];
+                }
+            }
+            //create copy + rename props so they are back sequential
+            var copyconfigkey = viewmodelconfigkey;
+            var copyconfig = viewmodelconfig;
+            viewmodelconfigkey = {};
+            viewmodelconfig = {};
+            //debugger;
+            var nr = 1;
+            for (var hotkey in copyconfigkey) {
+                viewmodelconfigkey['hotbuild' + nr + 's'] = copyconfigkey[hotkey];
+                viewmodelconfig['hotbuild' + nr + 's'] = copyconfig[hotkey];
+                nr++;
+            }
+
+            self.cleanhotbuildglobalkey(viewmodelconfigkey);
+            self.cleanhotbuildglobal(viewmodelconfig);
+            model.hotbuildconfig = self.cleanhotbuildglobal();
+            model.hotbuildconfigkey = self.cleanhotbuildglobalkey();
         };
 
         self.keyboardclickhandler = function () {
@@ -344,32 +379,36 @@ var hotbuildsettings = (function () {
                     var swapposition;
                     var currentposition;
                     //find swap position
-                    for (var i = 1; i <= 20; i++) {
-                        if (hotbuildglobalkey["hotbuild" + i + "s"] === swapto) {
+                    for (var hotkey in self.hotbuildglobalkey())
+                    {
+                        if(self.hotbuildglobalkey()[hotkey] === swapto)
+                        {
                             swapposition = i;
                             break;
                         }
                     }
                     //find current key position
-                    for (var i = 1; i <= 20; i++) {
-                        if (hotbuildglobalkey["hotbuild" + i + "s"] === self.keyboardkey()) {
+                    for (var hotkey in self.hotbuildglobalkey()) {
+                        if (self.hotbuildglobalkey()[hotkey] === self.keyboardkey()) {
                             currentposition = i;
                             break;
                         }
                     }
                     if (swapposition !== undefined) {
-                        hotbuildglobalkey["hotbuild" + currentposition + "s"] = swapto;
-                        hotbuildglobalkey["hotbuild" + swapposition + "s"] = self.keyboardkey();
+                        self.hotbuildglobalkey()["hotbuild" + currentposition + "s"] = swapto;
+                        self.hotbuildglobalkey()["hotbuild" + swapposition + "s"] = self.keyboardkey();
                     }
                     else {
-                        hotbuildglobalkey["hotbuild" + currentposition + "s"] = swapto;
+                        self.hotbuildglobalkey()["hotbuild" + currentposition + "s"] = swapto;
                     }
+                    self.Save();
                 }
             }
         }
 
         self.InitKeyboard = function () {
             self.selectedkeyinfo(undefined);
+            //debugger;
             var arrkeys = _.keys(_.invert(self.hotbuildglobalkey()));
             var uberkeys = [];
             _.forEach(model.keybindGroups(), function (o) {
@@ -474,7 +513,6 @@ var hotbuildsettings = (function () {
             model.camera_key_pan_style('ARROW');
             forgetFramePosition('hotbuild_info_frame');
             self.InitKeyboard();
-
         };
 
         self.ComunityDefaultsWASD = function () {
@@ -493,8 +531,9 @@ var hotbuildsettings = (function () {
                     keyboardsettings.uber[key] = localStorage[key];
                 }
             }
-            keyboardsettings.hotbuildglobalkey = self.hotbuildglobalkey();
-            keyboardsettings.hotbuildglobal = self.hotbuildglobal();
+            self.Save();
+            keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
+            keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
             $("#ieport").val(JSON.stringify(keyboardsettings));
         };
 
@@ -509,6 +548,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
+                self.Save();
                 self.InitKeyboard();
             }
             else {
@@ -526,6 +566,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
+                self.Save();
                 self.InitKeyboard();
             });
         };
@@ -562,11 +603,6 @@ var hotbuildsettings = (function () {
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
-    //remove this  
-    for (var i = 1; i < 21; i++) {
-        eval("hotbuildglobal.hotbuild" + i + "s = []");
-        eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
-    }
 
     var settings = decode(localStorage.settings);
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
@@ -576,25 +612,12 @@ var hotbuildsettings = (function () {
     var hotbuildsettings = {};
     hotbuildsettings.viewmodel = hbuisettings;
 
-    model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000,'Hotbuild2');
-    model.addSetting_Text('Hotbuild Requeue Amount', 'hotbuild_requeue_amount', 'UI', 'Number', 50,'Hotbuild2');
-    model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0,'Hotbuild2');
-    model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
     return hotbuildsettings;
-
 
 })();
 
 (function () {
-
-    model.oldSettingsBeforeHotbuild = model.settings;
-    model.settings = ko.computed(function () {
-        var newSettings = model.oldSettingsBeforeHotbuild();
-        newSettings.hotbuildconfig = hotbuildsettings.viewmodel.hotbuildglobal();
-        newSettings.hotbuildconfigkey = hotbuildsettings.viewmodel.hotbuildglobalkey();
-        return newSettings;
-    });
 
     function loadHotBuildSettings(element, url, model) {
         element.load(url, function () {
@@ -611,5 +634,19 @@ var hotbuildsettings = (function () {
 	        "</li>");
     $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
     loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
+
+
+    model.oldSettingsBeforeHotbuild = model.settings;
+    model.settings = ko.computed(function () {
+        var newSettings = model.oldSettingsBeforeHotbuild();
+        newSettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
+        newSettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        return newSettings;
+    });
+
+    model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000, 'Hotbuild2');
+    model.addSetting_Text('Hotbuild Requeue Amount', 'hotbuild_requeue_amount', 'UI', 'Number', 50, 'Hotbuild2');
+    model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
+    model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
 })();
