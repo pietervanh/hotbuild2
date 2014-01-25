@@ -4,7 +4,13 @@
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 var hotbuild2 = (function () {
 
+    var hotbuildglobal = {};
+    var hotbuildglobalkey = {};
+
     var settings = decode(localStorage.settings);
+
+    hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
+    hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
 
     model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
     //fast check on bad reset_time input
@@ -156,7 +162,24 @@ var hotbuild2 = (function () {
     //init hotbuildsystem
     hotbuild2.hotbuildManager = new hbManager(model.hotbuild_reset_time);
 
-    //NON HOTKEY FUNCTIONS BUT CALLABLE THROUGH NORMAL KEYBOARD KEYS
+    hotbuild2.hbgetBuildBarKey = function (id) {
+        var result = '';
+        var hbpos = 1;
+        _.forEach(hotbuildglobal, function (hbkey) {
+            _.forEach(hbkey, function (hbitem) {
+                //debugger;
+                if (hbitem.json === id) {
+                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
+                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                        return false;
+                    }
+                }
+            });
+            hbpos += 1;
+        });
+        return result;
+    };
+
 
     hotbuild2.buildTemplates = function () {
 
@@ -248,44 +271,6 @@ var hotbuild2 = (function () {
             mouseY = e.clientY;
         });
 
-        buildTemplates.imbaWall = function (queue, defence) {
-            if (model.selectedMobile()) {
-                var wall = "/pa/units/land/land_barrier/land_barrier.json";
-                var turret = defence;
-                (function () {
-                    var mX = mouseX;
-                    var mY = mouseY;
-                    buildAt(mX, mY, turret, queue, function (suc) {
-                        if (suc) {
-                            // if we do not wait for a bit the turret wont be placed already
-                            // it would not block the walls, making everything fail by placing the walls inside the turret
-                            // does anybody know what to do about this?!
-                            window.setTimeout(function () {
-                                api.arch.beginFabMode(wall).then(function (ok) {
-                                    // the callback of the callback of the callback of the oh wtf
-                                    tryInLine(mX, mY, ["up"], function () {
-                                        tryInLine(mX, mY, ["down"], function () {
-                                            tryInLine(mX, mY, ["right"], function () {
-                                                tryInLine(mX, mY, ["left"], function () {
-                                                    tryInLine(mX, mY, ["up", "left"], function () {
-                                                        tryInLine(mX, mY, ["up", "right"], function () {
-                                                            tryInLine(mX, mY, ["down", "left"], function () {
-                                                                tryInLine(mX, mY, ["down", "right"]);
-                                                            });
-                                                        });
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    });
-                                });
-                            }, 750);
-                        }
-                    });
-                }());
-            }
-        };
-
         buildTemplates.imbaWall2 = function (queue,mX,mY) {
             var wall = "/pa/units/land/land_barrier/land_barrier.json";
 
@@ -333,6 +318,7 @@ var hotbuild2 = (function () {
 
     }();
 
+    //NON HOTKEY FUNCTIONS BUT CALLABLE THROUGH NORMAL KEYBOARD KEYS
     //Pause / Unpause energy
     hotbuild2.energyToggle = function (event) {
         var currentOrder = model.selectedEnergyOrderIndex();
@@ -390,8 +376,6 @@ var hotbuild2 = (function () {
             }
         }
     };
-
-
 
 
     //same as the one in media\ui\alpha\shared\js\inputmap.js
@@ -456,24 +440,7 @@ var hotbuild2 = (function () {
         }
     };
 
-    //Hook up Real Functions to Keyboard Keys
-    //Special Actions
-    action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };
-    action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
-    action_sets.hotbuild['Requeue'] = function (event) { hotbuild2.requeue(event); };
-    action_sets.hotbuild['View Notification'] = function (event) { hotbuild2.viewAlert(); };
-    //action_sets.hotbuild['Build Template'] = function (event) { hotbuild2.buildTemplates.chooseBuildTemplate(); };
-    //Fixes for Uber Casesensitive keybinds
-    action_sets.hotbuild['move'] = function (event) { hotbuild2.CommandMode(0); };
-    action_sets.hotbuild['attack'] = function (event) { hotbuild2.CommandMode(1); };
-    action_sets.hotbuild['assist'] = function (event) { hotbuild2.CommandMode(2); };
-    action_sets.hotbuild['repair'] = function (event) { hotbuild2.CommandMode(3); };
-    action_sets.hotbuild['reclaim'] = function (event) { hotbuild2.CommandMode(4); };
-    action_sets.hotbuild['patrol'] = function (event) { hotbuild2.CommandMode(5); };
-    action_sets.hotbuild['stop'] = function (event) { hotbuild2.CommandMode(-1); };
-    action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
-    action_sets.hotbuild['unload'] = function (event) { hotbuild2.CommandMode(9); };
-
+    //capture mouse down to do the imbawalls after click place building
     var $holodeck = $('.holodeck');
     var holodeckModeMouseDown = {};
     $holodeck.mousedown(function (mdevent) {
@@ -485,6 +452,85 @@ var hotbuild2 = (function () {
             imbawallclick = "nobuild";
         }
     });
+
+
+    var keycodes = {
+        37: "left",
+        38: "up",
+        39: "right",
+        40: "down",
+        45: "insert",
+        46: "delete",
+        8: "backspace",
+        9: "tab",
+        13: "enter",
+        16: "shift",
+        17: "ctrl",
+        18: "alt",
+        19: "pause",
+        20: "capslock",
+        27: "escape",
+        32: "space",
+        33: "pageup",
+        34: "pagedown",
+        35: "end",
+        112: "f1",
+        113: "f2",
+        114: "f3",
+        115: "f4",
+        116: "f5",
+        117: "f6",
+        118: "f7",
+        119: "f8",
+        120: "f9",
+        121: "f10",
+        122: "f11",
+        123: "f12",
+        144: "numlock",
+        145: "scrolllock",
+        186: "semicolon",
+        187: "equal",
+        188: "comma",
+        189: "dash",
+        190: "period",
+        191: "slash",
+        192: "graveaccent",
+        219: "openbracket",
+        220: "backslash",
+        221: "closebraket",
+        222: "singlequote"
+    };
+    //fix for allowing multiple bindings per key
+    //for example stop = s / build mex = s
+    // stop = s = default mousetrap binding
+    // build mex = hotbuild key = using keydown
+    $(document).keydown(function (e) {
+
+        if (!model.hasSelection() || model.showLanding() || model.chatSelected())
+            return;
+
+        var value;
+        //console.log(e.keyCode);
+        if (e.which >= 48 && e.which <= 90) {
+
+            /* grab letters */
+            value = String.fromCharCode(e.which).toLowerCase();
+        } else {
+
+            /* if not a letter look in key codes */
+            value = keycodes[e.which];
+        }
+
+        //console.log(value);
+        for (var hotkey in hotbuildglobalkey)
+        {
+            if(hotbuildglobalkey[hotkey] === value)
+            {
+                hotbuild2.hotbuildManager.hotBuild(e, hotbuildglobal[hotkey]);
+            }
+        }
+    });
+
 
 
     return hotbuild2;

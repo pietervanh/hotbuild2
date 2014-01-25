@@ -186,13 +186,14 @@ var hotbuildsettings = (function () {
         });
 
         self.keyboardkey.subscribe(function (value) {
-            //debugger;
+            //debugger; 
             var keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), value);
             var hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
             if (hotbuildkey !== undefined) {
                 self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
             }
             else {
+                //TODO check if it works if no empty hotbuildglobalkeys"" ones are there
                 //find first unused hotbuildkey and select it 
                 keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), "");
                 hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
@@ -561,6 +562,7 @@ var hotbuildsettings = (function () {
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
+    //remove this  
     for (var i = 1; i < 21; i++) {
         eval("hotbuildglobal.hotbuild" + i + "s = []");
         eval("hotbuildglobalkey.hotbuild" + i + "s = ''");
