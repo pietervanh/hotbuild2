@@ -126,7 +126,7 @@ var hotbuild2 = (function () {
                             currentselection.push(model.selectionList()[i].type);
                         }
                         if (event.ctrlKey) {
-
+                            model.holodeck.view.selectByTypes("remove", selectionTypes);
                         }
                         else {
                             model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
