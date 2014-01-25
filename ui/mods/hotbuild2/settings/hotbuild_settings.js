@@ -58,7 +58,7 @@ var hotbuildsettings = (function () {
 		new hbListItem().json("/pa/units/land/bot_aa/bot_aa.json"),
 		new hbListItem().json("/pa/units/land/assault_bot/assault_bot.json"),
 		new hbListItem().json("/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json"),
-		new hbListItem().json("/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json"),		
+		new hbListItem().json("/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json"),
 		new hbListItem().json("/pa/units/land/assault_bot_adv/assault_bot_adv.json"),
 		new hbListItem().json("/pa/units/land/bot_artillery_adv/bot_artillery_adv.json"),
 		new hbListItem().json("/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"),
@@ -111,7 +111,7 @@ var hotbuildsettings = (function () {
                 _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
             }
             //Orbital is changing rapidly so hacky fixes here
-            if (listitem.json2 === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json"){
+            if (listitem.json2 === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
                 listitem.factory('ofac');
             }
             if (listitem.json2 === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
@@ -350,7 +350,7 @@ var hotbuildsettings = (function () {
                 $('#kbselection').replaceWith($selectedButton);
 
                 //$('#kbselection').css('text-transform', 'uppercase !important');
-                
+
 
                 $('#kbselection').click(function () {
                     $('#changeKeyDlg').dialog({
@@ -373,16 +373,13 @@ var hotbuildsettings = (function () {
         self.swapKey = function () {
             swapto = $("#swapkey").val();
 
-            if(self.keyboardkey() !== "" && swapto !== "")
-            {
+            if (self.keyboardkey() !== "" && swapto !== "") {
                 if (self.keyboardkey() !== swapto) {
                     var swapposition;
                     var currentposition;
                     //find swap position
-                    for (var hotkey in self.hotbuildglobalkey())
-                    {
-                        if(self.hotbuildglobalkey()[hotkey] === swapto)
-                        {
+                    for (var hotkey in self.hotbuildglobalkey()) {
+                        if (self.hotbuildglobalkey()[hotkey] === swapto) {
                             swapposition = i;
                             break;
                         }
@@ -524,7 +521,7 @@ var hotbuildsettings = (function () {
 
         self.export = function () {
             console.log('export');
-            var keyboardsettings = {}
+            var keyboardsettings = {};
             keyboardsettings.uber = {};
             for (var key in localStorage) {
                 if (localStorage.hasOwnProperty(key) && key.indexOf('keybinding') === 0) {
@@ -580,8 +577,8 @@ var hotbuildsettings = (function () {
                 width: 450,
                 modal: true,
                 buttons: {
-                    "Import": function () { self.import() },
-                    "Export": function () { self.export() }
+                    "Import": function () { self.import(); },
+                    "Export": function () { self.export(); }
                 },
                 close: function () {
                     self.showingImportExportDialog(false);
@@ -591,15 +588,13 @@ var hotbuildsettings = (function () {
     }
 
     self.getTemplate = function (hblistitem) {
-        if(hblistitem.factory === "")
-        {
+        if (hblistitem.factory === "") {
             return "structureTemplate";
         }
-        else
-        {
+        else {
             return "mobileTemplate";
         }
-    }
+    };
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
