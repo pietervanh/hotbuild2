@@ -201,7 +201,7 @@ var hotbuildsettings = (function () {
                 self.hotbuildglobalkey()['hotbuild' + lastindex + 's'] = value;
                 self.hotbuildglobal()['hotbuild' + lastindex + 's'] = [];
                 self.selectedkeyinfo('hotbuild' + lastindex);
-                self.Save();
+                //self.Save();
                 //keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), "");
                 //hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
                 //self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
