@@ -111,7 +111,7 @@ var hotbuild2 = (function () {
                 else {
                     //check if units are selected ?
                     //
-                    debugger;
+                    //debugger;
                     for (var i = 0; i < self.hotbuilds().length; i++)
                     {
                         var typeindex = _.findIndex(model.selectionList(), { 'type': self.hotbuilds()[i].json });
