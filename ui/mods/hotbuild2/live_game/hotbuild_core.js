@@ -112,29 +112,32 @@ var hotbuild2 = (function () {
                     //check if units are selected ?
                     //
                     //debugger;
-                    for (var i = 0; i < self.hotbuilds().length; i++)
-                    {
-                        var typeindex = _.findIndex(model.selectionList(), { 'type': self.hotbuilds()[i].json });
-                        if (typeindex !== -1) {
-                            //var e = jQuery.Event("click");
-                            if (event.ctrlKey) {
-                                var e = new MouseEvent('click', {
-                                    'button': 2
-                                });
-                                model.onSelectionDisplayClick(typeindex, e);
-                            }
-                            else
-                            {
-                                var e = new MouseEvent('click', {
-                                    'button': 1
-                                });
-                                model.onSelectionDisplayClick(typeindex, e);
-                            }
-                            break;
-                        }
+                    if (model.selectionList().length > 0) {
+                        var selectionTypes = [];
+                        for (var i = 0; i < self.hotbuilds().length; i++) {
 
+                            var typeindex = _.findIndex(model.selectionList(), { 'type': self.hotbuilds()[i].json });
+                            if (typeindex !== -1) {
+                                selectionTypes.push(self.hotbuilds()[i].json);
+                            }
+                        }
+                        var currentselection = [];
+                        for (var i = 0; i < model.selectionList().length; i++) {
+                            currentselection.push(model.selectionList()[i].type);
+                        }
+                        if (event.ctrlKey) {
+
+                        }
+                        else {
+                            model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
+                        }
+                        
                     }
-                    console.log('could not hotbuild item ' + self.debuginfo() + self.hotbuilds()[self.cycleid()].json);
+                    else {
+                        console.log('hotbuild doesnt know what to do ' + self.debuginfo());
+                    }
+
+                    
                 }
             }
         };
