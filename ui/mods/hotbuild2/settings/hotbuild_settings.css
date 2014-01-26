@@ -182,6 +182,7 @@ float: left;*/
    border-radius: 5px;
    -webkit-border-radius: 5px;
    color: rgba(0,255,255,1);
+   display: inline-block;
 }
 
 
@@ -190,6 +191,8 @@ float: left;*/
     padding-left: 1em;
     display: table;
     border-spacing: 0px 1px;
+    position: relative;
+    clear: right;
 }
 
 #uberlabel{
@@ -249,6 +252,7 @@ text-align: right;
     overflow: scroll;
     direction: rtl;
     width: 48%;
+    clear: left;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
@@ -335,16 +339,14 @@ text-align: right;
     background-image: url(/../../../mods/hotbuild2/settings/ui-icons_FF7F00_256x240.png) !important;
 }
 
-select {
-    width: 220px;
-    margin-left: 1em;
-	position: relative;
-}
 
-#addunit, #addbuilding {
+.filter {
+    position: relative;
+    height: 30px;
     display: inline-block;
 	float: right;
    	clear: right; 
+       border: 1px solid red;
 }
 
 #changeKeyDlg{
