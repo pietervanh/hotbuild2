@@ -342,8 +342,17 @@ select {
 	clear: right;
 }
 
+#changeKeyDlg{
+    min-width: 160px;
+}
+
 #changekey {
-        color: #00FFFF;
-    display: table-cell;
-    text-align: right;
+    color: #00FFFF;
+    display: inline-block;
+}
+
+#swapkey {
+    color: #00FFFF;
+    width: 9px;
+    display: inline-block;
 }

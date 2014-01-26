@@ -573,8 +573,7 @@ var hotbuildsettings = (function () {
         self.showImportExportDialog = function () {
             self.showingImportExportDialog(true);
             $('#importexportDlg').dialog({
-                height: 300,
-                width: 450,
+                width: 'auto',
                 modal: true,
                 buttons: {
                     "Import": function () { self.import(); },
