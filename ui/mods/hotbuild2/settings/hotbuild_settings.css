@@ -248,6 +248,7 @@ text-align: right;
     padding-right: 24px;
     overflow: scroll;
     direction: rtl;
+    width: 48%;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
@@ -269,7 +270,7 @@ text-align: right;
 
 #sequencelist {
     display: table;
-    min-width: 75%;
+/*    min-width: 75%; */
     position: relative;
     float: left;
 }
@@ -322,8 +323,8 @@ text-align: right;
     display: table-cell;
     vertical-align: middle;
     border-bottom: 1px solid #333;
-    /* min-width: 500px; */
-    width: 360px;
+    /* min-width: 500px; 
+    width: 360px;*/
 }
 
 .ui-icon-trash {
@@ -367,8 +368,9 @@ select {
     position: relative;
     float: right;
     margin-top: 6px;
-    padding-right: 24px;
+/*    padding-right: 24px; */
     overflow: scroll;
+        width: 48%;
 }
 
 .custom-scrollR::-webkit-scrollbar-thumb {
@@ -381,15 +383,16 @@ select {
 }
 
 #sequenceR {
+    padding-right: 8px;
     text-align: left;
-    float: left;
+    float: right;
 	position: relative;
 	height: 270px;
 }
 
 #sequencelistR {
     display: table;
-    min-width: 75%;
+/*    min-width: 75%; */
     position: relative;
-    float: left;
+    float: right;
 }
