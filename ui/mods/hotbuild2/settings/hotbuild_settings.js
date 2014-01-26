@@ -624,7 +624,7 @@ var hotbuildsettings = (function () {
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
-        if (arg.item.factory === undefined) {
+        if (_.isFunction(arg.item.factory)) {
             if (arg.item.factory() !== "") {
                 var unitCheck = true;
                 for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
