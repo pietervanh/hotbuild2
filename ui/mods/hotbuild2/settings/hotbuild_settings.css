@@ -241,7 +241,9 @@ text-align: right;
 }
 
 .custom-scroll {
-	clear: both;
+    float: left;
+    position: relative;
+    display: inline-block;
     margin-top: 6px;
     padding-right: 24px;
     overflow: scroll;
@@ -320,7 +322,8 @@ text-align: right;
     display: table-cell;
     vertical-align: middle;
     border-bottom: 1px solid #333;
-    min-width: 500px;
+    /* min-width: 500px; */
+    width: 360px;
 }
 
 .ui-icon-trash {
@@ -338,8 +341,9 @@ select {
 }
 
 #addunit, #addbuilding {
+    display: inline-block;
 	float: right;
-	clear: right;
+   	clear: right; 
 }
 
 #changeKeyDlg{
@@ -355,4 +359,37 @@ select {
     color: #00FFFF;
     width: 9px;
     display: inline-block;
+}
+
+
+
+.custom-scrollR {
+    position: relative;
+    float: right;
+    margin-top: 6px;
+    padding-right: 24px;
+    overflow: scroll;
+}
+
+.custom-scrollR::-webkit-scrollbar-thumb {
+    background-color: rgba(0,255,255,0.5);
+    -webkit-border-radius: 5px;
+}
+
+.custom-scrollR::-webkit-scrollbar-corner {
+    background-color: rgba(0,0,0,0);
+}
+
+#sequenceR {
+    text-align: left;
+    float: left;
+	position: relative;
+	height: 270px;
+}
+
+#sequencelistR {
+    display: table;
+    min-width: 75%;
+    position: relative;
+    float: left;
 }
