@@ -49,10 +49,7 @@ var hotbuildsettings = (function () {
         new hbListItem().json("/pa/units/land/teleporter/teleporter.json"),
 		new hbListItem().json("/pa/units/sea/torpedo_launcher_adv/torpedo_launcher_adv.json"),
         new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher.json"),
-		new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json")
-    ];
-
-    var hbunits = [
+		new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json"),
 		new hbListItem().json("/pa/units/land/fabrication_bot/fabrication_bot.json"),
         new hbListItem().json("/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json"),
 		new hbListItem().json("/pa/units/land/bot_aa/bot_aa.json"),
@@ -179,7 +176,7 @@ var hotbuildsettings = (function () {
         self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
         self.selectedhotbuild = ko.observableArray([]);
         self.buildings = ko.observableArray(hbbuildings);
-        self.units = ko.observableArray(hbunits);
+        //self.units = ko.observableArray(hbunits);
         self.keyboardkey = ko.observable();
         self.uberkey = ko.observable();
         self.selectedkeyinfo = ko.observable();
@@ -645,11 +642,27 @@ var hotbuildsettings = (function () {
     model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
-    ko.bindingHandlers.sortable.afterMove = function (arg) {
-        debugger;
+
+    ko.bindingHandlers.sortable.beforeMove = function (arg) {
+        var unitCheck = true;
         for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-            hotbuildsettings.viewmodel.selectedhotbuild()[i] = ko.toJS(hotbuildsettings.viewmodel.selectedhotbuild()[i]);
+            if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory()) {
+                unitCheck = false;
+                break;
+            }
         }
+        if(!unitCheck)
+        {
+            arg.cancelDrop = true;
+        }
+        return arg;
+    };
+
+    ko.bindingHandlers.sortable.afterMove = function (arg) {
+        for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
+            hotbuildsettings.viewmodel.selectedhotbuild()[i] = ko.toJS(hotbuildsettings.viewmodel.selectedhotbuild()[i]);           
+        }
+
     };
 
 })();
