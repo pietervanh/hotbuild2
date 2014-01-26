@@ -184,6 +184,7 @@ float: left;*/
    color: rgba(0,255,255,1);
 }
 
+
 #selectedlabels{
     float: left;
     padding-left: 1em;
@@ -205,13 +206,15 @@ width: 140px;
 }
 
 .ui-icon-circle-arrow-e{
-display: table-cell;
+    display: table-cell;
     border-bottom: 1px solid #333;
+    background-image: url(../../../mods/hotbuild2/settings/ui-icons_00FF7F_256x240.png) !important;
 }
 
 
 .ui-icon-circle-arrow-s{
     display: table-cell;
+    background-image: url(../../../mods/hotbuild2/settings/ui-icons_00FFFF_256x240.png) !important;
 }
 
 #imexporter{
@@ -227,7 +230,7 @@ display: table-cell;
 }
 
 .uberkey {
-    color: rgba(0,255,255,1);
+    color: #00FF7F;
         border-bottom: 1px solid #333;
 display: table-cell;
 text-align: right;
@@ -320,10 +323,12 @@ text-align: right;
     min-width: 500px;
 }
 
-#trashcan {
-    height: 48px;
+.ui-icon-trash {
     display: table-cell;
-    vertical-align: middle;
+}
+
+.ui-icon-trash:hover {
+    background-image: url(/../../../mods/hotbuild2/settings/ui-icons_FF7F00_256x240.png) !important;
 }
 
 select {
@@ -335,4 +340,10 @@ select {
 #addunit, #addbuilding {
 	float: right;
 	clear: right;
+}
+
+#changekey {
+        color: #00FFFF;
+    display: table-cell;
+    text-align: right;
 }

@@ -341,17 +341,11 @@ var hotbuildsettings = (function () {
                     $(this).addClass('active');
                     $(this).css('box-shadow', '0px 0px 2px 2px rgba(0,255,255,.7)');
                 }
-                //var $kbselection = $('#kbselection');
-                //$kbselection.html($($this.clone()));
                 var $selectedButton = $this.clone();
                 //$selectedButton.removeClass('active');
                 $selectedButton.attr('id', 'kbselection');
                 $selectedButton.css({ 'box-shadow': '', 'border': 'rgba(0,255,255,1) solid thin', '-webkit-border-radius': '5px', 'text-transform': 'uppercase !important' });
                 $('#kbselection').replaceWith($selectedButton);
-
-                //$('#kbselection').css('text-transform', 'uppercase !important');
-                
-
                 $('#kbselection').click(function () {
                     $('#changeKeyDlg').dialog({
                         height: 150,
