@@ -102,7 +102,7 @@
         <div class="custom-scroll">
             <div id="sequence">
                 <div id="sequencelist">
-                    <div data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild }">
+                    <div data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: 'body' } }">
 
                     </div>
                 </div>
@@ -111,7 +111,7 @@
         <div class="custom-scrollR">
             <div id="sequenceR">
                 <div id="sequencelistR">
-                    <div data-bind="sortable: {template: 'rightTemplate', data: buildings }">
+                    <div data-bind="sortable: {template: 'rightTemplate', data: buildings, options: { helper: 'clone', appendTo: 'body' } }">
 
                     </div>
                 </div>
