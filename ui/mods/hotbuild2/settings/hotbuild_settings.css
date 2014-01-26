@@ -270,13 +270,16 @@ text-align: right;
 	position: relative;
     direction: ltr;
 	height: 270px;
+        border: 1px solid blue;
 }
 
 #sequencelist {
     display: table;
-/*    min-width: 75%; */
+    min-width: 300px;
+    min-height: 48px;
     position: relative;
     float: left;
+    border: 1px solid yellow;
 }
 
 .hotbuild_fab_selection {
