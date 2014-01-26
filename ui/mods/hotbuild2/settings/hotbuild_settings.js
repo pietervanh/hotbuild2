@@ -128,6 +128,8 @@ var hotbuildsettings = (function () {
         if (listitem.factory() === undefined) {
             listitem.factory('');
         }
+        listitem.display_group(unitdata.display_group);
+        listitem.display_index(unitdata.display_group);
         //if(unitdata.json() != '')
         //listitem = ko.toJS(listitem);
     }
@@ -140,6 +142,8 @@ var hotbuildsettings = (function () {
         self.displayname = ko.observable("loading");
         self.factory = ko.observable(); //css based on factory ?
         self.image = ""; //get image of unit / building
+        self.display_group = ko.observable();
+        self.display_index = ko.observable();
         self.json.subscribe(function (value) {
             self.json2 = value;
             self.json(value);

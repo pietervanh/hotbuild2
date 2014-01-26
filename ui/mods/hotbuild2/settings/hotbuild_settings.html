@@ -3,8 +3,8 @@
         <div class="ui-icon ui-icon-comment"></div>
         <div id="comments" style="font-family:'DINPRO-LIGHT'">Please give comments/ideas on the forum</div>
         <div id="communitydefaults">
-            <input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
-            <input type="button" value="Community Defaults (WASD)" type="submit" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
+            <input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
+            <input type="button" value="Community Defaults (WASD)"  data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
         </div>
         <div id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</div>
         <div class="ui-icon ui-icon-info"></div>
@@ -109,7 +109,16 @@
         <div class="custom-scroll">
             <div id="sequence">
                 <div id="sequencelist">
-                    <div data-bind="sortable: {template: 'structureTemplate', data: selectedhotbuild }">
+                    <div data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild }">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-scroll">
+            <div id="sequence">
+                <div id="sequencelist">
+                    <div data-bind="sortable: {template: 'rightTemplate', data: buildings }">
 
                     </div>
                 </div>
@@ -117,7 +126,7 @@
         </div>
     </div>
 
-    <script id="structureTemplate" type="text/html">
+    <script id="leftTemplate" type="text/html">
         <div class="hotbuild_list_item">
             <div class="hotbuild_fab_selection">
                 <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
@@ -137,7 +146,7 @@
         </div>
     </script>
 
-    <script id="mobileTemplate" type="text/html">
+    <script id="rightTemplate" type="text/html">
         <div class="hotbuild_list_item">
             <div class="hotbuild_fab_selection">
                 <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
@@ -150,9 +159,6 @@
             <div class="hotbuild_list_desc">
                 <span data-bind="text: displayname"></span><br />
                 <span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
-            </div>
-            <div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'">
-                <span class="ui-icon ui-icon-trash" />
             </div>
         </div>
     </script>
