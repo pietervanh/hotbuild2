@@ -17,11 +17,12 @@
     "priority": 100,
     "live_game": [
         "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
-		"coui://ui/mods/hotbuild2/live_game/hotbuild_core.js",
+        "coui://ui/mods/hotbuild2/live_game/hotbuild_core.js",
         "coui://ui/mods/hotbuild2/live_game/hotbuild_live.js"
     ],
     "settings": [
         "coui://ui/mods/hotbuild2/settings/hotbuild_settings.css",
+        "coui://ui/mods/hotbuild2/settings/knockout-sortable.min.js",
         "coui://ui/mods/hotbuild2/settings/hotbuild_settings.js"
     ],
     "global_mod_list": [

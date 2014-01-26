@@ -70,27 +70,27 @@ var hotbuildsettings = (function () {
 		new hbListItem().json("/pa/units/land/tank_laser_adv/tank_laser_adv.json"),
 		new hbListItem().json("/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json"),
         new hbListItem().json("/pa/units/land/tank_heavy_armor/tank_heavy_armor.json"),
-		new hbListItem().json("/pa/units/air/fabrication_aircraft/fabrication_aircraft.json"),
-		new hbListItem().json("/pa/units/air/fighter/fighter.json"),
-		new hbListItem().json("/pa/units/air/air_scout/air_scout.json"),
-		new hbListItem().json("/pa/units/air/bomber/bomber.json"),
-		new hbListItem().json("/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json"),
-		new hbListItem().json("/pa/units/air/bomber_adv/bomber_adv.json"),
-		new hbListItem().json("/pa/units/air/fighter_adv/fighter_adv.json"),
+        new hbListItem().json("/pa/units/air/fabrication_aircraft/fabrication_aircraft.json"),
+        new hbListItem().json("/pa/units/air/fighter/fighter.json"),
+        new hbListItem().json("/pa/units/air/air_scout/air_scout.json"),
+        new hbListItem().json("/pa/units/air/bomber/bomber.json"),
+        new hbListItem().json("/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json"),
+        new hbListItem().json("/pa/units/air/bomber_adv/bomber_adv.json"),
+        new hbListItem().json("/pa/units/air/fighter_adv/fighter_adv.json"),
         new hbListItem().json("/pa/units/air/gunship/gunship.json"),
-		new hbListItem().json("/pa/units/sea/fabrication_ship/fabrication_ship.json"),
-		new hbListItem().json("/pa/units/sea/sea_scout/sea_scout.json"),
-		new hbListItem().json("/pa/units/sea/frigate/frigate.json"),
-		new hbListItem().json("/pa/units/sea/destroyer/destroyer.json"),
-		new hbListItem().json("/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json"),
-		new hbListItem().json("/pa/units/sea/battleship/battleship.json"),
-		new hbListItem().json("/pa/units/sea/missile_ship/missile_ship.json"),
+        new hbListItem().json("/pa/units/sea/fabrication_ship/fabrication_ship.json"),
+        new hbListItem().json("/pa/units/sea/sea_scout/sea_scout.json"),
+        new hbListItem().json("/pa/units/sea/frigate/frigate.json"),
+        new hbListItem().json("/pa/units/sea/destroyer/destroyer.json"),
+        new hbListItem().json("/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json"),
+        new hbListItem().json("/pa/units/sea/battleship/battleship.json"),
+        new hbListItem().json("/pa/units/sea/missile_ship/missile_ship.json"),
         new hbListItem().json("/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json"),
         new hbListItem().json("/pa/units/orbital/defense_sattelite/defense_satellite.json"),
-		new hbListItem().json("/pa/units/orbital/orbital_lander/orbital_lander.json"),
+        new hbListItem().json("/pa/units/orbital/orbital_lander/orbital_lander.json"),
         new hbListItem().json("/pa/units/orbital/radar_satellite/radar_satellite.json"),
         new hbListItem().json("/pa/units/land/nuke_launcher/nuke_launcher_ammo.json"),
-		new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"),
+        new hbListItem().json("/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"),
     ];
     //debugger;
 
@@ -624,8 +624,8 @@ var hotbuildsettings = (function () {
 
     var $gamesettings = $("#game_settings");
     $gamesettings.children(":first").append("<li class='game_settings'>" +
-	            "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
-	        "</li>");
+                                            "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
+                                            "</li>");
     $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
     loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
 
