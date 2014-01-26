@@ -624,18 +624,20 @@ var hotbuildsettings = (function () {
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
-        if (arg.item.factory() !== "") {
-            var unitCheck = true;
-            for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-                if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory()) {
-                    unitCheck = false;
-                    break;
+        if (arg.item.factory === undefined) {
+            if (arg.item.factory() !== "") {
+                var unitCheck = true;
+                for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
+                    if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory()) {
+                        unitCheck = false;
+                        break;
+                    }
                 }
+                if (!unitCheck) {
+                    arg.cancelDrop = true;
+                }
+                return arg;
             }
-            if (!unitCheck) {
-                arg.cancelDrop = true;
-            }
-            return arg;
         }
     };
 
