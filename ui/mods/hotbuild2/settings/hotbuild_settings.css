@@ -249,7 +249,7 @@ text-align: right;
     display: inline-block;
     margin-top: 6px;
     padding-right: 24px;
-/*    overflow: scroll; */
+    overflow: scroll;
     direction: rtl;
     width: 48%;
     clear: left;
