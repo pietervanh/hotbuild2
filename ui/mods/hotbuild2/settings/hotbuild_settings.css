@@ -249,7 +249,7 @@ text-align: right;
     display: inline-block;
     margin-top: 6px;
     padding-right: 24px;
-    overflow: scroll;
+/*    overflow: scroll; */
     direction: rtl;
     width: 48%;
     clear: left;
@@ -271,11 +271,12 @@ text-align: right;
     direction: ltr;
 	height: 270px;
         border: 1px solid blue;
+        min-width: 400px;
 }
 
 #sequencelist {
     display: table;
-    min-width: 300px;
+    min-width: 390px;
     min-height: 48px;
     position: relative;
     float: left;
@@ -400,4 +401,10 @@ text-align: right;
 /*    min-width: 75%; */
     position: relative;
     float: right;
+}
+
+.sequencelistitem {
+    min-height: 48px;
+    min-width: 300px;
+    border: 1px solid red;
 }
