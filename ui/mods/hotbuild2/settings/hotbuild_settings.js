@@ -176,7 +176,6 @@ var hotbuildsettings = (function () {
         self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
         self.selectedhotbuild = ko.observableArray([]);
         self.buildings = ko.observableArray(hbbuildings);
-        //self.units = ko.observableArray(hbunits);
         self.keyboardkey = ko.observable();
         self.uberkey = ko.observable();
         self.selectedkeyinfo = ko.observable();
@@ -271,25 +270,6 @@ var hotbuildsettings = (function () {
                 //self.cleanUpafterEmptyKey();
                 //self.keyboardkey();
                 // self.InitKeyboard();
-            }
-            self.Save();
-        };
-
-        //Maybe replace this with dragging ? 
-        self.upList = function (item) {
-            var i = self.selectedhotbuild.indexOf(item);
-            if (i >= 1 && i <= self.selectedhotbuild().length) {
-                var array = self.selectedhotbuild();
-                self.selectedhotbuild.splice(i - 1, 2, array[i], array[i - 1]);
-            }
-            self.Save();
-        };
-
-        self.downList = function (item) {
-            var i = self.selectedhotbuild.indexOf(item);
-            if (i < self.selectedhotbuild().length - 1) {
-                var array = self.selectedhotbuild();
-                self.selectedhotbuild.splice(i, 2, array[i + 1], array[i]);
             }
             self.Save();
         };
@@ -644,23 +624,24 @@ var hotbuildsettings = (function () {
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
-        var unitCheck = true;
-        for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-            if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory()) {
-                unitCheck = false;
-                break;
+        if (arg.item.factory() !== "") {
+            var unitCheck = true;
+            for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
+                if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory()) {
+                    unitCheck = false;
+                    break;
+                }
             }
+            if (!unitCheck) {
+                arg.cancelDrop = true;
+            }
+            return arg;
         }
-        if(!unitCheck)
-        {
-            arg.cancelDrop = true;
-        }
-        return arg;
     };
 
     ko.bindingHandlers.sortable.afterMove = function (arg) {
         for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-            hotbuildsettings.viewmodel.selectedhotbuild()[i] = ko.toJS(hotbuildsettings.viewmodel.selectedhotbuild()[i]);           
+            hotbuildsettings.viewmodel.selectedhotbuild()[i] = ko.toJS(hotbuildsettings.viewmodel.selectedhotbuild()[i]);
         }
 
     };
