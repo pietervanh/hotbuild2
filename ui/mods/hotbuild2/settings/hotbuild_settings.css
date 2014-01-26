@@ -302,8 +302,8 @@ text-align: right;
     height: 36px;
     width: 36px;
     position: absolute;
-/*    top: 4px; */
-    left: 4px;
+    top: 6px;
+    left: 6px;
 }
 
 .hotbuild_selected_text {
