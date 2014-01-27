@@ -139,8 +139,8 @@ var hotbuildsettings = (function () {
         self.displayname = ko.observable("loading");
         self.factory = ko.observable(); //css based on factory ?
         self.image = ""; //get image of unit / building
-        self.display_group = ko.observable();
-        self.display_index = ko.observable();
+        self.display_group = ko.observable("");
+        self.display_index = ko.observable("");
         self.json.subscribe(function (value) {
             self.json2 = value;
             self.json(value);
@@ -179,8 +179,9 @@ var hotbuildsettings = (function () {
         self.selectedhotbuild = ko.observableArray([]);
         self.buildings = ko.observableArray(hbbuildings);
         self.filters = ko.observableArray(["buildings","units"]);
-        var filterunits = function () {
+        self.filterunits = function () {
             self.buildings([]);
+            debugger;
             var hassubgroup = false;
             if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0)){
                 hassubgroup = true;
@@ -258,7 +259,7 @@ var hotbuildsettings = (function () {
             }
         };
         self.filters.subscribe(function (value) {
-            filterunits();
+            self.filterunits();
         });
 
         self.activeFilterBuildings = ko.computed(function () {
@@ -763,6 +764,7 @@ var hotbuildsettings = (function () {
         for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
             hotbuildsettings.viewmodel.selectedhotbuild()[i] = ko.toJS(hotbuildsettings.viewmodel.selectedhotbuild()[i]);
         }
+        hotbuildsettings.viewmodel.filterunits(); // should really clone eh
 
     };
 
