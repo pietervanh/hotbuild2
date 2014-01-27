@@ -200,12 +200,24 @@ display: table-cell;
 width: 140px;
     text-align: center;
         border-bottom: 1px solid #333;
+            background-color: black;
+    font-size: .8em;
+    color: white;
+    font-family:'DINPRO-LIGHT';
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 #hblabel{
 display: table-cell;
 width: 140px;
     text-align: center;
+        background-color: black;
+    font-size: .8em;
+    color: white;
+    font-family:'DINPRO-LIGHT';
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .ui-icon-circle-arrow-e{
@@ -458,18 +470,19 @@ text-align: right;
 }
 
 .unitFilterTab:hover {
-    background-color:rgba(0,255,255,.1);
+    background-color: black;
     color:white;
     border:1px solid rgba(0,255,255,.3);
 }
 
 .btFilterTab:hover {
-    background-color:rgba(0,255,255,.1);
+    background-color: black;
     color:white;
     border:1px solid rgba(0,255,255,.3);
 }
 
 .selecterFilterTab {
-    background-color: rgba(0,255,255,.5);
-    color: white;
+    background-color:rgba(0,255,255,.1);
+    color:white;
+    border:1px solid rgba(0,255,255,.3);
 }
