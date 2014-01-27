@@ -148,10 +148,12 @@ var hotbuildsettings = (function () {
                 case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
                     self.desc("Nuclear Missile Ammo");
                     self.displayname("Nuclear Missile");
+                    self.display_group('ammo');
                     break;
                 case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
                     self.desc("Anti-Nuclear Missile Ammo");
                     self.displayname("Anti-Nuclear Missile");
+                    self.display_group('ammo');
                     break;
                 default:
                     //fetch from json file the data	
@@ -210,6 +212,10 @@ var hotbuildsettings = (function () {
                     }
                 }
             }
+            hassubgroup = false;
+            if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0) || _.contains(self.filters(), 'ammo', 0)) {
+                hassubgroup = true;
+            }
             if (_.contains(self.filters(), 'units', 0)) {
                 //check subfilters for units
                 for (var i = 0; i < hbbuildings.length; i++) {
@@ -217,17 +223,25 @@ var hotbuildsettings = (function () {
                     if (hbbuildings[i].factory() !== "") {
                         if (_.contains(self.filters(), 'economy', 0) && hbbuildings[i].display_group() === 100) {
                             self.buildings.push(hbbuildings[i]);
+                            unitadded = true;
                         }
                         if (_.contains(self.filters(), 'factory', 0) && !unitadded && hbbuildings[i].display_group() === 100) {
                             self.buildings.push(hbbuildings[i]);
+                            unitadded = true;
                         }
-                        if (_.contains(self.filters(), 'defense', 0) && !unitadded && hbbuildings[i].display_group() === 100) {
+                        if (_.contains(self.filters(), 'defense', 0) && !unitadded && (hbbuildings[i].display_group() === 60 || hbbuildings[i].display_group() === 40)) {
                             self.buildings.push(hbbuildings[i]);
+                            unitadded = true;
                         }
-                        if (_.contains(self.filters(), 'recon', 0) && !unitadded && hbbuildings[i].display_group() === 100) {
+                        if (_.contains(self.filters(), 'recon', 0) && !unitadded && hbbuildings[i].display_group() === 80) {
                             self.buildings.push(hbbuildings[i]);
+                            unitadded = true;
                         }
-                        if (!unitadded) {
+                        if (_.contains(self.filters(), 'ammo', 0) && !unitadded && hbbuildings[i].display_group() === 'ammo') {
+                            self.buildings.push(hbbuildings[i]);
+                            unitadded = true;
+                        }
+                        if (!unitadded && !hassubgroup) {
                             self.buildings.push(hbbuildings[i]);
                         }
                     }
