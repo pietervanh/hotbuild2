@@ -176,29 +176,67 @@ var hotbuildsettings = (function () {
         self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
         self.selectedhotbuild = ko.observableArray([]);
         self.buildings = ko.observableArray(hbbuildings);
-        self.filters = ko.observableArray(["buildings"]);
+        self.filters = ko.observableArray(["buildings","units"]);
         var filterunits = function () {
             self.buildings([]);
-            if(_.contains(self.filters(), 'buildings', 0))
-            {
-                for (var i = 0; i < hbbuildings.length; i++){
-                    if(hbbuildings[i].factory() === ""){
-                        self.buildings().push(hbbuildings[i]);
+            if (_.contains(self.filters(), 'buildings', 0)) {
+                //check subfilters for buildings
+                for (var i = 0; i < hbbuildings.length; i++) {
+                    var buildingadded = false;
+                    if (hbbuildings[i].factory() === "") {
+                        if (_.contains(self.filters(), 'economy', 0) && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (_.contains(self.filters(), 'factory', 0) && !buildingadded && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (_.contains(self.filters(), 'defense', 0) && !buildingadded && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (_.contains(self.filters(), 'recon', 0) && !buildingadded && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (!buildingadded) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
                     }
                 }
             }
+            if (_.contains(self.filters(), 'units', 0)) {
+                //check subfilters for units
+                for (var i = 0; i < hbbuildings.length; i++) {
+                    var unitadded = false;
+                    if (hbbuildings[i].factory() !== "") {
+                        if (_.contains(self.filters(), 'economy', 0) && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (_.contains(self.filters(), 'factory', 0) && !unitadded && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (_.contains(self.filters(), 'defense', 0) && !unitadded && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (_.contains(self.filters(), 'recon', 0) && !unitadded && hbbuildings[i].display_group() === 100) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                        if (!unitadded) {
+                            self.buildings.push(hbbuildings[i]);
+                        }
+                    }
+
+                }
+            }
         };
-        self.addFilter = function (filter) {  
-            if (!_.contains(self.filters(), filter, 0)){
+        self.addFilter = function (filter) {
+            if (!_.contains(self.filters(), filter, 0)) {
                 self.filters.push(filter);
             }
-            else
-            {
+            else {
                 self.filters.remove(filter);
             }
         };
         self.filters.subscribe(function (value) {
-            debugger;
+            filterunits();
         });
 
         self.activeFilterBuildings = ko.computed(function () {
@@ -228,7 +266,7 @@ var hotbuildsettings = (function () {
         self.activeFilterAmmo = ko.computed(function () {
             return _.contains(self.filters(), 'ammo', 0);
         });
-        
+
         self.keyboardkey = ko.observable();
         self.uberkey = ko.observable();
         self.selectedkeyinfo = ko.observable();
@@ -433,7 +471,7 @@ var hotbuildsettings = (function () {
                     self.Save();
                 }
             }
-        }
+        };
 
         self.InitKeyboard = function () {
             self.selectedkeyinfo(undefined);
