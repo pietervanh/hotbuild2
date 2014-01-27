@@ -179,24 +179,32 @@ var hotbuildsettings = (function () {
         self.filters = ko.observableArray(["buildings","units"]);
         var filterunits = function () {
             self.buildings([]);
+            var hassubgroup = false;
+            if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0)){
+                hassubgroup = true;
+            }
             if (_.contains(self.filters(), 'buildings', 0)) {
                 //check subfilters for buildings
                 for (var i = 0; i < hbbuildings.length; i++) {
                     var buildingadded = false;
                     if (hbbuildings[i].factory() === "") {
-                        if (_.contains(self.filters(), 'economy', 0) && hbbuildings[i].display_group() === 100) {
+                        if (_.contains(self.filters(), 'economy', 0) && hbbuildings[i].display_group() === 80) {
                             self.buildings.push(hbbuildings[i]);
+                            buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'factory', 0) && !buildingadded && hbbuildings[i].display_group() === 100) {
+                        if (_.contains(self.filters(), 'factory', 0) && !buildingadded && hbbuildings[i].display_group() >= 70 && hbbuildings[i].display_group() < 80) {
                             self.buildings.push(hbbuildings[i]);
+                            buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'defense', 0) && !buildingadded && hbbuildings[i].display_group() === 100) {
+                        if (_.contains(self.filters(), 'defense', 0) && !buildingadded && hbbuildings[i].display_group() === 20) {
                             self.buildings.push(hbbuildings[i]);
+                            buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'recon', 0) && !buildingadded && hbbuildings[i].display_group() === 100) {
+                        if (_.contains(self.filters(), 'recon', 0) && !buildingadded && hbbuildings[i].display_group() === 50) {
                             self.buildings.push(hbbuildings[i]);
+                            buildingadded = true;
                         }
-                        if (!buildingadded) {
+                        if (!buildingadded && !hassubgroup) {
                             self.buildings.push(hbbuildings[i]);
                         }
                     }
