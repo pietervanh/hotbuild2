@@ -190,7 +190,7 @@ var hotbuildsettings = (function () {
         };
         self.addFilter = function (filter) {  
             if (!_.contains(self.filters(), filter, 0)){
-                self.filters().push(filter);
+                self.filters.push(filter);
             }
             else
             {
@@ -199,6 +199,34 @@ var hotbuildsettings = (function () {
         };
         self.filters.subscribe(function (value) {
             debugger;
+        });
+
+        self.activeFilterBuildings = ko.computed(function () {
+            return _.contains(self.filters(), 'buildings', 0);
+        });
+
+        self.activeFilterUnits = ko.computed(function () {
+            return _.contains(self.filters(), 'units', 0);
+        });
+
+        self.activeFilterEconomy = ko.computed(function () {
+            return _.contains(self.filters(), 'economy', 0);
+        });
+
+        self.activeFilterFactory = ko.computed(function () {
+            return _.contains(self.filters(), 'factory', 0);
+        });
+
+        self.activeFilterDefense = ko.computed(function () {
+            return _.contains(self.filters(), 'defense', 0);
+        });
+
+        self.activeFilterRecon = ko.computed(function () {
+            return _.contains(self.filters(), 'recon', 0);
+        });
+
+        self.activeFilterAmmo = ko.computed(function () {
+            return _.contains(self.filters(), 'ammo', 0);
         });
         
         self.keyboardkey = ko.observable();
