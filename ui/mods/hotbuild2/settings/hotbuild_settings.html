@@ -97,15 +97,15 @@
         </div>
         <div class="filter">
             <div class="unitTypes">
-                <span class="unitFilterTab">buildings</span>
-                <span class="unitFilterTab">units</span>
+                <span class="unitFilterTab" data-bind="click: function() { $root.addFilter('buildings'); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : _.contains($root.filters(), 'buildings', 0) }">buildings</span>
+                <span class="unitFilterTab" data-bind="click: function() { $root.addFilter('units'); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : _.contains($root.filters(), 'units', 0) }">units</span>
             </div>
             <div class="buildTabs">
-                <span class="btFilterTab">economy</span>
-                <span class="btFilterTab">factory</span>
-                <span class="btFilterTab">defense</span>
-                <span class="btFilterTab">recon</span>
-                <span class="btFilterTab">ammo</span>
+                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('economy');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : _.contains($root.filters(), 'economy', 0) }">economy</span>
+                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('factory');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : _.contains($root.filters(), 'factory', 0) }">factory</span>
+                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('defense');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : _.contains($root.filters(), 'defense', 0) }">defense</span>
+                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('recon');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : _.contains($root.filters(), 'recon', 0) }">recon</span>
+                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('ammo');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : _.contains($root.filters(), 'ammo', 0) }">ammo</span>
             </div>
         </div>
 

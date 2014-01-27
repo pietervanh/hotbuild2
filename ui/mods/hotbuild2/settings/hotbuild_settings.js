@@ -176,6 +176,31 @@ var hotbuildsettings = (function () {
         self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
         self.selectedhotbuild = ko.observableArray([]);
         self.buildings = ko.observableArray(hbbuildings);
+        self.filters = ko.observableArray(["buildings"]);
+        var filterunits = function () {
+            self.buildings([]);
+            if(_.contains(self.filters(), 'buildings', 0))
+            {
+                for (var i = 0; i < hbbuildings.length; i++){
+                    if(hbbuildings[i].factory() === ""){
+                        self.buildings().push(hbbuildings[i]);
+                    }
+                }
+            }
+        };
+        self.addFilter = function (filter) {  
+            if (!_.contains(self.filters(), filter, 0)){
+                self.filters().push(filter);
+            }
+            else
+            {
+                self.filters.remove(filter);
+            }
+        };
+        self.filters.subscribe(function (value) {
+            debugger;
+        });
+        
         self.keyboardkey = ko.observable();
         self.uberkey = ko.observable();
         self.selectedkeyinfo = ko.observable();
@@ -233,8 +258,6 @@ var hotbuildsettings = (function () {
         });
 
         self.selectedbuilding = ko.observable();
-
-        self.selectedunit = ko.observable();
 
         self.addBuilding = function () {
             self.selectedhotbuild.push(ko.toJS(self.selectedbuilding()));
@@ -565,6 +588,7 @@ var hotbuildsettings = (function () {
                 }
             });
         };
+        //filterunits();
     }
 
     self.getTemplate = function (hblistitem) {
