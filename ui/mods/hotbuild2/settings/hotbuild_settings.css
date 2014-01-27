@@ -251,8 +251,9 @@ text-align: right;
     padding-right: 24px;
     overflow: scroll;
     direction: rtl;
-    width: 48%;
+    width: 474px;
     clear: left;
+    -webkit-box-sizing: border-box;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
@@ -265,22 +266,22 @@ text-align: right;
 }
 
 #sequence {
+    -webkit-box-sizing: border-box;
     text-align: left;
     float: left;
 	position: relative;
     direction: ltr;
 	height: 270px;
-        border: 1px solid blue;
-        min-width: 400px;
+    width: 474px;
 }
 
 #sequencelist {
+    -webkit-box-sizing: border-box;
     display: table;
-    min-width: 390px;
+    min-width: 474px;
     min-height: 48px;
     position: relative;
     float: left;
-    border: 1px solid yellow;
 }
 
 .hotbuild_fab_selection {
@@ -289,7 +290,7 @@ text-align: right;
     border: 1px solid rgba(0,255,255,.5);
     border-radius: 2px;
     float: left;
-    margin: 1px 1px 1px 18px;
+    margin: 1px 1px 1px 16px;
     position: relative;
 
     box-shadow: inset 0 0 30px rgb(0, 100, 100);
@@ -298,6 +299,8 @@ text-align: right;
 
 
 .hotbuild_list_item {
+    -webkit-box-sizing: border-box;
+    min-width: 474px;
     vertical-align: middle;
     display: table-row;
 }
@@ -316,7 +319,6 @@ text-align: right;
     position: absolute;
     bottom: 0;
     right: 0;
-    z-index: 100;
     color: rgb(0, 255, 255);
 }
 
@@ -327,12 +329,13 @@ text-align: right;
 }
 
 .hotbuild_list_desc {
+    -webkit-box-sizing: border-box;
+    padding-left: 6px;
     height: 48px;
     display: table-cell;
     vertical-align: middle;
     border-bottom: 1px solid #333;
-    /* min-width: 500px; 
-    width: 360px;*/
+    min-width: 406px;
 }
 
 .ui-icon-trash {
@@ -344,14 +347,6 @@ text-align: right;
 }
 
 
-.filter {
-    position: relative;
-    height: 30px;
-    display: inline-block;
-	float: right;
-   	clear: right; 
-       border: 1px solid red;
-}
 
 #changeKeyDlg{
     min-width: 160px;
@@ -376,7 +371,7 @@ text-align: right;
     margin-top: 6px;
 /*    padding-right: 24px; */
     overflow: scroll;
-        width: 48%;
+       width: 500px;
 }
 
 .custom-scrollR::-webkit-scrollbar-thumb {
@@ -389,22 +384,92 @@ text-align: right;
 }
 
 #sequenceR {
-    padding-right: 8px;
+
     text-align: left;
     float: right;
 	position: relative;
+        min-width: 492px;
 	height: 270px;
 }
 
 #sequencelistR {
     display: table;
-/*    min-width: 75%; */
+    width: 484px;
     position: relative;
-    float: right;
+    float: left;
+    height: 48px;
+    overflow-x: hidden;
 }
 
 .sequencelistitem {
+    position: relative;
     min-height: 48px;
-    min-width: 300px;
-    border: 1px solid red;
+    min-width: 484px;
+    border:rgba(0,255,255,.1)  solid thin;
+}
+
+
+
+.filter {
+    width: 492px;
+    position: relative;
+    height: 30px;
+    display: inline-block;
+	float: right;
+   	clear: right; 
+}
+
+.unitTypes {
+    width: 492px;
+            text-align: justify;
+    text-justify: distribute-all-lines;
+}
+
+.buildTabs {
+    width: 492px;
+            text-align: justify;
+    text-justify: distribute-all-lines;
+}
+
+.unitFilterTab {
+    display: inline-block;
+    width: 242px;
+    background-color: black;
+    font-size: .8em;
+    color: white;
+    font-family:'DINPRO-LIGHT';
+    text-transform: uppercase;
+    font-weight: bold;
+    border:1px solid #222;
+    text-align: center;
+}
+
+.btFilterTab {
+    display: inline-block;
+    width: 94px;
+    background-color: black;
+    font-size: .8em;
+    color: white;
+    font-family:'DINPRO-LIGHT';
+    text-transform: uppercase;
+    font-weight: bold;
+    border:1px solid #222;
+      text-align: center;
+}
+
+.unitFilterTab:hover {
+    background-color:rgba(0,255,255,.1);
+    color:white;
+    border:1px solid rgba(0,255,255,.3);
+}
+
+.btFilterTab:hover {
+    background-color:rgba(0,255,255,.1);
+    color:white;
+    border:1px solid rgba(0,255,255,.3);
+}
+
+.selecterFilterTab {
+    background-color: rgba(0,255,255,.5);
+    color: white;
 }
