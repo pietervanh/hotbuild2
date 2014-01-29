@@ -190,7 +190,7 @@ var hotbuildsettings = (function () {
             
             //for (var i = 0; i < factories.length; i++){
                 for (var j = 0; j < filteredresults.length; j++) {
-                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") && _.contains(filteredresults[j].unit_types,"UNITTYPE_FactoryBuild")) {
+                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") && (_.contains(filteredresults[j].unit_types,"UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types,"UNITTYPE_FabOrbBuild"))) {
                         //unit
                         //the hard part parse the buildable types and compare them with the unit_types
                         //console.log(factories[i].buildable_types);
@@ -236,7 +236,7 @@ var hotbuildsettings = (function () {
                 //check subfilters for buildings
                 for (var i = 0; i < self.units().length; i++) {
                     var buildingadded = false;
-                    if (self.units()[i].factory() === "") {
+                    if (self.units()[i].factory === "") {
                         if (_.contains(self.filters(), 'economy', 0) && _.contains(self.units()[i].unit_types,"UNITTYPE_Economy")) {
                             self.buildings.push(self.units()[i]);
                             buildingadded = true;
@@ -267,7 +267,7 @@ var hotbuildsettings = (function () {
                 //check subfilters for units
                 for (var i = 0; i < self.units().length; i++) {
                     var unitadded = false;
-                    if (self.units()[i].factory() !== "") {
+                    if (self.units()[i].factory !== "") {
                         if (_.contains(self.filters(), 'economy', 0) && self.units()[i].display_group() === 100) {
                             self.buildings.push(self.units()[i]);
                             unitadded = true;
