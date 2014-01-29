@@ -210,33 +210,29 @@ var hotbuildsettings = (function () {
             }
             else {
                 hassubgroup = false;
-                if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0) || _.contains(self.filters(), 'ammo', 0)) {
+                if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0)) {
                     hassubgroup = true;
                 }
                 //check subfilters for units
                 for (var i = 0; i < self.units().length; i++) {
                     var unitadded = false;
                     if (self.units()[i].factory !== "") {
-                        //if (_.contains(self.filters(), 'economy', 0) && self.units()[i].display_group() === 100) {
-                        //    self.filteredunits.push(self.units()[i]);
-                        //    unitadded = true;
-                        //}
-                        //if (_.contains(self.filters(), 'factory', 0) && !unitadded && self.units()[i].display_group() === 100) {
-                        //    self.filteredunits.push(self.units()[i]);
-                        //    unitadded = true;
-                        //}
-                        //if (_.contains(self.filters(), 'defense', 0) && !unitadded && (self.units()[i].display_group() === 60 || self.units()[i].display_group() === 40)) {
-                        //    self.filteredunits.push(self.units()[i]);
-                        //    unitadded = true;
-                        //}
-                        //if (_.contains(self.filters(), 'recon', 0) && !unitadded && self.units()[i].display_group() === 80) {
-                        //    self.filteredunits.push(self.units()[i]);
-                        //    unitadded = true;
-                        //}
-                        //if (_.contains(self.filters(), 'ammo', 0) && !unitadded && self.units()[i].display_group() === 'ammo') {
-                        //    self.filteredunits.push(self.units()[i]);
-                        //    unitadded = true;
-                        //}
+                        if (_.contains(self.filters(), 'economy', 0) && _.contains(self.units()[i].unit_types, "UNITTYPE_Land")) {
+                            self.filteredunits.push(self.units()[i]);
+                            unitadded = true;
+                        }
+                        if (_.contains(self.filters(), 'factory', 0) && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Air")) {
+                            self.filteredunits.push(self.units()[i]);
+                            unitadded = true;
+                        }
+                        if (_.contains(self.filters(), 'defense', 0) && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Naval")) {
+                            self.filteredunits.push(self.units()[i]);
+                            unitadded = true;
+                        }
+                        if (_.contains(self.filters(), 'recon', 0) && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Orbital")) {
+                            self.filteredunits.push(self.units()[i]);
+                            unitadded = true;
+                        }
                         if (!unitadded && !hassubgroup) {
                             self.filteredunits.push(self.units()[i]);
                         }
