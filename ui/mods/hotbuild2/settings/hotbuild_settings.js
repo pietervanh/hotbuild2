@@ -271,11 +271,13 @@ var hotbuildsettings = (function () {
         self.units = ko.observableArray([]);
         hbunitInfoParser.loadUnits(function (results) {
             var filteredresults = [];
+            var filteredunits = [];
+            var filteredbuildings = [];
             var fabbers = [];
             var factories = [];
             //first filter
             for (var i = 0; i < results.length; i++) {
-                if (!_.contains(results[i].unit_types, "UNITTYPE_NoBuild") && !_.contains(results[i].unit_types, "UNITTYPE_Debug") && !_.contains(results[i].unit_types, "UNITTYPE_Construction") && results[i].unit_types !== undefined) {
+                if (!_.contains(results[i].unit_types, "UNITTYPE_NoBuild") && !_.contains(results[i].unit_types, "UNITTYPE_Debug") && results[i].unit_types !== undefined) {
                     //fixes
                     switch (results[i].json) {
                         case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
@@ -307,7 +309,25 @@ var hotbuildsettings = (function () {
                 }
             }
             //second filter is based on buildable_types
+            for (var i = 0; i < factories.length; i++)
+            {
+                for (var j = 0; j < filteredresults.length; j++) {
+                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")) {
+                        //unit
 
+                    }
+                }
+            }
+
+            /*
+            for (var i = 0; i < filteredresults.length; i++) {
+                if (_.contains(filteredresults[i].unit_types, "UNITTYPE_Structure")) {
+                    //building
+
+
+                }
+            }
+            */
             self.buildings(filteredresults);
             debugger;
             
