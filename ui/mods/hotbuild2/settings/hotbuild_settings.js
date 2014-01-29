@@ -310,37 +310,36 @@ var hotbuildsettings = (function () {
             }
             //second filter is based on buildable_types
             
-            for (var i = 0; i < factories.length; i++)
-            {
+            //for (var i = 0; i < factories.length; i++){
                 for (var j = 0; j < filteredresults.length; j++) {
-                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")) {
+                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") && _.contains(filteredresults[j].unit_types,"UNITTYPE_FactoryBuild")) {
                         //unit
                         //the hard part parse the buildable types and compare them with the unit_types
-                        console.log(factories[i].buildable_types);
+                        //console.log(factories[i].buildable_types);
                         console.log(filteredresults[j].unit_types);
 
                         filteredunits.push(filteredresults[j]);
 
                     }
                 }
-            }
+            //}
 
-            for (var i = 0; i < fabbers.length; i++) {
+            //for (var i = 0; i < fabbers.length; i++) {
                 for (var j = 0; j < filteredresults.length; j++) {
-                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")) {
-                        //unit
+                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") && _.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild")) {
+                        //building
                         //the hard part parse the buildable types and compare them with the unit_types
-                        console.log(fabbers[i].buildable_types);
+                        //console.log(fabbers[i].buildable_types);
                         console.log(filteredresults[j].unit_types);
 
                         filteredbuildings.push(filteredresults[j]);
 
                     }
                 }
-            }
+            //}
 
             filteredresults = [];
-            filteredresults.concat(filteredunits, filteredbuildings);
+            filteredresults = filteredresults.concat(filteredunits, filteredbuildings);;
             self.buildings(filteredresults);
             debugger;
             
