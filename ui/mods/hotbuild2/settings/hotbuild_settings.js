@@ -159,7 +159,7 @@ var hotbuildsettings = (function () {
             for (var j = 0; j < filteredresults.length; j++) {
                 if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
                     (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabAdvBuild") ||
-                    _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Radar"))
+                    _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Recon"))
                     || (_.contains(filteredresults[j].unit_types, "UNITTYPE_Advanced") && _.contains(filteredresults[j].unit_types, "UNITTYPE_Factory"))) {
                     filteredbuildings.push(filteredresults[j]);
                 }
