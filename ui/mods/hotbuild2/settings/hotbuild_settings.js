@@ -309,25 +309,38 @@ var hotbuildsettings = (function () {
                 }
             }
             //second filter is based on buildable_types
+            
             for (var i = 0; i < factories.length; i++)
             {
                 for (var j = 0; j < filteredresults.length; j++) {
                     if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")) {
                         //unit
+                        //the hard part parse the buildable types and compare them with the unit_types
+                        console.log(factories[i].buildable_types);
+                        console.log(filteredresults[j].unit_types);
+
+                        filteredunits.push(filteredresults[j]);
 
                     }
                 }
             }
 
-            /*
-            for (var i = 0; i < filteredresults.length; i++) {
-                if (_.contains(filteredresults[i].unit_types, "UNITTYPE_Structure")) {
-                    //building
+            for (var i = 0; i < fabbers.length; i++) {
+                for (var j = 0; j < filteredresults.length; j++) {
+                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")) {
+                        //unit
+                        //the hard part parse the buildable types and compare them with the unit_types
+                        console.log(fabbers[i].buildable_types);
+                        console.log(filteredresults[j].unit_types);
 
+                        filteredbuildings.push(filteredresults[j]);
 
+                    }
                 }
             }
-            */
+
+            filteredresults = [];
+            filteredresults.concat(filteredunits, filteredbuildings);
             self.buildings(filteredresults);
             debugger;
             
