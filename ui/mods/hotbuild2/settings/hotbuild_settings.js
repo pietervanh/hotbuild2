@@ -25,7 +25,7 @@ var hbunitInfoParser =
 	            function readUnitDataFromFile(file, callback) {
 	                $.getJSON(file, function (unit) {
 	                    var freshDataFromUnit = dataGetter(unit);
-                        //forget about base specs they are not needed and no properties are being overriden of inherited from basespecs for hotbuild
+	                    //forget about base specs they are not needed and no properties are being overriden of inherited from basespecs for hotbuild
 	                    if (freshDataFromUnit != undefined) {
 	                        callback(freshDataFromUnit);
 	                    }
@@ -39,9 +39,8 @@ var hbunitInfoParser =
 	            spawnedUnitCalls = units.length;
 	            function processUnitPath(unitPath) {
 	                readUnitDataFromFile(_coherentHost + unitPath, function (unitData) {
-	                    var unitresult = {'json':unitPath};
-	                    for(var data in unitData)
-	                    {
+	                    var unitresult = { 'json': unitPath };
+	                    for (var data in unitData) {
 	                        unitresult[data] = unitData[data];
 	                    }
 	                    resultTypeMapping.push(unitresult);
@@ -67,76 +66,17 @@ var hbunitInfoParser =
 	            result.description !== undefined ? result.description : 'no description';
 	            result.display_name !== undefined ? result.displayname : 'no name';
 	            result.factory = '';
-                /*
-	            if (_.contains(result.unit_types, 'UNITTYPE_Mobile')) {
-	                if (_.contains(result.unit_types, 'UNITTYPE_Basic')) {
-	                    _.contains(result.unit_types, 'UNITTYPE_Bot') ? result.factory = 'botfac' : '';
-	                    _.contains(result.unit_types, 'UNITTYPE_Tank') ? listitem.factory('vecfac') : '';
-	                    _.contains(result.unit_types, 'UNITTYPE_Air') ? listitem.factory('afac') : '';
-	                    _.contains(result.unit_types, 'UNITTYPE_Naval') ? listitem.factory('nfac') : '';
-	                }
-	                else {
-	                    _.contains(result.unit_types, 'UNITTYPE_Bot') ? listitem.factory('abotfac') : '';
-	                    _.contains(result.unit_types, 'UNITTYPE_Tank') ? listitem.factory('avecfac') : '';
-	                    _.contains(result.unit_types, 'UNITTYPE_Air') ? listitem.factory('aafac') : '';
-	                    _.contains(result.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
-	                }
-	                //Orbital is changing rapidly so hacky fixes here
-                    */
 	            return result;
 	        })
 	    };
 
 	    return {
 	        loadUnitData: _loadUnitData,
-            loadUnits : _loadUnits
+	        loadUnits: _loadUnits
 	    };
 	}()) : hbunitInfoParser;
 
 var hotbuildsettings = (function () {
-
-    //Problem don't know how to know it's a a buildable unit / factory  so can't dynamically fill buildings and units
-   
-    function onunitload(unitdata, listitem) {
-        unitdata.description !== undefined ? listitem.desc(unitdata.description) : listitem.desc('not found');
-        unitdata.display_name !== undefined ? listitem.displayname(unitdata.display_name) : listitem.displayname('not found');
-        if (_.contains(unitdata.unit_types, 'UNITTYPE_Mobile')) {
-            if (_.contains(unitdata.unit_types, 'UNITTYPE_Basic')) {
-                _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('botfac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('vecfac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('afac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('nfac') : '';
-            }
-            else {
-                _.contains(unitdata.unit_types, 'UNITTYPE_Bot') ? listitem.factory('abotfac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Tank') ? listitem.factory('avecfac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Air') ? listitem.factory('aafac') : '';
-                _.contains(unitdata.unit_types, 'UNITTYPE_Naval') ? listitem.factory('anfac') : '';
-            }
-            //Orbital is changing rapidly so hacky fixes here
-            if (listitem.json2 === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
-                listitem.factory('ofac');
-            }
-            if (listitem.json2 === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
-                listitem.factory('ofac');
-            }
-            if (listitem.json2 === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
-                listitem.factory('ofac');
-            }
-            if (listitem.json2 === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
-                listitem.factory('ofac');
-            }
-            //console.log(listitem.factory());
-        }
-        if (listitem.factory() === undefined) {
-            listitem.factory('');
-        }
-        listitem.display_group(unitdata.display_group);
-        listitem.display_index(unitdata.display_group);
-        //if(unitdata.json() != '')
-        //listitem = ko.toJS(listitem);
-    }
-
 
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
         var self = this;
@@ -145,7 +85,7 @@ var hotbuildsettings = (function () {
         self.cleanhotbuildglobal = ko.observable(hbglobal);
         self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
         self.selectedhotbuild = ko.observableArray([]);
-        self.buildings = ko.observableArray([]);
+        self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
         hbunitInfoParser.loadUnits(function (results) {
             var filteredresults = [];
@@ -171,130 +111,143 @@ var hotbuildsettings = (function () {
                         case "/pa/units/air/gunship/gunship.json":
                             results[i].desc = "Gunship";
                             results[i].displayname = "Shoots Stuff from Air";
-                            results[i].display_group = 60 ;
+                            results[i].display_group = 60;
+                    }
+                    if (_.contains(results[i].unit_types, 'UNITTYPE_Mobile')) {
+                        if (_.contains(results[i].unit_types, 'UNITTYPE_Basic')) {
+                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'botfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'vecfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'afac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'nfac' : '';
+                        }
+                        else {
+                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'abotfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'avecfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'aafac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'anfac' : '';
+                        }
+                        //Orbital is changing rapidly so hacky fixes here
+                        //Orbital is changing rapidly so hacky fixes here
+                        if (results[i].json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
+                            results[i].factory = 'ofac';
+                        }
+                        if (results[i].json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
+                            results[i].factory = 'ofac';
+                        }
+                        if (results[i].json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
+                            results[i].factory = 'ofac';
+                        }
+                        if (results[i].json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
+                            results[i].factory = 'ofac';
+                        }
                     }
                     var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
                     var end = /[.]json$/;
                     results[i].image = '../live_game/img/build_bar/units/' + results[i].json.substring(results[i].json.search(start), results[i].json.search(end)) + '.png';
                     filteredresults.push(results[i]);
-                    if(_.contains(results[i].unit_types, "UNITTYPE_Fabber"))
-                    {
-                        fabbers.push(results[i]);
-                    }
-                    if (_.contains(results[i].unit_types, "UNITTYPE_Factory")) {
-                        factories.push(results[i]);
-                    }
                 }
             }
             //second filter is based on buildable_types
-            
-            //for (var i = 0; i < factories.length; i++){
-                for (var j = 0; j < filteredresults.length; j++) {
-                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") && (_.contains(filteredresults[j].unit_types,"UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types,"UNITTYPE_FabOrbBuild"))) {
-                        //unit
-                        //the hard part parse the buildable types and compare them with the unit_types
-                        //console.log(factories[i].buildable_types);
-                        console.log(filteredresults[j].unit_types);
+            for (var j = 0; j < filteredresults.length; j++) {
+                if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
+                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabOrbBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_CombatFabBuild"))) {
+                    console.log(filteredresults[j].unit_types);
+                    filteredunits.push(filteredresults[j]);
 
-                        filteredunits.push(filteredresults[j]);
-
-                    }
                 }
-            //}
-
-            //for (var i = 0; i < fabbers.length; i++) {
-                for (var j = 0; j < filteredresults.length; j++) {
-                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") && (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types,"UNITTYPE_FabAdvBuild"))) {
-                        //building
-                        //the hard part parse the buildable types and compare them with the unit_types
-                        //console.log(fabbers[i].buildable_types);
-                        console.log(filteredresults[j].unit_types);
-
-                        filteredbuildings.push(filteredresults[j]);
-
-                    }
+            }
+            for (var j = 0; j < filteredresults.length; j++) {
+                if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
+                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabAdvBuild") ||
+                    _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Radar"))
+                    || (_.contains(filteredresults[j].unit_types, "UNITTYPE_Advanced") && _.contains(filteredresults[j].unit_types, "UNITTYPE_Factory"))) {
+                    filteredbuildings.push(filteredresults[j]);
                 }
-            //}
+            }
 
             filteredresults = [];
-            filteredresults = filteredresults.concat(filteredunits, filteredbuildings);
-            filteredresults = _.sortBy(filteredresults, 'display_group');
-            self.buildings(filteredresults);
+            filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
+            filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
+            self.filteredunits(filteredbuildings); //set standard on buildings
             self.units(filteredresults)
             debugger;
-            
+
         });
-        self.filters = ko.observableArray(["buildings","units"]);
+        self.unitbuildfilter = ko.observable(true);
+        self.filters = ko.observableArray(["buildings"]);
         self.filterunits = function () {
-            self.buildings([]);
-            debugger;
+            self.filteredunits([]);
             var hassubgroup = false;
-            if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0)){
-                hassubgroup = true;
-            }
-            if (_.contains(self.filters(), 'buildings', 0)) {
+            if (self.unitbuildfilter()) {
+                if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0)) {
+                    hassubgroup = true;
+                }
                 //check subfilters for buildings
                 for (var i = 0; i < self.units().length; i++) {
                     var buildingadded = false;
                     if (self.units()[i].factory === "") {
-                        if (_.contains(self.filters(), 'economy', 0) && _.contains(self.units()[i].unit_types,"UNITTYPE_Economy")) {
-                            self.buildings.push(self.units()[i]);
+                        if (_.contains(self.filters(), 'economy', 0) && _.contains(self.units()[i].unit_types, "UNITTYPE_Economy")) {
+                            self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
                         if (_.contains(self.filters(), 'factory', 0) && _.contains(self.units()[i].unit_types, "UNITTYPE_Factory")) {
-                            self.buildings.push(self.units()[i]);
+                            self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'defense', 0) && !buildingadded && _.contains(self.units()[i].unit_types,"UNITTYPE_Defense")) {
-                            self.buildings.push(self.units()[i]);
+                        if (_.contains(self.filters(), 'defense', 0) && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Defense")) {
+                            self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'recon', 0) && !buildingadded && _.contains(self.units()[i].unit_types,"UNITTYPE_Recon")) {
-                            self.buildings.push(self.units()[i]);
+                        if (_.contains(self.filters(), 'recon', 0) && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Recon")) {
+                            self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
                         if (!buildingadded && !hassubgroup) {
-                            self.buildings.push(self.units()[i]);
+                            self.filteredunits.push(self.units()[i]);
                         }
                     }
                 }
             }
-            hassubgroup = false;
-            if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0) || _.contains(self.filters(), 'ammo', 0)) {
-                hassubgroup = true;
-            }
-            if (_.contains(self.filters(), 'units', 0)) {
+            else {
+                hassubgroup = false;
+                if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0) || _.contains(self.filters(), 'ammo', 0)) {
+                    hassubgroup = true;
+                }
                 //check subfilters for units
                 for (var i = 0; i < self.units().length; i++) {
                     var unitadded = false;
                     if (self.units()[i].factory !== "") {
-                        if (_.contains(self.filters(), 'economy', 0) && self.units()[i].display_group() === 100) {
-                            self.buildings.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (_.contains(self.filters(), 'factory', 0) && !unitadded && self.units()[i].display_group() === 100) {
-                            self.buildings.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (_.contains(self.filters(), 'defense', 0) && !unitadded && (self.units()[i].display_group() === 60 || self.units()[i].display_group() === 40)) {
-                            self.buildings.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (_.contains(self.filters(), 'recon', 0) && !unitadded && self.units()[i].display_group() === 80) {
-                            self.buildings.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (_.contains(self.filters(), 'ammo', 0) && !unitadded && self.units()[i].display_group() === 'ammo') {
-                            self.buildings.push(self.units()[i]);
-                            unitadded = true;
-                        }
+                        //if (_.contains(self.filters(), 'economy', 0) && self.units()[i].display_group() === 100) {
+                        //    self.filteredunits.push(self.units()[i]);
+                        //    unitadded = true;
+                        //}
+                        //if (_.contains(self.filters(), 'factory', 0) && !unitadded && self.units()[i].display_group() === 100) {
+                        //    self.filteredunits.push(self.units()[i]);
+                        //    unitadded = true;
+                        //}
+                        //if (_.contains(self.filters(), 'defense', 0) && !unitadded && (self.units()[i].display_group() === 60 || self.units()[i].display_group() === 40)) {
+                        //    self.filteredunits.push(self.units()[i]);
+                        //    unitadded = true;
+                        //}
+                        //if (_.contains(self.filters(), 'recon', 0) && !unitadded && self.units()[i].display_group() === 80) {
+                        //    self.filteredunits.push(self.units()[i]);
+                        //    unitadded = true;
+                        //}
+                        //if (_.contains(self.filters(), 'ammo', 0) && !unitadded && self.units()[i].display_group() === 'ammo') {
+                        //    self.filteredunits.push(self.units()[i]);
+                        //    unitadded = true;
+                        //}
                         if (!unitadded && !hassubgroup) {
-                            self.buildings.push(self.units()[i]);
+                            self.filteredunits.push(self.units()[i]);
                         }
                     }
 
                 }
             }
+        };
+        self.toggleTopFilter = function (buildings) {
+            self.unitbuildfilter(buildings);
+            self.filterunits();
         };
         self.addFilter = function (filter) {
             if (!_.contains(self.filters(), filter, 0)) {

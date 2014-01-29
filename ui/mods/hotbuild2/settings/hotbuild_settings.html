@@ -97,8 +97,8 @@
         </div>
         <div class="filter">
             <div class="unitTypes">
-                <span class="unitFilterTab" data-bind="click: function() { $root.addFilter('buildings'); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterBuildings() }">buildings</span>
-                <span class="unitFilterTab" data-bind="click: function() { $root.addFilter('units'); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterUnits() }">units</span>
+                <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
+                <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
             </div>
             <div class="buildTabs">
                 <span class="btFilterTab" data-bind="click: function() { $root.addFilter('economy');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterEconomy() }">economy</span>
@@ -121,7 +121,7 @@
         <div class="custom-scrollR">
             <div id="sequenceR">
                 <div id="sequencelistR">
-                    <div data-bind="sortable: {template: 'rightTemplate', data: buildings, options: { helper: 'clone', appendTo: 'body' } }">
+                    <div data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: 'body' } }">
 
                     </div>
                 </div>
