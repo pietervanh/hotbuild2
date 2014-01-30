@@ -87,95 +87,99 @@ var hotbuildsettings = (function () {
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
         hbunitInfoParser.loadUnits(function (results) {
-            var filteredresults = [];
-            var filteredunits = [];
-            var filteredbuildings = [];
-            var fabbers = [];
-            var factories = [];
-            //first filter
-            for (var i = 0; i < results.length; i++) {
-                if (!_.contains(results[i].unit_types, "UNITTYPE_NoBuild") && !_.contains(results[i].unit_types, "UNITTYPE_Debug") && results[i].unit_types !== undefined) {
-                    //fixes
-                    switch (results[i].json) {
-                        case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
-                            results[i].desc = "Nuclear Missile Ammo";
-                            results[i].displayname = "Nuclear Missile";
-                            results[i].display_group = 'ammo';
-                            break;
-                        case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
-                            results[i].desc = "Anti-Nuclear Missile Ammo";
-                            results[i].displayname = "Anti-Nuclear Missile";
-                            results[i].display_group = 'ammo';
-                            break;
-                        case "/pa/units/air/gunship/gunship.json":
-                            results[i].desc = "Gunship";
-                            results[i].displayname = "Shoots Stuff from Air";
-                            results[i].display_group = 60;
+                var filteredresults = [];
+                var filteredunits = [];
+                var filteredbuildings = [];
+                var fabbers = [];
+                var factories = [];
+                //first filter
+                for (var i = 0; i < results.length; i++) {
+                    if (!_.contains(results[i].unit_types, "UNITTYPE_NoBuild") && !_.contains(results[i].unit_types, "UNITTYPE_Debug") && results[i].unit_types !== undefined) {
+                        //fixes
+                        switch (results[i].json) {
+                            case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
+                                results[i].desc = "Nuclear Missile Ammo";
+                                results[i].displayname = "Nuclear Missile";
+                                results[i].display_group = 'ammo';
+                                break;
+                            case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
+                                results[i].desc = "Anti-Nuclear Missile Ammo";
+                                results[i].displayname = "Anti-Nuclear Missile";
+                                results[i].display_group = 'ammo';
+                                break;
+                            case "/pa/units/air/gunship/gunship.json":
+                                results[i].desc = "Gunship";
+                                results[i].displayname = "Shoots Stuff from Air";
+                                results[i].display_group = 60;
+                        }
+                        if (_.contains(results[i].unit_types, 'UNITTYPE_Mobile')) {
+                            if (_.contains(results[i].unit_types, 'UNITTYPE_Basic')) {
+                                _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'botfac' : '';
+                                _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'vecfac' : '';
+                                _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'afac' : '';
+                                _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'nfac' : '';
+                            }
+                            else {
+                                _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'abotfac' : '';
+                                _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'avecfac' : '';
+                                _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'aafac' : '';
+                                _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'anfac' : '';
+                            }
+                            //Orbital is changing rapidly so hacky fixes here
+                            //Orbital is changing rapidly so hacky fixes here
+                            if (results[i].json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
+                                results[i].factory = 'ofac';
+                            }
+                            if (results[i].json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
+                                results[i].factory = 'ofac';
+                            }
+                            if (results[i].json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
+                                results[i].factory = 'ofac';
+                            }
+                            if (results[i].json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
+                                results[i].factory = 'ofac';
+                            }
+                        }
+                        var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
+                        var end = /[.]json$/;
+                        results[i].image = '../live_game/img/build_bar/units/' + results[i].json.substring(results[i].json.search(start), results[i].json.search(end)) + '.png';
+                        filteredresults.push(results[i]);
                     }
-                    if (_.contains(results[i].unit_types, 'UNITTYPE_Mobile')) {
-                        if (_.contains(results[i].unit_types, 'UNITTYPE_Basic')) {
-                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'botfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'vecfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'afac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'nfac' : '';
-                        }
-                        else {
-                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'abotfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'avecfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'aafac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'anfac' : '';
-                        }
-                        //Orbital is changing rapidly so hacky fixes here
-                        //Orbital is changing rapidly so hacky fixes here
-                        if (results[i].json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
-                            results[i].factory = 'ofac';
-                        }
-                        if (results[i].json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
-                            results[i].factory = 'ofac';
-                        }
-                        if (results[i].json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
-                            results[i].factory = 'ofac';
-                        }
-                        if (results[i].json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
-                            results[i].factory = 'ofac';
-                        }
+                }
+                //second filter is based on buildable_types
+                for (var j = 0; j < filteredresults.length; j++) {
+                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
+                        (_.contains(filteredresults[j].unit_types, "UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabOrbBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_CombatFabBuild"))) {
+                        filteredunits.push(filteredresults[j]);
+
                     }
-                    var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
-                    var end = /[.]json$/;
-                    results[i].image = '../live_game/img/build_bar/units/' + results[i].json.substring(results[i].json.search(start), results[i].json.search(end)) + '.png';
-                    filteredresults.push(results[i]);
                 }
-            }
-            //second filter is based on buildable_types
-            for (var j = 0; j < filteredresults.length; j++) {
-                if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
-                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabOrbBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_CombatFabBuild"))) {
-                    filteredunits.push(filteredresults[j]);
-
+                for (var j = 0; j < filteredresults.length; j++) {
+                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
+                        (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabAdvBuild") ||
+                        _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Recon"))
+                        || (_.contains(filteredresults[j].unit_types, "UNITTYPE_Advanced") && _.contains(filteredresults[j].unit_types, "UNITTYPE_Factory"))) {
+                        filteredbuildings.push(filteredresults[j]);
+                    }
                 }
-            }
-            for (var j = 0; j < filteredresults.length; j++) {
-                if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
-                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabAdvBuild") ||
-                    _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Recon"))
-                    || (_.contains(filteredresults[j].unit_types, "UNITTYPE_Advanced") && _.contains(filteredresults[j].unit_types, "UNITTYPE_Factory"))) {
-                    filteredbuildings.push(filteredresults[j]);
-                }
-            }
 
-            filteredresults = [];
-            filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
-            filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
-            self.filteredunits(filteredbuildings); //set standard on buildings
-            self.units(filteredresults);
+                filteredresults = [];
+                filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
+                filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
+                self.filteredunits(filteredbuildings); //set standard on buildings
+                self.units(filteredresults);
+                updateExistingSettings();
 
-            debugger;
+
+                //debugger;
+
+        });
+        function updateExistingSettings(){
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
-            for(var hbkey in self.hotbuildglobal()){
-                //if(_.contains(filteredresults,hb.json))
-                for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++)
-                {
-                    var match = _.find(filteredresults, { 'json': self.hotbuildglobal()[hbkey][i].json });
+            for (var hbkey in self.hotbuildglobal()) {
+                //if(_.contains(self.units(),hb.json))
+                for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
+                    var match = _.find(self.units(), { 'json': self.hotbuildglobal()[hbkey][i].json });
                     self.hotbuildglobal()[hbkey][i] = match;
                 }
                 var goodstuff = [];
@@ -187,10 +191,7 @@ var hotbuildsettings = (function () {
                 self.hotbuildglobal()[hbkey] = goodstuff;
 
             }
-
-            //debugger;
-
-        });
+        }
         self.unitbuildfilter = ko.observable(true);
         self.unitbuildfilter.subscribe(function (value) {
             self.activeSubFilters("All");
@@ -630,6 +631,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
+                updateExistingSettings();
                 self.Save();
                 self.InitKeyboard();
             }
@@ -648,6 +650,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
+                updateExistingSettings();
                 self.Save();
                 self.InitKeyboard();
             });
