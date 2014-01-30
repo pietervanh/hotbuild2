@@ -176,16 +176,16 @@ var hotbuildsettings = (function () {
                 for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++)
                 {
                     var match = _.find(filteredresults, { 'json': self.hotbuildglobal()[hbkey][i].json });
-                    if (match === undefined) {
-                        //should remove item
-                    }
-                    else {
-                        self.hotbuildglobal()[hbkey][i] = match;
-                    }
-
-                    
-                    //console.log(self.hotbuildglobal()[hbkey][i].json);
+                    self.hotbuildglobal()[hbkey][i] = match;
                 }
+                var goodstuff = [];
+                for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
+                    if (self.hotbuildglobal()[hbkey][i] !== undefined) {
+                        goodstuff.push(self.hotbuildglobal()[hbkey][i]);
+                    }
+                }
+                self.hotbuildglobal()[hbkey] = goodstuff;
+
             }
 
             //debugger;
@@ -458,18 +458,23 @@ var hotbuildsettings = (function () {
                     var swapposition;
                     var currentposition;
                     //find swap position
+                    debugger;
+                    var i = 0;
                     for (var hotkey in self.hotbuildglobalkey()) {
                         if (self.hotbuildglobalkey()[hotkey] === swapto) {
                             swapposition = i;
                             break;
                         }
+                        i++;
                     }
                     //find current key position
+                    i = 0;
                     for (var hotkey in self.hotbuildglobalkey()) {
                         if (self.hotbuildglobalkey()[hotkey] === self.keyboardkey()) {
                             currentposition = i;
                             break;
                         }
+                        i++;
                     }
                     if (swapposition !== undefined) {
                         self.hotbuildglobalkey()["hotbuild" + currentposition + "s"] = swapto;
