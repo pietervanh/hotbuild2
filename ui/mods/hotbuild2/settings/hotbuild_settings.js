@@ -3,7 +3,6 @@
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 
-
 var hbunitInfoParser =
 	(typeof hbunitInfoParser === "undefined") ?
 	(function () {
@@ -151,7 +150,6 @@ var hotbuildsettings = (function () {
             for (var j = 0; j < filteredresults.length; j++) {
                 if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
                     (_.contains(filteredresults[j].unit_types, "UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabOrbBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_CombatFabBuild"))) {
-                    console.log(filteredresults[j].unit_types);
                     filteredunits.push(filteredresults[j]);
 
                 }
@@ -169,7 +167,27 @@ var hotbuildsettings = (function () {
             filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
             filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
             self.filteredunits(filteredbuildings); //set standard on buildings
-            self.units(filteredresults)
+            self.units(filteredresults);
+
+            debugger;
+            //now compare / update the existing hotbuildglobal data so it's always up 2 date
+            for(var hbkey in self.hotbuildglobal()){
+                //if(_.contains(filteredresults,hb.json))
+                for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++)
+                {
+                    var match = _.find(filteredresults, { 'json': self.hotbuildglobal()[hbkey][i].json });
+                    if (match === undefined) {
+                        //should remove item
+                    }
+                    else {
+                        self.hotbuildglobal()[hbkey][i] = match;
+                    }
+
+                    
+                    //console.log(self.hotbuildglobal()[hbkey][i].json);
+                }
+            }
+
             //debugger;
 
         });
@@ -268,6 +286,9 @@ var hotbuildsettings = (function () {
         self.selectKey = function () {
             self.selectedhotbuild(self.hotbuildglobal()[self.selectedkeyinfo() + "s"]);
         };
+        self.selectedhotbuild.subscribe(function (value) {
+            //on change selectedhotbuild
+        });
 
         self.selectedkeyinfo.subscribe(function (value) {
             self.selectKey();
@@ -364,11 +385,16 @@ var hotbuildsettings = (function () {
             var copyconfig = viewmodelconfig;
             viewmodelconfigkey = {};
             viewmodelconfig = {};
-            //debugger;
+            debugger;
             var nr = 1;
             for (var hotkey in copyconfigkey) {
                 viewmodelconfigkey['hotbuild' + nr + 's'] = copyconfigkey[hotkey];
-                viewmodelconfig['hotbuild' + nr + 's'] = copyconfig[hotkey];
+                viewmodelconfig['hotbuild' + nr + 's'] = [];
+                for (var i = 0; i < copyconfig[hotkey].length; i++) {
+                    viewmodelconfig['hotbuild' + nr + 's'].push({ 'json': copyconfig[hotkey][i].json });
+                    //viewmodelconfig['hotbuild' + nr + 's'][i] = copyconfig[hotkey][i];
+                }
+                //viewmodelconfig['hotbuild' + nr + 's'].json = copyconfig[hotkey].json;
                 nr++;
             }
 
@@ -379,6 +405,7 @@ var hotbuildsettings = (function () {
         };
 
         self.keyboardclickhandler = function () {
+            // this needs to be knockoutified !
             var $this = $(this);
             var character = $this.html();
             //debugger;
