@@ -170,11 +170,12 @@ var hotbuildsettings = (function () {
             filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
             self.filteredunits(filteredbuildings); //set standard on buildings
             self.units(filteredresults)
-            debugger;
+            //debugger;
 
         });
         self.unitbuildfilter = ko.observable(true);
         self.unitbuildfilter.subscribe(function (value) {
+            self.activeSubFilters("All");
             if (self.unitbuildfilter()) {
                 self.filters(["All", "Economy", "Factory", "Defense", "Recon"])
             }
@@ -192,14 +193,8 @@ var hotbuildsettings = (function () {
             self.filterunits();
         });
         self.addFilter = function (filter) {
-            if (!_.contains(self.filters(), filter, 0)) {
-                self.filters.push(filter);
-            }
-            else {
-                self.filters.remove(filter);
-            }
+            self.activeSubFilters(filter);
         };
-
         self.filterunits = function () {
             self.filteredunits([]);
             var hassubgroup = false;
@@ -266,34 +261,6 @@ var hotbuildsettings = (function () {
                 }
             }
         };
-
-        self.activeFilterBuildings = ko.computed(function () {
-            return _.contains(self.filters(), 'buildings', 0);
-        });
-
-        self.activeFilterUnits = ko.computed(function () {
-            return _.contains(self.filters(), 'units', 0);
-        });
-
-        self.activeFilterEconomy = ko.computed(function () {
-            return _.contains(self.filters(), 'economy', 0);
-        });
-
-        self.activeFilterFactory = ko.computed(function () {
-            return _.contains(self.filters(), 'factory', 0);
-        });
-
-        self.activeFilterDefense = ko.computed(function () {
-            return _.contains(self.filters(), 'defense', 0);
-        });
-
-        self.activeFilterRecon = ko.computed(function () {
-            return _.contains(self.filters(), 'recon', 0);
-        });
-
-        self.activeFilterAmmo = ko.computed(function () {
-            return _.contains(self.filters(), 'ammo', 0);
-        });
 
         self.keyboardkey = ko.observable();
         self.uberkey = ko.observable();
@@ -376,18 +343,6 @@ var hotbuildsettings = (function () {
                 self.selectedhotbuild.push(selectedunit);
             }
             !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
-            self.Save();
-        };
-
-        self.remFromList = function (item) {
-            self.selectedhotbuild.remove(item);
-            if (self.selectedhotbuild().length === 0) {
-                //self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = "";
-                $('.active').hasClass('hbk') ? $('.active').removeClass('hbk') : '';
-                //self.cleanUpafterEmptyKey();
-                //self.keyboardkey();
-                // self.InitKeyboard();
-            }
             self.Save();
         };
 
@@ -685,15 +640,6 @@ var hotbuildsettings = (function () {
         //filterunits();
     }
 
-    self.getTemplate = function (hblistitem) {
-        if (hblistitem.factory === "") {
-            return "structureTemplate";
-        }
-        else {
-            return "mobileTemplate";
-        }
-    };
-
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
 
@@ -770,6 +716,7 @@ var hotbuildsettings = (function () {
             hotbuildsettings.viewmodel.selectedhotbuild()[i] = ko.toJS(hotbuildsettings.viewmodel.selectedhotbuild()[i]);
         }
         hotbuildsettings.viewmodel.filterunits(); // should really clone eh
+        hotbuildsettings.viewmodel.Save();
 
     };
 

@@ -101,7 +101,7 @@
                 <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
             </div>
             <div class="buildTabs" data-bind="foreach: filters">
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data }, text: $data"></span>
+                <span class="btFilterTab" data-bind="click: function() { $root.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data === $root.activeSubFilters() }, text: $data"></span>
             </div>
         </div>
 
