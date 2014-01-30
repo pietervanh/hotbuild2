@@ -100,12 +100,8 @@
                 <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
                 <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
             </div>
-            <div class="buildTabs">
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('economy');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterEconomy() }">economy</span>
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('factory');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterFactory() }">factory</span>
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('defense');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterDefense() }">defense</span>
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('recon');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterRecon() }">recon</span>
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter('ammo');}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : activeFilterAmmo() }">ammo</span>
+            <div class="buildTabs" data-bind="foreach: filters">
+                <span class="btFilterTab" data-bind="click: function() { $root.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data }, text: $data"></span>
             </div>
         </div>
 

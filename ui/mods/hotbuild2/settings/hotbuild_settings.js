@@ -174,31 +174,56 @@ var hotbuildsettings = (function () {
 
         });
         self.unitbuildfilter = ko.observable(true);
-        self.filters = ko.observableArray(["buildings"]);
+        self.unitbuildfilter.subscribe(function (value) {
+            if (self.unitbuildfilter()) {
+                self.filters(["All", "Economy", "Factory", "Defense", "Recon"])
+            }
+            else {
+                self.filters(["All", "Land", "Air", "Naval", "Orbital"])
+            }
+            self.filterunits();
+        });
+        self.toggleTopFilter = function (buildings) {
+            self.unitbuildfilter(buildings);
+        };
+        self.filters = ko.observableArray(["All", "Economy", "Factory", "Defense", "Recon"]);
+        self.activeSubFilters = ko.observable("All");
+        self.activeSubFilters.subscribe(function (value) {
+            self.filterunits();
+        });
+        self.addFilter = function (filter) {
+            if (!_.contains(self.filters(), filter, 0)) {
+                self.filters.push(filter);
+            }
+            else {
+                self.filters.remove(filter);
+            }
+        };
+
         self.filterunits = function () {
             self.filteredunits([]);
             var hassubgroup = false;
             if (self.unitbuildfilter()) {
-                if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0)) {
+                if (self.activeSubFilters() !== 'All') {
                     hassubgroup = true;
                 }
                 //check subfilters for buildings
                 for (var i = 0; i < self.units().length; i++) {
                     var buildingadded = false;
                     if (self.units()[i].factory === "") {
-                        if (_.contains(self.filters(), 'economy', 0) && _.contains(self.units()[i].unit_types, "UNITTYPE_Economy")) {
+                        if (self.activeSubFilters() === 'Economy' && _.contains(self.units()[i].unit_types, "UNITTYPE_Economy")) {
                             self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'factory', 0) && _.contains(self.units()[i].unit_types, "UNITTYPE_Factory")) {
+                        if (self.activeSubFilters() === 'Factory' && _.contains(self.units()[i].unit_types, "UNITTYPE_Factory")) {
                             self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'defense', 0) && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Defense")) {
+                        if (self.activeSubFilters() === 'Defense' && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Defense")) {
                             self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
-                        if (_.contains(self.filters(), 'recon', 0) && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Recon")) {
+                        if (self.activeSubFilters() === 'Recon' && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Recon")) {
                             self.filteredunits.push(self.units()[i]);
                             buildingadded = true;
                         }
@@ -210,26 +235,26 @@ var hotbuildsettings = (function () {
             }
             else {
                 hassubgroup = false;
-                if (_.contains(self.filters(), 'economy', 0) || _.contains(self.filters(), 'factory', 0) || _.contains(self.filters(), 'defense', 0) || _.contains(self.filters(), 'recon', 0)) {
+                if (self.activeSubFilters() !== 'All') {
                     hassubgroup = true;
                 }
                 //check subfilters for units
                 for (var i = 0; i < self.units().length; i++) {
                     var unitadded = false;
                     if (self.units()[i].factory !== "") {
-                        if (_.contains(self.filters(), 'economy', 0) && _.contains(self.units()[i].unit_types, "UNITTYPE_Land")) {
+                        if (self.activeSubFilters() === 'Land' && _.contains(self.units()[i].unit_types, "UNITTYPE_Land")) {
                             self.filteredunits.push(self.units()[i]);
                             unitadded = true;
                         }
-                        if (_.contains(self.filters(), 'factory', 0) && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Air")) {
+                        if (self.activeSubFilters() === 'Air' && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Air")) {
                             self.filteredunits.push(self.units()[i]);
                             unitadded = true;
                         }
-                        if (_.contains(self.filters(), 'defense', 0) && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Naval")) {
+                        if (self.activeSubFilters() === 'Naval' && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Naval")) {
                             self.filteredunits.push(self.units()[i]);
                             unitadded = true;
                         }
-                        if (_.contains(self.filters(), 'recon', 0) && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Orbital")) {
+                        if (self.activeSubFilters() === 'Orbital' && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Orbital")) {
                             self.filteredunits.push(self.units()[i]);
                             unitadded = true;
                         }
@@ -241,21 +266,6 @@ var hotbuildsettings = (function () {
                 }
             }
         };
-        self.toggleTopFilter = function (buildings) {
-            self.unitbuildfilter(buildings);
-            self.filterunits();
-        };
-        self.addFilter = function (filter) {
-            if (!_.contains(self.filters(), filter, 0)) {
-                self.filters.push(filter);
-            }
-            else {
-                self.filters.remove(filter);
-            }
-        };
-        self.filters.subscribe(function (value) {
-            self.filterunits();
-        });
 
         self.activeFilterBuildings = ko.computed(function () {
             return _.contains(self.filters(), 'buildings', 0);
