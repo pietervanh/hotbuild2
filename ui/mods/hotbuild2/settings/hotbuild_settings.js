@@ -414,6 +414,7 @@ var hotbuildsettings = (function () {
         self.remFromList = function (item) {
             self.selectedhotbuild.remove(item);
             self.Save();
+            self.updatehotbuildkeys();
         };
 
         self.showingDefaultPrompt = ko.observable(false);
@@ -509,7 +510,7 @@ var hotbuildsettings = (function () {
                 self.hotbuildglobal(imported.hotbuildglobal);
                 updateExistingSettings();
                 self.Save();
-                self.keyboardkey();
+                self.keyboardkey('');
             }
             else {
                 //alert("Please input Text to import in textbox");
@@ -528,7 +529,7 @@ var hotbuildsettings = (function () {
                 self.hotbuildglobal(imported.hotbuildglobal);
                 updateExistingSettings();
                 self.Save();
-                self.keyboardkey();
+                self.keyboardkey('');
             });
         };
 
@@ -623,13 +624,9 @@ var hotbuildsettings = (function () {
     };
 
     ko.bindingHandlers.sortable.afterMove = function (arg) {
-        for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-            hotbuildsettings.viewmodel.selectedhotbuild()[i] = ko.toJS(hotbuildsettings.viewmodel.selectedhotbuild()[i]);
-        }
         hotbuildsettings.viewmodel.filterunits(); // should really clone eh
         hotbuildsettings.viewmodel.Save();
         hotbuildsettings.viewmodel.updatehotbuildkeys();
-
     };
 
     ko.bindingHandlers.colorhotbuildkeys = {
