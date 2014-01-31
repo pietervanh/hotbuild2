@@ -169,10 +169,6 @@ var hotbuildsettings = (function () {
             self.filteredunits(filteredbuildings); //set standard on buildings
             self.units(filteredresults);
             updateExistingSettings();
-
-
-            //debugger;
-
         });
         function updateExistingSettings() {
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
@@ -307,7 +303,6 @@ var hotbuildsettings = (function () {
 
             }
             //get uberkey info
-
             var fuberkey = false;
             _.forEach(model.keybindGroups(), function (o) {
                 _.forEach(o.keybinds(), function (k) {
@@ -322,15 +317,6 @@ var hotbuildsettings = (function () {
             }
         });
 
-        self.hbkey = ko.computed({
-            read: function () {
-                return self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"];
-            },
-            write: function (value) {
-                self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = value;
-            },
-            owner: self
-        });
 
         self.uberkeys = ko.computed(function () {
             var uberkeys = [];
@@ -359,26 +345,6 @@ var hotbuildsettings = (function () {
         self.updatehotbuildkeys = function () {
             self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
         }
-
-        self.addUnit = function () {
-            //if(self.selectedhotbuild contains already a unit with the same factory ignore)
-            var unitCheck = true;
-            //debugger;
-            var selectedunit = ko.toJS(self.selectedunit());
-            for (var i = 0; i < self.selectedhotbuild().length; i++) {
-                if (self.selectedhotbuild()[i].factory == selectedunit.factory) {
-                    unitCheck = false;
-                    break;
-                }
-            }
-            if (unitCheck) {
-                self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = self.keyboardkey();
-                self.selectedhotbuild.push(selectedunit);
-            }
-            !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
-            self.Save();
-        };
-
         self.Save = function () {
             //is this needed ? 
             //model.hotbuildconfig = self.hotbuildglobal();
@@ -397,7 +363,7 @@ var hotbuildsettings = (function () {
             var copyconfig = viewmodelconfig;
             viewmodelconfigkey = {};
             viewmodelconfig = {};
-            debugger;
+            //debugger;
             var nr = 1;
             for (var hotkey in copyconfigkey) {
                 viewmodelconfigkey['hotbuild' + nr + 's'] = copyconfigkey[hotkey];
@@ -589,7 +555,6 @@ var hotbuildsettings = (function () {
                 }
             });
         };
-        //filterunits();
 
         self.keyboardclickhandler = function () {
             var $this = $(this);
