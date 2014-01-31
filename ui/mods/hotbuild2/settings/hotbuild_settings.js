@@ -410,6 +410,11 @@ var hotbuildsettings = (function () {
             self.keyboardkey(swapto);
 
         };
+        //remove for dummies that don't know to drag it back 
+        self.remFromList = function (item) {
+            self.selectedhotbuild.remove(item);
+            self.Save();
+        };
 
         self.showingDefaultPrompt = ko.observable(false);
         self.showingDefaultWASDPrompt = ko.observable(false);

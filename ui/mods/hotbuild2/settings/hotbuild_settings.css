@@ -261,9 +261,9 @@ text-align: right;
     display: inline-block;
     margin-top: 6px;
     padding-right: 24px;
-    overflow: scroll;
+    overflow-y: auto;
     direction: rtl;
-    width: 474px;
+    width: 500px;
     clear: left;
     -webkit-box-sizing: border-box;
 }
@@ -348,9 +348,11 @@ text-align: right;
     vertical-align: middle;
     border-bottom: 1px solid #333;
     min-width: 406px;
+    line-height: 16px;
 }
 
-.ui-icon-trash {
+#hbremovefromlist {
+    vertical-align: middle;
     display: table-cell;
 }
 
@@ -416,8 +418,9 @@ text-align: right;
 .sequencelistitem {
     position: relative;
     min-height: 48px;
-    min-width: 484px;
-    border:rgba(0,255,255,.1)  solid thin;
+    width: 484px;
+    border-top: rgba(0,255,255,.1)  solid thin;
+    border-bottom: rgba(0,255,255,.1)  solid thin;
 }
 
 
