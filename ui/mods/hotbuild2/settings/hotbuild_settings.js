@@ -351,7 +351,6 @@ var hotbuildsettings = (function () {
             var copyconfig = viewmodelconfig;
             viewmodelconfigkey = {};
             viewmodelconfig = {};
-            //debugger;
             var nr = 1;
             for (var hotkey in copyconfigkey) {
                 viewmodelconfigkey['hotbuild' + nr + 's'] = copyconfigkey[hotkey];
@@ -380,7 +379,6 @@ var hotbuildsettings = (function () {
                     var swapposition;
                     var currentposition;
                     //find swap position
-                    debugger;
                     for (var hotkey in self.hotbuildglobalkey()) {
                         if (self.hotbuildglobalkey()[hotkey] === swapto) {
                             swapposition = hotkey;
