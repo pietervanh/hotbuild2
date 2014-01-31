@@ -499,7 +499,6 @@ var hotbuildsettings = (function () {
         self.InitKeyboard = function () {
             self.selectedkeyinfo(undefined);
             //debugger;
-            var arrkeys = _.keys(_.invert(self.hotbuildglobalkey()));
             var uberkeys = [];
             _.forEach(model.keybindGroups(), function (o) {
                 _.forEach(o.keybinds(), function (k) {
@@ -511,9 +510,6 @@ var hotbuildsettings = (function () {
                 diskeys = diskeys.concat(['w', 'a', 's', 'd']);
             }
             $('#keyboard li').each(function (index) {
-                if ($(this).hasClass('hbk')) {
-                    $(this).removeClass('hbk');
-                }
                 if ($(this).hasClass('uber')) {
                     $(this).removeClass('uber');
                 }
@@ -525,11 +521,6 @@ var hotbuildsettings = (function () {
                 }
             });
             $('#keyboard li').each(function (index) {
-                for (var i = 0; i < arrkeys.length; i++) {
-                    if ($(this).html() == arrkeys[i]) {
-                        $(this).toggleClass('hbk');
-                    }
-                }
                 for (var i = 0; i < uberkeys.length; i++) {
                     if ($(this).html() == uberkeys[i]) {
                         $(this).toggleClass('uber');
@@ -763,17 +754,20 @@ var hotbuildsettings = (function () {
             var value = valueAccessor();
             // Next, whether or not the supplied model property is observable, get its current value
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            // Now manipulate the DOM elements
-            $("#keyboard li").each(function (index) {
-                for (var i = 0; i < valueUnwrapped.length; i++) {
-                    if ($(this).text() === valueUnwrapped[i]) {
-                        $(this).addClass('hbk');
-                    }
-                    else{
-                        $(this).removeClass('hbk');
-                    }
+            $('#keyboard li').each(function (index) {
+                if ($(this).hasClass('hbk')) {
+                    $(this).removeClass('hbk');
                 }
             });
+            for (var i = 0; i < valueUnwrapped.length; i++) {
+                $("#keyboard li").each(function (index) {
+                    if ($(this).text() === valueUnwrapped[i]) {
+                        if (!$(this).hasClass('hbk')) {
+                            $(this).toggleClass('hbk');
+                        }
+                    }
+                });
+            }
         }
     };
 
