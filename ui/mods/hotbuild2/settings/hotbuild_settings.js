@@ -346,9 +346,6 @@ var hotbuildsettings = (function () {
             self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
         }
         self.Save = function () {
-            //is this needed ? 
-            //model.hotbuildconfig = self.hotbuildglobal();
-            //model.hotbuildconfigkey = self.hotbuildglobalkey();
             //do cleanup of empty props
             var viewmodelconfigkey = self.hotbuildglobalkey();
             var viewmodelconfig = self.hotbuildglobal();
