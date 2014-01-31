@@ -191,12 +191,6 @@ var hotbuildsettings = (function () {
         self.unitbuildfilter = ko.observable(true);
         self.unitbuildfilter.subscribe(function (value) {
             self.activeSubFilters("All");
-            if (self.unitbuildfilter()) {
-                self.filters(["All", "Economy", "Factory", "Defense", "Recon"])
-            }
-            else {
-                self.filters(["All", "Land", "Air", "Naval", "Orbital"])
-            }
             self.filterunits();
         });
         self.toggleTopFilter = function (buildings) {
@@ -212,67 +206,64 @@ var hotbuildsettings = (function () {
         };
         self.filterunits = function () {
             self.filteredunits([]);
-            var hassubgroup = false;
+            self.filters([]); //make empty to fix scrolling
             if (self.unitbuildfilter()) {
+                self.filters(["All", "Economy", "Factory", "Defense", "Recon"]);
                 if (self.activeSubFilters() !== 'All') {
-                    hassubgroup = true;
+                    //check subfilters for buildings
+                    for (var i = 0; i < self.units().length; i++) {
+                        if (self.units()[i].factory === "") {
+                            if (self.activeSubFilters() === 'Economy' && _.contains(self.units()[i].unit_types, "UNITTYPE_Economy")) {
+                                self.filteredunits.push(self.units()[i]);
+                            }
+                            if (self.activeSubFilters() === 'Factory' && _.contains(self.units()[i].unit_types, "UNITTYPE_Factory")) {
+                                self.filteredunits.push(self.units()[i]);
+
+                            }
+                            if (self.activeSubFilters() === 'Defense' && _.contains(self.units()[i].unit_types, "UNITTYPE_Defense")) {
+                                self.filteredunits.push(self.units()[i]);
+
+                            }
+                            if (self.activeSubFilters() === 'Recon' && _.contains(self.units()[i].unit_types, "UNITTYPE_Recon")) {
+                                self.filteredunits.push(self.units()[i]);
+                            }
+                        }
+                    }
                 }
-                //check subfilters for buildings
-                for (var i = 0; i < self.units().length; i++) {
-                    var buildingadded = false;
-                    if (self.units()[i].factory === "") {
-                        if (self.activeSubFilters() === 'Economy' && _.contains(self.units()[i].unit_types, "UNITTYPE_Economy")) {
-                            self.filteredunits.push(self.units()[i]);
-                            buildingadded = true;
-                        }
-                        if (self.activeSubFilters() === 'Factory' && _.contains(self.units()[i].unit_types, "UNITTYPE_Factory")) {
-                            self.filteredunits.push(self.units()[i]);
-                            buildingadded = true;
-                        }
-                        if (self.activeSubFilters() === 'Defense' && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Defense")) {
-                            self.filteredunits.push(self.units()[i]);
-                            buildingadded = true;
-                        }
-                        if (self.activeSubFilters() === 'Recon' && !buildingadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Recon")) {
-                            self.filteredunits.push(self.units()[i]);
-                            buildingadded = true;
-                        }
-                        if (!buildingadded && !hassubgroup) {
+                else {
+                    for (var i = 0; i < self.units().length; i++) {
+                        if (self.units()[i].factory === "") {
                             self.filteredunits.push(self.units()[i]);
                         }
                     }
                 }
             }
             else {
-                hassubgroup = false;
+                self.filters(["All", "Land", "Air", "Naval", "Orbital"]);
                 if (self.activeSubFilters() !== 'All') {
-                    hassubgroup = true;
+                    for (var i = 0; i < self.units().length; i++) {
+                        if (self.units()[i].factory !== "") {
+                            if (self.activeSubFilters() === 'Land' && _.contains(self.units()[i].unit_types, "UNITTYPE_Land")) {
+                                self.filteredunits.push(self.units()[i]);
+                            }
+                            if (self.activeSubFilters() === 'Air' && _.contains(self.units()[i].unit_types, "UNITTYPE_Air")) {
+                                self.filteredunits.push(self.units()[i]);
+                            }
+                            if (self.activeSubFilters() === 'Naval' && _.contains(self.units()[i].unit_types, "UNITTYPE_Naval")) {
+                                self.filteredunits.push(self.units()[i]);
+                            }
+                            if (self.activeSubFilters() === 'Orbital' && _.contains(self.units()[i].unit_types, "UNITTYPE_Orbital")) {
+                                self.filteredunits.push(self.units()[i]);
+                            }
+                        }
+                    }
                 }
-                //check subfilters for units
-                for (var i = 0; i < self.units().length; i++) {
-                    var unitadded = false;
-                    if (self.units()[i].factory !== "") {
-                        if (self.activeSubFilters() === 'Land' && _.contains(self.units()[i].unit_types, "UNITTYPE_Land")) {
-                            self.filteredunits.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (self.activeSubFilters() === 'Air' && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Air")) {
-                            self.filteredunits.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (self.activeSubFilters() === 'Naval' && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Naval")) {
-                            self.filteredunits.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (self.activeSubFilters() === 'Orbital' && !unitadded && _.contains(self.units()[i].unit_types, "UNITTYPE_Orbital")) {
-                            self.filteredunits.push(self.units()[i]);
-                            unitadded = true;
-                        }
-                        if (!unitadded && !hassubgroup) {
+                else {
+                    for (var i = 0; i < self.units().length; i++) {
+                        if (self.units()[i].factory !== "") {
                             self.filteredunits.push(self.units()[i]);
                         }
                     }
-
                 }
             }
         };
