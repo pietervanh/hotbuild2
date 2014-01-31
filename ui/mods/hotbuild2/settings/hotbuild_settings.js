@@ -287,9 +287,6 @@ var hotbuildsettings = (function () {
         self.selectKey = function () {
             self.selectedhotbuild(self.hotbuildglobal()[self.selectedkeyinfo() + "s"]);
         };
-        self.selectedhotbuild.subscribe(function (value) {
-            //on change selectedhotbuild
-        });
 
         self.selectedkeyinfo.subscribe(function (value) {
             self.selectKey();
@@ -347,13 +344,7 @@ var hotbuildsettings = (function () {
         });
 
         self.updatehotbuildkeys = function () {
-            //debugger;
-            self.hotbuildkeys([]);
-            for (var hbkey in self.hotbuildglobal()) {
-                if (self.hotbuildglobal()[hbkey].length > 0) {
-                    self.hotbuildkeys.push(self.hotbuildglobalkey()[hbkey]);
-                }
-            }
+            self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
         }
 
         self.selectedbuilding = ko.observable();
