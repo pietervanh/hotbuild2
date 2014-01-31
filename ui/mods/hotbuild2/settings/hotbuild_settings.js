@@ -332,6 +332,24 @@ var hotbuildsettings = (function () {
             owner: self
         });
 
+        self.uberkeys = ko.computed(function () {
+            var uberkeys = [];
+            _.forEach(model.keybindGroups(), function (o) {
+                _.forEach(o.keybinds(), function (k) {
+                    uberkeys.push(k.binding());
+                });
+            });
+            return uberkeys;
+        });
+
+        self.disabledkeys = ko.computed(function () {
+            var diskeys = ['caps lock', 'shift', 'return'];
+            if (model.camera_key_pan_style() === "WASD") {
+                diskeys = diskeys.concat(['w', 'a', 's', 'd']);
+            }
+            return diskeys;
+        });
+
         self.hotbuildkeys = ko.observableArray([]);
 
         self.hotbuildglobal.subscribe(function (value) {
@@ -341,15 +359,6 @@ var hotbuildsettings = (function () {
         self.updatehotbuildkeys = function () {
             self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
         }
-
-        self.selectedbuilding = ko.observable();
-
-        self.addBuilding = function () {
-            self.selectedhotbuild.push(ko.toJS(self.selectedbuilding()));
-            self.hotbuildglobalkey()[self.selectedkeyinfo() + "s"] = self.keyboardkey();
-            self.Save();
-            !$('.active').hasClass('hbk') ? $('.active').addClass('hbk') : '';
-        };
 
         self.addUnit = function () {
             //if(self.selectedhotbuild contains already a unit with the same factory ignore)
@@ -591,24 +600,6 @@ var hotbuildsettings = (function () {
                 }
             }
         };
-
-        self.uberkeys = ko.computed(function () {
-            var uberkeys = [];
-            _.forEach(model.keybindGroups(), function (o) {
-                _.forEach(o.keybinds(), function (k) {
-                    uberkeys.push(k.binding());
-                });
-            });
-            return uberkeys;
-        });
-
-        self.disabledkeys = ko.computed(function () {
-            var diskeys = ['caps lock', 'shift', 'return'];
-            if (model.camera_key_pan_style() === "WASD") {
-                diskeys = diskeys.concat(['w', 'a', 's', 'd']);
-            }
-            return diskeys;
-        });
     }
 
 
@@ -653,20 +644,18 @@ var hotbuildsettings = (function () {
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
-            if (_.isFunction(arg.item.factory)) {
-                if (arg.item.factory() !== "") {
-                    var unitCheck = true;
-                    for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-                        if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory()) {
-                            unitCheck = false;
-                            break;
-                        }
+            if (arg.item.factory !== "") {
+                var unitCheck = true;
+                for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
+                    if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory) {
+                        unitCheck = false;
+                        break;
                     }
-                    if (!unitCheck) {
-                        arg.cancelDrop = true;
-                    }
-                    return arg;
                 }
+                if (!unitCheck) {
+                    arg.cancelDrop = true;
+                }
+                return arg;
             }
         }
         else {
