@@ -339,6 +339,22 @@ var hotbuildsettings = (function () {
             },
             owner: self
         });
+        
+        self.hotbuildkeys = ko.observableArray([]);
+
+        self.hotbuildglobal.subscribe(function (value) {
+            self.updatehotbuildkeys();
+        });
+
+        self.updatehotbuildkeys = function () {
+            //debugger;
+            self.hotbuildkeys([]);
+            for (var hbkey in self.hotbuildglobal()) {
+                if (self.hotbuildglobal()[hbkey].length > 0) {
+                    self.hotbuildkeys.push(self.hotbuildglobalkey()[hbkey]);
+                }
+            }
+        }
 
         self.selectedbuilding = ko.observable();
 
@@ -702,12 +718,6 @@ var hotbuildsettings = (function () {
         });
     }
 
-    var $gamesettings = $("#game_settings");
-    $gamesettings.children(":first").append("<li class='game_settings'>" +
-                                            "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
-                                            "</li>");
-    $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
-    loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
 
 
     model.oldSettingsBeforeHotbuild = model.settings;
@@ -752,7 +762,34 @@ var hotbuildsettings = (function () {
         }
         hotbuildsettings.viewmodel.filterunits(); // should really clone eh
         hotbuildsettings.viewmodel.Save();
+        hotbuildsettings.viewmodel.updatehotbuildkeys();
 
     };
+    
+    ko.bindingHandlers.colorhotbuildkeys = {
+        update: function (element, valueAccessor, allBindings) {
+            // First get the latest data that we're bound to
+            var value = valueAccessor();
+            // Next, whether or not the supplied model property is observable, get its current value
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            // Now manipulate the DOM elements
+            $("#keyboard li").each(function (index) {
+                for (var i = 0; i < valueUnwrapped.length; i++) {
+                    if ($(this).text() === valueUnwrapped[i]) {
+                        $(this).addClass('hbk');
+                    }
+                    else{
+                        $(this).removeClass('hbk');
+                    }
+                }
+            });
+        }
+    };
 
+    var $gamesettings = $("#game_settings");
+    $gamesettings.children(":first").append("<li class='game_settings'>" +
+                                            "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
+                                            "</li>");
+    $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
+    loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
 })();
