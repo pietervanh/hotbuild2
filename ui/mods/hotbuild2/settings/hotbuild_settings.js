@@ -87,94 +87,94 @@ var hotbuildsettings = (function () {
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
         hbunitInfoParser.loadUnits(function (results) {
-                var filteredresults = [];
-                var filteredunits = [];
-                var filteredbuildings = [];
-                var fabbers = [];
-                var factories = [];
-                //first filter
-                for (var i = 0; i < results.length; i++) {
-                    if (!_.contains(results[i].unit_types, "UNITTYPE_NoBuild") && !_.contains(results[i].unit_types, "UNITTYPE_Debug") && results[i].unit_types !== undefined) {
-                        //fixes
-                        switch (results[i].json) {
-                            case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
-                                results[i].desc = "Nuclear Missile Ammo";
-                                results[i].displayname = "Nuclear Missile";
-                                results[i].display_group = 'ammo';
-                                break;
-                            case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
-                                results[i].desc = "Anti-Nuclear Missile Ammo";
-                                results[i].displayname = "Anti-Nuclear Missile";
-                                results[i].display_group = 'ammo';
-                                break;
-                            case "/pa/units/air/gunship/gunship.json":
-                                results[i].desc = "Gunship";
-                                results[i].displayname = "Shoots Stuff from Air";
-                                results[i].display_group = 60;
+            var filteredresults = [];
+            var filteredunits = [];
+            var filteredbuildings = [];
+            var fabbers = [];
+            var factories = [];
+            //first filter
+            for (var i = 0; i < results.length; i++) {
+                if (!_.contains(results[i].unit_types, "UNITTYPE_NoBuild") && !_.contains(results[i].unit_types, "UNITTYPE_Debug") && results[i].unit_types !== undefined) {
+                    //fixes
+                    switch (results[i].json) {
+                        case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
+                            results[i].desc = "Nuclear Missile Ammo";
+                            results[i].displayname = "Nuclear Missile";
+                            results[i].display_group = 'ammo';
+                            break;
+                        case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
+                            results[i].desc = "Anti-Nuclear Missile Ammo";
+                            results[i].displayname = "Anti-Nuclear Missile";
+                            results[i].display_group = 'ammo';
+                            break;
+                        case "/pa/units/air/gunship/gunship.json":
+                            results[i].desc = "Gunship";
+                            results[i].displayname = "Shoots Stuff from Air";
+                            results[i].display_group = 60;
+                    }
+                    if (_.contains(results[i].unit_types, 'UNITTYPE_Mobile')) {
+                        if (_.contains(results[i].unit_types, 'UNITTYPE_Basic')) {
+                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'botfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'vecfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'afac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'nfac' : '';
                         }
-                        if (_.contains(results[i].unit_types, 'UNITTYPE_Mobile')) {
-                            if (_.contains(results[i].unit_types, 'UNITTYPE_Basic')) {
-                                _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'botfac' : '';
-                                _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'vecfac' : '';
-                                _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'afac' : '';
-                                _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'nfac' : '';
-                            }
-                            else {
-                                _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'abotfac' : '';
-                                _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'avecfac' : '';
-                                _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'aafac' : '';
-                                _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'anfac' : '';
-                            }
-                            //Orbital is changing rapidly so hacky fixes here
-                            //Orbital is changing rapidly so hacky fixes here
-                            if (results[i].json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
-                                results[i].factory = 'ofac';
-                            }
-                            if (results[i].json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
-                                results[i].factory = 'ofac';
-                            }
-                            if (results[i].json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
-                                results[i].factory = 'ofac';
-                            }
-                            if (results[i].json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
-                                results[i].factory = 'ofac';
-                            }
+                        else {
+                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'abotfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'avecfac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'aafac' : '';
+                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'anfac' : '';
                         }
-                        var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
-                        var end = /[.]json$/;
-                        results[i].image = '../live_game/img/build_bar/units/' + results[i].json.substring(results[i].json.search(start), results[i].json.search(end)) + '.png';
-                        filteredresults.push(results[i]);
+                        //Orbital is changing rapidly so hacky fixes here
+                        //Orbital is changing rapidly so hacky fixes here
+                        if (results[i].json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
+                            results[i].factory = 'ofac';
+                        }
+                        if (results[i].json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
+                            results[i].factory = 'ofac';
+                        }
+                        if (results[i].json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
+                            results[i].factory = 'ofac';
+                        }
+                        if (results[i].json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
+                            results[i].factory = 'ofac';
+                        }
                     }
+                    var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
+                    var end = /[.]json$/;
+                    results[i].image = '../live_game/img/build_bar/units/' + results[i].json.substring(results[i].json.search(start), results[i].json.search(end)) + '.png';
+                    filteredresults.push(results[i]);
                 }
-                //second filter is based on buildable_types
-                for (var j = 0; j < filteredresults.length; j++) {
-                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
-                        (_.contains(filteredresults[j].unit_types, "UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabOrbBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_CombatFabBuild"))) {
-                        filteredunits.push(filteredresults[j]);
+            }
+            //second filter is based on buildable_types
+            for (var j = 0; j < filteredresults.length; j++) {
+                if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
+                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabOrbBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_CombatFabBuild"))) {
+                    filteredunits.push(filteredresults[j]);
 
-                    }
                 }
-                for (var j = 0; j < filteredresults.length; j++) {
-                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
-                        (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabAdvBuild") ||
-                        _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Recon"))
-                        || (_.contains(filteredresults[j].unit_types, "UNITTYPE_Advanced") && _.contains(filteredresults[j].unit_types, "UNITTYPE_Factory"))) {
-                        filteredbuildings.push(filteredresults[j]);
-                    }
+            }
+            for (var j = 0; j < filteredresults.length; j++) {
+                if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
+                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabAdvBuild") ||
+                    _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Recon"))
+                    || (_.contains(filteredresults[j].unit_types, "UNITTYPE_Advanced") && _.contains(filteredresults[j].unit_types, "UNITTYPE_Factory"))) {
+                    filteredbuildings.push(filteredresults[j]);
                 }
+            }
 
-                filteredresults = [];
-                filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
-                filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
-                self.filteredunits(filteredbuildings); //set standard on buildings
-                self.units(filteredresults);
-                updateExistingSettings();
+            filteredresults = [];
+            filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
+            filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
+            self.filteredunits(filteredbuildings); //set standard on buildings
+            self.units(filteredresults);
+            updateExistingSettings();
 
 
-                //debugger;
+            //debugger;
 
         });
-        function updateExistingSettings(){
+        function updateExistingSettings() {
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
             for (var hbkey in self.hotbuildglobal()) {
                 //if(_.contains(self.units(),hb.json))
@@ -287,12 +287,11 @@ var hotbuildsettings = (function () {
         self.selectKey = function () {
             self.selectedhotbuild(self.hotbuildglobal()[self.selectedkeyinfo() + "s"]);
         };
-
         self.selectedkeyinfo.subscribe(function (value) {
             self.selectKey();
         });
-
         self.keyboardkey.subscribe(function (value) {
+            console.log("keyboard key changed to " + value);
 
             var keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), value);
             var hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
@@ -300,16 +299,12 @@ var hotbuildsettings = (function () {
                 self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
             }
             else {
-                //TODO check if it works if no empty hotbuildglobalkeys"" ones are there
                 //find first unused hotbuildkey and select it 
                 var lastindex = _.keys(self.hotbuildglobalkey()).length + 1;
                 self.hotbuildglobalkey()['hotbuild' + lastindex + 's'] = value;
                 self.hotbuildglobal()['hotbuild' + lastindex + 's'] = [];
                 self.selectedkeyinfo('hotbuild' + lastindex);
-                //self.Save();
-                //keyindex = _.indexOf(_.keys(_.invert(self.hotbuildglobalkey())), "");
-                //hotbuildkey = _.keys(self.hotbuildglobalkey())[keyindex];
-                //self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
+
             }
             //get uberkey info
 
@@ -336,7 +331,7 @@ var hotbuildsettings = (function () {
             },
             owner: self
         });
-        
+
         self.hotbuildkeys = ko.observableArray([]);
 
         self.hotbuildglobal.subscribe(function (value) {
@@ -412,51 +407,7 @@ var hotbuildsettings = (function () {
             model.hotbuildconfigkey = self.cleanhotbuildglobalkey();
         };
 
-        self.keyboardclickhandler = function () {
-            // this needs to be knockoutified !
-            var $this = $(this);
-            var character = $this.html();
-            //debugger;
-            if (!$this.hasClass('dis')) {
-                //self.InitKeyboard();
-                if (!$this.hasClass('active')) {
-                    $('#keyboard li').each(function (index) {
-                        if ($(this).hasClass('active')) {
-                            $(this).toggleClass('active');
-                            $(this).css('box-shadow', '');
-                        }
-                    });
-                    $(this).addClass('active');
-                    $(this).css('box-shadow', '0px 0px 2px 2px rgba(0,255,255,.7)');
-                }
-                //var $kbselection = $('#kbselection');
-                //$kbselection.html($($this.clone()));
-                var $selectedButton = $this.clone();
-                //$selectedButton.removeClass('active');
-                $selectedButton.attr('id', 'kbselection');
-                $selectedButton.css({ 'box-shadow': '', 'border': 'rgba(0,255,255,1) solid thin', '-webkit-border-radius': '5px', 'text-transform': 'uppercase !important' });
-                $('#kbselection').replaceWith($selectedButton);
 
-                //$('#kbselection').css('text-transform', 'uppercase !important');
-
-
-                $('#kbselection').click(function () {
-                    $('#changeKeyDlg').dialog({
-                        height: 150,
-                        width: 150,
-                        modal: true,
-                        buttons: {
-                            "Change Key": function () { self.swapKey(); self.InitKeyboard(); $(this).dialog("close"); }
-                        },
-                        close: function () {
-                        }
-                    });
-
-                });
-
-                self.keyboardkey(character.toLowerCase());
-            }
-        };
 
         self.swapKey = function () {
             swapto = $("#swapkey").val();
@@ -467,71 +418,33 @@ var hotbuildsettings = (function () {
                     var currentposition;
                     //find swap position
                     debugger;
-                    var i = 0;
                     for (var hotkey in self.hotbuildglobalkey()) {
                         if (self.hotbuildglobalkey()[hotkey] === swapto) {
-                            swapposition = i;
+                            swapposition = hotkey;
                             break;
                         }
-                        i++;
+
                     }
                     //find current key position
-                    i = 0;
                     for (var hotkey in self.hotbuildglobalkey()) {
                         if (self.hotbuildglobalkey()[hotkey] === self.keyboardkey()) {
-                            currentposition = i;
+                            currentposition = hotkey;
                             break;
                         }
-                        i++;
                     }
                     if (swapposition !== undefined) {
-                        self.hotbuildglobalkey()["hotbuild" + currentposition + "s"] = swapto;
-                        self.hotbuildglobalkey()["hotbuild" + swapposition + "s"] = self.keyboardkey();
+                        self.hotbuildglobalkey()[currentposition] = swapto;
+                        self.hotbuildglobalkey()[swapposition] = self.keyboardkey();
                     }
                     else {
-                        self.hotbuildglobalkey()["hotbuild" + currentposition + "s"] = swapto;
+                        self.hotbuildglobalkey()[currentposition] = swapto;
                     }
                     self.Save();
                 }
             }
-        };
-
-        self.InitKeyboard = function () {
-            self.selectedkeyinfo(undefined);
-            //debugger;
-            var uberkeys = [];
-            _.forEach(model.keybindGroups(), function (o) {
-                _.forEach(o.keybinds(), function (k) {
-                    uberkeys.push(k.binding());
-                });
-            });
-            var diskeys = ['caps lock', 'shift', 'return'];
-            if (model.camera_key_pan_style() === "WASD") {
-                diskeys = diskeys.concat(['w', 'a', 's', 'd']);
-            }
-            $('#keyboard li').each(function (index) {
-                if ($(this).hasClass('uber')) {
-                    $(this).removeClass('uber');
-                }
-                if ($(this).hasClass('dis')) {
-                    $(this).removeClass('dis');
-                }
-                if ($(this).hasClass('active')) {
-                    $(this).removeClass('active');
-                }
-            });
-            $('#keyboard li').each(function (index) {
-                for (var i = 0; i < uberkeys.length; i++) {
-                    if ($(this).html() == uberkeys[i]) {
-                        $(this).toggleClass('uber');
-                    }
-                }
-                for (var i = 0; i < diskeys.length; i++) {
-                    if ($(this).html() == diskeys[i]) {
-                        $(this).toggleClass('dis');
-                    }
-                }
-            });
+            self.updatehotbuildkeys();
+            console.log(swapto);
+            self.keyboardkey(swapto);
 
         };
 
@@ -589,15 +502,12 @@ var hotbuildsettings = (function () {
         };
 
         self.ComunityDefaults = function () {
-            self.keyboardkey();
             self.importfromfile("/ui/mods/hotbuild2/defaults/ARROWS.json");
             model.camera_key_pan_style('ARROW');
             forgetFramePosition('hotbuild_info_frame');
-            self.InitKeyboard();
         };
 
         self.ComunityDefaultsWASD = function () {
-            self.keyboardkey();
             model.camera_key_pan_style('WASD');
             forgetFramePosition('hotbuild_info_frame');
             self.importfromfile("/ui/mods/hotbuild2/defaults/WASD.json");
@@ -631,7 +541,7 @@ var hotbuildsettings = (function () {
                 self.hotbuildglobal(imported.hotbuildglobal);
                 updateExistingSettings();
                 self.Save();
-                self.InitKeyboard();
+                self.keyboardkey();
             }
             else {
                 //alert("Please input Text to import in textbox");
@@ -650,7 +560,7 @@ var hotbuildsettings = (function () {
                 self.hotbuildglobal(imported.hotbuildglobal);
                 updateExistingSettings();
                 self.Save();
-                self.InitKeyboard();
+                self.keyboardkey();
             });
         };
 
@@ -671,7 +581,36 @@ var hotbuildsettings = (function () {
             });
         };
         //filterunits();
+
+        self.keyboardclickhandler = function () {
+            var $this = $(this);
+            var character = $this.html();
+            if (!$this.hasClass('dis')) {
+                if (!$this.hasClass('active')) {
+                    self.keyboardkey(character.toLowerCase());
+                }
+            }
+        };
+
+        self.uberkeys = ko.computed(function () {
+            var uberkeys = [];
+            _.forEach(model.keybindGroups(), function (o) {
+                _.forEach(o.keybinds(), function (k) {
+                    uberkeys.push(k.binding());
+                });
+            });
+            return uberkeys;
+        });
+
+        self.disabledkeys = ko.computed(function () {
+            var diskeys = ['caps lock', 'shift', 'return'];
+            if (model.camera_key_pan_style() === "WASD") {
+                diskeys = diskeys.concat(['w', 'a', 's', 'd']);
+            }
+            return diskeys;
+        });
     }
+
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
@@ -683,6 +622,7 @@ var hotbuildsettings = (function () {
     var hbuisettings = new HotBuildSettingsViewModel(hotbuildglobal, hotbuildglobalkey);
     var hotbuildsettings = {};
     hotbuildsettings.viewmodel = hbuisettings;
+    hotbuildsettings.viewmodel.updatehotbuildkeys();
 
 
     return hotbuildsettings;
@@ -695,12 +635,9 @@ var hotbuildsettings = (function () {
         element.load(url, function () {
             console.log("Loading html " + url);
             ko.applyBindings(model, element.get(0));
-            hotbuildsettings.viewmodel.InitKeyboard();
             $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
         });
     }
-
-
 
     model.oldSettingsBeforeHotbuild = model.settings;
     model.settings = ko.computed(function () {
@@ -747,7 +684,7 @@ var hotbuildsettings = (function () {
         hotbuildsettings.viewmodel.updatehotbuildkeys();
 
     };
-    
+
     ko.bindingHandlers.colorhotbuildkeys = {
         update: function (element, valueAccessor, allBindings) {
             // First get the latest data that we're bound to
@@ -768,6 +705,95 @@ var hotbuildsettings = (function () {
                     }
                 });
             }
+        }
+    };
+
+    ko.bindingHandlers.coloruberkeys = {
+        update: function (element, valueAccessor, allBindings) {
+            // First get the latest data that we're bound to
+            var value = valueAccessor();
+            // Next, whether or not the supplied model property is observable, get its current value
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            $('#keyboard li').each(function (index) {
+                if ($(this).hasClass('uber')) {
+                    $(this).removeClass('uber');
+                }
+            });
+            for (var i = 0; i < valueUnwrapped.length; i++) {
+                $("#keyboard li").each(function (index) {
+                    if ($(this).text() === valueUnwrapped[i]) {
+                        if (!$(this).hasClass('uber')) {
+                            $(this).toggleClass('uber');
+                        }
+                    }
+                });
+            }
+        }
+    };
+
+    ko.bindingHandlers.colordisabledkeys = {
+        update: function (element, valueAccessor, allBindings) {
+            // First get the latest data that we're bound to
+            var value = valueAccessor();
+            // Next, whether or not the supplied model property is observable, get its current value
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            $('#keyboard li').each(function (index) {
+                if ($(this).hasClass('dis')) {
+                    $(this).removeClass('dis');
+                }
+            });
+            for (var i = 0; i < valueUnwrapped.length; i++) {
+                $("#keyboard li").each(function (index) {
+                    if ($(this).text() === valueUnwrapped[i]) {
+                        if (!$(this).hasClass('dis')) {
+                            $(this).toggleClass('dis');
+                        }
+                    }
+                });
+            }
+        }
+    };
+
+    ko.bindingHandlers.activekey = {
+        update: function (element, valueAccessor, allBindings) {
+            // First get the latest data that we're bound to
+            var value = valueAccessor();
+            // Next, whether or not the supplied model property is observable, get its current value
+            var valueUnwrapped = ko.utils.unwrapObservable(value);
+            $('#keyboard li').each(function (index) {
+                if ($(this).hasClass('active')) {
+                    $(this).css('box-shadow', '');
+                    $(this).removeClass('active');
+                }
+            });
+            $("#keyboard li").each(function (index) {
+                if ($(this).text() === valueUnwrapped) {
+                    var $this = $(this);
+                    if (!$this.hasClass('active')) {
+                        $this.addClass('active');
+                        $this.css('box-shadow', '0px 0px 2px 2px rgba(0,255,255,.7)');
+                        var $selectedButton = $this.clone();
+                        //$selectedButton.removeClass('active');
+                        $selectedButton.attr('id', 'kbselection');
+                        $selectedButton.css({ 'box-shadow': '', 'border': 'rgba(0,255,255,1) solid thin', '-webkit-border-radius': '5px', 'text-transform': 'uppercase !important' });
+                        $('#kbselection').replaceWith($selectedButton);
+                        $('#kbselection').click(function () {
+                            $('#changeKeyDlg').dialog({
+                                height: 150,
+                                width: 150,
+                                modal: true,
+                                buttons: {
+                                    "Change Key": function () { hotbuildsettings.viewmodel.swapKey(); $(this).dialog("close"); }
+                                },
+                                close: function () {
+                                }
+                            });
+
+                        });
+                        return true;
+                    }
+                }
+            });
         }
     };
 
