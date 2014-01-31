@@ -483,12 +483,7 @@ var hotbuildsettings = (function () {
         self.export = function () {
             console.log('export');
             var keyboardsettings = {};
-            keyboardsettings.uber = {};
-            for (var key in localStorage) {
-                if (localStorage.hasOwnProperty(key) && key.indexOf('keybinding') === 0) {
-                    keyboardsettings.uber[key] = localStorage[key];
-                }
-            }
+            keyboardsettings.uber = ko.toJS(model.keybindGroups());
             self.Save();
             keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
             keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
@@ -499,9 +494,11 @@ var hotbuildsettings = (function () {
             console.log('import');
             if ($("#ieport").val() !== '') {
                 var imported = JSON.parse($("#ieport").val());
-                for (var key in imported.uber) {
-                    if (imported.hasOwnProperty(key)) {
-                        localStorage[key] = imported[key];
+                for (var kvgm in imported.uber) {
+                    for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
+                        console.log(imported.uber[kvgm].keybinds[i].binding);
+                        console.log(model.keybindGroups()[kvgm].keybinds()[i].binding());
+                        model.keybindGroups()[kvgm].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding)
                     }
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
@@ -518,10 +515,11 @@ var hotbuildsettings = (function () {
         self.importfromfile = function (importfile) {
             console.log('importing importfile');
             $.getJSON('coui:/' + importfile, function (imported) {
-                for (var key in imported.uber) {
-                    if (imported.hasOwnProperty(key)) {
-                        localStorage[key] = imported[key];
-                        //NEEDS FIXING
+                for (var kvgm in imported.uber) {
+                    for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
+                        console.log(imported.uber[kvgm].keybinds[i].binding);
+                        console.log(model.keybindGroups()[kvgm].keybinds()[i].binding());
+                        model.keybindGroups()[kvgm].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding)
                     }
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
@@ -572,7 +570,6 @@ var hotbuildsettings = (function () {
     var hotbuildsettings = {};
     hotbuildsettings.viewmodel = hbuisettings;
     hotbuildsettings.viewmodel.updatehotbuildkeys();
-
 
     return hotbuildsettings;
 
