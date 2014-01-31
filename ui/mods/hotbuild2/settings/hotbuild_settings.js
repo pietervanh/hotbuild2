@@ -523,6 +523,7 @@ var hotbuildsettings = (function () {
                 for (var key in imported.uber) {
                     if (imported.hasOwnProperty(key)) {
                         localStorage[key] = imported[key];
+                        //NEEDS FIXING
                     }
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
