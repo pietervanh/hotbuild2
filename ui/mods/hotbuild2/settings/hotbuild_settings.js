@@ -515,6 +515,7 @@ var hotbuildsettings = (function () {
         self.importfromfile = function (importfile) {
             console.log('importing importfile');
             $.getJSON('coui:/' + importfile, function (imported) {
+                
                 for (var kvgm in imported.uber) {
                     for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
                         console.log(imported.uber[kvgm].keybinds[i].binding);
