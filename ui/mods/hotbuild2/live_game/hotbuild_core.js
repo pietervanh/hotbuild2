@@ -497,7 +497,7 @@ var hotbuild2 = (function () {
         17: "ctrl",
         18: "alt",
         19: "pause",
-        20: "capslock",
+        20: "caps lock",
         27: "escape",
         32: "space",
         33: "pageup",
@@ -517,17 +517,17 @@ var hotbuild2 = (function () {
         123: "f12",
         144: "numlock",
         145: "scrolllock",
-        186: "semicolon",
-        187: "equal",
-        188: "comma",
-        189: "dash",
-        190: "period",
-        191: "slash",
+        186: ";",
+        187: "=",
+        188: ",",
+        189: "-",
+        190: ".",
+        191: "/",
         192: "graveaccent",
-        219: "openbracket",
-        220: "backslash",
-        221: "closebraket",
-        222: "singlequote"
+        219: "[",
+        220: "\\",
+        221: "]",
+        222: "'"
     };
     //fix for allowing multiple bindings per key
     //for example stop = s / build mex = s
