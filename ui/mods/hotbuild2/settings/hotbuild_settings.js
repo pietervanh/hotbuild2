@@ -4,76 +4,76 @@
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 
 var hbunitInfoParser =
-	(typeof hbunitInfoParser === "undefined") ?
-	(function () {
-	    var _coherentHost = "coui://";
-	    var _unitListPath = _coherentHost + "pa/units/unit_list.json";
+    (typeof hbunitInfoParser === "undefined") ?
+    (function () {
+        var _coherentHost = "coui://";
+        var _unitListPath = _coherentHost + "pa/units/unit_list.json";
 
-	    // function parses all units, following unit bases recursively
-	    // onComplete is given the finished map of spec => custom piece of data per spec
-	    // dataGetter gets the data from the unit json, it expects one parameter: the parsed unit json
-	    // datamerger expected two parameters, the data further up the definition tree of the unit and further down
-	    // examples see the next 2 functions after this
-	    var _loadUnitData = function (onComplete, dataGetter) {
-	        var resultTypeMapping = [];
-	        var spawnedUnitCalls = 0;
-	        $.getJSON(_unitListPath, function (data) {
-	            var units = data.units;
-	            var finishedAll = false;
+        // function parses all units, following unit bases recursively
+        // onComplete is given the finished map of spec => custom piece of data per spec
+        // dataGetter gets the data from the unit json, it expects one parameter: the parsed unit json
+        // datamerger expected two parameters, the data further up the definition tree of the unit and further down
+        // examples see the next 2 functions after this
+        var _loadUnitData = function (onComplete, dataGetter) {
+            var resultTypeMapping = [];
+            var spawnedUnitCalls = 0;
+            $.getJSON(_unitListPath, function (data) {
+                var units = data.units;
+                var finishedAll = false;
 
-	            function readUnitDataFromFile(file, callback) {
-	                $.getJSON(file, function (unit) {
-	                    var freshDataFromUnit = dataGetter(unit);
-	                    //forget about base specs they are not needed and no properties are being overriden of inherited from basespecs for hotbuild
-	                    if (freshDataFromUnit != undefined) {
-	                        callback(freshDataFromUnit);
-	                    }
-	                    spawnedUnitCalls--;
-	                    if (spawnedUnitCalls === 0) {
-	                        onComplete(resultTypeMapping);
-	                    }
-	                });
-	            }
+                function readUnitDataFromFile(file, callback) {
+                    $.getJSON(file, function (unit) {
+                        var freshDataFromUnit = dataGetter(unit);
+                        //forget about base specs they are not needed and no properties are being overriden of inherited from basespecs for hotbuild
+                        if (freshDataFromUnit != undefined) {
+                            callback(freshDataFromUnit);
+                        }
+                        spawnedUnitCalls--;
+                        if (spawnedUnitCalls === 0) {
+                            onComplete(resultTypeMapping);
+                        }
+                    });
+                }
 
-	            spawnedUnitCalls = units.length;
-	            function processUnitPath(unitPath) {
-	                readUnitDataFromFile(_coherentHost + unitPath, function (unitData) {
-	                    var unitresult = { 'json': unitPath };
-	                    for (var data in unitData) {
-	                        unitresult[data] = unitData[data];
-	                    }
-	                    resultTypeMapping.push(unitresult);
-	                });
-	            }
-	            for (var i = 0; i < units.length; i++) {
-	                processUnitPath(units[i]);
-	            }
-	        });
-	    };
+                spawnedUnitCalls = units.length;
+                function processUnitPath(unitPath) {
+                    readUnitDataFromFile(_coherentHost + unitPath, function (unitData) {
+                        var unitresult = { 'json': unitPath };
+                        for (var data in unitData) {
+                            unitresult[data] = unitData[data];
+                        }
+                        resultTypeMapping.push(unitresult);
+                    });
+                }
+                for (var i = 0; i < units.length; i++) {
+                    processUnitPath(units[i]);
+                }
+            });
+        };
 
 
-	    //creates a map of all unit information to their display name
-	    var _loadUnits = function (onComplete) {
-	        _loadUnitData(onComplete, function (unit) {
-	            var result = {};
-	            result['displayname'] = unit.display_name;
-	            result['desc'] = unit.description;
-	            result['unit_types'] = unit.unit_types;
-	            result['buildable_types'] = unit.buildable_types;
-	            result['display_group'] = unit.display_group;
+        //creates a map of all unit information to their display name
+        var _loadUnits = function (onComplete) {
+            _loadUnitData(onComplete, function (unit) {
+                var result = {};
+                result['displayname'] = unit.display_name;
+                result['desc'] = unit.description;
+                result['unit_types'] = unit.unit_types;
+                result['buildable_types'] = unit.buildable_types;
+                result['display_group'] = unit.display_group;
 
-	            result.description !== undefined ? result.description : 'no description';
-	            result.display_name !== undefined ? result.displayname : 'no name';
-	            result.factory = '';
-	            return result;
-	        })
-	    };
+                result.description !== undefined ? result.description : 'no description';
+                result.display_name !== undefined ? result.displayname : 'no name';
+                result.factory = '';
+                return result;
+            })
+        };
 
-	    return {
-	        loadUnitData: _loadUnitData,
-	        loadUnits: _loadUnits
-	    };
-	}()) : hbunitInfoParser;
+        return {
+            loadUnitData: _loadUnitData,
+            loadUnits: _loadUnits
+        };
+    }()) : hbunitInfoParser;
 
 var hotbuildsettings = (function () {
 
