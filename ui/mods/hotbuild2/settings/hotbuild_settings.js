@@ -2,79 +2,6 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
-
-var hbunitInfoParser =
-    (typeof hbunitInfoParser === "undefined") ?
-    (function () {
-        var _coherentHost = "coui://";
-        var _unitListPath = _coherentHost + "pa/units/unit_list.json";
-
-        // function parses all units, following unit bases recursively
-        // onComplete is given the finished map of spec => custom piece of data per spec
-        // dataGetter gets the data from the unit json, it expects one parameter: the parsed unit json
-        // datamerger expected two parameters, the data further up the definition tree of the unit and further down
-        // examples see the next 2 functions after this
-        var _loadUnitData = function (onComplete, dataGetter) {
-            var resultTypeMapping = [];
-            var spawnedUnitCalls = 0;
-            $.getJSON(_unitListPath, function (data) {
-                var units = data.units;
-                var finishedAll = false;
-
-                function readUnitDataFromFile(file, callback) {
-                    $.getJSON(file, function (unit) {
-                        var freshDataFromUnit = dataGetter(unit);
-                        //forget about base specs they are not needed and no properties are being overriden of inherited from basespecs for hotbuild
-                        if (freshDataFromUnit != undefined) {
-                            callback(freshDataFromUnit);
-                        }
-                        spawnedUnitCalls--;
-                        if (spawnedUnitCalls === 0) {
-                            onComplete(resultTypeMapping);
-                        }
-                    });
-                }
-
-                spawnedUnitCalls = units.length;
-                function processUnitPath(unitPath) {
-                    readUnitDataFromFile(_coherentHost + unitPath, function (unitData) {
-                        var unitresult = { 'json': unitPath };
-                        for (var data in unitData) {
-                            unitresult[data] = unitData[data];
-                        }
-                        resultTypeMapping.push(unitresult);
-                    });
-                }
-                for (var i = 0; i < units.length; i++) {
-                    processUnitPath(units[i]);
-                }
-            });
-        };
-
-
-        //creates a map of all unit information to their display name
-        var _loadUnits = function (onComplete) {
-            _loadUnitData(onComplete, function (unit) {
-                var result = {};
-                result['displayname'] = unit.display_name;
-                result['desc'] = unit.description;
-                result['unit_types'] = unit.unit_types;
-                result['buildable_types'] = unit.buildable_types;
-                result['display_group'] = unit.display_group;
-
-                result.description !== undefined ? result.description : 'no description';
-                result.display_name !== undefined ? result.displayname : 'no name';
-                result.factory = '';
-                return result;
-            })
-        };
-
-        return {
-            loadUnitData: _loadUnitData,
-            loadUnits: _loadUnits
-        };
-    }()) : hbunitInfoParser;
-
 var hotbuildsettings = (function () {
 
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
@@ -97,6 +24,7 @@ var hotbuildsettings = (function () {
                 hotbuildunit.json = hotbuildunit.path;
                 hotbuildunit.displayname = hotbuildunit.display_name;
                 hotbuildunit.desc = hotbuildunit.description;
+                hotbuildunit.factory = "";
                 //console.log(hotbuildunit.json);
                 if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Mobile')) {
                     if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Basic')) {
@@ -146,94 +74,8 @@ var hotbuildsettings = (function () {
             self.filteredunits(filteredbuildings); //set standard on buildings
             self.units(filteredresults);
             updateExistingSettings();
-            //debugger;
         });
-        /*
-        hbunitInfoParser.loadUnits(function (results) {
-            var filteredresults = [];
-            var filteredunits = [];
-            var filteredbuildings = [];
-            var fabbers = [];
-            var factories = [];
-            //first filter
-            for (var i = 0; i < results.length; i++) {
-                if (!_.contains(results[i].unit_types, "UNITTYPE_NoBuild") && !_.contains(results[i].unit_types, "UNITTYPE_Debug") && results[i].unit_types !== undefined) {
-                    //fixes
-                    switch (results[i].json) {
-                        case "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json":
-                            results[i].desc = "Nuclear Missile Ammo";
-                            results[i].displayname = "Nuclear Missile";
-                            results[i].display_group = 'ammo';
-                            break;
-                        case "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json":
-                            results[i].desc = "Anti-Nuclear Missile Ammo";
-                            results[i].displayname = "Anti-Nuclear Missile";
-                            results[i].display_group = 'ammo';
-                            break;
-                        case "/pa/units/air/gunship/gunship.json":
-                            results[i].desc = "Gunship";
-                            results[i].displayname = "Shoots Stuff from Air";
-                            results[i].display_group = 60;
-                    }
-                    if (_.contains(results[i].unit_types, 'UNITTYPE_Mobile')) {
-                        if (_.contains(results[i].unit_types, 'UNITTYPE_Basic')) {
-                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'botfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'vecfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'afac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'nfac' : '';
-                        }
-                        else {
-                            _.contains(results[i].unit_types, 'UNITTYPE_Bot') ? results[i].factory = 'abotfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Tank') ? results[i].factory = 'avecfac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Air') ? results[i].factory = 'aafac' : '';
-                            _.contains(results[i].unit_types, 'UNITTYPE_Naval') ? results[i].factory = 'anfac' : '';
-                        }
-                        //Orbital is changing rapidly so hacky fixes here
-                        //Orbital is changing rapidly so hacky fixes here
-                        if (results[i].json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
-                            results[i].factory = 'ofac';
-                        }
-                        if (results[i].json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
-                            results[i].factory = 'ofac';
-                        }
-                        if (results[i].json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
-                            results[i].factory = 'ofac';
-                        }
-                        if (results[i].json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
-                            results[i].factory = 'ofac';
-                        }
-                    }
-                    var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
-                    var end = /[.]json$/;
-                    results[i].image = '../live_game/img/build_bar/units/' + results[i].json.substring(results[i].json.search(start), results[i].json.search(end)) + '.png';
-                    filteredresults.push(results[i]);
-                }
-            }
-            //second filter is based on buildable_types
-            for (var j = 0; j < filteredresults.length; j++) {
-                if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
-                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FactoryBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabOrbBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_CombatFabBuild"))) {
-                    filteredunits.push(filteredresults[j]);
 
-                }
-            }
-            for (var j = 0; j < filteredresults.length; j++) {
-                if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure") &&
-                    (_.contains(filteredresults[j].unit_types, "UNITTYPE_FabBuild") || _.contains(filteredresults[j].unit_types, "UNITTYPE_FabAdvBuild") ||
-                    _.contains(filteredresults[j].unit_types, "UNITTYPE_Defense") || _.contains(filteredresults[j].unit_types, "UNITTYPE_Recon"))
-                    || (_.contains(filteredresults[j].unit_types, "UNITTYPE_Advanced") && _.contains(filteredresults[j].unit_types, "UNITTYPE_Factory"))) {
-                    filteredbuildings.push(filteredresults[j]);
-                }
-            }
-
-            filteredresults = [];
-            filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
-            filteredresults = filteredresults.concat(filteredbuildings, filteredunits);
-            self.filteredunits(filteredbuildings); //set standard on buildings
-            self.units(filteredresults);
-            updateExistingSettings();
-        });
-        */
         function updateExistingSettings() {
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
             for (var hbkey in self.hotbuildglobal()) {
@@ -274,7 +116,6 @@ var hotbuildsettings = (function () {
             if (self.unitbuildfilter()) {
                 self.filters(["All", "Economy", "Factory", "Defense", "Recon"]);
                 if (self.activeSubFilters() !== 'All') {
-                    debugger;
                     //check subfilters for buildings
                     for (var i = 0; i < self.units().length; i++) {
                         if (self.units()[i].factory === "") {
