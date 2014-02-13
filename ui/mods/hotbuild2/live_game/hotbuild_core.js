@@ -109,6 +109,7 @@ var hotbuild2 = (function () {
                     event.preventDefault();
                 }
                 else {
+                debugger;
                     if (model.selectionList().length > 0) { //check if units are selected ?
                         var selectionTypes = [];
                         for (var i = 0; i < self.hotbuilds().length; i++) {
@@ -123,10 +124,14 @@ var hotbuild2 = (function () {
                             currentselection.push(model.selectionList()[i].type);
                         }
                         if (event.ctrlKey) {
-                            model.holodeck.view.selectByTypes("remove", selectionTypes);
+                            if(selectionTypes.length > 0){
+                              model.holodeck.view.selectByTypes("remove", selectionTypes);
+                            }
                         }
                         else {
-                            model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
+                            if(selectionTypes.length > 0){
+                              model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
+                            }
                         }
                         
                     }
