@@ -86,6 +86,69 @@ var hotbuildsettings = (function () {
         self.selectedhotbuild = ko.observableArray([]);
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
+        bif.registerBIFReadyCallback(function () {
+            var filteredresults = [];
+            var filteredunits = [];
+            var filteredbuildings = [];
+            var results = bif.getBuildableUnitIDs();
+            for (var i = 0; i < results.length; i++) {
+                var bifunit = bif.units[results[i]];
+                var hotbuildunit = bifunit;
+                hotbuildunit.json = hotbuildunit.path;
+                hotbuildunit.displayname = hotbuildunit.display_name;
+                hotbuildunit.desc = hotbuildunit.description;
+                //console.log(hotbuildunit.json);
+                if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Mobile')) {
+                    if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Basic')) {
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'botfac' : '';
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'vecfac' : '';
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'afac' : '';
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'nfac' : '';
+                    }
+                    else {
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'abotfac' : '';
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'avecfac' : '';
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'aafac' : '';
+                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'anfac' : '';
+                    }
+                    //Orbital is changing rapidly so hacky fixes here
+                    if (hotbuildunit.json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
+                        hotbuildunit.factory = 'ofac';
+                    }
+                    if (hotbuildunit.json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
+                        hotbuildunit.factory = 'ofac';
+                    }
+                    if (hotbuildunit.json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
+                        hotbuildunit.factory = 'ofac';
+                    }
+                    if (hotbuildunit.json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
+                        hotbuildunit.factory = 'ofac';
+                    }
+                }
+                var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
+                var end = /[.]json$/;
+                hotbuildunit.image = '../live_game/img/build_bar/units/' + hotbuildunit.json.substring(hotbuildunit.json.search(start), hotbuildunit.json.search(end)) + '.png';
+                filteredresults.push(hotbuildunit);
+
+            }
+            for (var j = 0; j < filteredresults.length; j++) {
+                if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
+                    filteredunits.push(filteredresults[j]);
+                }
+            }
+            for (var j = 0; j < filteredresults.length; j++) {
+                if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
+                    filteredbuildings.push(filteredresults[j]);
+                }
+            }
+
+            filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
+            self.filteredunits(filteredbuildings); //set standard on buildings
+            self.units(filteredresults);
+            updateExistingSettings();
+            //debugger;
+        });
+        /*
         hbunitInfoParser.loadUnits(function (results) {
             var filteredresults = [];
             var filteredunits = [];
@@ -170,6 +233,7 @@ var hotbuildsettings = (function () {
             self.units(filteredresults);
             updateExistingSettings();
         });
+        */
         function updateExistingSettings() {
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
             for (var hbkey in self.hotbuildglobal()) {
@@ -210,6 +274,7 @@ var hotbuildsettings = (function () {
             if (self.unitbuildfilter()) {
                 self.filters(["All", "Economy", "Factory", "Defense", "Recon"]);
                 if (self.activeSubFilters() !== 'All') {
+                    debugger;
                     //check subfilters for buildings
                     for (var i = 0; i < self.units().length; i++) {
                         if (self.units()[i].factory === "") {
