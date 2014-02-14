@@ -402,9 +402,14 @@ var hotbuildsettings = (function () {
                 var imported = JSON.parse($("#ieport").val());
                 for (var kvgm in imported.uber) {
                     for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                        console.log(imported.uber[kvgm].keybinds[i].binding);
-                        console.log(model.keybindGroups()[kvgm].keybinds()[i].binding());
-                        model.keybindGroups()[kvgm].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding)
+                        try {
+                            console.log(imported.uber[kvgm].keybinds[i].binding);
+                            console.log(model.keybindGroups()[kvgm].keybinds()[i].binding());
+                            model.keybindGroups()[kvgm].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding);
+                        }
+                        catch (err) {
+                            console.log(err);
+                        }
                     }
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
@@ -421,12 +426,18 @@ var hotbuildsettings = (function () {
         self.importfromfile = function (importfile) {
             console.log('importing importfile');
             $.getJSON('coui:/' + importfile, function (imported) {
-                
+                debugger;
                 for (var kvgm in imported.uber) {
+                    console.log(imported.uber[kvgm].name);
                     for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                        console.log(imported.uber[kvgm].keybinds[i].binding);
-                        console.log(model.keybindGroups()[kvgm].keybinds()[i].binding());
-                        model.keybindGroups()[kvgm].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding)
+                        try {
+                            console.log(imported.uber[kvgm].keybinds[i].binding);
+                            console.log(model.keybindGroups()[kvgm].keybinds()[i].binding());
+                            model.keybindGroups()[kvgm].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding);
+                        }
+                        catch (err) {
+                            console.log(err);
+                        }
                     }
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
