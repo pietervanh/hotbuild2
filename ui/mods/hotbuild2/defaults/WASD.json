@@ -1303,6 +1303,18 @@
                "action":"unload",
                "binding":"u",
                "bound":true
+            },
+            {
+               "group":"hotbuild",
+               "action":"D-Gun",
+               "binding":"p",
+               "bound":true
+            },
+            {
+               "group":"hotbuild",
+               "action":"Ping",
+               "binding":"",
+               "bound":true
             }
          ]
       }
@@ -1329,13 +1341,16 @@
             "json":"/pa/units/land/bot_factory/bot_factory.json"
          },
          {
+            "json":"/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"
+         },
+         {
+            "json":"/pa/units/land/nuke_launcher/nuke_launcher_ammo.json"
+         },
+         {
             "json":"/pa/units/land/land_scout/land_scout.json"
          },
          {
             "json":"/pa/units/air/air_scout/air_scout.json"
-         },
-         {
-            "json":"/pa/units/sea/sea_scout/sea_scout.json"
          }
       ],
       "hotbuild2s":[
@@ -1378,6 +1393,12 @@
             "json":"/pa/units/orbital/deep_space_radar/deep_space_radar.json"
          },
          {
+            "json":"/pa/units/orbital/radar_satellite/radar_satellite.json"
+         },
+         {
+            "json":"/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json"
+         },
+         {
             "json":"/pa/units/air/fighter/fighter.json"
          },
          {
@@ -1401,10 +1422,13 @@
             "json":"/pa/units/land/bot_factory_adv/bot_factory_adv.json"
          },
          {
-            "json":"/pa/units/land/tank_heavy_armor/tank_heavy_armor.json"
+            "json":"/pa/units/land/bot_bomb/bot_bomb.json"
          },
          {
             "json":"/pa/units/land/tank_armor/tank_armor.json"
+         },
+         {
+            "json":"/pa/units/land/tank_heavy_armor/tank_heavy_armor.json"
          },
          {
             "json":"/pa/units/orbital/orbital_lander/orbital_lander.json"
@@ -1416,6 +1440,9 @@
          },
          {
             "json":"/pa/units/land/energy_plant/energy_plant.json"
+         },
+         {
+            "json":"/pa/units/orbital/solar_array/solar_array.json"
          },
          {
             "json":"/pa/units/land/assault_bot/assault_bot.json"
@@ -1463,6 +1490,9 @@
          },
          {
             "json":"/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"
+         },
+         {
+            "json":"/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json"
          },
          {
             "json":"/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json"
