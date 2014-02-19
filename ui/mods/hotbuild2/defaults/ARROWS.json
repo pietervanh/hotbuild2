@@ -1303,6 +1303,18 @@
                "action":"unload",
                "binding":"u",
                "bound":true
+            },
+            {
+               "group":"hotbuild",
+               "action":"D-Gun",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"hotbuild",
+               "action":"Ping",
+               "binding":"",
+               "bound":true
             }
          ]
       }

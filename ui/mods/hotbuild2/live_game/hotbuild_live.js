@@ -48,7 +48,7 @@ var hotbuild2live = (function () {
     action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
     action_sets.hotbuild['unload'] = function (event) { hotbuild2.CommandMode(9); };
     action_sets.hotbuild['D-Gun'] = function (event) { hotbuild2.CommandMode(12); };
-    action_sets.hotbuild['D-Gun'] = function (event) { hotbuild2.CommandMode(13); };
+    action_sets.hotbuild['Ping'] = function (event) { hotbuild2.CommandMode(13); };
 
     // hijack some method that is in the right place to execute our engine calls
     //might be not needed in future if live_game.js has no more 
