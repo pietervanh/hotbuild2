@@ -26,6 +26,7 @@
     action_sets.hotbuild['select commie'] = function (event) { };
     action_sets.hotbuild['unload'] = function (event) { };
     action_sets.hotbuild['D-Gun'] = function (event) { };
+    action_sets.hotbuild['Ping'] = function (event) { };
     
     //set defaults for when you click on the set defaults button in settings
     // here we set them empty click community defaults buttons for better defaults
@@ -45,5 +46,6 @@
     default_keybinds.hotbuild['select commie'] = '';
     default_keybinds.hotbuild['unload'] = '';
     default_keybinds.hotbuild['D-Gun'] = '';
+    default_keybinds.hotbuild['Ping'] = '';
     
 })();

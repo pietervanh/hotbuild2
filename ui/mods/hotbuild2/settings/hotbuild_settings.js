@@ -41,14 +41,15 @@ var hotbuildsettings = (function () {
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'aafac' : '';
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'anfac' : '';
                     }
+                    //should change to bif is built by orbital launcher
                     //Orbital is changing rapidly so hacky fixes here
                     if (hotbuildunit.json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
                         hotbuildunit.factory = 'ofac';
                     }
-                    if (hotbuildunit.json === "/pa/units/orbital/defense_sattelite/defense_satellite.json") {
+                    if (hotbuildunit.json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
                         hotbuildunit.factory = 'ofac';
                     }
-                    if (hotbuildunit.json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
+                    if (hotbuildunit.json === "/pa/units/orbital/orbital_fighter/orbital_fighter.json") {
                         hotbuildunit.factory = 'ofac';
                     }
                     if (hotbuildunit.json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
