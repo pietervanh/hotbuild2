@@ -560,7 +560,6 @@ var hotbuildsettings = (function () {
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
-        debugger;
             if (arg.item.factory !== "" && arg.sourceParentNode.className === undefined) {
                 var unitCheck = true;
                 for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
