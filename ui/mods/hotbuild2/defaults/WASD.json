@@ -38,6 +38,12 @@
                "action":"team chat",
                "binding":"shift+enter",
                "bound":true
+            },
+            {
+               "group":"general",
+               "action":"twitch chat",
+               "binding":"ctrl+enter",
+               "bound":true
             }
          ]
       },
@@ -94,7 +100,13 @@
             },
             {
                "group":"gameplay",
-               "action":"command mode [celestial move]",
+               "action":"command mode [alt fire]",
+               "binding":"!",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"command mode [ping]",
                "binding":"",
                "bound":true
             },
@@ -130,6 +142,12 @@
             },
             {
                "group":"gameplay",
+               "action":"toggle fire orders",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
                "action":"maneuver",
                "binding":"",
                "bound":true
@@ -148,282 +166,324 @@
             },
             {
                "group":"gameplay",
-               "action":"enable navigation debug info",
+               "action":"toggle move orders",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"disable navigation debug info",
+               "action":"on",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select commander",
+               "action":"off",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select idle fabbers",
+               "action":"toggle energy orders",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all factories",
-               "binding":"shift+f1",
+               "action":"build once",
+               "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all idle factories",
-               "binding":"shift+f2",
+               "action":"build loop",
+               "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all factories on screen",
-               "binding":"shift+f3",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all idle factories on screen",
-               "binding":"shift+f4",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all combat units",
+               "action":"toggle build orders",
                "binding":"ctrl+shift+f6",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all combat units on screen",
+               "action":"enable navigation debug info",
                "binding":"shift+f6",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all air combat units on screen",
+               "action":"disable navigation debug info",
                "binding":"shift+f8",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all naval combat units on screen",
+               "action":"select commander",
                "binding":"shift+f9",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all land combat units on screen",
+               "action":"select idle fabbers",
                "binding":"shift+f7",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all air combat units",
+               "action":"select all factories",
                "binding":"ctrl+shift+f8",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all naval combat units",
+               "action":"select all idle factories",
                "binding":"ctrl+shift+f9",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all land combat units",
+               "action":"select all factories on screen",
                "binding":"ctrl+shift+f7",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"select all matching units on screen",
+               "action":"select all idle factories on screen",
                "binding":"ctrl+z",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"track selection with camera",
+               "action":"select all combat units",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"self destruct selected unit",
+               "action":"select all combat units on screen",
                "binding":"del",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"resume at latest time",
+               "action":"select all air combat units on screen",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"pause time",
+               "action":"select all naval combat units on screen",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"play forward at 100%",
+               "action":"select all land combat units on screen",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"play backwards at 100%",
+               "action":"select all air combat units",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"play forward at 50%",
+               "action":"select all naval combat units",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"play backwards at 50%",
+               "action":"select all land combat units",
                "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"last pseudo frame",
+               "action":"select all matching units on screen",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"next pseudo frame",
+               "action":"track selection with camera",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 1",
+               "action":"self destruct selected unit",
                "binding":"ctrl+1",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 2",
+               "action":"resume at latest time",
                "binding":"ctrl+2",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 3",
+               "action":"pause time",
                "binding":"ctrl+3",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 4",
+               "action":"play forward at 100%",
                "binding":"ctrl+4",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 5",
+               "action":"play backwards at 100%",
                "binding":"ctrl+5",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 6",
+               "action":"play forward at 50%",
                "binding":"ctrl+6",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 7",
+               "action":"play backwards at 50%",
                "binding":"ctrl+7",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 8",
+               "action":"last pseudo frame",
                "binding":"ctrl+8",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 9",
+               "action":"next pseudo frame",
                "binding":"ctrl+9",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"capture group 0",
+               "action":"capture group 1",
                "binding":"ctrl+0",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 1",
+               "action":"capture group 2",
                "binding":"1",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 2",
+               "action":"capture group 3",
                "binding":"2",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 3",
+               "action":"capture group 4",
                "binding":"3",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 4",
+               "action":"capture group 5",
                "binding":"4",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 5",
+               "action":"capture group 6",
                "binding":"5",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 6",
+               "action":"capture group 7",
                "binding":"6",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 7",
+               "action":"capture group 8",
                "binding":"7",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 8",
+               "action":"capture group 9",
                "binding":"8",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 9",
+               "action":"capture group 0",
                "binding":"9",
                "bound":true
             },
             {
                "group":"gameplay",
-               "action":"recall group 0",
+               "action":"recall group 1",
                "binding":"0",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 2",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 3",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 4",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 5",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 6",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 7",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 8",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 9",
+               "binding":"",
+               "bound":true
+            },
+            {
+               "group":"gameplay",
+               "action":"recall group 0",
+               "binding":"",
                "bound":true
             },
             {
@@ -651,7 +711,6 @@
             {
                "group":"gameplay",
                "action":"build fabrication aircraft_adv",
-               "binding":"",
                "bound":true
             },
             {
@@ -705,6 +764,7 @@
             {
                "group":"gameplay",
                "action":"build dox",
+               "binding":"",
                "bound":true
             },
             {
@@ -752,13 +812,11 @@
             {
                "group":"gameplay",
                "action":"build hornet",
-               "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
                "action":"build sun fish",
-               "binding":"",
                "bound":true
             },
             {
@@ -770,7 +828,6 @@
             {
                "group":"gameplay",
                "action":"build bluebottle",
-               "binding":"",
                "bound":true
             },
             {
@@ -782,13 +839,11 @@
             {
                "group":"gameplay",
                "action":"build barracuda",
-               "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
                "action":"build leviathan",
-               "binding":"",
                "bound":true
             },
             {
@@ -843,13 +898,13 @@
             {
                "group":"gameplay",
                "action":"build avatar",
-               "binding":"alt+f1",
+               "binding":"",
                "bound":true
             },
             {
                "group":"gameplay",
                "action":"build avatar factory",
-               "binding":"alt+f2",
+               "binding":"",
                "bound":true
             }
          ]
@@ -1180,7 +1235,7 @@
             {
                "group":"hotbuild",
                "action":"Lock Pole",
-               "binding":"^",
+               "binding":"y",
                "bound":true
             },
             {
@@ -1346,6 +1401,12 @@
             "json":"/pa/units/land/bot_factory_adv/bot_factory_adv.json"
          },
          {
+            "json":"/pa/units/land/tank_heavy_armor/tank_heavy_armor.json"
+         },
+         {
+            "json":"/pa/units/land/tank_armor/tank_armor.json"
+         },
+         {
             "json":"/pa/units/orbital/orbital_lander/orbital_lander.json"
          }
       ],
@@ -1418,6 +1479,9 @@
       ],
       "hotbuild7s":[
          {
+            "json":"/pa/units/orbital/defense_satellite/defense_satellite.json"
+         },
+         {
             "json":"/pa/units/land/laser_defense_adv/laser_defense_adv.json"
          },
          {
@@ -1469,6 +1533,12 @@
          },
          {
             "json":"/pa/units/orbital/ion_defense/ion_defense.json"
+         },
+         {
+            "json":"/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json"
+         },
+         {
+            "json":"/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json"
          },
          {
             "json":"/pa/units/orbital/delta_v_engine/delta_v_engine.json"
