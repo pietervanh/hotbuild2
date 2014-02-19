@@ -14,6 +14,8 @@ var hotbuildsettings = (function () {
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
         bif.registerBIFReadyCallback(function () {
+            var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
+            var end = /[.]json$/;
             var filteredresults = [];
             var filteredunits = [];
             var filteredbuildings = [];
@@ -53,12 +55,31 @@ var hotbuildsettings = (function () {
                         hotbuildunit.factory = 'ofac';
                     }
                 }
-                var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
-                var end = /[.]json$/;
-                hotbuildunit.image = '../live_game/img/build_bar/units/' + hotbuildunit.json.substring(hotbuildunit.json.search(start), hotbuildunit.json.search(end)) + '.png';
+
+                hotbuildunit.image = hotbuildunit.buildPicture;
                 filteredresults.push(hotbuildunit);
 
             }
+            //hack for nuke and anti nuke ammo
+            var nukeammo = {};
+            nukeammo.json = "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json";
+            nukeammo.displayname = "Nuclear Missile";
+            nukeammo.desc = "Creates Nuclear Explosion";
+            nukeammo.factory = "nuke";
+            nukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile','UNITTYPE_Orbital'];
+            nukeammo.image = '../live_game/img/build_bar/units/' + nukeammo.json.substring(nukeammo.json.search(start), nukeammo.json.search(end)) + '.png';
+            nukeammo.display_group = '1';
+            filteredresults.push(nukeammo);
+            var anukeammo = {};
+            anukeammo.json = "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json";
+            anukeammo.displayname = "Anti Nuclear Missile";
+            anukeammo.desc = "Intercepts Nuclear Missiles";
+            anukeammo.factory = "antinuke";
+            anukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile'];
+            anukeammo.image = '../live_game/img/build_bar/units/' + anukeammo.json.substring(anukeammo.json.search(start), anukeammo.json.search(end)) + '.png';
+            anukeammo.display_group = '1';
+            filteredresults.push(anukeammo);
+            
             for (var j = 0; j < filteredresults.length; j++) {
                 if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
                     filteredunits.push(filteredresults[j]);
@@ -539,7 +560,8 @@ var hotbuildsettings = (function () {
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
-            if (arg.item.factory !== "") {
+        debugger;
+            if (arg.item.factory !== "" && arg.sourceParentNode.className === undefined) {
                 var unitCheck = true;
                 for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
                     if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory) {
