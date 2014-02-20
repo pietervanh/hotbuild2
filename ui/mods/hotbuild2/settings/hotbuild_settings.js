@@ -434,14 +434,19 @@ var hotbuildsettings = (function () {
                     if (modelKeybindGroupIndex !== undefined) {
                         console.log(model.keybindGroups()[modelKeybindGroupIndex].name());
                         for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                            try {
-                                console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding());
-                                console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].binding);
-                                //check action
-                                model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding);
-                            }
-                            catch (err) {
-                                console.log(err);
+                            for(var j = 0; j < model.keybindGroups()[modelKeybindGroupIndex].keybinds().length; j++){
+                                if(imported.uber[kvgm].keybinds[i].action === model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].action())
+                                {
+                                    try {
+                                        console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding());
+                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].binding);
+                                        model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].binding(imported.uber[kvgm].keybinds[i].binding);
+                                        break;
+                                    }
+                                    catch (err) {
+                                        console.log(err);
+                                    }
+                                }
                             }
                         }
                     }
@@ -472,14 +477,19 @@ var hotbuildsettings = (function () {
                     if (modelKeybindGroupIndex !== undefined) {
                         console.log(model.keybindGroups()[modelKeybindGroupIndex].name());
                         for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                            try {
-                                console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding());
-                                console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].binding);
-                                //check action
-                                model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding(imported.uber[kvgm].keybinds[i].binding);
-                            }
-                            catch (err) {
-                                console.log(err);
+                            for(var j = 0; j < model.keybindGroups()[modelKeybindGroupIndex].keybinds().length; j++){
+                                if(imported.uber[kvgm].keybinds[i].action === model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].action())
+                                {
+                                    try {
+                                        console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding());
+                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].binding);
+                                        model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].binding(imported.uber[kvgm].keybinds[i].binding);
+                                        break;
+                                    }
+                                    catch (err) {
+                                        console.log(err);
+                                    }
+                                }
                             }
                         }
                     }
