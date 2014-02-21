@@ -48,7 +48,6 @@ var hotbuild2 = (function () {
 
         self.buildPreviewList = function (hbindex, hotbuilds) {
             //set the buildPreview list
-            //debugger;
             if (hotbuilds !== undefined) {
                 self.hotbuildPreviews([{ 'icon': '', 'json': '' }]);
                 var unitinfo;
@@ -113,7 +112,6 @@ var hotbuild2 = (function () {
                     event.preventDefault();
                 }
                 else {
-                //debugger;
                     if (model.selectionList().length > 0) { //check if units are selected ?
                         var selectionTypes = [];
                         for (var i = 0; i < self.hotbuilds().length; i++) {
@@ -205,7 +203,6 @@ var hotbuild2 = (function () {
         var hbpos = 1;
         _.forEach(hotbuildglobal, function (hbkey) {
             _.forEach(hbkey, function (hbitem) {
-                //debugger;
                 if (hbitem.json === id) {
                     if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
                         result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
@@ -449,8 +446,6 @@ var hotbuild2 = (function () {
             if (localStorage['keybinding_' + key] !== undefined)
                 binding = decode(localStorage['keybinding_' + key]);
 
-            //console.log(key + ":" + (binding) ? binding : "unbound");
-            //debugger;
             if (resolve) {
                 clear_conflict = true;
                 for (i = 0; i < conflicts.length; i++) {
@@ -483,9 +478,7 @@ var hotbuild2 = (function () {
     var holodeckModeMouseDown = {};
     $holodeck.mousedown(function (mdevent) {
         if (hotbuildshiftrecycle === "ON") {
-            //debugger;
             if (mdevent.button === 0 && afterhotbuildclick === "hotbuild" && mdevent.shiftKey !== true) {
-                console.log("recycled");
                 hotbuild2.hotbuildManager.cycleid(0);
             }
         }
