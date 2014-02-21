@@ -11,6 +11,7 @@ var hotbuild2 = (function () {
 
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
+    var hotbuildshiftrecycle = settings.hotbuild_show_key_on_buildbar ? settings.hotbuild_show_key_on_buildbar : "OFF";
 
     model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
     //fast check on bad reset_time input
@@ -21,6 +22,7 @@ var hotbuild2 = (function () {
     var hotbuild2 = {};
 
     var imbawallclick = "nobuild";
+    var afterhotbuildclick = "nobuild";
 
     function hbManager(resetTime) {
         var self = this;
@@ -96,6 +98,8 @@ var hotbuild2 = (function () {
                     if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].buildStructure) {
                         //check if it' needs to be ImbaWalled
                         model['maybeSetBuildTarget'](self.hotbuilds()[self.cycleid()].json);
+                        //cola colin option
+                        afterhotbuildclick = "hotbuild";
                         if (self.imbawallers.indexOf(self.hotbuilds()[self.cycleid()].json) !== -1) {
                             imbawallclick = "build";
                         }
@@ -475,9 +479,17 @@ var hotbuild2 = (function () {
     };
 
     //capture mouse down to do the imbawalls after click place building
-    var $holodeck = $('.holodeck');
+    var $holodeck = $('holodeck');
     var holodeckModeMouseDown = {};
     $holodeck.mousedown(function (mdevent) {
+        if (hotbuildshiftrecycle === "ON") {
+            //debugger;
+            if (mdevent.button === 0 && afterhotbuildclick === "hotbuild" && mdevent.shiftKey !== true) {
+                console.log("recycled");
+                hotbuild2.hotbuildManager.cycleid(0);
+            }
+        }
+        afterhotbuildclick = "nobuild";
         if (mdevent.button === 0 && imbawallclick === "build" && mdevent.altKey === true) {
             var startx = mdevent.offsetX;
             var starty = mdevent.offsetY;
