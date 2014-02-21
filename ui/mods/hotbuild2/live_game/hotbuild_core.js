@@ -256,8 +256,8 @@ var hotbuild2 = (function () {
         }
 
         function buildSelectedAt(x, y, queue, complete) {
-            holodeck.unitBeginFab(x, y, false);
-            holodeck.unitEndFab(x, y, queue, false).then(function (success) {
+            model.holodeck.unitBeginFab(x, y, false);
+            model.holodeck.unitEndFab(x, y, queue, false).then(function (success) {
                 if (complete) {
                     complete(success);
                 }
