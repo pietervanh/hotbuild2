@@ -109,7 +109,7 @@ var hotbuild2 = (function () {
                     event.preventDefault();
                 }
                 else {
-                debugger;
+                //debugger;
                     if (model.selectionList().length > 0) { //check if units are selected ?
                         var selectionTypes = [];
                         for (var i = 0; i < self.hotbuilds().length; i++) {

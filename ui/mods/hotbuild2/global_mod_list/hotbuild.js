@@ -6,6 +6,7 @@
     //Make sure settings are set / if not set defaults
     initialSettingValue('hotbuild_reset_time',2000);
     initialSettingValue('hotbuild_show_key_on_buildbar','ON');
+	initialSettingValue('hotbuild_show_key_on_sidebar','ON');
     
     //keyboard tab keys under hotbuild title
     action_sets.hotbuild = {}; 

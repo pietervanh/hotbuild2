@@ -567,6 +567,7 @@ var hotbuildsettings = (function () {
 
     model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
+	model.addSetting_DropDown('Hotbuild Show Key on SideBar', 'hotbuild_show_key_on_sidebar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
