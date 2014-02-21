@@ -19,7 +19,7 @@ var hotbuild2live = (function () {
     createFloatingFrame('hotbuild_info_frame', 220, 70, { 'offset': 'leftCenter', 'top': -200 });
     loadHotBuildTemplate($('#hotbuild_info_frame_content'), '../../mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
 
-	//show keybinds on build bar
+    //show keybinds on build bar
     if (settings.hotbuild_show_key_on_buildbar === "ON") {
         //Show key on buildbar
         $('.div_build_item img').replaceWith(
@@ -31,24 +31,40 @@ var hotbuild2live = (function () {
         '<span class="hbselectionbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
     };
 
-	if (settings.hotbuild_show_key_on_sidebar === "ON") {
-	//show keybinds on command + orders sidebar
-	//commands
-	$('.div_command_item > a#A5').after('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_move')) + '</span>');
-	$('.div_command_item > a#A6').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_attack')) + '</span>');
-	$('.div_command_item > a#A20').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_D-Gun')) + '</span>');
-	$('.div_command_item > a#A7').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_assist')) + '</span>');
-	$('.div_command_item > a#A8').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_repair')) + '</span>');
-	$('.div_command_item > a#A9').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_reclaim')) + '</span>');
-	$('.div_command_item > a#A10').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_patrol')) + '</span>');
-	$('.div_command_item > a#A21').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_Ping')) + '</span>');
-	$('.div_command_item > a#A13').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_stop')) + '</span>');
-	$('.div_command_item > a#A12').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_unload')) + '</span>');
-	//orders
-	$('.div_command_item.order_energy_item').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_Toggle Energy')) + '</span>');
-	$('.div_command_item.order_buildstance_item').append('<span class="hbsidebarkey">' + JSON.parse(localStorage.getItem('keybinding_Requeue')) + '</span>');
-	};
-	
+    if (settings.hotbuild_show_key_on_sidebar === "ON") {
+        //show keybinds on command + orders sidebar
+        //commands
+        var keybindFix = function (keybind) {
+            keybind = JSON.Parse(localStorage.getItem(keybind));
+            if (keybind !== undefined) {
+                if (keybind !== 'undefined' && keybind !== '""' && keybind !== '') {
+                    return keybind;
+                }
+                else {
+                    return '';
+                }
+            }
+            else {
+                return '';
+            }
+        }
+
+        if (keybindFix('keybinding_move') !== '') { $('.div_command_item > a#A5').after('<span class="hbsidebarkey">' + keybindFix('keybinding_move') + '</span>'); }
+        if (keybindFix('keybinding_attack') !== '') { $('.div_command_item > a#A6').append('<span class="hbsidebarkey">' + keybindFix('keybinding_attack') + '</span>'); }        
+        if (keybindFix('keybinding_assist') !== '') { $('.div_command_item > a#A7').append('<span class="hbsidebarkey">' + keybindFix('keybinding_assist') + '</span>'); }
+        if (keybindFix('keybinding_repair') !== '') { $('.div_command_item > a#A8').append('<span class="hbsidebarkey">' + keybindFix('keybinding_repair') + '</span>'); }
+        if (keybindFix('keybinding_reclaim') !== '') { $('.div_command_item > a#A9').append('<span class="hbsidebarkey">' + keybindFix('keybinding_reclaim') + '</span>'); }
+        if (keybindFix('keybinding_patrol') !== '') { $('.div_command_item > a#A10').append('<span class="hbsidebarkey">' + keybindFix('keybinding_patrol') + '</span>'); }
+        if (keybindFix('keybinding_unload') !== '') { $('.div_command_item > a#A12').append('<span class="hbsidebarkey">' + keybindFix('keybinding_unload') + '</span>'); }
+        if (keybindFix('keybinding_stop') !== '') { $('.div_command_item > a#A13').append('<span class="hbsidebarkey">' + keybindFix('keybinding_stop') + '</span>'); }
+        if (keybindFix('keybinding_D-Gun') !== '') { $('.div_command_item > a#A20').append('<span class="hbsidebarkey">' + keybindFix('keybinding_D-Gun') + '</span>'); }
+        if (keybindFix('keybinding_Ping') !== '') { $('.div_command_item > a#A21').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Ping') + '</span>'); }
+        
+        //orders
+        if (keybindFix('keybinding_Toggle Energy') !== '') { $('.div_command_item.order_energy_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Toggle Energy') + '</span>'); }
+        if (keybindFix('keybinding_Requeue') !== '') { $('.div_command_item.order_buildstance_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Requeue') + '</span>'); }
+    };
+
     //Hook up Real Functions to Keyboard Keys
     //Special Action
     action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };
