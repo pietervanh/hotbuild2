@@ -35,7 +35,7 @@ var hotbuild2live = (function () {
         //show keybinds on command + orders sidebar
         //commands
         var keybindFix = function (keybind) {
-            keybind = JSON.Parse(localStorage.getItem(keybind));
+            keybind = JSON.parse(localStorage.getItem(keybind));
             if (keybind !== undefined) {
                 if (keybind !== 'undefined' && keybind !== '""' && keybind !== '') {
                     return keybind;
