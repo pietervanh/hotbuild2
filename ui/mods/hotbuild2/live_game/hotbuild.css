@@ -80,15 +80,22 @@ border-radius:4px;
     text-transform: uppercase;
 }
 
+.div_command_item.order_energy_item, .div_command_item.order_buildstance_item, #A5, #A6, #A7, #A8, #A9, #A10, #A12, #A13, #A20, #A21  {
+position: relative !important;
+}
+
 .hbsidebarkey{
 	color: rgba(255,255,255,1);
-	position: relative;
+	position: absolute;
+	right: -12px;
+	bottom: 10px;
     background: rgba(0,255,127,.3);
     border-radius: 2px;
     font-size: 12px;
     border: 1px solid rgba(0,255,127,1);
     text-transform: uppercase;
-	min-width: 8px;
+	min-width: 12px;
+	text-align: center;
 }
 
 .hbunitName {

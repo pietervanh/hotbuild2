@@ -48,8 +48,8 @@ var hotbuild2live = (function () {
                 return '';
             }
         }
-
-        if (keybindFix('keybinding_move') !== '') { $('.div_command_item > a#A5').after('<span class="hbsidebarkey">' + keybindFix('keybinding_move') + '</span>'); }
+		
+        if (keybindFix('keybinding_move') !== '') { $('.div_command_item > a#A5').append('<span class="hbsidebarkey">' + keybindFix('keybinding_move') + '</span>'); }
         if (keybindFix('keybinding_attack') !== '') { $('.div_command_item > a#A6').append('<span class="hbsidebarkey">' + keybindFix('keybinding_attack') + '</span>'); }        
         if (keybindFix('keybinding_assist') !== '') { $('.div_command_item > a#A7').append('<span class="hbsidebarkey">' + keybindFix('keybinding_assist') + '</span>'); }
         if (keybindFix('keybinding_repair') !== '') { $('.div_command_item > a#A8').append('<span class="hbsidebarkey">' + keybindFix('keybinding_repair') + '</span>'); }
