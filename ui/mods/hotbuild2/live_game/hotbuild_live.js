@@ -87,10 +87,13 @@ var hotbuild2live = (function () {
 
     // hijack some method that is in the right place to execute our engine calls
     //might be not needed in future if live_game.js has no more 
+    /*
     var hotbuildapplyUIDisplaySettings = model.applyUIDisplaySettings;
     model.applyUIDisplaySettings = function () {
         hotbuild2.apply_keybinds();
         hotbuildapplyUIDisplaySettings();
     };
+    */
+    hotbuild2.apply_keybinds();
 
 })();
