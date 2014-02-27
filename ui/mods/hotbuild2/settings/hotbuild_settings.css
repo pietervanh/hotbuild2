@@ -43,7 +43,8 @@
 float: right;
 display: inline-block;
 clear: right;
-width: 180px;
+width: 190px;
+padding: 0;
 }
 
 #troubles,.ui-icon-info{
@@ -53,7 +54,7 @@ width: 180px;
 
 #keyboardcontainer {
 	width: 760px;
-	height: 124px;
+	height: 120px;
 	margin-top: 2em;
 	margin-right: auto;
 	margin-left: auto;
@@ -97,7 +98,7 @@ width: 180px;
 }
 
 #keyboard .return {
-    width: 67px;
+    width: 65px;
 }
 
 #keyboard .left-shift {
@@ -105,7 +106,7 @@ width: 180px;
 }
 
 #keyboard .right-shift {
-    width: 99px;
+    width: 95px;
 }
 
 .lastitem {
@@ -118,7 +119,7 @@ width: 180px;
 
 #keyboard .space {
     clear: left;
-    width: 560px;
+    width: 534px;
 }
 
 .on {
@@ -163,6 +164,7 @@ width: 180px;
 #legendlabel{
 float: left;
 clear: right;
+padding-top: 7px;
 }
 
 #buttoninfo {
@@ -172,8 +174,6 @@ clear: right;
 }
 
 #kbselection{
-	    /*zoom: 150%;
-float: left;*/
    min-width: 30px;
    height: 30px;
    line-height: 30px;
@@ -184,7 +184,6 @@ float: left;*/
    color: rgba(0,255,255,1);
    display: inline-block;
 }
-
 
 #selectedlabels{
     float: left;
@@ -239,6 +238,12 @@ width: 140px;
 	bottom: 0px;
 }
 
+#imexporter input{
+float: right;
+width: 110px;
+padding: 0;
+}
+
 #uspacer {
     display: table-cell;
     min-width: 1em;
@@ -283,7 +288,7 @@ text-align: right;
     float: left;
 	position: relative;
     direction: ltr;
-	height: 270px;
+	height: 285px;
     width: 474px;
 }
 
@@ -384,7 +389,6 @@ text-align: right;
     position: relative;
     float: right;
     margin-top: 6px;
-/*    padding-right: 24px; */
     overflow: scroll;
        width: 500px;
 }
@@ -404,7 +408,7 @@ text-align: right;
     float: right;
 	position: relative;
         min-width: 492px;
-	height: 270px;
+	height: 285px;
 }
 
 #sequencelistR {
