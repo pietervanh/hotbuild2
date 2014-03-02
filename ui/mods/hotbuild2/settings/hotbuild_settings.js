@@ -397,13 +397,11 @@ var hotbuildsettings = (function () {
         };
 
         self.ComunityDefaults = function () {
-            self.importfromfile("/ui/mods/hotbuild2/defaults/ARROWS.json");
-            model.camera_key_pan_style('ARROW');
             forgetFramePosition('hotbuild_info_frame');
+            self.importfromfile("/ui/mods/hotbuild2/defaults/ARROWS.json");
         };
 
         self.ComunityDefaultsWASD = function () {
-            model.camera_key_pan_style('WASD');
             forgetFramePosition('hotbuild_info_frame');
             self.importfromfile("/ui/mods/hotbuild2/defaults/WASD.json");
         };
@@ -415,6 +413,7 @@ var hotbuildsettings = (function () {
             self.Save();
             keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
             keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
+            keyboardsettings.camera_key_pan_style = model.camera_key_pan_style();
             $("#ieport").val(JSON.stringify(keyboardsettings));
         };
 
@@ -453,6 +452,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
+                model.camera_key_pan_style(imported.camera_key_pan_style);
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
@@ -496,6 +496,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
+                model.camera_key_pan_style(imported.camera_key_pan_style);
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
@@ -693,8 +694,8 @@ var hotbuildsettings = (function () {
                         $('#kbselection').replaceWith($selectedButton);
                         $('#kbselection').click(function () {
                             $('#changeKeyDlg').dialog({
-                                height: 150,
-                                width: 150,
+                                height: 200,
+                                width: 250,
                                 modal: true,
                                 buttons: {
                                     "Change Key": function () { hotbuildsettings.viewmodel.swapKey(); $(this).dialog("close"); }

@@ -22,7 +22,6 @@ var hotbuild2 = (function () {
     var hotbuild2 = {};
 
     var imbawallclick = "nobuild";
-    var afterhotbuildclick = "nobuild";
 
     function hbManager(resetTime) {
         var self = this;
@@ -77,7 +76,7 @@ var hotbuild2 = (function () {
                 self.previewvisible.notifySubscribers();
             }
         };
-
+        
         self.hotBuild = function (event, hotbuilds) {
             self.hotbuilds(hotbuilds);
             if (model['maybeSetBuildTarget']) {
@@ -97,8 +96,6 @@ var hotbuild2 = (function () {
                     if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].buildStructure) {
                         //check if it' needs to be ImbaWalled
                         model['maybeSetBuildTarget'](self.hotbuilds()[self.cycleid()].json);
-                        //cola colin option
-                        afterhotbuildclick = "hotbuild";
                         if (self.imbawallers.indexOf(self.hotbuilds()[self.cycleid()].json) !== -1) {
                             imbawallclick = "build";
                         }
@@ -127,12 +124,12 @@ var hotbuild2 = (function () {
                         }
                         if (event.ctrlKey) {
                             if(selectionTypes.length > 0){
-                              model.holodeck.view.selectByTypes("remove", selectionTypes);
+                                model.holodeck.view.selectByTypes("remove", selectionTypes);
                             }
                         }
                         else {
                             if(selectionTypes.length > 0){
-                              model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
+                                model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
                             }
                         }
                         
@@ -214,7 +211,14 @@ var hotbuild2 = (function () {
         });
         return result;
     };
-
+    
+    if (hotbuildshiftrecycle === "ON") {
+        var oldEndFabMode = model.endFabMode;
+        model.endFabMode = function () {
+            hotbuild2.hotbuildManager.cycleid(0);
+            oldEndFabMode();
+        };
+    }
 
     hotbuild2.buildTemplates = function () {
 
@@ -477,12 +481,6 @@ var hotbuild2 = (function () {
     var $holodeck = $('holodeck');
     var holodeckModeMouseDown = {};
     $holodeck.mousedown(function (mdevent) {
-        if (hotbuildshiftrecycle === "ON") {
-            if (mdevent.button === 0 && afterhotbuildclick === "hotbuild" && mdevent.shiftKey !== true) {
-                hotbuild2.hotbuildManager.cycleid(0);
-            }
-        }
-        afterhotbuildclick = "nobuild";
         if (mdevent.button === 0 && imbawallclick === "build" && mdevent.altKey === true) {
             var startx = mdevent.offsetX;
             var starty = mdevent.offsetY;
@@ -569,8 +567,6 @@ var hotbuild2 = (function () {
             }
         }
     });
-
-
 
     return hotbuild2;
 

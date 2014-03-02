@@ -17,7 +17,7 @@
     "icon": "http://pamods.github.io/icons/hotbuild2.png",
     "id": "hotbuild2",
     "priority": 100,
-	"scenes:"{
+	"scenes":{
 		"live_game": [
 			"coui://ui/mods/hotbuild2/live_game/hotbuild.css",
 			"coui://ui/mods/hotbuild2/live_game/hotbuild_core.js",
