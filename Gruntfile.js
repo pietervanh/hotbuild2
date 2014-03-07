@@ -8,43 +8,9 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     target: target,
-    /*
-    requirejs: {
-      target: {
-        options: {
-          baseUrl: 'ui/mods',
-          mainConfigFile: 'ui/mods/instant_sandbox/bootstrap.js',
-          skipDirOptimize: true,
-          optimize: 'none',
-          stubModules: ['text'],
-
-          //name: 'lib/ext/almond',
-          name: 'instant_sandbox/main',
-          out: '../<%= target %>/ui/mods/instant_sandbox/bootstrap.js',
-
-          skipModuleInsertion: true,
-          onBuildWrite: function( name, path, contents ) {
-            return require('amdclean').clean({
-              code: contents,
-              globalObject: true,
-              globalObjectName: 'instant_sandbox',
-            });
-          },
-        }
-      }
-    },
-    */
     clean: {
       options: { force: true },
-      src: ['modinfo.json',../<%= target %>/*/*/*/*','../<%= target %>/*/*/*','../<%= target %>/*/*','../<%= target %>/*']
-    },
-    cssmin: {
-      minify: {
-        files: { 
-          '../<%= target %>/ui/mods/hotbuild2/live_game/hotbuild.css' : ['ui/mods/hotbuild2/live_game/hotbuild.css'],
-          '../<%= target %>/ui/mods/hotbuild2/settings/hotbuild_settings.css' : ['ui/mods/hotbuild2/settings/hotbuild_settings.css']
-        }
-      }
+      src: ['modinfo.json','../<%= target %>/*/*/*/*','../<%= target %>/*/*/*','../<%= target %>/*/*','../<%= target %>/*']
     },
     jshint: {
       files:['Gruntfile.js','ui/mods/hotbuild2/global_mod_list/*.js','ui/mods/hotbuild2/live_game/*.js','ui/mods/hotbuild2/settings/*.js'],
@@ -59,6 +25,17 @@ module.exports = function(grunt) {
     },
     copy: {
       simple: {
+        files: [
+          {
+            src: [
+              'ui/mods/hotbuild2/defaults/*.json',
+              'ui/mods/hotbuild2/lib/*.js',
+              'ui/mods/hotbuild2/**/*.png'],
+            dest: '../<%= target %>/',
+          },
+        ],
+      },
+      test: {
         files: [
           {
             src: [
@@ -116,6 +93,56 @@ module.exports = function(grunt) {
         }
       }
     },
+    /*
+    requirejs: {
+      target: {
+        options: {
+          baseUrl: 'ui/mods',
+          mainConfigFile: 'ui/mods/instant_sandbox/bootstrap.js',
+          skipDirOptimize: true,
+          optimize: 'none',
+          stubModules: ['text'],
+
+          //name: 'lib/ext/almond',
+          name: 'instant_sandbox/main',
+          out: '../<%= target %>/ui/mods/instant_sandbox/bootstrap.js',
+
+          skipModuleInsertion: true,
+          onBuildWrite: function( name, path, contents ) {
+            return require('amdclean').clean({
+              code: contents,
+              globalObject: true,
+              globalObjectName: 'instant_sandbox',
+            });
+          },
+        }
+      }
+    },
+    */
+    uglify:{
+      release:{
+        options: {
+          mangle: false,
+          compress: {
+            drop_console: true
+          }
+        },
+        files:{
+          '../<%= target %>/ui/mods/hotbuild2/global_mod_list/hotbuild.js' : ['ui/mods/hotbuild2/global_mod_list/hotbuild.js'],
+          '../<%= target %>/ui/mods/hotbuild2/live_game/hotbuild_core.js' : ['ui/mods/hotbuild2/live_game/hotbuild_core.js'],
+          '../<%= target %>/ui/mods/hotbuild2/live_game/hotbuild_live.js' : ['ui/mods/hotbuild2/live_game/hotbuild_live.js'],
+          '../<%= target %>/ui/mods/hotbuild2/settings/hotbuild_settings.js' : ['ui/mods/hotbuild2/settings/hotbuild_settings.js']
+        }
+      }
+    },
+    cssmin: {
+      release: {
+        files: { 
+          '../<%= target %>/ui/mods/hotbuild2/live_game/hotbuild.css' : ['ui/mods/hotbuild2/live_game/hotbuild.css'],
+          '../<%= target %>/ui/mods/hotbuild2/settings/hotbuild_settings.css' : ['ui/mods/hotbuild2/settings/hotbuild_settings.css']
+        }
+      }
+    }
   });
 
   // Load the plugin that provides the "uglify" task.
@@ -125,12 +152,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-remove-logging');
-  
 
-  // Default task(s).
-  //grunt.registerTask('default', ['clean']);
-  //grunt.registerTask('default', ['requirejs', 'copy:simple', 'copy:modinfo']);
-  grunt.registerTask('default', ['jshint','clean','copy:simple', 'copy:modinfo','cssmin:minify']);
+  grunt.registerTask('default', ['jshint','clean','copy:simple', 'copy:modinfo','copy:test']);
+  grunt.registerTask('release', ['jshint','clean','copy:simple', 'copy:modinfo','cssmin:release','uglify:release']);
 
 };
