@@ -2,6 +2,7 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
+
 var hotbuild2 = (function () {
 
     var hotbuildglobal = {};
@@ -13,7 +14,7 @@ var hotbuild2 = (function () {
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
     var hotbuildshiftrecycle = settings.hotbuild_show_key_on_buildbar ? settings.hotbuild_show_key_on_buildbar : "OFF";
 
-    model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time);
+    model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time,0);
     //fast check on bad reset_time input
     if (isNaN(model.hotbuild_reset_time)) {
         model.hotbuild_reset_time = 2000;
@@ -79,7 +80,7 @@ var hotbuild2 = (function () {
         
         self.hotBuild = function (event, hotbuilds) {
             self.hotbuilds(hotbuilds);
-            if (model['maybeSetBuildTarget']) {
+            if (model.maybeSetBuildTarget) {
                 
                 if (self.knowsAnyBuildCommand()) {
                     var failDetect = 0;
@@ -95,7 +96,7 @@ var hotbuild2 = (function () {
                     setTimeout(self.clean, self.cycleResetTime + 1000);
                     if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].buildStructure) {
                         //check if it' needs to be ImbaWalled
-                        model['maybeSetBuildTarget'](self.hotbuilds()[self.cycleid()].json);
+                        model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
                         if (self.imbawallers.indexOf(self.hotbuilds()[self.cycleid()].json) !== -1) {
                             imbawallclick = "build";
                         }
@@ -119,7 +120,7 @@ var hotbuild2 = (function () {
                             }
                         }
                         var currentselection = [];
-                        for (var i = 0; i < model.selectionList().length; i++) {
+                        for (i = 0; i < model.selectionList().length; i++) {
                             currentselection.push(model.selectionList()[i].type);
                         }
                         if (event.ctrlKey) {
@@ -396,8 +397,8 @@ var hotbuild2 = (function () {
 
     //Standard CommandMode functionality
     hotbuild2.CommandMode = function (cmd) {
-        if (model['setCommandIndex']) {
-            model['setCommandIndex'](cmd);
+        if (model.setCommandIndex) {
+            model.setCommandIndex(cmd);
         }
     };
 
@@ -470,7 +471,9 @@ var hotbuild2 = (function () {
                     else {
                         used_keybinds[binding] = true;
                         binding = [binding, 'shift+' + binding]; //array with shift DIFFERENCE so both upper and lower case should work
+                        /*jshint -W083 */
                         Mousetrap.bind(binding, _.partial(function (callback, event, binding) { callback(event, binding); event.preventDefault(); }, action));
+                        /*jshint +W083 */
                     }
                 }
             }

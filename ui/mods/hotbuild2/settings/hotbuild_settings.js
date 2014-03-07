@@ -6,7 +6,7 @@ var hotbuildsettings = (function () {
 
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
         var self = this;
-        self.hotbuildglobal = ko.observable(hbglobal).extend({ notify: 'always' });;
+        self.hotbuildglobal = ko.observable(hbglobal).extend({ notify: 'always' });
         self.hotbuildglobalkey = ko.observable(hbglobalkey);
         self.cleanhotbuildglobal = ko.observable(hbglobal);
         self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
@@ -28,6 +28,7 @@ var hotbuildsettings = (function () {
                 hotbuildunit.desc = hotbuildunit.description;
                 hotbuildunit.factory = "";
                 //console.log(hotbuildunit.json);
+                /*jshint -W030 */
                 if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Mobile')) {
                     if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Basic')) {
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'botfac' : '';
@@ -41,6 +42,7 @@ var hotbuildsettings = (function () {
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'aafac' : '';
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'anfac' : '';
                     }
+                    /*jshint +W030 */
                     //should change to bif is built by orbital launcher
                     //Orbital is changing rapidly so hacky fixes here
                     if (hotbuildunit.json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
@@ -86,7 +88,7 @@ var hotbuildsettings = (function () {
                     filteredunits.push(filteredresults[j]);
                 }
             }
-            for (var j = 0; j < filteredresults.length; j++) {
+            for (j = 0; j < filteredresults.length; j++) {
                 if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
                     filteredbuildings.push(filteredresults[j]);
                 }
@@ -107,7 +109,7 @@ var hotbuildsettings = (function () {
                     self.hotbuildglobal()[hbkey][i] = match;
                 }
                 var goodstuff = [];
-                for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
+                for (i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
                     if (self.hotbuildglobal()[hbkey][i] !== undefined) {
                         goodstuff.push(self.hotbuildglobal()[hbkey][i]);
                     }
@@ -159,9 +161,9 @@ var hotbuildsettings = (function () {
                     }
                 }
                 else {
-                    for (var i = 0; i < self.units().length; i++) {
-                        if (self.units()[i].factory === "") {
-                            self.filteredunits.push(self.units()[i]);
+                    for (var j = 0; j < self.units().length; j++) {
+                        if (self.units()[j].factory === "") {
+                            self.filteredunits.push(self.units()[j]);
                         }
                     }
                 }
@@ -169,27 +171,27 @@ var hotbuildsettings = (function () {
             else {
                 self.filters(["All", "Land", "Air", "Naval", "Orbital"]);
                 if (self.activeSubFilters() !== 'All') {
-                    for (var i = 0; i < self.units().length; i++) {
-                        if (self.units()[i].factory !== "") {
-                            if (self.activeSubFilters() === 'Land' && _.contains(self.units()[i].unit_types, "UNITTYPE_Land")) {
-                                self.filteredunits.push(self.units()[i]);
+                    for (var l = 0; l < self.units().length; l++) {
+                        if (self.units()[l].factory !== "") {
+                            if (self.activeSubFilters() === 'Land' && _.contains(self.units()[l].unit_types, "UNITTYPE_Land")) {
+                                self.filteredunits.push(self.units()[l]);
                             }
-                            if (self.activeSubFilters() === 'Air' && _.contains(self.units()[i].unit_types, "UNITTYPE_Air")) {
-                                self.filteredunits.push(self.units()[i]);
+                            if (self.activeSubFilters() === 'Air' && _.contains(self.units()[l].unit_types, "UNITTYPE_Air")) {
+                                self.filteredunits.push(self.units()[l]);
                             }
-                            if (self.activeSubFilters() === 'Naval' && _.contains(self.units()[i].unit_types, "UNITTYPE_Naval")) {
-                                self.filteredunits.push(self.units()[i]);
+                            if (self.activeSubFilters() === 'Naval' && _.contains(self.units()[l].unit_types, "UNITTYPE_Naval")) {
+                                self.filteredunits.push(self.units()[l]);
                             }
-                            if (self.activeSubFilters() === 'Orbital' && _.contains(self.units()[i].unit_types, "UNITTYPE_Orbital")) {
-                                self.filteredunits.push(self.units()[i]);
+                            if (self.activeSubFilters() === 'Orbital' && _.contains(self.units()[l].unit_types, "UNITTYPE_Orbital")) {
+                                self.filteredunits.push(self.units()[l]);
                             }
                         }
                     }
                 }
                 else {
-                    for (var i = 0; i < self.units().length; i++) {
-                        if (self.units()[i].factory !== "") {
-                            self.filteredunits.push(self.units()[i]);
+                    for (var k = 0; k < self.units().length; k++) {
+                        if (self.units()[k].factory !== "") {
+                            self.filteredunits.push(self.units()[k]);
                         }
                     }
                 }
@@ -263,7 +265,7 @@ var hotbuildsettings = (function () {
 
         self.updatehotbuildkeys = function () {
             self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
-        }
+        };
         self.Save = function () {
             //do cleanup of empty props
             var viewmodelconfigkey = self.hotbuildglobalkey();
@@ -280,7 +282,7 @@ var hotbuildsettings = (function () {
             viewmodelconfigkey = {};
             viewmodelconfig = {};
             var nr = 1;
-            for (var hotkey in copyconfigkey) {
+            for (hotkey in copyconfigkey) {
                 viewmodelconfigkey['hotbuild' + nr + 's'] = copyconfigkey[hotkey];
                 viewmodelconfig['hotbuild' + nr + 's'] = [];
                 for (var i = 0; i < copyconfig[hotkey].length; i++) {
@@ -315,7 +317,7 @@ var hotbuildsettings = (function () {
 
                     }
                     //find current key position
-                    for (var hotkey in self.hotbuildglobalkey()) {
+                    for (hotkey in self.hotbuildglobalkey()) {
                         if (self.hotbuildglobalkey()[hotkey] === self.keyboardkey()) {
                             currentposition = hotkey;
                             break;
@@ -611,6 +613,7 @@ var hotbuildsettings = (function () {
                     $(this).removeClass('hbk');
                 }
             });
+            /*jshint -W083 */
             for (var i = 0; i < valueUnwrapped.length; i++) {
                 $("#keyboard li").each(function (index) {
                     if ($(this).text() === valueUnwrapped[i]) {
@@ -620,6 +623,7 @@ var hotbuildsettings = (function () {
                     }
                 });
             }
+            /*jshint +W083 */
         }
     };
 
@@ -634,6 +638,7 @@ var hotbuildsettings = (function () {
                     $(this).removeClass('uber');
                 }
             });
+            /*jshint -W083 */
             for (var i = 0; i < valueUnwrapped.length; i++) {
                 $("#keyboard li").each(function (index) {
                     if ($(this).text() === valueUnwrapped[i]) {
@@ -643,6 +648,7 @@ var hotbuildsettings = (function () {
                     }
                 });
             }
+            /*jshint +W083 */
         }
     };
 
@@ -657,6 +663,7 @@ var hotbuildsettings = (function () {
                     $(this).removeClass('dis');
                 }
             });
+            /*jshint -W083 */
             for (var i = 0; i < valueUnwrapped.length; i++) {
                 $("#keyboard li").each(function (index) {
                     if ($(this).text() === valueUnwrapped[i]) {
@@ -666,6 +673,7 @@ var hotbuildsettings = (function () {
                     }
                 });
             }
+            /*jshint +W083 */
         }
     };
 

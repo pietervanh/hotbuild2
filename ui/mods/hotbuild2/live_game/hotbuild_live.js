@@ -29,7 +29,7 @@ var hotbuild2live = (function () {
         '<img class="img_selected_unit" src="" data-bind="attr: { src: $data.icon }" style="-webkit-transform: scaleX(-1);"/>' +
         //'<span class="hbbuildbarkey" data-bind="blah: console.log($data.type)"></span>');
         '<span class="hbselectionbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
-    };
+    }
 
     if (settings.hotbuild_show_key_on_sidebar === "ON") {
         //show keybinds on command + orders sidebar
@@ -47,8 +47,8 @@ var hotbuild2live = (function () {
             else {
                 return '';
             }
-        }
-		
+        };
+
         if (keybindFix('keybinding_move') !== '') { $('.div_command_item > a#A5').append('<span class="hbsidebarkey">' + keybindFix('keybinding_move') + '</span>'); }
         if (keybindFix('keybinding_attack') !== '') { $('.div_command_item > a#A6').append('<span class="hbsidebarkey">' + keybindFix('keybinding_attack') + '</span>'); }        
         if (keybindFix('keybinding_assist') !== '') { $('.div_command_item > a#A7').append('<span class="hbsidebarkey">' + keybindFix('keybinding_assist') + '</span>'); }
@@ -63,27 +63,27 @@ var hotbuild2live = (function () {
         //orders
         if (keybindFix('keybinding_Toggle Energy') !== '') { $('.div_command_item.order_energy_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Toggle Energy') + '</span>'); }
         if (keybindFix('keybinding_Requeue') !== '') { $('.div_command_item.order_buildstance_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Requeue') + '</span>'); }
-    };
+    }
 
     //Hook up Real Functions to Keyboard Keys
     //Special Action
     action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };
     action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
-    action_sets.hotbuild['Requeue'] = function (event) { hotbuild2.requeue(event); };
+    action_sets.hotbuild.Requeue = function (event) { hotbuild2.requeue(event); };
     action_sets.hotbuild['View Notification'] = function (event) { hotbuild2.viewAlert(); };
     //action_sets.hotbuild['Build Template'] = function (event) { hotbuild2.buildTemplates.chooseBuildTemplate(); };
     //Fixes for Uber Casesensitive keybinds
-    action_sets.hotbuild['move'] = function (event) { hotbuild2.CommandMode(0); };
-    action_sets.hotbuild['attack'] = function (event) { hotbuild2.CommandMode(1); };
-    action_sets.hotbuild['assist'] = function (event) { hotbuild2.CommandMode(2); };
-    action_sets.hotbuild['repair'] = function (event) { hotbuild2.CommandMode(3); };
-    action_sets.hotbuild['reclaim'] = function (event) { hotbuild2.CommandMode(4); };
-    action_sets.hotbuild['patrol'] = function (event) { hotbuild2.CommandMode(5); };
-    action_sets.hotbuild['stop'] = function (event) { hotbuild2.CommandMode(-1); };
+    action_sets.hotbuild.move = function (event) { hotbuild2.CommandMode(0); };
+    action_sets.hotbuild.attack = function (event) { hotbuild2.CommandMode(1); };
+    action_sets.hotbuild.assist = function (event) { hotbuild2.CommandMode(2); };
+    action_sets.hotbuild.repair = function (event) { hotbuild2.CommandMode(3); };
+    action_sets.hotbuild.reclaim = function (event) { hotbuild2.CommandMode(4); };
+    action_sets.hotbuild.patrol = function (event) { hotbuild2.CommandMode(5); };
+    action_sets.hotbuild.stop = function (event) { hotbuild2.CommandMode(-1); };
     action_sets.hotbuild['select commie'] = input.doubleTap(api.select.commander, function () { api.camera.track(true); input.doubleTap.reset(); });
-    action_sets.hotbuild['unload'] = function (event) { hotbuild2.CommandMode(9); };
+    action_sets.hotbuild.unload = function (event) { hotbuild2.CommandMode(9); };
     action_sets.hotbuild['D-Gun'] = function (event) { hotbuild2.CommandMode(12); };
-    action_sets.hotbuild['Ping'] = function (event) { hotbuild2.CommandMode(13); };
+    action_sets.hotbuild.Ping = function (event) { hotbuild2.CommandMode(13); };
 
     // hijack some method that is in the right place to execute our engine calls
     //might be not needed in future if live_game.js has no more 
