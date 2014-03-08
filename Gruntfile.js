@@ -30,7 +30,8 @@ module.exports = function(grunt) {
             src: [
               'ui/mods/hotbuild2/defaults/*.json',
               'ui/mods/hotbuild2/lib/*.js',
-              'ui/mods/hotbuild2/**/*.png'],
+              'ui/mods/hotbuild2/**/*.png',
+              'ui/mods/hotbuild2/**/*.html'],
             dest: '../<%= target %>/',
           },
         ],
@@ -41,6 +42,7 @@ module.exports = function(grunt) {
             src: [
               'ui/mods/hotbuild2/defaults/*.json',
               'ui/mods/hotbuild2/**/*.js',
+              'ui/mods/hotbuild2/**/*.css',
               'ui/mods/hotbuild2/**/*.png'],
             dest: '../<%= target %>/',
           },
