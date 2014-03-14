@@ -11,7 +11,7 @@ var hotbuild2 = (function () {
     /*variables for hotbuild toggle*/
     var hotbuild_enable=true; //allow hotbuild buildbar
     var hotbuild_select_enable=true; //allow hotbuild select bar
-	var hotbuild_frameEvent; //animationFrame Timer
+    var hotbuild_frameEvent; //animationFrame Timer
 
     var settings = decode(localStorage.settings);
 
@@ -424,63 +424,63 @@ var hotbuild2 = (function () {
     
 /*Start of toggle Hotbuild*/
     
-   	//toggle hotbuild on or off
-   	hotbuild2.toggleState=function(){
-   		if(hotbuild_enable){
-   			hotbuild2.setBuildBehavior(false);
-   		}else{
-   			hotbuild2.setBuildBehavior(true);
-   		}
-   	};
-   	
-   	//toggle hotbuild on or off
-   	hotbuild2.toggleState_select=function(){
-   		if(hotbuild_select_enable){
-   			hotbuild2.setSelectBehavior(false);
-   		}else{
-   			hotbuild2.setSelectBehavior(true);
-   		}
-   	};
-   	
-   	//manually set the state of hotbuild (can be used by other mods)
-   	hotbuild2.setBuildBehavior=function(_state){
-   		if(_state){
-   			hotbuild_enable=true;
-   			$('.hbbuildbarkey:not(:empty)').show();
-   		}else{
-   			hotbuild_enable=false;
-   			$('.hbbuildbarkey').hide();
-   			hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
-   		}
-   	}
+    //toggle hotbuild on or off
+    hotbuild2.toggleState=function(){
+        if(hotbuild_enable){
+            hotbuild2.setBuildBehavior(false);
+        }else{
+            hotbuild2.setBuildBehavior(true);
+        }
+    };
+    
+    //toggle hotbuild on or off
+    hotbuild2.toggleState_select=function(){
+        if(hotbuild_select_enable){
+            hotbuild2.setSelectBehavior(false);
+        }else{
+            hotbuild2.setSelectBehavior(true);
+        }
+    };
+    
+    //manually set the state of hotbuild (can be used by other mods)
+    hotbuild2.setBuildBehavior=function(_state){
+        if(_state){
+            hotbuild_enable=true;
+            $('.hbbuildbarkey:not(:empty)').show();
+        }else{
+            hotbuild_enable=false;
+            $('.hbbuildbarkey').hide();
+            hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
+        }
+    };
 
-   	//keep the buildbar hidden even though selections etc might change
-   	hotbuild2.watch_toggle=function(){
-   		//hotbuild is disabled, hide the buildbar
-   		if(!hotbuild_enable){
-   			$('.hbbuildbarkey').hide();
-   		}
-   		if(!hotbuild_select_enable){
-   			$('.hbselectionbarkey').hide();
-   		}
-   		//keep checking for hotbuild state if needed
-   		if(!hotbuild_enable||!hotbuild_select_enable){
-   			hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
-   		}
-   	};
-   
-   	//set the behavior of the selection bar with hotbuild
-   	hotbuild2.setSelectBehavior=function(_state){
-   		if(_state){
-   			hotbuild_select_enable=true;
-   			$('.hbselectionbarkey:not(:empty)').show();
-   		}else{
-   			hotbuild_select_enable=false;
-   			$('.hbselectionbarkey').hide();
-   			hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
-   		}
-   	}
-   	
+    //keep the buildbar hidden even though selections etc might change
+    hotbuild2.watch_toggle=function(){
+        //hotbuild is disabled, hide the buildbar
+        if(!hotbuild_enable){
+            $('.hbbuildbarkey').hide();
+        }
+        if(!hotbuild_select_enable){
+            $('.hbselectionbarkey').hide();
+        }
+        //keep checking for hotbuild state if needed
+        if(!hotbuild_enable||!hotbuild_select_enable){
+            hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
+        }
+    };
+
+    //set the behavior of the selection bar with hotbuild
+    hotbuild2.setSelectBehavior=function(_state){
+        if(_state){
+            hotbuild_select_enable=true;
+            $('.hbselectionbarkey:not(:empty)').show();
+        }else{
+            hotbuild_select_enable=false;
+            $('.hbselectionbarkey').hide();
+            hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
+        }
+    };
+    
 /*End of toggle Hotbuild*/    
 
 
