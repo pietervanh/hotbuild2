@@ -7,6 +7,11 @@ var hotbuild2 = (function () {
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
+    
+    /*variables for hotbuild toggle*/
+    var hotbuild_enable=true; //allow hotbuild buildbar
+    var hotbuild_select_enable=true; //allow hotbuild select bar
+	var hotbuild_frameEvent; //animationFrame Timer
 
     var settings = decode(localStorage.settings);
 
@@ -82,7 +87,7 @@ var hotbuild2 = (function () {
             self.hotbuilds(hotbuilds);
             if (model.maybeSetBuildTarget) {
                 
-                if (self.knowsAnyBuildCommand()) {
+                if (self.knowsAnyBuildCommand()&&hotbuild_enable) {
                     var failDetect = 0;
                     do {
                         self.doCycleId(self.hotbuilds().length, event.which);
@@ -110,7 +115,7 @@ var hotbuild2 = (function () {
                     event.preventDefault();
                 }
                 else {
-                    if (model.selectionList().length > 0) { //check if units are selected ?
+                    if (model.selectionList().length > 0&&hotbuild_select_enable) { //check if units are selected ?
                         var selectionTypes = [];
                         for (var i = 0; i < self.hotbuilds().length; i++) {
 
@@ -136,7 +141,7 @@ var hotbuild2 = (function () {
                         
                     }
                     else {
-                        console.log('hotbuild doesnt know what to do ' + self.debuginfo());
+                        console.log('hotbuild doesnt know what to do (or hotSelect is disabled)' + self.debuginfo());
                     }
 
                     
@@ -416,6 +421,67 @@ var hotbuild2 = (function () {
             }
         }
     };
+    
+/*Start of toggle Hotbuild*/
+    
+   	//toggle hotbuild on or off
+   	hotbuild2.toggleState=function(){
+   		if(hotbuild_enable){
+   			hotbuild2.setBuildBehavior(false);
+   		}else{
+   			hotbuild2.setBuildBehavior(true);
+   		}
+   	};
+   	
+   	//toggle hotbuild on or off
+   	hotbuild2.toggleState_select=function(){
+   		if(hotbuild_select_enable){
+   			hotbuild2.setSelectBehavior(false);
+   		}else{
+   			hotbuild2.setSelectBehavior(true);
+   		}
+   	};
+   	
+   	//manually set the state of hotbuild (can be used by other mods)
+   	hotbuild2.setBuildBehavior=function(_state){
+   		if(_state){
+   			hotbuild_enable=true;
+   			$('.hbbuildbarkey:not(:empty)').show();
+   		}else{
+   			hotbuild_enable=false;
+   			$('.hbbuildbarkey').hide();
+   			hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
+   		}
+   	}
+
+   	//keep the buildbar hidden even though selections etc might change
+   	hotbuild2.watch_toggle=function(){
+   		//hotbuild is disabled, hide the buildbar
+   		if(!hotbuild_enable){
+   			$('.hbbuildbarkey').hide();
+   		}
+   		if(!hotbuild_select_enable){
+   			$('.hbselectionbarkey').hide();
+   		}
+   		//keep checking for hotbuild state if needed
+   		if(!hotbuild_enable||!hotbuild_select_enable){
+   			hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
+   		}
+   	};
+   
+   	//set the behavior of the selection bar with hotbuild
+   	hotbuild2.setSelectBehavior=function(_state){
+   		if(_state){
+   			hotbuild_select_enable=true;
+   			$('.hbselectionbarkey:not(:empty)').show();
+   		}else{
+   			hotbuild_select_enable=false;
+   			$('.hbselectionbarkey').hide();
+   			hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
+   		}
+   	}
+   	
+/*End of toggle Hotbuild*/    
 
 
     //same as the one in media\ui\alpha\shared\js\inputmap.js
