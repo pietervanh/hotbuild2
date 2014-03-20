@@ -156,6 +156,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.registerTask('default', ['jshint','clean','copy:simple', 'copy:modinfo','copy:test']);
-  grunt.registerTask('release', ['jshint','clean','copy:simple', 'copy:modinfo','cssmin:release','uglify:release']);
+  grunt.registerTask('release', ['jshint','clean','copy:simple', 'copy:modinfo','copy:test']);  
+  //grunt.registerTask('release', ['jshint','clean','copy:simple', 'copy:modinfo','cssmin:release','uglify:release']);
 
 };
