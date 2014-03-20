@@ -221,7 +221,7 @@ var hotbuild2 = (function () {
     if (hotbuildshiftrecycle === "ON") {
         var oldEndFabMode = model.endFabMode;
         model.endFabMode = function () {
-            hotbuild2.hotbuildManager.cycleid(0);
+            hotbuild2.hotbuildManager.cycleid(-1);
             oldEndFabMode();
         };
     }
