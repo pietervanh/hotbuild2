@@ -523,6 +523,7 @@ var hotbuildsettings = (function () {
         };
 
         self.keyboardclickhandler = function () {
+            //console.log('click hotbuildkey');
             var $this = $(this);
             var character = $this.html();
             if (!$this.hasClass('dis')) {
@@ -552,13 +553,13 @@ var hotbuildsettings = (function () {
 
 (function () {
 
-    function loadHotBuildSettings(element, url, model) {
+    var loadHotBuildSettings = function(element, url, model) {
         element.load(url, function () {
             console.log("Loading html " + url);
             ko.applyBindings(model, element.get(0));
             $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
         });
-    }
+    };
 
     model.oldSettingsBeforeHotbuild = model.settings;
     model.settings = ko.computed(function () {
@@ -720,10 +721,11 @@ var hotbuildsettings = (function () {
         }
     };
 
+    //debugger;
     var $gamesettings = $("#game_settings");
     $gamesettings.children(":first").append("<li class='game_settings'>" +
                                             "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
                                             "</li>");
     $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
-    loadHotBuildSettings($('#tab_hotbuildprefs'), '../../mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
+    loadHotBuildSettings($('#tab_hotbuildprefs'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
 })();
