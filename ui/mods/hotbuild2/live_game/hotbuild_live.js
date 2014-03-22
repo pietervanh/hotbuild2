@@ -17,7 +17,7 @@ var hotbuild2live = (function () {
     var settings = decode(localStorage.settings);
 
     createFloatingFrame('hotbuild_info_frame', 220, 70, { 'offset': 'leftCenter', 'top': -200 });
-    loadHotBuildTemplate($('#hotbuild_info_frame_content'), '../../mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
+    loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
 
     //show keybinds on build bar
     if (settings.hotbuild_show_key_on_buildbar === "ON") {
