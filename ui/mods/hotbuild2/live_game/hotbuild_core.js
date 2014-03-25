@@ -395,6 +395,38 @@ var hotbuild2 = (function () {
         event.preventDefault();
     };
 
+    //cinematic mode on/off
+    hotbuild2.cinematicToggle = function(event){
+        var allSettings = decode(localStorage.settings);
+        var currentCinematic = allSettings.cinematic_value; 
+        var nextSetting = "";
+        if (currentCinematic === 'OFF') {
+            nextSetting = "ON";
+        } else {
+            nextSetting = "OFF";
+        }
+        allSettings.cinematic_value = nextSetting;
+        localStorage.settings = encode(allSettings);
+        model.applyUIDisplaySettings();
+        event.preventDefault();
+    };
+
+    //terrestial toggle
+    hotbuild2.terrestrialToggle = function(event){
+        var allSettings = decode(localStorage.settings);
+        var currentTerrestrial = allSettings.always_show_terrestrial_units;
+        var nextSetting = "";
+        if (currentTerrestrial === 'ALWAYS') {
+            nextSetting = "RANGE DEPENDENT";
+        } else {
+            nextSetting = "ALWAYS";
+        }
+        allSettings.always_show_terrestrial_units = nextSetting;
+        localStorage.settings = encode(allSettings);
+        model.applyUIDisplaySettings();
+        event.preventDefault();
+    };
+
     //ReQueue Functionality   
     hotbuild2.requeue = function (event) {
         model.toggleBuildStanceOrderIndex();

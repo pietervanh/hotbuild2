@@ -69,6 +69,8 @@ var hotbuild2live = (function () {
     //Special Action
     action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };
     action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
+    action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
+    action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
     action_sets.hotbuild.Requeue = function (event) { hotbuild2.requeue(event); };
     action_sets.hotbuild['View Notification'] = function (event) { hotbuild2.viewAlert(); };
     //action_sets.hotbuild['Build Template'] = function (event) { hotbuild2.buildTemplates.chooseBuildTemplate(); };

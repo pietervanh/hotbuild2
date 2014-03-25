@@ -14,6 +14,8 @@
     //Special Actions
     action_sets.hotbuild['Toggle Energy'] = function (event) { };
     action_sets.hotbuild['Lock Pole'] = function (event) { };
+    action_sets.hotbuild['Toggle Cinematic'] = function (event) { };
+    action_sets.hotbuild['Toggle Terrestrial'] = function (event) { };
     action_sets.hotbuild.Requeue = function (event) { };
     action_sets.hotbuild['View Notification'] = function (event) { };
     //action_sets.hotbuild['Build Template'] = function (event) { };
@@ -37,6 +39,8 @@
     default_keybinds.hotbuild = {}; 
     default_keybinds.hotbuild['Toggle Energy'] = '';
     default_keybinds.hotbuild['Lock Pole'] = '';
+    default_keybinds.hotbuild['Toggle Cinematic'] = '';
+    default_keybinds.hotbuild['Toggle Terrestrial'] = '';
     default_keybinds.hotbuild.Requeue = '';
     default_keybinds.hotbuild['View Notification'] = '';
     //default_keybinds.hotbuild['Build Template'] = '';
