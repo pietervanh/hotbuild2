@@ -104,8 +104,9 @@ var hotbuild2 = (function () {
                     console.log(self.hotbuilds()[self.cycleid()].json);
                     if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].structure) {
                         //check if it' needs to be ImbaWalled
-                        debugger;
-                        model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
+
+                        //model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
+                        model.buildItemBySpec(self.hotbuilds()[self.cycleid()].json);
                         if (self.imbawallers.indexOf(self.hotbuilds()[self.cycleid()].json) !== -1) {
                             imbawallclick = "build";
                         }
