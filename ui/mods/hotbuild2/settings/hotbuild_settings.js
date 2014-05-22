@@ -576,7 +576,6 @@ var hotbuildsettings = (function () {
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
     
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
-        /*
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
             if (arg.item.factory !== "" && arg.sourceParentNode.className === undefined) {
                 var unitCheck = true;
@@ -596,15 +595,13 @@ var hotbuildsettings = (function () {
             arg.cancelDrop = true;
             return arg;
         }
-        */
+
     };
 
     ko.bindingHandlers.sortable.afterMove = function (arg) {
-        /*
         hotbuildsettings.viewmodel.filterunits(); // should really clone eh
         hotbuildsettings.viewmodel.Save();
         hotbuildsettings.viewmodel.updatehotbuildkeys();
-        */
     };
     
     ko.bindingHandlers.colorhotbuildkeys = {
@@ -726,10 +723,11 @@ var hotbuildsettings = (function () {
     };
 
     //debugger;
-    var $gamesettings = $("#game_settings");
-    $gamesettings.children(":first").append("<li class='game_settings'>" +
-                                            "<a href='#tab_hotbuildprefs'>HOTBUILD</a>" +
+    var $tabheadersettings = $("#main .header");
+    $tabheadersettings.children(":first").append("<li>" +
+                                            "<a href='#tab_hotbuildprefs' data-toggle='pill'>HOTBUILD</a>" +
                                             "</li>");
-    $gamesettings.append('<div class="div_settings" id="tab_hotbuildprefs"></div>');
+    var $tabcontentsettings = $("#main .content");
+    $tabcontentsettings.children(":first").append('<div class="option-list tab-pane" id="tab_hotbuildprefs"></div>');
     loadHotBuildSettings($('#tab_hotbuildprefs'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
 })();
