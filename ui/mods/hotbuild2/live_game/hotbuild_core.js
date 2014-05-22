@@ -54,12 +54,16 @@ var hotbuild2 = (function () {
         self.buildPreviewList = function (hbindex, hotbuilds) {
             //set the buildPreview list
             if (hotbuilds !== undefined) {
-                console.log("hello");
                 self.hotbuildPreviews([{ 'icon': '', 'json': '' }]);
                 var unitinfo;
                 for (var i = hbindex; i < hotbuilds.length; i++) {
                     if (self.knowsBuildCommand(hotbuilds[i].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[i].json];
+                        if (unitinfo === undefined)
+                        {
+                            //prolly GW
+                            unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
+                        }
                         if (unitinfo.buildStructure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[i].json });
                         }
@@ -101,20 +105,25 @@ var hotbuild2 = (function () {
                     self.hbtriggertime(_.now());
                     setTimeout(self.clean, self.cycleResetTime + 1000);
                     //debugger;
-                    console.log(self.hotbuilds()[self.cycleid()].json);
-                    if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].structure) {
+                    
+                    var hbunit = model.unitSpecs[self.hotbuilds()[self.cycleid()].json];
+                    if(hbunit === undefined){
+                        hbunit = model.unitSpecs[self.hotbuilds()[self.cycleid()].json + ".player"];
+                    }
+                    console.log(hbunit.id);
+                    if (hbunit.structure) {
                         //check if it' needs to be ImbaWalled
 
                         //model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
-                        model.buildItemBySpec(self.hotbuilds()[self.cycleid()].json);
-                        if (self.imbawallers.indexOf(self.hotbuilds()[self.cycleid()].json) !== -1) {
+                        model.buildItemBySpec(hbunit.id);
+                        if (self.imbawallers.indexOf(hbunit.id) !== -1) {
                             imbawallclick = "build";
                         }
                     }
                     else {
                         model.executeStartBuild(event, self.getBuildItemId());
                     }
-                    self.unitName(model.unitSpecs[self.hotbuilds()[self.cycleid()].json].name);
+                    self.unitName(hbunit.name);
                     self.buildPreviewList(self.cycleid(), self.hotbuilds());
                     self.previewvisible(true);
                     event.preventDefault();
@@ -165,13 +174,19 @@ var hotbuild2 = (function () {
 
         self.knowsBuildCommand = function (cmd) {
             //check on buildtablist empty
+
             if (model.buildTabLists().length > 0){
                 for (var b = 0; b < model.buildTabLists().length; b++){
                     for (var i = 0; i < model.buildTabLists()[b].length; i++) {
                         if (_.isObject(model.buildTabLists()[b][i])){
+                            //console.log(model.buildTabLists()[b][i].id.replace(".player", "", "gi"));
                             if(model.buildTabLists()[b][i].id == cmd) {
                                 return true;
                             }
+                            //GW fix
+                            if(model.buildTabLists()[b][i].id == cmd + ".player") {
+                                return true;
+                            }                            
                         }
                     }
                 }
