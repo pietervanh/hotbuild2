@@ -225,7 +225,7 @@ var hotbuildsettings = (function () {
             }
             //get uberkey info
             var fuberkey = false;
-            _.forEach(model.keybindGroups(), function (o) {
+            _.forEach(model.keybindings().groups(), function (o) {
                 _.forEach(o.keybinds(), function (k) {
                     if (k.binding() == value) {
                         fuberkey = true;
@@ -241,7 +241,7 @@ var hotbuildsettings = (function () {
 
         self.uberkeys = ko.computed(function () {
             var uberkeys = [];
-            _.forEach(model.keybindGroups(), function (o) {
+            _.forEach(model.keybindings().groups(), function (o) {
                 _.forEach(o.keybinds(), function (k) {
                     uberkeys.push(k.binding());
                 });
@@ -251,7 +251,7 @@ var hotbuildsettings = (function () {
 
         self.disabledkeys = ko.computed(function () {
             var diskeys = ['caps lock', 'shift', 'return'];
-            if (model.camera_key_pan_style() === "WASD") {
+            if (model.cameraKeyPanStyle() === "WASD") {
                 diskeys = diskeys.concat(['w', 'a', 's', 'd']);
             }
             return diskeys;
@@ -574,8 +574,9 @@ var hotbuildsettings = (function () {
     model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Show Key on SideBar', 'hotbuild_show_key_on_sidebar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
-
+    
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
+        /*
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
             if (arg.item.factory !== "" && arg.sourceParentNode.className === undefined) {
                 var unitCheck = true;
@@ -595,14 +596,17 @@ var hotbuildsettings = (function () {
             arg.cancelDrop = true;
             return arg;
         }
+        */
     };
 
     ko.bindingHandlers.sortable.afterMove = function (arg) {
+        /*
         hotbuildsettings.viewmodel.filterunits(); // should really clone eh
         hotbuildsettings.viewmodel.Save();
         hotbuildsettings.viewmodel.updatehotbuildkeys();
+        */
     };
-
+    
     ko.bindingHandlers.colorhotbuildkeys = {
         update: function (element, valueAccessor, allBindings) {
             // First get the latest data that we're bound to

@@ -20,6 +20,7 @@ var hotbuild2live = (function () {
     loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
 
     //show keybinds on build bar
+    /*
     if (settings.hotbuild_show_key_on_buildbar === "ON") {
         //Show key on buildbar
         $('.div_build_item img').replaceWith(
@@ -63,8 +64,9 @@ var hotbuild2live = (function () {
         //orders
         if (keybindFix('keybinding_Toggle Energy') !== '') { $('.div_command_item.order_energy_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Toggle Energy') + '</span>'); }
         if (keybindFix('keybinding_Requeue') !== '') { $('.div_command_item.order_buildstance_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Requeue') + '</span>'); }
-    }
 
+    }
+    */
     //Hook up Real Functions to Keyboard Keys
     //Special Action
     action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };

@@ -54,6 +54,7 @@ var hotbuild2 = (function () {
         self.buildPreviewList = function (hbindex, hotbuilds) {
             //set the buildPreview list
             if (hotbuilds !== undefined) {
+                console.log("hello");
                 self.hotbuildPreviews([{ 'icon': '', 'json': '' }]);
                 var unitinfo;
                 for (var i = hbindex; i < hotbuilds.length; i++) {
@@ -99,8 +100,11 @@ var hotbuild2 = (function () {
                     } while (!self.knowsBuildCommand(self.hotbuilds()[self.cycleid()].json) && self.knowsAnyBuildCommand());
                     self.hbtriggertime(_.now());
                     setTimeout(self.clean, self.cycleResetTime + 1000);
-                    if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].buildStructure) {
+                    //debugger;
+                    console.log(self.hotbuilds()[self.cycleid()].json);
+                    if (model.unitSpecs[self.hotbuilds()[self.cycleid()].json].structure) {
                         //check if it' needs to be ImbaWalled
+                        debugger;
                         model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
                         if (self.imbawallers.indexOf(self.hotbuilds()[self.cycleid()].json) !== -1) {
                             imbawallclick = "build";
@@ -161,9 +165,13 @@ var hotbuild2 = (function () {
         self.knowsBuildCommand = function (cmd) {
             //check on buildtablist empty
             if (model.buildTabLists().length > 0){
-                for (var i = 0; i < model.buildTabLists()[model.selectedBuildTabIndex()].length; i++) {
-                    if (model.buildTabLists()[model.selectedBuildTabIndex()][i].id == cmd) {
-                        return true;
+                for (var b = 0; b < model.buildTabLists().length; b++){
+                    for (var i = 0; i < model.buildTabLists()[b].length; i++) {
+                        if (_.isObject(model.buildTabLists()[b][i])){
+                            if(model.buildTabLists()[b][i].id == cmd) {
+                                return true;
+                            }
+                        }
                     }
                 }
             }
@@ -189,8 +197,8 @@ var hotbuild2 = (function () {
 
 
         self.getBuildItemId = function () {
-            for (var i = 0; i < model.buildItems().length; i++) {
-                if (model.buildItems()[i].id() === self.hotbuilds()[self.cycleid()].json) {
+            for (var i = 0; i < model.buildLists.length; i++) {
+                if (model.buildLists[i].id() === self.hotbuilds()[self.cycleid()].json) {
                     return i;
                 }
             }
