@@ -56,14 +56,11 @@ var hotbuild2 = (function () {
             if (hotbuilds !== undefined) {
                 self.hotbuildPreviews([{ 'icon': '', 'json': '' }]);
                 var unitinfo;
+
                 for (var i = hbindex; i < hotbuilds.length; i++) {
                     if (self.knowsBuildCommand(hotbuilds[i].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[i].json];
-                        if (unitinfo === undefined)
-                        {
-                            //prolly GW
-                            unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
-                        }
+                        console.log(unitinfo.buildIcon);
                         if (unitinfo.buildStructure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[i].json });
                         }
@@ -121,7 +118,8 @@ var hotbuild2 = (function () {
                         }
                     }
                     else {
-                        model.executeStartBuild(event, self.getBuildItemId());
+                        model.buildItemBySpec(hbunit.id);
+                        //model.executeStartBuild(event, self.getBuildItemId());
                     }
                     self.unitName(hbunit.name);
                     self.buildPreviewList(self.cycleid(), self.hotbuilds());

@@ -31,7 +31,7 @@ var hotbuild2live = (function () {
         //'<span class="hbbuildbarkey" data-bind="blah: console.log($data.type)"></span>');
         '<span class="hbselectionbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
     }
-
+    */
     if (settings.hotbuild_show_key_on_sidebar === "ON") {
         //show keybinds on command + orders sidebar
         //commands
@@ -66,7 +66,7 @@ var hotbuild2live = (function () {
         if (keybindFix('keybinding_Requeue') !== '') { $('.div_command_item.order_buildstance_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Requeue') + '</span>'); }
 
     }
-    */
+    
     //Hook up Real Functions to Keyboard Keys
     //Special Action
     action_sets.hotbuild['Toggle Energy'] = function (event) { hotbuild2.energyToggle(event); };

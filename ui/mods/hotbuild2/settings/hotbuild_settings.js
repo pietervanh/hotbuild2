@@ -562,12 +562,21 @@ var hotbuildsettings = (function () {
     };
 
     model.oldSettingsBeforeHotbuild = model.settings;
+    /*
     model.settings = ko.computed(function () {
         var newSettings = model.oldSettingsBeforeHotbuild();
         newSettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
         newSettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
         return newSettings;
     });
+*/
+
+    model.oldsaveBeforeHotbuild = model.save;
+    model.save = function(){
+        model.settings().hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
+        model.settings().hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        model.oldsaveBeforeHotbuild();
+    };
 
     model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Reset Cycle when Shift isn\'t down', 'hotbuild_shift_key_recycle', 'UI', ['ON', 'OFF'], 1, 'Hotbuild2');
