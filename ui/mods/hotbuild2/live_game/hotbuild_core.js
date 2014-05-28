@@ -107,7 +107,7 @@ var hotbuild2 = (function () {
                     if(hbunit === undefined){
                         hbunit = model.unitSpecs[self.hotbuilds()[self.cycleid()].json + ".player"];
                     }
-                    console.log(hbunit.id);
+                    
                     if (hbunit.structure) {
                         //check if it' needs to be ImbaWalled
 
@@ -118,8 +118,10 @@ var hotbuild2 = (function () {
                         }
                     }
                     else {
-                        model.buildItemBySpec(hbunit.id);
+                        //model.buildItemBySpec(hbunit.id);
+                        //console.log(hbunit.id);
                         //model.executeStartBuild(event, self.getBuildItemId());
+                        model.executeStartBuild(event, hbunit);
                     }
                     self.unitName(hbunit.name);
                     self.buildPreviewList(self.cycleid(), self.hotbuilds());
