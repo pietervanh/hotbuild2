@@ -20,18 +20,22 @@ var hotbuild2live = (function () {
     loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
 
     //show keybinds on build bar
-    /*
+    
     if (settings.hotbuild_show_key_on_buildbar === "ON") {
         //Show key on buildbar
-        $('.div_build_item img').replaceWith(
-        '<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
-        '<span class="hbbuildbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.id()) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.id())"></span>');
+        $('.span_hotkey').replaceWith(
+        //'<img class="img_build_unit" src="img/build_bar/units/build_unit_sample.png" data-bind="attr: { src: icon }" /></a>' +
+        //'<span class="hbbuildbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.id()) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.id())"></span>');
+        '<span class="span_hotkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.id) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.id)"></span>'
+        );
+        $('.div_build_bar_cont').removeAttr('data-bind');
+
         $('.div_unit_selection img').replaceWith(
         '<img class="img_selected_unit" src="" data-bind="attr: { src: $data.icon }" style="-webkit-transform: scaleX(-1);"/>' +
         //'<span class="hbbuildbarkey" data-bind="blah: console.log($data.type)"></span>');
         '<span class="hbselectionbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
     }
-    */
+    
     if (settings.hotbuild_show_key_on_sidebar === "ON") {
         //show keybinds on command + orders sidebar
         //commands
