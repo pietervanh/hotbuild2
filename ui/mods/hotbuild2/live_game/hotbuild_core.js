@@ -60,8 +60,7 @@ var hotbuild2 = (function () {
                 for (var i = hbindex; i < hotbuilds.length; i++) {
                     if (self.knowsBuildCommand(hotbuilds[i].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[i].json];
-                        console.log(unitinfo.buildIcon);
-                        if (unitinfo.buildStructure) {
+                        if (unitinfo.structure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[i].json });
                         }
                     }
@@ -69,7 +68,7 @@ var hotbuild2 = (function () {
                 for (var j = 0; j < hbindex; j++) {
                     if (self.knowsBuildCommand(hotbuilds[j].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[j].json];
-                        if (unitinfo.buildStructure) {
+                        if (unitinfo.structure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[j].json });
                         }
                     }

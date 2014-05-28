@@ -439,9 +439,10 @@ var hotbuildsettings = (function () {
                                 if(imported.uber[kvgm].keybinds[i].action === model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].action())
                                 {
                                     try {
-                                        console.log("OLD" + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].binding());
-                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].binding);
-                                        model.model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].binding(imported.uber[kvgm].keybinds[i].binding);
+                                        console.log("OLD" + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].value());
+                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].value);
+                                        model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].binding(imported.uber[kvgm].keybinds[i].value);
+                                        //model.model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].bound(imported.uber[kvgm].keybinds[i].bound);
                                         break;
                                     }
                                     catch (err) {

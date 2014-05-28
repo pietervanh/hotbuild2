@@ -1,1602 +1,1570 @@
-{
-   "uber":[
-      {
-         "name":"general",
-         "keybinds":[
-            {
-               "group":"general",
-               "action":"show/hide UI",
-               "binding":"ctrl+u",
-               "bound":true
+{ "cameraKeyPanStyle" : "WASD",
+  "hotbuildglobal" : { "hotbuild10s" : [ { "json" : "/pa/units/land/energy_storage/energy_storage.json" },
+          { "json" : "/pa/units/land/metal_storage/metal_storage.json" },
+          { "json" : "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json" },
+          { "json" : "/pa/units/land/nuke_launcher/nuke_launcher.json" }
+        ],
+      "hotbuild11s" : [ { "json" : "/pa/units/land/teleporter/teleporter.json" },
+          { "json" : "/pa/units/orbital/ion_defense/ion_defense.json" },
+          { "json" : "/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json" },
+          { "json" : "/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json" },
+          { "json" : "/pa/units/orbital/delta_v_engine/delta_v_engine.json" }
+        ],
+      "hotbuild1s" : [ { "json" : "/pa/units/land/vehicle_factory/vehicle_factory.json" },
+          { "json" : "/pa/units/land/bot_factory/bot_factory.json" },
+          { "json" : "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json" },
+          { "json" : "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json" },
+          { "json" : "/pa/units/land/land_scout/land_scout.json" },
+          { "json" : "/pa/units/air/air_scout/air_scout.json" }
+        ],
+      "hotbuild2s" : [ { "json" : "/pa/units/air/air_factory/air_factory.json" },
+          { "json" : "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+          { "json" : "/pa/units/sea/naval_factory/naval_factory.json" },
+          { "json" : "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
+          { "json" : "/pa/units/orbital/orbital_launcher/orbital_launcher.json" },
+          { "json" : "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json" },
+          { "json" : "/pa/units/sea/missile_ship/missile_ship.json" },
+          { "json" : "/pa/units/orbital/orbital_laser/orbital_laser.json" }
+        ],
+      "hotbuild3s" : [ { "json" : "/pa/units/land/radar_adv/radar_adv.json" },
+          { "json" : "/pa/units/land/radar/radar.json" },
+          { "json" : "/pa/units/orbital/deep_space_radar/deep_space_radar.json" },
+          { "json" : "/pa/units/orbital/radar_satellite/radar_satellite.json" },
+          { "json" : "/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json" },
+          { "json" : "/pa/units/air/fighter/fighter.json" },
+          { "json" : "/pa/units/air/fighter_adv/fighter_adv.json" },
+          { "json" : "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
+          { "json" : "/pa/units/land/bot_aa/bot_aa.json" },
+          { "json" : "/pa/units/sea/frigate/frigate.json" }
+        ],
+      "hotbuild4s" : [ { "json" : "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
+          { "json" : "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
+          { "json" : "/pa/units/land/bot_bomb/bot_bomb.json" },
+          { "json" : "/pa/units/land/tank_armor/tank_armor.json" },
+          { "json" : "/pa/units/land/tank_heavy_armor/tank_heavy_armor.json" },
+          { "json" : "/pa/units/orbital/orbital_lander/orbital_lander.json" }
+        ],
+      "hotbuild5s" : [ { "json" : "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
+          { "json" : "/pa/units/land/energy_plant/energy_plant.json" },
+          { "json" : "/pa/units/orbital/solar_array/solar_array.json" },
+          { "json" : "/pa/units/land/assault_bot/assault_bot.json" },
+          { "json" : "/pa/units/land/assault_bot_adv/assault_bot_adv.json" },
+          { "json" : "/pa/units/land/tank_light_laser/tank_light_laser.json" },
+          { "json" : "/pa/units/land/tank_laser_adv/tank_laser_adv.json" },
+          { "json" : "/pa/units/air/bomber/bomber.json" },
+          { "json" : "/pa/units/air/bomber_adv/bomber_adv.json" },
+          { "json" : "/pa/units/sea/destroyer/destroyer.json" },
+          { "json" : "/pa/units/sea/battleship/battleship.json" },
+          { "json" : "/pa/units/orbital/orbital_fighter/orbital_fighter.json" }
+        ],
+      "hotbuild6s" : [ { "json" : "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
+          { "json" : "/pa/units/land/metal_extractor/metal_extractor.json" },
+          { "json" : "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
+          { "json" : "/pa/units/land/fabrication_bot/fabrication_bot.json" },
+          { "json" : "/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json" },
+          { "json" : "/pa/units/land/fabrication_vehicle/fabrication_vehicle.json" },
+          { "json" : "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json" },
+          { "json" : "/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json" },
+          { "json" : "/pa/units/air/fabrication_aircraft/fabrication_aircraft.json" },
+          { "json" : "/pa/units/sea/fabrication_ship/fabrication_ship.json" },
+          { "json" : "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" }
+        ],
+      "hotbuild7s" : [ { "json" : "/pa/units/orbital/defense_satellite/defense_satellite.json" },
+          { "json" : "/pa/units/land/laser_defense_adv/laser_defense_adv.json" },
+          { "json" : "/pa/units/land/laser_defense/laser_defense.json" },
+          { "json" : "/pa/units/land/laser_defense_single/laser_defense_single.json" }
+        ],
+      "hotbuild8s" : [ { "json" : "/pa/units/land/air_defense_adv/air_defense_adv.json" },
+          { "json" : "/pa/units/land/air_defense/air_defense.json" },
+          { "json" : "/pa/units/land/land_barrier/land_barrier.json" }
+        ],
+      "hotbuild9s" : [ { "json" : "/pa/units/land/artillery_short/artillery_short.json" },
+          { "json" : "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json" },
+          { "json" : "/pa/units/land/artillery_long/artillery_long.json" }
+        ]
+    },
+  "hotbuildglobalkey" : { "hotbuild10s" : "z",
+      "hotbuild11s" : "j",
+      "hotbuild1s" : "f",
+      "hotbuild2s" : "g",
+      "hotbuild3s" : "t",
+      "hotbuild4s" : "h",
+      "hotbuild5s" : "r",
+      "hotbuild6s" : "e",
+      "hotbuild7s" : "x",
+      "hotbuild8s" : "c",
+      "hotbuild9s" : "v"
+    },
+  "uber" : [ { "keybinds" : [ { "action" : "show/hide UI",
+              "binding" : "ctrl+u",
+              "conflicted" : false,
+              "default" : "ctrl+u",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "ctrl+u"
             },
-            {
-               "group":"general",
-               "action":"show/hide performance panel",
-               "binding":"ctrl+p",
-               "bound":true
+            { "action" : "show/hide AR",
+              "conflicted" : false,
+              "default" : "ctrl+y",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "ctrl+y"
             },
-            {
-               "group":"general",
-               "action":"toggle music",
-               "binding":"ctrl+s",
-               "bound":true
+            { "action" : "show/hide performance panel",
+              "binding" : "ctrl+p",
+              "conflicted" : false,
+              "default" : "ctrl+p",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "ctrl+p"
             },
-            {
-               "group":"general",
-               "action":"toggle fullscreen",
-               "binding":"alt+enter",
-               "bound":true
+            { "action" : "toggle music",
+              "binding" : "ctrl+s",
+              "conflicted" : false,
+              "default" : "ctrl+s",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "ctrl+s"
             },
-            {
-               "group":"general",
-               "action":"normal chat",
-               "binding":"enter",
-               "bound":true
+            { "action" : "toggle fullscreen",
+              "binding" : "alt+enter",
+              "conflicted" : false,
+              "default" : "alt+enter",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "alt+enter"
             },
-            {
-               "group":"general",
-               "action":"team chat",
-               "binding":"shift+enter",
-               "bound":true
+            { "action" : "normal chat",
+              "binding" : "enter",
+              "conflicted" : false,
+              "default" : "enter",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "enter"
             },
-            {
-               "group":"general",
-               "action":"twitch chat",
-               "binding":"ctrl+enter",
-               "bound":true
+            { "action" : "team chat",
+              "binding" : "shift+enter",
+              "conflicted" : false,
+              "default" : "shift+enter",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "shift+enter"
             },
-            {
-               "group":"general",
-               "action":"toggle pips",
-               "binding":"",
-               "bound":true
+            { "action" : "twitch chat",
+              "binding" : "ctrl+enter",
+              "conflicted" : false,
+              "default" : "ctrl+enter",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "ctrl+enter"
             },
-            {
-               "group":"general",
-               "action":"swap pips",
-               "binding":"",
-               "bound":true
+            { "action" : "toggle twitch streaming",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "f6",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "f6"
             },
-            {
-               "group":"general",
-               "action":"copy to pip",
-               "binding":"",
-               "bound":true
+            { "action" : "toggle twitch microphone",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "f7",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "f7"
+            },
+            { "action" : "toggle twitch system audio recording",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "f8",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "f8"
+            },
+            { "action" : "run twitch commercial",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "f9",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "f9"
+            },
+            { "action" : "toggle pips",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "q",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "q"
+            },
+            { "action" : "swap pips",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "shift+q",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "shift+q"
+            },
+            { "action" : "copy to pip",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "alt+q",
+              "dirty" : false,
+              "group" : "general",
+              "value" : "alt+q"
             }
-         ]
+          ],
+        "name" : "general"
       },
-      {
-         "name":"gameplay",
-         "keybinds":[
-            {
-               "group":"gameplay",
-               "action":"command mode [move]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [attack]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [assist]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [repair]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [reclaim]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [patrol]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [special move]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [unload]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [alt fire]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"command mode [ping]",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"stop command",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"next build tab",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"fire at will",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"return fire",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"hold fire",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"toggle fire orders",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"maneuver",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"roam",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"hold position",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"toggle move orders",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"on",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"off",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"toggle energy orders",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build once",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build loop",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"toggle build orders",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"enable navigation debug info",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"disable navigation debug info",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select commander",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select idle fabbers",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all factories",
-               "binding":"shift+f1",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all idle factories",
-               "binding":"shift+f2",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all factories on screen",
-               "binding":"shift+f3",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all idle factories on screen",
-               "binding":"shift+f4",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all combat units",
-               "binding":"ctrl+shift+f6",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all combat units on screen",
-               "binding":"shift+f6",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all air combat units on screen",
-               "binding":"shift+f8",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all naval combat units on screen",
-               "binding":"shift+f9",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all land combat units on screen",
-               "binding":"shift+f7",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all air combat units",
-               "binding":"ctrl+shift+f8",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all naval combat units",
-               "binding":"ctrl+shift+f9",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all land combat units",
-               "binding":"ctrl+shift+f7",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"select all matching units on screen",
-               "binding":"ctrl+z",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"track selection with camera",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"self destruct selected unit",
-               "binding":"del",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"resume at latest time",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"pause time",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"play forward at 100%",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"play backwards at 100%",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"play forward at 50%",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"play backwards at 50%",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"last pseudo frame",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"next pseudo frame",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 1",
-               "binding":"ctrl+1",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 2",
-               "binding":"ctrl+2",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 3",
-               "binding":"ctrl+3",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 4",
-               "binding":"ctrl+4",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 5",
-               "binding":"ctrl+5",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 6",
-               "binding":"ctrl+6",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 7",
-               "binding":"ctrl+7",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 8",
-               "binding":"ctrl+8",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 9",
-               "binding":"ctrl+9",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"capture group 0",
-               "binding":"ctrl+0",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 1",
-               "binding":"1",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 2",
-               "binding":"2",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 3",
-               "binding":"3",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 4",
-               "binding":"4",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 5",
-               "binding":"5",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 6",
-               "binding":"6",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 7",
-               "binding":"7",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 8",
-               "binding":"8",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 9",
-               "binding":"9",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"recall group 0",
-               "binding":"0",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build metal extractor",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced metal extractor",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build metal storage",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build energy_plant",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced energy plant",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build energy storage",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build vehicle factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced vehicle factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build bot factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced bot factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build air factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced air factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build naval factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced naval factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build orbital factory",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build air defense tower",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build laser defense tower",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced laser defense tower",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build torpedo launcher",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced torpedo launcher",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build wall",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build radar",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced radar",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build sonar",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced sonar",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build radar satellite",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build radar advanced satellite",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build pelter",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build lobber",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build catapult",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build nuke launcher",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build anti-nuke launcher",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication vehicle",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication vehicle_adv",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication bot",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication_bot_adv",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication aircraft",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication aircraft_adv",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication ship",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication ship_adv",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build fabrication sub",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build skitter",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build spinner",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build ant",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build sheller",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build leveler",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build dox",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build stinger",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build slammer",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build stomper",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build firefly",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build hummingbird",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build peregrine",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build bumblebee",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build hornet",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build sun fish",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build narwhal",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build bluebottle",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build dolphin",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build barracuda",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build leviathan",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build stingray",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build jellyfish",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build astraeus",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build sxx-1304 laser platform",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build orbital launcher",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build avenger",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build solar array",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build radar satelite",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build advanced radar satelite",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build avatar",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"gameplay",
-               "action":"build avatar factory",
-               "binding":"",
-               "bound":true
+      { "keybinds" : [ { "action" : "command mode [move]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "m",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "m"
+            },
+            { "action" : "command mode [attack]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "a",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "a"
+            },
+            { "action" : "command mode [assist]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "i",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "i"
+            },
+            { "action" : "command mode [repair]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "r",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "r"
+            },
+            { "action" : "command mode [reclaim]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "e",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "e"
+            },
+            { "action" : "command mode [patrol]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "p",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "p"
+            },
+            { "action" : "command mode [special move]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "command mode [unload]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "command mode [load]",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "command mode [alt fire]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "d",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "d"
+            },
+            { "action" : "command mode [ping]",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "g",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "g"
+            },
+            { "action" : "stop command",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "s",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "s"
+            },
+            { "action" : "fire at will",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "return fire",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "hold fire",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "toggle fire orders",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "h",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "h"
+            },
+            { "action" : "maneuver",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "roam",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "hold position",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "toggle move orders",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "j",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "j"
+            },
+            { "action" : "on",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "off",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "toggle energy orders",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "k",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "k"
+            },
+            { "action" : "build once",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "build loop",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "toggle build orders",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "l",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "l"
+            },
+            { "action" : "enable navigation debug info",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "disable navigation debug info",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "select commander",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "b",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "b"
+            },
+            { "action" : "select idle fabbers",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "f",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "f"
+            },
+            { "action" : "select all factories",
+              "binding" : "shift+f1",
+              "conflicted" : false,
+              "default" : "shift+f1",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f1"
+            },
+            { "action" : "select all idle factories",
+              "binding" : "shift+f2",
+              "conflicted" : false,
+              "default" : "shift+f2",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f2"
+            },
+            { "action" : "select all factories on screen",
+              "binding" : "shift+f3",
+              "conflicted" : false,
+              "default" : "shift+f3",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f3"
+            },
+            { "action" : "select all idle factories on screen",
+              "binding" : "shift+f4",
+              "conflicted" : false,
+              "default" : "shift+f4",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f4"
+            },
+            { "action" : "select all combat units",
+              "binding" : "ctrl+shift+f6",
+              "conflicted" : false,
+              "default" : "ctrl+shift+f6",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+shift+f6"
+            },
+            { "action" : "select all combat units on screen",
+              "binding" : "shift+f6",
+              "conflicted" : false,
+              "default" : "shift+f6",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f6"
+            },
+            { "action" : "select all air combat units on screen",
+              "binding" : "shift+f8",
+              "conflicted" : false,
+              "default" : "shift+f8",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f8"
+            },
+            { "action" : "select all naval combat units on screen",
+              "binding" : "shift+f9",
+              "conflicted" : false,
+              "default" : "shift+f9",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f9"
+            },
+            { "action" : "select all land combat units on screen",
+              "binding" : "shift+f7",
+              "conflicted" : false,
+              "default" : "shift+f7",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "shift+f7"
+            },
+            { "action" : "select all air combat units",
+              "binding" : "ctrl+shift+f8",
+              "conflicted" : false,
+              "default" : "ctrl+shift+f8",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+shift+f8"
+            },
+            { "action" : "select all naval combat units",
+              "binding" : "ctrl+shift+f9",
+              "conflicted" : false,
+              "default" : "ctrl+shift+f9",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+shift+f9"
+            },
+            { "action" : "select all land combat units",
+              "binding" : "ctrl+shift+f7",
+              "conflicted" : false,
+              "default" : "ctrl+shift+f7",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+shift+f7"
+            },
+            { "action" : "select all matching units on screen",
+              "binding" : "ctrl+z",
+              "conflicted" : false,
+              "default" : "ctrl+z",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+z"
+            },
+            { "action" : "track selection with camera",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "t",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "t"
+            },
+            { "action" : "self destruct selected unit",
+              "binding" : "del",
+              "conflicted" : false,
+              "default" : "del",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "del"
+            },
+            { "action" : "resume at latest time",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "pause time",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "play forward at 100%",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "play backwards at 100%",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "play forward at 50%",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "play backwards at 50%",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : ""
+            },
+            { "action" : "last pseudo frame",
+              "conflicted" : false,
+              "dirty" : false,
+              "group" : "gameplay"
+            },
+            { "action" : "next pseudo frame",
+              "conflicted" : false,
+              "dirty" : false,
+              "group" : "gameplay"
+            },
+            { "action" : "capture group 1",
+              "binding" : "ctrl+1",
+              "conflicted" : false,
+              "default" : "ctrl+1",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+1"
+            },
+            { "action" : "capture group 2",
+              "binding" : "ctrl+2",
+              "conflicted" : false,
+              "default" : "ctrl+2",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+2"
+            },
+            { "action" : "capture group 3",
+              "binding" : "ctrl+3",
+              "conflicted" : false,
+              "default" : "ctrl+3",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+3"
+            },
+            { "action" : "capture group 4",
+              "binding" : "ctrl+4",
+              "conflicted" : false,
+              "default" : "ctrl+4",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+4"
+            },
+            { "action" : "capture group 5",
+              "binding" : "ctrl+5",
+              "conflicted" : false,
+              "default" : "ctrl+5",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+5"
+            },
+            { "action" : "capture group 6",
+              "binding" : "ctrl+6",
+              "conflicted" : false,
+              "default" : "ctrl+6",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+6"
+            },
+            { "action" : "capture group 7",
+              "binding" : "ctrl+7",
+              "conflicted" : false,
+              "default" : "ctrl+7",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+7"
+            },
+            { "action" : "capture group 8",
+              "binding" : "ctrl+8",
+              "conflicted" : false,
+              "default" : "ctrl+8",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+8"
+            },
+            { "action" : "capture group 9",
+              "binding" : "ctrl+9",
+              "conflicted" : false,
+              "default" : "ctrl+9",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+9"
+            },
+            { "action" : "capture group 0",
+              "binding" : "ctrl+0",
+              "conflicted" : false,
+              "default" : "ctrl+0",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "ctrl+0"
+            },
+            { "action" : "recall group 1",
+              "binding" : "1",
+              "conflicted" : false,
+              "default" : "1",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "1"
+            },
+            { "action" : "recall group 2",
+              "binding" : "2",
+              "conflicted" : false,
+              "default" : "2",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "2"
+            },
+            { "action" : "recall group 3",
+              "binding" : "3",
+              "conflicted" : false,
+              "default" : "3",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "3"
+            },
+            { "action" : "recall group 4",
+              "binding" : "4",
+              "conflicted" : false,
+              "default" : "4",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "4"
+            },
+            { "action" : "recall group 5",
+              "binding" : "5",
+              "conflicted" : false,
+              "default" : "5",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "5"
+            },
+            { "action" : "recall group 6",
+              "binding" : "6",
+              "conflicted" : false,
+              "default" : "6",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "6"
+            },
+            { "action" : "recall group 7",
+              "binding" : "7",
+              "conflicted" : false,
+              "default" : "7",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "7"
+            },
+            { "action" : "recall group 8",
+              "binding" : "8",
+              "conflicted" : false,
+              "default" : "8",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "8"
+            },
+            { "action" : "recall group 9",
+              "binding" : "9",
+              "conflicted" : false,
+              "default" : "9",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "9"
+            },
+            { "action" : "recall group 0",
+              "binding" : "0",
+              "conflicted" : false,
+              "default" : "0",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "0"
             }
-         ]
+          ],
+        "name" : "gameplay"
       },
-      {
-         "name":"camera",
-         "keybinds":[
-            {
-               "group":"camera",
-               "action":"capture anchor 1",
-               "binding":"shift+1",
-               "bound":true
+      { "keybinds" : [ { "action" : "start build utility",
+              "conflicted" : false,
+              "default" : "v",
+              "dirty" : false,
+              "group" : "build structure",
+              "value" : ""
             },
-            {
-               "group":"camera",
-               "action":"capture anchor 2",
-               "binding":"shift+2",
-               "bound":true
+            { "action" : "start build factory",
+              "conflicted" : false,
+              "default" : "x",
+              "dirty" : false,
+              "group" : "build structure",
+              "value" : ""
             },
-            {
-               "group":"camera",
-               "action":"capture anchor 3",
-               "binding":"shift+3",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"capture anchor 4",
-               "binding":"shift+4",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"capture anchor 5",
-               "binding":"shift+5",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"capture anchor 6",
-               "binding":"shift+6",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"capture anchor 7",
-               "binding":"shift+7",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"capture anchor 8",
-               "binding":"shift+8",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"capture anchor 9",
-               "binding":"shift+9",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"capture anchor 0",
-               "binding":"shift+0",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 1",
-               "binding":"alt+1",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 2",
-               "binding":"alt+2",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 3",
-               "binding":"alt+3",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 4",
-               "binding":"alt+4",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 5",
-               "binding":"alt+5",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 6",
-               "binding":"alt+6",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 7",
-               "binding":"alt+7",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 8",
-               "binding":"alt+8",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 9",
-               "binding":"alt+9",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"recall anchor 0",
-               "binding":"alt+0",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"set planet camera",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"set free camera",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"set debug camera",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"set space camera",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"toggle free camera",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"toggle debug camera",
-               "binding":"ctrl+m",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"toggle space camera",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"zoom to surface",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"zoom to air",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"zoom to orbital",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"zoom to celestial",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"previous planet",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"next planet",
-               "binding":",",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"align to pole",
-               "binding":"n",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"increaseCameraPanSpeed",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"decreaseCameraPanSpeed",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"smooth zoom out",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"smooth zoom in",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"relax constraints",
-               "binding":"",
-               "bound":true
-            },
-            {
-               "group":"camera",
-               "action":"restore constraints",
-               "binding":"",
-               "bound":true
+            { "action" : "start build combat",
+              "conflicted" : false,
+              "default" : "c",
+              "dirty" : false,
+              "group" : "build structure",
+              "value" : ""
             }
-         ]
+          ],
+        "name" : "build structure"
       },
-      {
-         "name":"debugging",
-         "keybinds":[
-            {
-               "group":"debugging",
-               "action":"abort",
-               "binding":"",
-               "bound":true
+      { "keybinds" : [ { "action" : "start build vehicle",
+              "conflicted" : false,
+              "default" : "z",
+              "dirty" : false,
+              "group" : "build unit",
+              "value" : ""
             },
-            {
-               "group":"debugging",
-               "action":"crash",
-               "binding":"",
-               "bound":true
+            { "action" : "start build bot",
+              "conflicted" : false,
+              "default" : "x",
+              "dirty" : false,
+              "group" : "build unit",
+              "value" : ""
             },
-            {
-               "group":"debugging",
-               "action":"reload view",
-               "binding":"f5",
-               "bound":true
+            { "action" : "start build air",
+              "conflicted" : false,
+              "default" : "c",
+              "dirty" : false,
+              "group" : "build unit",
+              "value" : ""
             },
-            {
-               "group":"debugging",
-               "action":"toggle audio logging",
-               "binding":"",
-               "bound":true
+            { "action" : "start build sea",
+              "conflicted" : false,
+              "default" : "v",
+              "dirty" : false,
+              "group" : "build unit",
+              "value" : ""
             },
-            {
-               "group":"debugging",
-               "action":"quick profile",
-               "binding":"ctrl+f11",
-               "bound":true
-            },
-            {
-               "group":"debugging",
-               "action":"bug report",
-               "binding":"ctrl+f10",
-               "bound":true
+            { "action" : "start build orbital",
+              "conflicted" : false,
+              "default" : "b",
+              "dirty" : false,
+              "group" : "build unit",
+              "value" : ""
             }
-         ]
+          ],
+        "name" : "build unit"
       },
-      {
-         "name":"hacks",
-         "keybinds":[
-            {
-               "group":"hacks",
-               "action":"copy unit",
-               "binding":"ctrl+c",
-               "bound":true
+      { "keybinds" : [ { "action" : "build item 1",
+              "conflicted" : false,
+              "default" : "1",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
             },
-            {
-               "group":"hacks",
-               "action":"paste unit",
-               "binding":"ctrl+v",
-               "bound":true
+            { "action" : "build item 2",
+              "conflicted" : false,
+              "default" : "2",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
             },
-            {
-               "group":"hacks",
-               "action":"set army from hover",
-               "binding":"ctrl+b",
-               "bound":true
+            { "action" : "build item 3",
+              "conflicted" : false,
+              "default" : "3",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
             },
-            {
-               "group":"hacks",
-               "action":"toggle FOW",
-               "binding":"ctrl+j",
-               "bound":true
+            { "action" : "build item 4",
+              "conflicted" : false,
+              "default" : "4",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 5",
+              "conflicted" : false,
+              "default" : "q",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 6",
+              "conflicted" : false,
+              "default" : "w",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 7",
+              "conflicted" : false,
+              "default" : "e",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 8",
+              "conflicted" : false,
+              "default" : "r",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 9",
+              "conflicted" : false,
+              "default" : "a",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 10",
+              "conflicted" : false,
+              "default" : "s",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 11",
+              "conflicted" : false,
+              "default" : "d",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 12",
+              "conflicted" : false,
+              "default" : "f",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 13",
+              "conflicted" : false,
+              "default" : "z",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 14",
+              "conflicted" : false,
+              "default" : "x",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 15",
+              "conflicted" : false,
+              "default" : "c",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 16",
+              "conflicted" : false,
+              "default" : "v",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
             }
-         ]
+          ],
+        "name" : "build"
       },
-      {
-         "name":"hotbuild",
-         "keybinds":[
-            {
-               "group":"hotbuild",
-               "action":"Toggle Energy",
-               "binding":"tab",
-               "bound":true
+      { "keybinds" : [ { "action" : "capture anchor 1",
+              "binding" : "shift+1",
+              "conflicted" : false,
+              "default" : "shift+1",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+1"
             },
-            {
-               "group":"hotbuild",
-               "action":"Lock Pole",
-               "binding":"y",
-               "bound":true
+            { "action" : "capture anchor 2",
+              "binding" : "shift+2",
+              "conflicted" : false,
+              "default" : "shift+2",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+2"
             },
-            {
-               "group":"hotbuild",
-               "action":"Requeue",
-               "binding":"o",
-               "bound":true
+            { "action" : "capture anchor 3",
+              "binding" : "shift+3",
+              "conflicted" : false,
+              "default" : "shift+3",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+3"
             },
-            {
-               "group":"hotbuild",
-               "action":"View Notification",
-               "binding":"space",
-               "bound":true
+            { "action" : "capture anchor 4",
+              "binding" : "shift+4",
+              "conflicted" : false,
+              "default" : "shift+4",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+4"
             },
-            {
-               "group":"hotbuild",
-               "action":"move",
-               "binding":"",
-               "bound":true
+            { "action" : "capture anchor 5",
+              "binding" : "shift+5",
+              "conflicted" : false,
+              "default" : "shift+5",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+5"
             },
-            {
-               "group":"hotbuild",
-               "action":"attack",
-               "binding":"",
-               "bound":true
+            { "action" : "capture anchor 6",
+              "binding" : "shift+6",
+              "conflicted" : false,
+              "default" : "shift+6",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+6"
             },
-            {
-               "group":"hotbuild",
-               "action":"assist",
-               "binding":"",
-               "bound":true
+            { "action" : "capture anchor 7",
+              "binding" : "shift+7",
+              "conflicted" : false,
+              "default" : "shift+7",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+7"
             },
-            {
-               "group":"hotbuild",
-               "action":"repair",
-               "binding":"",
-               "bound":true
+            { "action" : "capture anchor 8",
+              "binding" : "shift+8",
+              "conflicted" : false,
+              "default" : "shift+8",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+8"
             },
-            {
-               "group":"hotbuild",
-               "action":"reclaim",
-               "binding":"",
-               "bound":true
+            { "action" : "capture anchor 9",
+              "binding" : "shift+9",
+              "conflicted" : false,
+              "default" : "shift+9",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+9"
             },
-            {
-               "group":"hotbuild",
-               "action":"patrol",
-               "binding":"",
-               "bound":true
+            { "action" : "capture anchor 0",
+              "binding" : "shift+0",
+              "conflicted" : false,
+              "default" : "shift+0",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "shift+0"
             },
-            {
-               "group":"hotbuild",
-               "action":"stop",
-               "binding":"q",
-               "bound":true
+            { "action" : "recall anchor 1",
+              "binding" : "alt+1",
+              "conflicted" : false,
+              "default" : "alt+1",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+1"
             },
-            {
-               "group":"hotbuild",
-               "action":"select commie",
-               "binding":"b",
-               "bound":true
+            { "action" : "recall anchor 2",
+              "binding" : "alt+2",
+              "conflicted" : false,
+              "default" : "alt+2",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+2"
             },
-            {
-               "group":"hotbuild",
-               "action":"unload",
-               "binding":"",
-               "bound":true
+            { "action" : "recall anchor 3",
+              "binding" : "alt+3",
+              "conflicted" : false,
+              "default" : "alt+3",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+3"
             },
-            {
-               "group":"hotbuild",
-               "action":"D-Gun",
-               "binding":"u",
-               "bound":true
+            { "action" : "recall anchor 4",
+              "binding" : "alt+4",
+              "conflicted" : false,
+              "default" : "alt+4",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+4"
             },
-            {
-               "group":"hotbuild",
-               "action":"Ping",
-               "binding":"",
-               "bound":true
+            { "action" : "recall anchor 5",
+              "binding" : "alt+5",
+              "conflicted" : false,
+              "default" : "alt+5",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+5"
+            },
+            { "action" : "recall anchor 6",
+              "binding" : "alt+6",
+              "conflicted" : false,
+              "default" : "alt+6",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+6"
+            },
+            { "action" : "recall anchor 7",
+              "binding" : "alt+7",
+              "conflicted" : false,
+              "default" : "alt+7",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+7"
+            },
+            { "action" : "recall anchor 8",
+              "binding" : "alt+8",
+              "conflicted" : false,
+              "default" : "alt+8",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+8"
+            },
+            { "action" : "recall anchor 9",
+              "binding" : "alt+9",
+              "conflicted" : false,
+              "default" : "alt+9",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+9"
+            },
+            { "action" : "recall anchor 0",
+              "binding" : "alt+0",
+              "conflicted" : false,
+              "default" : "alt+0",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "alt+0"
+            },
+            { "action" : "set planet camera",
+              "conflicted" : false,
+              "dirty" : false,
+              "group" : "camera"
+            },
+            { "action" : "set free camera",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "set debug camera",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "set space camera",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "toggle free camera",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "toggle debug camera",
+              "binding" : "ctrl+m",
+              "conflicted" : false,
+              "default" : "ctrl+m",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "ctrl+m"
+            },
+            { "action" : "toggle space camera",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "zoom to surface",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "zoom to air",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "zoom to orbital",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "zoom to celestial",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "space",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "space"
+            },
+            { "action" : "previous planet",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "next planet",
+              "binding" : ",",
+              "conflicted" : false,
+              "default" : ",",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ","
+            },
+            { "action" : "align to pole",
+              "binding" : "n",
+              "conflicted" : false,
+              "default" : "n",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : "n"
+            },
+            { "action" : "increaseCameraPanSpeed",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "decreaseCameraPanSpeed",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "smooth zoom out",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "smooth zoom in",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "relax constraints",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
+            },
+            { "action" : "restore constraints",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "camera",
+              "value" : ""
             }
-         ]
+          ],
+        "name" : "camera"
+      },
+      { "keybinds" : [ { "action" : "abort",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : ""
+            },
+            { "action" : "crash",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : ""
+            },
+            { "action" : "reload view",
+              "binding" : "f5",
+              "conflicted" : false,
+              "default" : "f5",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : "f5"
+            },
+            { "action" : "toggle audio logging",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : ""
+            },
+            { "action" : "quick profile",
+              "binding" : "ctrl+f11",
+              "conflicted" : false,
+              "default" : "ctrl+f11",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : "ctrl+f11"
+            },
+            { "action" : "bug report",
+              "binding" : "ctrl+f10",
+              "conflicted" : false,
+              "default" : "ctrl+f10",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : "ctrl+f10"
+            },
+            { "action" : "toggle nav debug",
+              "binding" : "ctrl+alt+f11",
+              "conflicted" : false,
+              "default" : "ctrl+alt+f11",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : "ctrl+alt+f11"
+            },
+            { "action" : "toggle console",
+              "conflicted" : false,
+              "default" : "`",
+              "dirty" : false,
+              "group" : "debugging",
+              "value" : "`"
+            }
+          ],
+        "name" : "debugging"
+      },
+      { "keybinds" : [ { "action" : "copy unit",
+              "binding" : "ctrl+c",
+              "conflicted" : false,
+              "default" : "ctrl+c",
+              "dirty" : false,
+              "group" : "hacks",
+              "value" : "ctrl+c"
+            },
+            { "action" : "paste unit",
+              "binding" : "ctrl+v",
+              "conflicted" : false,
+              "default" : "ctrl+v",
+              "dirty" : false,
+              "group" : "hacks",
+              "value" : "ctrl+v"
+            },
+            { "action" : "set army from hover",
+              "binding" : "ctrl+b",
+              "conflicted" : false,
+              "default" : "ctrl+b",
+              "dirty" : false,
+              "group" : "hacks",
+              "value" : "ctrl+b"
+            },
+            { "action" : "toggle FOW",
+              "binding" : "ctrl+j",
+              "conflicted" : false,
+              "default" : "ctrl+j",
+              "dirty" : false,
+              "group" : "hacks",
+              "value" : "ctrl+j"
+            },
+            { "action" : "build avatar",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "alt+f1",
+              "dirty" : false,
+              "group" : "hacks",
+              "value" : "alt+f1"
+            },
+            { "action" : "build avatar factory",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "alt+f2",
+              "dirty" : false,
+              "group" : "hacks",
+              "value" : "alt+f2"
+            }
+          ],
+        "name" : "hacks"
+      },
+      { "keybinds" : [ { "action" : "Toggle Energy",
+              "binding" : "tab",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "tab"
+            },
+            { "action" : "Lock Pole",
+              "binding" : "y",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "y"
+            },
+            { "action" : "Toggle Cinematic",
+              "binding" : "f8",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "f8"
+            },
+            { "action" : "Toggle Terrestrial",
+              "binding" : "f9",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "f9"
+            },
+            { "action" : "Requeue",
+              "binding" : "o",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "o"
+            },
+            { "action" : "View Notification",
+              "binding" : "space",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "space"
+            },
+            { "action" : "move",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "attack",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "assist",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "repair",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "reclaim",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "patrol",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "stop",
+              "binding" : "q",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "q"
+            },
+            { "action" : "select commie",
+              "binding" : "b",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "b"
+            },
+            { "action" : "unload",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "D-Gun",
+              "binding" : "u",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : "u"
+            },
+            { "action" : "Ping",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "Toggle Hotbuild",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            },
+            { "action" : "Toggle HotSelect",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "",
+              "dirty" : false,
+              "group" : "hotbuild",
+              "value" : ""
+            }
+          ],
+        "name" : "hotbuild"
       }
-   ],
-   "hotbuildglobalkey":{
-      "hotbuild1s":"f",
-      "hotbuild2s":"g",
-      "hotbuild3s":"t",
-      "hotbuild4s":"h",
-      "hotbuild5s":"r",
-      "hotbuild6s":"e",
-      "hotbuild7s":"x",
-      "hotbuild8s":"c",
-      "hotbuild9s":"v",
-      "hotbuild10s":"z",
-      "hotbuild11s":"j"
-   },
-   "hotbuildglobal":{
-      "hotbuild1s":[
-         {
-            "json":"/pa/units/land/vehicle_factory/vehicle_factory.json"
-         },
-         {
-            "json":"/pa/units/land/bot_factory/bot_factory.json"
-         },
-         {
-            "json":"/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json"
-         },
-         {
-            "json":"/pa/units/land/nuke_launcher/nuke_launcher_ammo.json"
-         },
-         {
-            "json":"/pa/units/land/land_scout/land_scout.json"
-         },
-         {
-            "json":"/pa/units/air/air_scout/air_scout.json"
-         }
-      ],
-      "hotbuild2s":[
-         {
-            "json":"/pa/units/air/air_factory/air_factory.json"
-         },
-         {
-            "json":"/pa/units/air/air_factory_adv/air_factory_adv.json"
-         },
-         {
-            "json":"/pa/units/sea/naval_factory/naval_factory.json"
-         },
-         {
-            "json":"/pa/units/sea/naval_factory_adv/naval_factory_adv.json"
-         },
-         {
-            "json":"/pa/units/orbital/orbital_launcher/orbital_launcher.json"
-         },
-         {
-            "json":"/pa/units/land/bot_artillery_adv/bot_artillery_adv.json"
-         },
-         {
-            "json":"/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json"
-         },
-         {
-            "json":"/pa/units/sea/missile_ship/missile_ship.json"
-         },
-         {
-            "json":"/pa/units/orbital/orbital_laser/orbital_laser.json"
-         }
-      ],
-      "hotbuild3s":[
-         {
-            "json":"/pa/units/land/radar_adv/radar_adv.json"
-         },
-         {
-            "json":"/pa/units/land/radar/radar.json"
-         },
-         {
-            "json":"/pa/units/orbital/deep_space_radar/deep_space_radar.json"
-         },
-         {
-            "json":"/pa/units/orbital/radar_satellite/radar_satellite.json"
-         },
-         {
-            "json":"/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json"
-         },
-         {
-            "json":"/pa/units/air/fighter/fighter.json"
-         },
-         {
-            "json":"/pa/units/air/fighter_adv/fighter_adv.json"
-         },
-         {
-            "json":"/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json"
-         },
-         {
-            "json":"/pa/units/land/bot_aa/bot_aa.json"
-         },
-         {
-            "json":"/pa/units/sea/frigate/frigate.json"
-         }
-      ],
-      "hotbuild4s":[
-         {
-            "json":"/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json"
-         },
-         {
-            "json":"/pa/units/land/bot_factory_adv/bot_factory_adv.json"
-         },
-         {
-            "json":"/pa/units/land/bot_bomb/bot_bomb.json"
-         },
-         {
-            "json":"/pa/units/land/tank_armor/tank_armor.json"
-         },
-         {
-            "json":"/pa/units/land/tank_heavy_armor/tank_heavy_armor.json"
-         },
-         {
-            "json":"/pa/units/orbital/orbital_lander/orbital_lander.json"
-         }
-      ],
-      "hotbuild5s":[
-         {
-            "json":"/pa/units/land/energy_plant_adv/energy_plant_adv.json"
-         },
-         {
-            "json":"/pa/units/land/energy_plant/energy_plant.json"
-         },
-         {
-            "json":"/pa/units/orbital/solar_array/solar_array.json"
-         },
-         {
-            "json":"/pa/units/land/assault_bot/assault_bot.json"
-         },
-         {
-            "json":"/pa/units/land/assault_bot_adv/assault_bot_adv.json"
-         },
-         {
-            "json":"/pa/units/land/tank_light_laser/tank_light_laser.json"
-         },
-         {
-            "json":"/pa/units/land/tank_laser_adv/tank_laser_adv.json"
-         },
-         {
-            "json":"/pa/units/air/bomber/bomber.json"
-         },
-         {
-            "json":"/pa/units/air/bomber_adv/bomber_adv.json"
-         },
-         {
-            "json":"/pa/units/sea/destroyer/destroyer.json"
-         },
-         {
-            "json":"/pa/units/sea/battleship/battleship.json"
-         },
-         {
-            "json":"/pa/units/orbital/orbital_fighter/orbital_fighter.json"
-         }
-      ],
-      "hotbuild6s":[
-         {
-            "json":"/pa/units/land/metal_extractor_adv/metal_extractor_adv.json"
-         },
-         {
-            "json":"/pa/units/land/metal_extractor/metal_extractor.json"
-         },
-         {
-            "json":"/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json"
-         },
-         {
-            "json":"/pa/units/land/fabrication_bot/fabrication_bot.json"
-         },
-         {
-            "json":"/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json"
-         },
-         {
-            "json":"/pa/units/land/fabrication_vehicle/fabrication_vehicle.json"
-         },
-         {
-            "json":"/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json"
-         },
-         {
-            "json":"/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json"
-         },
-         {
-            "json":"/pa/units/air/fabrication_aircraft/fabrication_aircraft.json"
-         },
-         {
-            "json":"/pa/units/sea/fabrication_ship/fabrication_ship.json"
-         },
-         {
-            "json":"/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json"
-         }
-      ],
-      "hotbuild7s":[
-         {
-            "json":"/pa/units/orbital/defense_satellite/defense_satellite.json"
-         },
-         {
-            "json":"/pa/units/land/laser_defense_adv/laser_defense_adv.json"
-         },
-         {
-            "json":"/pa/units/land/laser_defense/laser_defense.json"
-         },
-         {
-            "json":"/pa/units/land/laser_defense_single/laser_defense_single.json"
-         }
-      ],
-      "hotbuild8s":[
-         {
-            "json":"/pa/units/land/air_defense_adv/air_defense_adv.json"
-         },
-         {
-            "json":"/pa/units/land/air_defense/air_defense.json"
-         },
-         {
-            "json":"/pa/units/land/land_barrier/land_barrier.json"
-         }
-      ],
-      "hotbuild9s":[
-         {
-            "json":"/pa/units/land/artillery_short/artillery_short.json"
-         },
-         {
-            "json":"/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json"
-         },
-         {
-            "json":"/pa/units/land/artillery_long/artillery_long.json"
-         }
-      ],
-      "hotbuild10s":[
-         {
-            "json":"/pa/units/land/energy_storage/energy_storage.json"
-         },
-         {
-            "json":"/pa/units/land/metal_storage/metal_storage.json"
-         },
-         {
-            "json":"/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json"
-         },
-         {
-            "json":"/pa/units/land/nuke_launcher/nuke_launcher.json"
-         }
-      ],
-      "hotbuild11s":[
-         {
-            "json":"/pa/units/land/teleporter/teleporter.json"
-         },
-         {
-            "json":"/pa/units/orbital/ion_defense/ion_defense.json"
-         },
-         {
-            "json":"/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json"
-         },
-         {
-            "json":"/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json"
-         },
-         {
-            "json":"/pa/units/orbital/delta_v_engine/delta_v_engine.json"
-         }
-      ]
-   }
-  ,"camera_key_pan_style":"WASD"
+    ]
 }
