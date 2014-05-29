@@ -433,15 +433,15 @@ var hotbuildsettings = (function () {
                         }
                     }
                     if (modelKeybindGroupIndex !== undefined) {
-                        console.log(model.model.keybindings().groups()[modelKeybindGroupIndex].name());
+                        console.log(model.keybindings().groups()[modelKeybindGroupIndex].name());
                         for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                            for(var j = 0; j < model.model.keybindings().groups()[modelKeybindGroupIndex].keybinds().length; j++){
+                            for(var j = 0; j < model.keybindings().groups()[modelKeybindGroupIndex].keybinds().length; j++){
                                 if(imported.uber[kvgm].keybinds[i].action === model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].action())
                                 {
                                     try {
                                         console.log("OLD" + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].value());
                                         console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].value);
-                                        model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].binding(imported.uber[kvgm].keybinds[i].value);
+                                        model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
                                         //model.model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].bound(imported.uber[kvgm].keybinds[i].bound);
                                         break;
                                     }
@@ -485,8 +485,8 @@ var hotbuildsettings = (function () {
                                 {
                                     try {
                                         console.log("OLD" + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].binding());
-                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].binding);
-                                        model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].binding(imported.uber[kvgm].keybinds[i].binding);
+                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].value);
+                                        model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
                                         break;
                                     }
                                     catch (err) {
