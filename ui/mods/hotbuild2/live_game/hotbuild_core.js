@@ -49,7 +49,11 @@ var hotbuild2 = (function () {
         self.unitName = ko.observable("");
         self.imbawallers = ko.observableArray(["/pa/units/land/laser_defense/laser_defense.json",
                                                 "/pa/units/land/laser_defense_single/laser_defense_single.json",
-                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json"]);
+                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json",
+                                                "/pa/units/land/laser_defense/laser_defense.json.player",
+                                                "/pa/units/land/laser_defense_single/laser_defense_single.json.player",
+                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json.player"
+                                                ]);
 
         self.buildPreviewList = function (hbindex, hotbuilds) {
             //set the buildPreview list
@@ -59,7 +63,11 @@ var hotbuild2 = (function () {
 
                 for (var i = hbindex; i < hotbuilds.length; i++) {
                     if (self.knowsBuildCommand(hotbuilds[i].json)) {
+
                         unitinfo = model.unitSpecs[hotbuilds[i].json];
+                        if(unitinfo === undefined){
+                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];   
+                        }
                         if (unitinfo.structure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[i].json });
                         }
@@ -68,6 +76,9 @@ var hotbuild2 = (function () {
                 for (var j = 0; j < hbindex; j++) {
                     if (self.knowsBuildCommand(hotbuilds[j].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[j].json];
+                        if(unitinfo === undefined){
+                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];   
+                        }                        
                         if (unitinfo.structure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[j].json });
                         }
@@ -235,6 +246,12 @@ var hotbuild2 = (function () {
                         return false;
                     }
                 }
+                if (hbitem.json + ".player" === id) {
+                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
+                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                        return false;
+                    }
+                }                
             });
             hbpos += 1;
         });
