@@ -404,20 +404,6 @@ var hotbuild2 = (function () {
     }();
 
     //NON HOTKEY FUNCTIONS BUT CALLABLE THROUGH NORMAL KEYBOARD KEYS
-    //Pause / Unpause energy
-    hotbuild2.energyToggle = function (event) {
-        var currentOrder = model.selectedEnergyOrderIndex();
-        var eOrder;
-        if (currentOrder === 0) {
-            eOrder = 'conserve';
-        } else {
-            eOrder = 'consume';
-        }
-        model.selectedEnergyOrderIndex(model.energyOrdersMap[eOrder]);
-        model.endFabMode();
-        engine.call('set_order_state', 'energy', eOrder);
-        event.preventDefault();
-    };
 
     //Pole Lock on/off
     hotbuild2.polelockToggle = function (event) {
@@ -465,33 +451,6 @@ var hotbuild2 = (function () {
         localStorage.settings = encode(allSettings);
         model.applyUIDisplaySettings();
         event.preventDefault();
-    };
-
-    //ReQueue Functionality   
-    hotbuild2.requeue = function (event) {
-        model.toggleBuildStanceOrderIndex();
-    };
-
-    //Standard CommandMode functionality
-    hotbuild2.CommandMode = function (cmd) {
-        if (model.setCommandIndex) {
-            model.setCommandIndex(cmd);
-        }
-    };
-
-    //View Event
-    hotbuild2.viewAlert = function () {
-        if (model.unitAlertModel.alerts().length > 0) {
-            for (var i = 0; i < model.unitAlertModel.alerts().length; i++) {
-                //console.log(model.unitAlertModel.alerts()[i]);
-                var alert = model.unitAlertModel.alerts()[i];
-                var target = {
-                    location: alert.location,
-                    planet_id: alert.planet_id
-                };
-                engine.call('camera.lookAt', JSON.stringify(target));
-            }
-        }
     };
     
 /*Start of toggle Hotbuild*/
@@ -554,69 +513,6 @@ var hotbuild2 = (function () {
     };
     
 /*End of toggle Hotbuild*/    
-
-
-    //same as the one in media\ui\alpha\shared\js\inputmap.js
-    //problem default you can't give in the arrays with upper and lower keys
-    //this version automaticaly gives in [binding,binding+shift] wich solves the problem
-    hotbuild2.apply_keybinds = function (used_keybinds, conflicts, resolve) {
-        var set = 'hotbuild';
-        var key;
-        var action;
-        var binding;
-        var clear_conflict;
-        var i;
-        var defaults = default_keybinds[set];
-
-        var squelch = function (e) {
-            if (e.preventDefault)
-                e.preventDefault();
-            return false;
-        };
-
-        // kill bad chrome defaults. todo: get list of all default bindings
-        Mousetrap.bind('backspace', squelch);
-
-        used_keybinds = (used_keybinds) ? used_keybinds : {};
-        conflicts = (conflicts) ? conflicts : [];
-
-        //console.log('apply_keybinds:' + set);
-
-        for (key in action_sets[set]) {
-            action = action_sets[set][key];
-            binding = defaults[key];
-
-            if (localStorage['keybinding_' + key] !== undefined)
-                binding = decode(localStorage['keybinding_' + key]);
-
-            if (resolve) {
-                clear_conflict = true;
-                for (i = 0; i < conflicts.length; i++) {
-                    if (conflicts[i].binding === binding) {
-                        localStorage['keybinding_' + key] = encode('conflict');
-                        Mousetrap.unbind(binding);
-                        clear_conflict = false;
-                    }
-                }
-
-                if (clear_conflict && binding === 'conflict')
-                    localStorage.removeItem('keybinding_' + key);
-            }
-            else {
-                if (binding && binding !== 'conflict') {
-                    if (used_keybinds[binding])
-                        conflicts.push({ 'set': set, 'key': key, 'binding': binding });
-                    else {
-                        used_keybinds[binding] = true;
-                        binding = [binding, 'shift+' + binding]; //array with shift DIFFERENCE so both upper and lower case should work
-                        /*jshint -W083 */
-                        Mousetrap.bind(binding, _.partial(function (callback, event, binding) { callback(event, binding); event.preventDefault(); }, action));
-                        /*jshint +W083 */
-                    }
-                }
-            }
-        }
-    };
 
     //capture mouse down to do the imbawalls after click place building
     var $holodeck = $('holodeck');

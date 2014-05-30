@@ -96,6 +96,7 @@
       "hotbuild9s" : "v"
     },
   "uber" : [ { "keybinds" : [ { "action" : "show/hide UI",
+              "actionString" : "show/hide UI",
               "binding" : "ctrl+u",
               "conflicted" : false,
               "default" : "ctrl+u",
@@ -104,6 +105,7 @@
               "value" : "ctrl+u"
             },
             { "action" : "show/hide AR",
+              "actionString" : "show/hide AR",
               "conflicted" : false,
               "default" : "ctrl+y",
               "dirty" : false,
@@ -111,6 +113,7 @@
               "value" : "ctrl+y"
             },
             { "action" : "show/hide performance panel",
+              "actionString" : "show/hide performance panel",
               "binding" : "ctrl+p",
               "conflicted" : false,
               "default" : "ctrl+p",
@@ -119,6 +122,7 @@
               "value" : "ctrl+p"
             },
             { "action" : "toggle music",
+              "actionString" : "toggle music",
               "binding" : "ctrl+s",
               "conflicted" : false,
               "default" : "ctrl+s",
@@ -127,6 +131,7 @@
               "value" : "ctrl+s"
             },
             { "action" : "toggle fullscreen",
+              "actionString" : "toggle fullscreen",
               "binding" : "alt+enter",
               "conflicted" : false,
               "default" : "alt+enter",
@@ -135,6 +140,7 @@
               "value" : "alt+enter"
             },
             { "action" : "normal chat",
+              "actionString" : "normal chat",
               "binding" : "enter",
               "conflicted" : false,
               "default" : "enter",
@@ -143,6 +149,7 @@
               "value" : "enter"
             },
             { "action" : "team chat",
+              "actionString" : "team chat",
               "binding" : "shift+enter",
               "conflicted" : false,
               "default" : "shift+enter",
@@ -151,6 +158,7 @@
               "value" : "shift+enter"
             },
             { "action" : "twitch chat",
+              "actionString" : "twitch chat",
               "binding" : "ctrl+enter",
               "conflicted" : false,
               "default" : "ctrl+enter",
@@ -159,113 +167,127 @@
               "value" : "ctrl+enter"
             },
             { "action" : "toggle twitch streaming",
+              "actionString" : "toggle twitch streaming",
               "binding" : "",
               "conflicted" : false,
               "default" : "f6",
               "dirty" : false,
               "group" : "general",
-              "value" : "f6"
+              "value" : ""
             },
             { "action" : "toggle twitch microphone",
+              "actionString" : "toggle twitch microphone",
               "binding" : "",
               "conflicted" : false,
               "default" : "f7",
               "dirty" : false,
               "group" : "general",
-              "value" : "f7"
+              "value" : ""
             },
             { "action" : "toggle twitch system audio recording",
+              "actionString" : "toggle twitch system audio recording",
               "binding" : "",
               "conflicted" : false,
               "default" : "f8",
               "dirty" : false,
               "group" : "general",
-              "value" : "f8"
+              "value" : ""
             },
             { "action" : "run twitch commercial",
+              "actionString" : "run twitch commercial",
               "binding" : "",
               "conflicted" : false,
               "default" : "f9",
               "dirty" : false,
               "group" : "general",
-              "value" : "f9"
+              "value" : ""
             },
             { "action" : "toggle pips",
+              "actionString" : "toggle pips",
               "binding" : "",
               "conflicted" : false,
               "default" : "q",
               "dirty" : false,
               "group" : "general",
-              "value" : "q"
+              "value" : ""
             },
             { "action" : "swap pips",
+              "actionString" : "swap pips",
               "binding" : "",
               "conflicted" : false,
               "default" : "shift+q",
               "dirty" : false,
               "group" : "general",
-              "value" : "shift+q"
+              "value" : ""
             },
             { "action" : "copy to pip",
+              "actionString" : "copy to pip",
               "binding" : "",
               "conflicted" : false,
               "default" : "alt+q",
               "dirty" : false,
               "group" : "general",
-              "value" : "alt+q"
+              "value" : ""
             }
           ],
         "name" : "general"
       },
       { "keybinds" : [ { "action" : "command mode [move]",
+              "actionString" : "command mode [move]",
               "binding" : "",
               "conflicted" : false,
               "default" : "m",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "m"
+              "value" : ""
             },
             { "action" : "command mode [attack]",
+              "actionString" : "command mode [attack]",
               "binding" : "",
               "conflicted" : false,
               "default" : "a",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "a"
+              "value" : ""
             },
             { "action" : "command mode [assist]",
+              "actionString" : "command mode [assist]",
               "binding" : "",
               "conflicted" : false,
               "default" : "i",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "i"
+              "value" : ""
             },
             { "action" : "command mode [repair]",
+              "actionString" : "command mode [repair]",
               "binding" : "",
               "conflicted" : false,
               "default" : "r",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "r"
+              "value" : ""
             },
             { "action" : "command mode [reclaim]",
+              "actionString" : "command mode [reclaim]",
               "binding" : "",
               "conflicted" : false,
               "default" : "e",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "e"
+              "value" : ""
             },
             { "action" : "command mode [patrol]",
+              "actionString" : "command mode [patrol]",
               "binding" : "",
               "conflicted" : false,
               "default" : "p",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "p"
+              "value" : ""
             },
             { "action" : "command mode [special move]",
+              "actionString" : "command mode [special move]",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -274,6 +296,7 @@
               "value" : ""
             },
             { "action" : "command mode [unload]",
+              "actionString" : "command mode [unload]",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -282,6 +305,7 @@
               "value" : ""
             },
             { "action" : "command mode [load]",
+              "actionString" : "command mode [load]",
               "conflicted" : false,
               "default" : "",
               "dirty" : false,
@@ -289,30 +313,34 @@
               "value" : ""
             },
             { "action" : "command mode [alt fire]",
-              "binding" : "",
+              "actionString" : "command mode [alt fire]",
+              "binding" : "u",
               "conflicted" : false,
               "default" : "d",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "d"
+              "value" : "u"
             },
             { "action" : "command mode [ping]",
+              "actionString" : "command mode [ping]",
               "binding" : "",
               "conflicted" : false,
               "default" : "g",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "g"
+              "value" : ""
             },
             { "action" : "stop command",
-              "binding" : "",
+              "actionString" : "stop command",
+              "binding" : "q",
               "conflicted" : false,
               "default" : "s",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "s"
+              "value" : "q"
             },
             { "action" : "fire at will",
+              "actionString" : "fire at will",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -321,6 +349,7 @@
               "value" : ""
             },
             { "action" : "return fire",
+              "actionString" : "return fire",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -329,6 +358,7 @@
               "value" : ""
             },
             { "action" : "hold fire",
+              "actionString" : "hold fire",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -337,14 +367,16 @@
               "value" : ""
             },
             { "action" : "toggle fire orders",
+              "actionString" : "toggle fire orders",
               "binding" : "",
               "conflicted" : false,
               "default" : "h",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "h"
+              "value" : ""
             },
             { "action" : "maneuver",
+              "actionString" : "maneuver",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -353,6 +385,7 @@
               "value" : ""
             },
             { "action" : "roam",
+              "actionString" : "roam",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -361,6 +394,7 @@
               "value" : ""
             },
             { "action" : "hold position",
+              "actionString" : "hold position",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -369,14 +403,16 @@
               "value" : ""
             },
             { "action" : "toggle move orders",
+              "actionString" : "toggle move orders",
               "binding" : "",
               "conflicted" : false,
               "default" : "j",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "j"
+              "value" : ""
             },
             { "action" : "on",
+              "actionString" : "on",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -385,6 +421,7 @@
               "value" : ""
             },
             { "action" : "off",
+              "actionString" : "off",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -393,14 +430,16 @@
               "value" : ""
             },
             { "action" : "toggle energy orders",
-              "binding" : "",
+              "actionString" : "toggle energy orders",
+              "binding" : "tab",
               "conflicted" : false,
-              "default" : "k",
+              "default" : "tab",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "k"
+              "value" : "tab"
             },
             { "action" : "build once",
+              "actionString" : "build once",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -409,6 +448,7 @@
               "value" : ""
             },
             { "action" : "build loop",
+              "actionString" : "build loop",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -417,14 +457,24 @@
               "value" : ""
             },
             { "action" : "toggle build orders",
-              "binding" : "",
+              "actionString" : "toggle build orders",
+              "binding" : "o",
               "conflicted" : false,
-              "default" : "l",
+              "default" : "o",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "l"
+              "value" : "o"
+            },
+            { "action" : "acknowledge alert",
+              "actionString" : "acknowledge alert",
+              "conflicted" : false,
+              "default" : "space",
+              "dirty" : false,
+              "group" : "gameplay",
+              "value" : "space"
             },
             { "action" : "enable navigation debug info",
+              "actionString" : "enable navigation debug info",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -433,6 +483,7 @@
               "value" : ""
             },
             { "action" : "disable navigation debug info",
+              "actionString" : "disable navigation debug info",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -441,6 +492,7 @@
               "value" : ""
             },
             { "action" : "select commander",
+              "actionString" : "select commander",
               "binding" : "",
               "conflicted" : false,
               "default" : "b",
@@ -449,14 +501,16 @@
               "value" : "b"
             },
             { "action" : "select idle fabbers",
+              "actionString" : "select idle fabbers",
               "binding" : "",
               "conflicted" : false,
               "default" : "f",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "f"
+              "value" : ""
             },
             { "action" : "select all factories",
+              "actionString" : "select all factories",
               "binding" : "shift+f1",
               "conflicted" : false,
               "default" : "shift+f1",
@@ -465,6 +519,7 @@
               "value" : "shift+f1"
             },
             { "action" : "select all idle factories",
+              "actionString" : "select all idle factories",
               "binding" : "shift+f2",
               "conflicted" : false,
               "default" : "shift+f2",
@@ -473,6 +528,7 @@
               "value" : "shift+f2"
             },
             { "action" : "select all factories on screen",
+              "actionString" : "select all factories on screen",
               "binding" : "shift+f3",
               "conflicted" : false,
               "default" : "shift+f3",
@@ -481,6 +537,7 @@
               "value" : "shift+f3"
             },
             { "action" : "select all idle factories on screen",
+              "actionString" : "select all idle factories on screen",
               "binding" : "shift+f4",
               "conflicted" : false,
               "default" : "shift+f4",
@@ -489,6 +546,7 @@
               "value" : "shift+f4"
             },
             { "action" : "select all combat units",
+              "actionString" : "select all combat units",
               "binding" : "ctrl+shift+f6",
               "conflicted" : false,
               "default" : "ctrl+shift+f6",
@@ -497,6 +555,7 @@
               "value" : "ctrl+shift+f6"
             },
             { "action" : "select all combat units on screen",
+              "actionString" : "select all combat units on screen",
               "binding" : "shift+f6",
               "conflicted" : false,
               "default" : "shift+f6",
@@ -505,6 +564,7 @@
               "value" : "shift+f6"
             },
             { "action" : "select all air combat units on screen",
+              "actionString" : "select all air combat units on screen",
               "binding" : "shift+f8",
               "conflicted" : false,
               "default" : "shift+f8",
@@ -513,6 +573,7 @@
               "value" : "shift+f8"
             },
             { "action" : "select all naval combat units on screen",
+              "actionString" : "select all naval combat units on screen",
               "binding" : "shift+f9",
               "conflicted" : false,
               "default" : "shift+f9",
@@ -521,6 +582,7 @@
               "value" : "shift+f9"
             },
             { "action" : "select all land combat units on screen",
+              "actionString" : "select all land combat units on screen",
               "binding" : "shift+f7",
               "conflicted" : false,
               "default" : "shift+f7",
@@ -529,6 +591,7 @@
               "value" : "shift+f7"
             },
             { "action" : "select all air combat units",
+              "actionString" : "select all air combat units",
               "binding" : "ctrl+shift+f8",
               "conflicted" : false,
               "default" : "ctrl+shift+f8",
@@ -537,6 +600,7 @@
               "value" : "ctrl+shift+f8"
             },
             { "action" : "select all naval combat units",
+              "actionString" : "select all naval combat units",
               "binding" : "ctrl+shift+f9",
               "conflicted" : false,
               "default" : "ctrl+shift+f9",
@@ -545,6 +609,7 @@
               "value" : "ctrl+shift+f9"
             },
             { "action" : "select all land combat units",
+              "actionString" : "select all land combat units",
               "binding" : "ctrl+shift+f7",
               "conflicted" : false,
               "default" : "ctrl+shift+f7",
@@ -553,6 +618,7 @@
               "value" : "ctrl+shift+f7"
             },
             { "action" : "select all matching units on screen",
+              "actionString" : "select all matching units on screen",
               "binding" : "ctrl+z",
               "conflicted" : false,
               "default" : "ctrl+z",
@@ -561,14 +627,16 @@
               "value" : "ctrl+z"
             },
             { "action" : "track selection with camera",
+              "actionString" : "track selection with camera",
               "binding" : "",
               "conflicted" : false,
               "default" : "t",
               "dirty" : false,
               "group" : "gameplay",
-              "value" : "t"
+              "value" : ""
             },
             { "action" : "self destruct selected unit",
+              "actionString" : "self destruct selected unit",
               "binding" : "del",
               "conflicted" : false,
               "default" : "del",
@@ -577,6 +645,7 @@
               "value" : "del"
             },
             { "action" : "resume at latest time",
+              "actionString" : "resume at latest time",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -585,6 +654,7 @@
               "value" : ""
             },
             { "action" : "pause time",
+              "actionString" : "pause time",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -593,6 +663,7 @@
               "value" : ""
             },
             { "action" : "play forward at 100%",
+              "actionString" : "play forward at 100%",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -601,6 +672,7 @@
               "value" : ""
             },
             { "action" : "play backwards at 100%",
+              "actionString" : "play backwards at 100%",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -609,6 +681,7 @@
               "value" : ""
             },
             { "action" : "play forward at 50%",
+              "actionString" : "play forward at 50%",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -617,6 +690,7 @@
               "value" : ""
             },
             { "action" : "play backwards at 50%",
+              "actionString" : "play backwards at 50%",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -625,16 +699,19 @@
               "value" : ""
             },
             { "action" : "last pseudo frame",
+              "actionString" : "last pseudo frame",
               "conflicted" : false,
               "dirty" : false,
               "group" : "gameplay"
             },
             { "action" : "next pseudo frame",
+              "actionString" : "next pseudo frame",
               "conflicted" : false,
               "dirty" : false,
               "group" : "gameplay"
             },
             { "action" : "capture group 1",
+              "actionString" : "capture group 1",
               "binding" : "ctrl+1",
               "conflicted" : false,
               "default" : "ctrl+1",
@@ -643,6 +720,7 @@
               "value" : "ctrl+1"
             },
             { "action" : "capture group 2",
+              "actionString" : "capture group 2",
               "binding" : "ctrl+2",
               "conflicted" : false,
               "default" : "ctrl+2",
@@ -651,6 +729,7 @@
               "value" : "ctrl+2"
             },
             { "action" : "capture group 3",
+              "actionString" : "capture group 3",
               "binding" : "ctrl+3",
               "conflicted" : false,
               "default" : "ctrl+3",
@@ -659,6 +738,7 @@
               "value" : "ctrl+3"
             },
             { "action" : "capture group 4",
+              "actionString" : "capture group 4",
               "binding" : "ctrl+4",
               "conflicted" : false,
               "default" : "ctrl+4",
@@ -667,6 +747,7 @@
               "value" : "ctrl+4"
             },
             { "action" : "capture group 5",
+              "actionString" : "capture group 5",
               "binding" : "ctrl+5",
               "conflicted" : false,
               "default" : "ctrl+5",
@@ -675,6 +756,7 @@
               "value" : "ctrl+5"
             },
             { "action" : "capture group 6",
+              "actionString" : "capture group 6",
               "binding" : "ctrl+6",
               "conflicted" : false,
               "default" : "ctrl+6",
@@ -683,6 +765,7 @@
               "value" : "ctrl+6"
             },
             { "action" : "capture group 7",
+              "actionString" : "capture group 7",
               "binding" : "ctrl+7",
               "conflicted" : false,
               "default" : "ctrl+7",
@@ -691,6 +774,7 @@
               "value" : "ctrl+7"
             },
             { "action" : "capture group 8",
+              "actionString" : "capture group 8",
               "binding" : "ctrl+8",
               "conflicted" : false,
               "default" : "ctrl+8",
@@ -699,6 +783,7 @@
               "value" : "ctrl+8"
             },
             { "action" : "capture group 9",
+              "actionString" : "capture group 9",
               "binding" : "ctrl+9",
               "conflicted" : false,
               "default" : "ctrl+9",
@@ -707,6 +792,7 @@
               "value" : "ctrl+9"
             },
             { "action" : "capture group 0",
+              "actionString" : "capture group 0",
               "binding" : "ctrl+0",
               "conflicted" : false,
               "default" : "ctrl+0",
@@ -715,6 +801,7 @@
               "value" : "ctrl+0"
             },
             { "action" : "recall group 1",
+              "actionString" : "recall group 1",
               "binding" : "1",
               "conflicted" : false,
               "default" : "1",
@@ -723,6 +810,7 @@
               "value" : "1"
             },
             { "action" : "recall group 2",
+              "actionString" : "recall group 2",
               "binding" : "2",
               "conflicted" : false,
               "default" : "2",
@@ -731,6 +819,7 @@
               "value" : "2"
             },
             { "action" : "recall group 3",
+              "actionString" : "recall group 3",
               "binding" : "3",
               "conflicted" : false,
               "default" : "3",
@@ -739,6 +828,7 @@
               "value" : "3"
             },
             { "action" : "recall group 4",
+              "actionString" : "recall group 4",
               "binding" : "4",
               "conflicted" : false,
               "default" : "4",
@@ -747,6 +837,7 @@
               "value" : "4"
             },
             { "action" : "recall group 5",
+              "actionString" : "recall group 5",
               "binding" : "5",
               "conflicted" : false,
               "default" : "5",
@@ -755,6 +846,7 @@
               "value" : "5"
             },
             { "action" : "recall group 6",
+              "actionString" : "recall group 6",
               "binding" : "6",
               "conflicted" : false,
               "default" : "6",
@@ -763,6 +855,7 @@
               "value" : "6"
             },
             { "action" : "recall group 7",
+              "actionString" : "recall group 7",
               "binding" : "7",
               "conflicted" : false,
               "default" : "7",
@@ -771,6 +864,7 @@
               "value" : "7"
             },
             { "action" : "recall group 8",
+              "actionString" : "recall group 8",
               "binding" : "8",
               "conflicted" : false,
               "default" : "8",
@@ -779,6 +873,7 @@
               "value" : "8"
             },
             { "action" : "recall group 9",
+              "actionString" : "recall group 9",
               "binding" : "9",
               "conflicted" : false,
               "default" : "9",
@@ -787,6 +882,7 @@
               "value" : "9"
             },
             { "action" : "recall group 0",
+              "actionString" : "recall group 0",
               "binding" : "0",
               "conflicted" : false,
               "default" : "0",
@@ -798,22 +894,28 @@
         "name" : "gameplay"
       },
       { "keybinds" : [ { "action" : "start build utility",
+              "actionString" : "start build utility",
+              "binding" : "",
               "conflicted" : false,
-              "default" : "",
+              "default" : "v",
               "dirty" : false,
               "group" : "build structure",
               "value" : ""
             },
             { "action" : "start build factory",
+              "actionString" : "start build factory",
+              "binding" : "",
               "conflicted" : false,
-              "default" : "",
+              "default" : "x",
               "dirty" : false,
               "group" : "build structure",
               "value" : ""
             },
             { "action" : "start build combat",
+              "actionString" : "start build combat",
+              "binding" : "",
               "conflicted" : false,
-              "default" : "",
+              "default" : "c",
               "dirty" : false,
               "group" : "build structure",
               "value" : ""
@@ -822,6 +924,8 @@
         "name" : "build structure"
       },
       { "keybinds" : [ { "action" : "start build vehicle",
+              "actionString" : "start build vehicle",
+              "binding" : "",
               "conflicted" : false,
               "default" : "",
               "dirty" : false,
@@ -829,6 +933,8 @@
               "value" : ""
             },
             { "action" : "start build bot",
+              "actionString" : "start build bot",
+              "binding" : "",
               "conflicted" : false,
               "default" : "",
               "dirty" : false,
@@ -836,6 +942,8 @@
               "value" : ""
             },
             { "action" : "start build air",
+              "actionString" : "start build air",
+              "binding" : "",
               "conflicted" : false,
               "default" : "",
               "dirty" : false,
@@ -843,6 +951,8 @@
               "value" : ""
             },
             { "action" : "start build sea",
+              "actionString" : "start build sea",
+              "binding" : "",
               "conflicted" : false,
               "default" : "",
               "dirty" : false,
@@ -850,8 +960,10 @@
               "value" : ""
             },
             { "action" : "start build orbital",
+              "actionString" : "start build orbital",
+              "binding" : "",
               "conflicted" : false,
-              "default" : "b",
+              "default" : "",
               "dirty" : false,
               "group" : "build unit",
               "value" : ""
@@ -860,6 +972,8 @@
         "name" : "build unit"
       },
       { "keybinds" : [ { "action" : "build item 1",
+              "actionString" : "build item 1",
+              "binding" : "",
               "conflicted" : false,
               "default" : "1",
               "dirty" : false,
@@ -867,6 +981,8 @@
               "value" : ""
             },
             { "action" : "build item 2",
+              "actionString" : "build item 2",
+              "binding" : "",
               "conflicted" : false,
               "default" : "2",
               "dirty" : false,
@@ -874,6 +990,8 @@
               "value" : ""
             },
             { "action" : "build item 3",
+              "actionString" : "build item 3",
+              "binding" : "",
               "conflicted" : false,
               "default" : "3",
               "dirty" : false,
@@ -881,6 +999,8 @@
               "value" : ""
             },
             { "action" : "build item 4",
+              "actionString" : "build item 4",
+              "binding" : "",
               "conflicted" : false,
               "default" : "4",
               "dirty" : false,
@@ -888,85 +1008,100 @@
               "value" : ""
             },
             { "action" : "build item 5",
+              "actionString" : "build item 5",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "5",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 6",
+              "actionString" : "build item 6",
+              "binding" : "",
               "conflicted" : false,
               "default" : "q",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 6",
+            { "action" : "build item 7",
+              "actionString" : "build item 7",
+              "binding" : "",
               "conflicted" : false,
               "default" : "w",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 7",
+            { "action" : "build item 8",
+              "actionString" : "build item 8",
+              "binding" : "",
               "conflicted" : false,
               "default" : "e",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 8",
+            { "action" : "build item 9",
+              "actionString" : "build item 9",
+              "binding" : "",
               "conflicted" : false,
               "default" : "r",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 9",
+            { "action" : "build item 10",
+              "actionString" : "build item 10",
+              "binding" : "",
+              "conflicted" : false,
+              "default" : "t",
+              "dirty" : false,
+              "group" : "build",
+              "value" : ""
+            },
+            { "action" : "build item 11",
+              "actionString" : "build item 11",
+              "binding" : "",
               "conflicted" : false,
               "default" : "a",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 10",
+            { "action" : "build item 12",
+              "actionString" : "build item 12",
+              "binding" : "",
               "conflicted" : false,
               "default" : "s",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 11",
+            { "action" : "build item 13",
+              "actionString" : "build item 13",
+              "binding" : "",
               "conflicted" : false,
               "default" : "d",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 12",
+            { "action" : "build item 14",
+              "actionString" : "build item 14",
+              "binding" : "",
               "conflicted" : false,
               "default" : "f",
               "dirty" : false,
               "group" : "build",
               "value" : ""
             },
-            { "action" : "build item 13",
-              "conflicted" : false,
-              "default" : "z",
-              "dirty" : false,
-              "group" : "build",
-              "value" : ""
-            },
-            { "action" : "build item 14",
-              "conflicted" : false,
-              "default" : "x",
-              "dirty" : false,
-              "group" : "build",
-              "value" : ""
-            },
             { "action" : "build item 15",
+              "actionString" : "build item 15",
+              "binding" : "",
               "conflicted" : false,
-              "default" : "c",
-              "dirty" : false,
-              "group" : "build",
-              "value" : ""
-            },
-            { "action" : "build item 16",
-              "conflicted" : false,
-              "default" : "v",
+              "default" : "g",
               "dirty" : false,
               "group" : "build",
               "value" : ""
@@ -975,6 +1110,7 @@
         "name" : "build"
       },
       { "keybinds" : [ { "action" : "capture anchor 1",
+              "actionString" : "capture anchor 1",
               "binding" : "shift+1",
               "conflicted" : false,
               "default" : "shift+1",
@@ -983,6 +1119,7 @@
               "value" : "shift+1"
             },
             { "action" : "capture anchor 2",
+              "actionString" : "capture anchor 2",
               "binding" : "shift+2",
               "conflicted" : false,
               "default" : "shift+2",
@@ -991,6 +1128,7 @@
               "value" : "shift+2"
             },
             { "action" : "capture anchor 3",
+              "actionString" : "capture anchor 3",
               "binding" : "shift+3",
               "conflicted" : false,
               "default" : "shift+3",
@@ -999,6 +1137,7 @@
               "value" : "shift+3"
             },
             { "action" : "capture anchor 4",
+              "actionString" : "capture anchor 4",
               "binding" : "shift+4",
               "conflicted" : false,
               "default" : "shift+4",
@@ -1007,6 +1146,7 @@
               "value" : "shift+4"
             },
             { "action" : "capture anchor 5",
+              "actionString" : "capture anchor 5",
               "binding" : "shift+5",
               "conflicted" : false,
               "default" : "shift+5",
@@ -1015,6 +1155,7 @@
               "value" : "shift+5"
             },
             { "action" : "capture anchor 6",
+              "actionString" : "capture anchor 6",
               "binding" : "shift+6",
               "conflicted" : false,
               "default" : "shift+6",
@@ -1023,6 +1164,7 @@
               "value" : "shift+6"
             },
             { "action" : "capture anchor 7",
+              "actionString" : "capture anchor 7",
               "binding" : "shift+7",
               "conflicted" : false,
               "default" : "shift+7",
@@ -1031,6 +1173,7 @@
               "value" : "shift+7"
             },
             { "action" : "capture anchor 8",
+              "actionString" : "capture anchor 8",
               "binding" : "shift+8",
               "conflicted" : false,
               "default" : "shift+8",
@@ -1039,6 +1182,7 @@
               "value" : "shift+8"
             },
             { "action" : "capture anchor 9",
+              "actionString" : "capture anchor 9",
               "binding" : "shift+9",
               "conflicted" : false,
               "default" : "shift+9",
@@ -1047,6 +1191,7 @@
               "value" : "shift+9"
             },
             { "action" : "capture anchor 0",
+              "actionString" : "capture anchor 0",
               "binding" : "shift+0",
               "conflicted" : false,
               "default" : "shift+0",
@@ -1055,6 +1200,7 @@
               "value" : "shift+0"
             },
             { "action" : "recall anchor 1",
+              "actionString" : "recall anchor 1",
               "binding" : "alt+1",
               "conflicted" : false,
               "default" : "alt+1",
@@ -1063,6 +1209,7 @@
               "value" : "alt+1"
             },
             { "action" : "recall anchor 2",
+              "actionString" : "recall anchor 2",
               "binding" : "alt+2",
               "conflicted" : false,
               "default" : "alt+2",
@@ -1071,6 +1218,7 @@
               "value" : "alt+2"
             },
             { "action" : "recall anchor 3",
+              "actionString" : "recall anchor 3",
               "binding" : "alt+3",
               "conflicted" : false,
               "default" : "alt+3",
@@ -1079,6 +1227,7 @@
               "value" : "alt+3"
             },
             { "action" : "recall anchor 4",
+              "actionString" : "recall anchor 4",
               "binding" : "alt+4",
               "conflicted" : false,
               "default" : "alt+4",
@@ -1087,6 +1236,7 @@
               "value" : "alt+4"
             },
             { "action" : "recall anchor 5",
+              "actionString" : "recall anchor 5",
               "binding" : "alt+5",
               "conflicted" : false,
               "default" : "alt+5",
@@ -1095,6 +1245,7 @@
               "value" : "alt+5"
             },
             { "action" : "recall anchor 6",
+              "actionString" : "recall anchor 6",
               "binding" : "alt+6",
               "conflicted" : false,
               "default" : "alt+6",
@@ -1103,6 +1254,7 @@
               "value" : "alt+6"
             },
             { "action" : "recall anchor 7",
+              "actionString" : "recall anchor 7",
               "binding" : "alt+7",
               "conflicted" : false,
               "default" : "alt+7",
@@ -1111,6 +1263,7 @@
               "value" : "alt+7"
             },
             { "action" : "recall anchor 8",
+              "actionString" : "recall anchor 8",
               "binding" : "alt+8",
               "conflicted" : false,
               "default" : "alt+8",
@@ -1119,6 +1272,7 @@
               "value" : "alt+8"
             },
             { "action" : "recall anchor 9",
+              "actionString" : "recall anchor 9",
               "binding" : "alt+9",
               "conflicted" : false,
               "default" : "alt+9",
@@ -1127,6 +1281,7 @@
               "value" : "alt+9"
             },
             { "action" : "recall anchor 0",
+              "actionString" : "recall anchor 0",
               "binding" : "alt+0",
               "conflicted" : false,
               "default" : "alt+0",
@@ -1135,11 +1290,13 @@
               "value" : "alt+0"
             },
             { "action" : "set planet camera",
+              "actionString" : "set planet camera",
               "conflicted" : false,
               "dirty" : false,
               "group" : "camera"
             },
             { "action" : "set free camera",
+              "actionString" : "set free camera",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1148,6 +1305,7 @@
               "value" : ""
             },
             { "action" : "set debug camera",
+              "actionString" : "set debug camera",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1156,6 +1314,7 @@
               "value" : ""
             },
             { "action" : "set space camera",
+              "actionString" : "set space camera",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1164,6 +1323,7 @@
               "value" : ""
             },
             { "action" : "toggle free camera",
+              "actionString" : "toggle free camera",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1172,6 +1332,7 @@
               "value" : ""
             },
             { "action" : "toggle debug camera",
+              "actionString" : "toggle debug camera",
               "binding" : "ctrl+m",
               "conflicted" : false,
               "default" : "ctrl+m",
@@ -1180,6 +1341,7 @@
               "value" : "ctrl+m"
             },
             { "action" : "toggle space camera",
+              "actionString" : "toggle space camera",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1188,6 +1350,7 @@
               "value" : ""
             },
             { "action" : "zoom to surface",
+              "actionString" : "zoom to surface",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1196,6 +1359,7 @@
               "value" : ""
             },
             { "action" : "zoom to air",
+              "actionString" : "zoom to air",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1204,6 +1368,7 @@
               "value" : ""
             },
             { "action" : "zoom to orbital",
+              "actionString" : "zoom to orbital",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1212,14 +1377,16 @@
               "value" : ""
             },
             { "action" : "zoom to celestial",
+              "actionString" : "zoom to celestial",
               "binding" : "",
               "conflicted" : false,
-              "default" : "space",
+              "default" : "",
               "dirty" : false,
               "group" : "camera",
-              "value" : "space"
+              "value" : ""
             },
             { "action" : "previous planet",
+              "actionString" : "previous planet",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1228,6 +1395,7 @@
               "value" : ""
             },
             { "action" : "next planet",
+              "actionString" : "next planet",
               "binding" : ",",
               "conflicted" : false,
               "default" : ",",
@@ -1236,6 +1404,7 @@
               "value" : ","
             },
             { "action" : "align to pole",
+              "actionString" : "align to pole",
               "binding" : "n",
               "conflicted" : false,
               "default" : "n",
@@ -1244,6 +1413,7 @@
               "value" : "n"
             },
             { "action" : "increaseCameraPanSpeed",
+              "actionString" : "increaseCameraPanSpeed",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1252,6 +1422,7 @@
               "value" : ""
             },
             { "action" : "decreaseCameraPanSpeed",
+              "actionString" : "decreaseCameraPanSpeed",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1260,6 +1431,7 @@
               "value" : ""
             },
             { "action" : "smooth zoom out",
+              "actionString" : "smooth zoom out",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1268,6 +1440,7 @@
               "value" : ""
             },
             { "action" : "smooth zoom in",
+              "actionString" : "smooth zoom in",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1276,6 +1449,7 @@
               "value" : ""
             },
             { "action" : "relax constraints",
+              "actionString" : "relax constraints",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1284,6 +1458,7 @@
               "value" : ""
             },
             { "action" : "restore constraints",
+              "actionString" : "restore constraints",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1295,6 +1470,7 @@
         "name" : "camera"
       },
       { "keybinds" : [ { "action" : "abort",
+              "actionString" : "abort",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1303,6 +1479,7 @@
               "value" : ""
             },
             { "action" : "crash",
+              "actionString" : "crash",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1311,6 +1488,7 @@
               "value" : ""
             },
             { "action" : "reload view",
+              "actionString" : "reload view",
               "binding" : "f5",
               "conflicted" : false,
               "default" : "f5",
@@ -1319,6 +1497,7 @@
               "value" : "f5"
             },
             { "action" : "toggle audio logging",
+              "actionString" : "toggle audio logging",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1327,6 +1506,7 @@
               "value" : ""
             },
             { "action" : "quick profile",
+              "actionString" : "quick profile",
               "binding" : "ctrl+f11",
               "conflicted" : false,
               "default" : "ctrl+f11",
@@ -1335,6 +1515,7 @@
               "value" : "ctrl+f11"
             },
             { "action" : "bug report",
+              "actionString" : "bug report",
               "binding" : "ctrl+f10",
               "conflicted" : false,
               "default" : "ctrl+f10",
@@ -1343,6 +1524,7 @@
               "value" : "ctrl+f10"
             },
             { "action" : "toggle nav debug",
+              "actionString" : "toggle nav debug",
               "binding" : "ctrl+alt+f11",
               "conflicted" : false,
               "default" : "ctrl+alt+f11",
@@ -1351,6 +1533,7 @@
               "value" : "ctrl+alt+f11"
             },
             { "action" : "toggle console",
+              "actionString" : "toggle console",
               "conflicted" : false,
               "default" : "`",
               "dirty" : false,
@@ -1361,6 +1544,7 @@
         "name" : "debugging"
       },
       { "keybinds" : [ { "action" : "copy unit",
+              "actionString" : "copy unit",
               "binding" : "ctrl+c",
               "conflicted" : false,
               "default" : "ctrl+c",
@@ -1369,6 +1553,7 @@
               "value" : "ctrl+c"
             },
             { "action" : "paste unit",
+              "actionString" : "paste unit",
               "binding" : "ctrl+v",
               "conflicted" : false,
               "default" : "ctrl+v",
@@ -1377,6 +1562,7 @@
               "value" : "ctrl+v"
             },
             { "action" : "set army from hover",
+              "actionString" : "set army from hover",
               "binding" : "ctrl+b",
               "conflicted" : false,
               "default" : "ctrl+b",
@@ -1385,6 +1571,7 @@
               "value" : "ctrl+b"
             },
             { "action" : "toggle FOW",
+              "actionString" : "toggle FOW",
               "binding" : "ctrl+j",
               "conflicted" : false,
               "default" : "ctrl+j",
@@ -1393,33 +1580,28 @@
               "value" : "ctrl+j"
             },
             { "action" : "build avatar",
+              "actionString" : "build avatar",
               "binding" : "",
               "conflicted" : false,
               "default" : "alt+f1",
               "dirty" : false,
               "group" : "hacks",
-              "value" : "alt+f1"
+              "value" : ""
             },
             { "action" : "build avatar factory",
+              "actionString" : "build avatar factory",
               "binding" : "",
               "conflicted" : false,
               "default" : "alt+f2",
               "dirty" : false,
               "group" : "hacks",
-              "value" : "alt+f2"
+              "value" : ""
             }
           ],
         "name" : "hacks"
       },
-      { "keybinds" : [ { "action" : "Toggle Energy",
-              "binding" : "tab",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : "tab"
-            },
-            { "action" : "Lock Pole",
+      { "keybinds" : [ { "action" : "Lock Pole",
+              "actionString" : "Lock Pole",
               "binding" : "y",
               "conflicted" : false,
               "default" : "",
@@ -1428,6 +1610,7 @@
               "value" : "y"
             },
             { "action" : "Toggle Cinematic",
+              "actionString" : "Toggle Cinematic",
               "binding" : "f8",
               "conflicted" : false,
               "default" : "",
@@ -1436,6 +1619,7 @@
               "value" : "f8"
             },
             { "action" : "Toggle Terrestrial",
+              "actionString" : "Toggle Terrestrial",
               "binding" : "f9",
               "conflicted" : false,
               "default" : "",
@@ -1443,111 +1627,8 @@
               "group" : "hotbuild",
               "value" : "f9"
             },
-            { "action" : "Requeue",
-              "binding" : "o",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : "o"
-            },
-            { "action" : "View Notification",
-              "binding" : "space",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : "space"
-            },
-            { "action" : "move",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
-            { "action" : "attack",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
-            { "action" : "assist",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
-            { "action" : "repair",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
-            { "action" : "reclaim",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
-            { "action" : "patrol",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
-            { "action" : "stop",
-              "binding" : "q",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : "q"
-            },
-            { "action" : "select commie",
-              "binding" : "b",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : "b"
-            },
-            { "action" : "unload",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
-            { "action" : "D-Gun",
-              "binding" : "u",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : "u"
-            },
-            { "action" : "Ping",
-              "binding" : "",
-              "conflicted" : false,
-              "default" : "",
-              "dirty" : false,
-              "group" : "hotbuild",
-              "value" : ""
-            },
             { "action" : "Toggle Hotbuild",
+              "actionString" : "Toggle Hotbuild",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
@@ -1556,6 +1637,7 @@
               "value" : ""
             },
             { "action" : "Toggle HotSelect",
+              "actionString" : "Toggle HotSelect",
               "binding" : "",
               "conflicted" : false,
               "default" : "",
