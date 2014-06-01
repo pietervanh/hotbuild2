@@ -587,11 +587,12 @@ var hotbuildsettings = (function () {
     model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
     
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
+        //debugger;
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
-            if (arg.item.factory !== "" && arg.sourceParentNode.className === undefined) {
+            if (arg.item.factory !== "" && arg.sourceParentNode.parent().attr("id") === "sequencelistR") {
                 var unitCheck = true;
                 for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-                    if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory == arg.item.factory) {
+                    if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory === arg.item.factory) {
                         unitCheck = false;
                         break;
                     }
