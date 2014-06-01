@@ -466,7 +466,7 @@ var hotbuildsettings = (function () {
         };
 
         self.importfromfile = function (importfile) {
-            console.log('importing importfile');
+            console.log('importing importfile ' + importfile);
             $.getJSON('coui:/' + importfile, function (imported) {
                 for (var kvgm in imported.uber) {
                     console.log(imported.uber[kvgm].name);
@@ -499,6 +499,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
+                console.log(imported.cameraKeyPanStyle);
                 model.cameraKeyPanStyle(imported.cameraKeyPanStyle);
                 updateExistingSettings();
                 self.Save();
