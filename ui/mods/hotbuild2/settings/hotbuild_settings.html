@@ -1,187 +1,112 @@
-<div id="div_settings_hotbuild_cont">
-    <div id="block">
-        <div class="ui-icon ui-icon-comment"></div>
-        <div id="comments" style="font-family:'DINPRO-LIGHT'">Please give comments/ideas on the forum</div>
-        <div id="communitydefaults">
-            <input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
-            <input type="button" value="Community Defaults (WASD)"  data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
-        </div>
-        <div id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</div>
-        <div class="ui-icon ui-icon-info"></div>
-
-        <div id="keyboardcontainer">
-            <ul id="keyboard" data-bind="colorhotbuildkeys: hotbuildkeys, coloruberkeys: uberkeys, colordisabledkeys: disabledkeys, activekey: keyboardkey, click_sound: 'default', rollover_sound: 'default'">
-                <li class="tab">tab</li>
-                <li class="letter">q</li>
-                <li class="letter">w</li>
-                <li class="letter">e</li>
-                <li class="letter">r</li>
-                <li class="letter">t</li>
-                <li class="letter">y</li>
-                <li class="letter">u</li>
-                <li class="letter">i</li>
-                <li class="letter">o</li>
-                <li class="letter">p</li>
-                <li class="symbol">[</li>
-                <li class="symbol">]</li>
-                <li class="symbol lastitem">\</li>
-                <li class="capslock">caps lock</li>
-                <li class="letter">a</li>
-                <li class="letter">s</li>
-                <li class="letter">d</li>
-                <li class="letter">f</li>
-                <li class="letter">g</li>
-                <li class="letter">h</li>
-                <li class="letter">j</li>
-                <li class="letter">k</li>
-                <li class="letter">l</li>
-                <li class="symbol">;</li>
-                <li class="symbol">'</li>
-                <li class="return lastitem">return</li>
-                <li class="left-shift">shift</li>
-                <li class="letter">z</li>
-                <li class="letter">x</li>
-                <li class="letter">c</li>
-                <li class="letter">v</li>
-                <li class="letter">b</li>
-                <li class="letter">n</li>
-                <li class="letter">m</li>
-                <li class="symbol">,</li>
-                <li class="symbol">.</li>
-                <li class="symbol">/</li>
-                <li class="right-shift lastitem">shift</li>
-                <li class="space lastitem">space</li>
-            </ul>
-            <ul id="legend">
-                <li class="letter">&nbsp;</li>
-                <div id="legendlabel">Unassigned</div>
-                <li class="letter hbk">&nbsp;</li>
-                <div id="legendlabel">Hotbuild</div>
-                <li class="letter uber">&nbsp;</li>
-                <div id="legendlabel">Uber</div>
-                <li class="letter dis">&nbsp;</li>
-                <div id="legendlabel">Reserved</div>
-            </ul>
-
-        </div>
-
-        <div id="imexporter">
-            <input type="button" value="Import - Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog" />
-        </div>
+  <div id="hb_settings_cont">
+    <div id="hb_header">
+        <div id="hb_comments">Please give comments/ideas on the forum</div>
+		<div id="hb_troubles">Issues? Please select a "Community Default" then "Save Settings"</div>
+		
+		<div class="form-group">
+			<select class="selectpicker form-control" id="hb_communitydefaults" name="dropdown" value="Community Defaults" style="display: none;">
+				<option data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt">Community Defaults (&#8592;&#8593;&#8594;&#8595;)</option>
+				<option data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt">Community Defaults (WASD)</option>
+		</div>
+		<div class="btn-group bootstrap-select form-control">
+			<button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="hb_communitydefaults" title="Community Defaults">
+			<span class="caret"></span>
+			<div class="dropdown-menu open" style="max-height: 891px; overflow: hidden; min-height: 0px;"</div>
+			</div>
+		</div>
+		
     </div>
 
-
-
-    <div id="ruler" />
-
-    <div id="block">
-        <div id="buttoninfo">
-            <ul>
-                <li id="kbselection">&nbsp;</li>
-            </ul>
-        </div>
-        <div id="selectedlabels">
-            <div>
-                <span class="ui-icon ui-icon-circle-arrow-e"></span>
-                <span id="uberlabel">Uber Keybind</span>
-                <span class="ui-icon ui-icon-circle-arrow-e"></span>
-                <span id="uspacer"></span>
-                <span data-bind="text: uberkey" class="uberkey"></span>
-            </div>
-            <div>
-                <span class="ui-icon ui-icon-circle-arrow-s"></span>
-                <span id="hblabel">Hotbuild Sequence</span>
-                <span class="ui-icon ui-icon-circle-arrow-s"></span>
-            </div>
-        </div>
-        <div class="filter">
-            <div class="unitTypes">
-                <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
-                <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
-            </div>
-            <div class="buildTabs" data-bind="foreach: filters">
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data === $root.activeSubFilters() }, text: $data"></span>
-            </div>
-        </div>
-
-        <div class="custom-scroll">
-            <div id="sequence">
-                <div id="sequencelist">
-                    <div class="sequencelistitem" data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: 'body', placeholder: 'ui-state-hover' } }">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="custom-scrollR">
-            <div id="sequenceR">
-                <div id="sequencelistR">
-                    <div data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: 'body', placeholder: 'ui-state-hover' } }">
-
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="hb_kb_cont">
+      KEYBOARD
     </div>
 
-    <script id="leftTemplate" type="text/html">
-        <div class="hotbuild_list_item">
-            <div class="hotbuild_fab_selection">
-                <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
-                <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
-            </div>
-            <div class="hotbuild_list_desc">
-                <span data-bind="text: displayname"></span><br />
-                <span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
-             </div>
-            <div id="hbremovefromlist">
-                <span class="ui-icon ui-icon-trash" data-bind="click: $root.remFromList, click_sound: 'default', rollover_sound: 'default'" />
-            </div>
-         </div>
-    </script>
-
-    <script id="rightTemplate" type="text/html">
-        <div class="hotbuild_list_item">
-            <div class="hotbuild_fab_selection">
-                <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
-            </div>
-            <div class="hotbuild_list_desc">
-                <span data-bind="text: displayname"></span><br />
-                <span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
-            </div>
+    <div id="hb_assign_cont">
+      <div id="hb_assign_left">
+        <div id="hb_assign_sequence">
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
         </div>
-    </script>
+      </div>
 
-
-
-    <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
-        <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
-        <div id="tutorialBtnGroup" style="margin-top: 10px">
-            <button id="setComDefaults" type="submit" style="width: 45%">YES</button>
-            <button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+      <div id="hb_assign_right">
+        <div id="hb_assign_select">
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
+          MIDDLE<br>
         </div>
+      </div>
     </div>
 
-    <div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
-        <div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
-        <div id="tutorialBtnGroup" style="margin-top: 10px">
-            <button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
-            <button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
-        </div>
+    <div id="hb_footer">
+      FOOTER
     </div>
-
-    <div id="importexportDlg" data-bind="visible: showingImportExportDialog" title="Import/Export">
-        <div>
-            <p>Before exporting make sure you have pressed save and close</p>
-            <p>Copy text into/from textarea below</p>
-            <textarea id="ieport" style="width:400px" rows="5"></textarea>
-        </div>
-    </div>
-
-    <div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details">
-        <div>
-            Change <span id="changekey" data-bind="text: keyboardkey" /> to <input id="swapkey" type="text"/>
-        </div>
-    </div>
-
-</div>
+  </div>

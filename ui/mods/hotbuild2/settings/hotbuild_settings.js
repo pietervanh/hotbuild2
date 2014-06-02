@@ -736,9 +736,9 @@ var hotbuildsettings = (function () {
     //debugger;
     var $tabheadersettings = $("#main .header");
     $tabheadersettings.children(":first").append("<li>" +
-                                            "<a href='#tab_hotbuildprefs' data-toggle='pill'>HOTBUILD</a>" +
+                                            "<a href='#hotbuild' data-toggle='pill'>HOTBUILD</a>" +
                                             "</li>");
     var $tabcontentsettings = $("#main .content");
-    $tabcontentsettings.children(":first").append('<div class="option-list tab-pane" id="tab_hotbuildprefs"></div>');
-    loadHotBuildSettings($('#tab_hotbuildprefs'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
+    $tabcontentsettings.children(":first").append('<div class="option-list tab-pane" id="hotbuild"></div>');
+    loadHotBuildSettings($('#hotbuild'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
 })();
