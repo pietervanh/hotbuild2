@@ -19,7 +19,6 @@
 	top: 24px;
 	width: 100%;
 	height: 280px;
-	border: 1px solid white;
 }
 
 #hb_assign_cont {
@@ -68,9 +67,19 @@
  ******************/
  
 #hb_comments, #hb_troubles {
-display: inline-block;
-float: left;
-padding-right: 24px;
+	display: inline-block;
+	float: left;
+	padding-right: 24px;
+	line-height: 24px;
 }
 
- 
+#hb_troubles {
+	display: none;
+}
+
+#hb_commdef_cont, #hb_imexport, #hb_communitydefaults {
+	float: right;
+	height: 24px;
+	line-height: 8px;
+	margin-left: 2px;
+}

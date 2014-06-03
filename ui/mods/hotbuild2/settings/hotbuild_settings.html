@@ -1,19 +1,20 @@
   <div id="hb_settings_cont">
     <div id="hb_header">
-        <div id="hb_comments">Please give comments/ideas on the forum</div>
-		<div id="hb_troubles">Issues? Please select a "Community Default" then "Save Settings"</div>
+        <span id="hb_comments">Please give comments/ideas on the forum</span>
+		<span id="hb_troubles">Issues? Please select a "Community Default" then "Save Settings"</span>
 		
-		<div class="form-group">
-			<select class="selectpicker form-control" id="hb_communitydefaults" name="dropdown" value="Community Defaults" style="display: none;">
-				<option data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt">Community Defaults (&#8592;&#8593;&#8594;&#8595;)</option>
-				<option data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt">Community Defaults (WASD)</option>
-		</div>
-		<div class="btn-group bootstrap-select form-control">
-			<button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" data-id="hb_communitydefaults" title="Community Defaults">
-			<span class="caret"></span>
-			<div class="dropdown-menu open" style="max-height: 891px; overflow: hidden; min-height: 0px;"</div>
-			</div>
-		</div>
+<div class="btn-group" id="hb_commdef_cont">
+  <button class="btn btn-default btn-xs dropdown-toggle" id="hb_communitydefaults" type="button" data-toggle="dropdown" data-bind="click_sound: 'default', rollover_sound: 'default'">
+    Community Defaults <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+   <li><a href="#" data-bind="click:$root.showCommunityDefaultWASDPrompt">WASD</a></li>
+    <li><a href="#" data-bind="click:$root.showCommunityDefaultPrompt">ARROW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8592;&#8593;&#8594;&#8595;</a></li>
+  </ul>
+</div>
+  <button class="btn btn-default btn-xs" id="hb_imexport" type="button" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog">
+    Import/Export
+  </button>
 		
     </div>
 
@@ -110,3 +111,29 @@
       FOOTER
     </div>
   </div>
+
+  
+  
+      <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
+        <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
+        <div id="tutorialBtnGroup" style="margin-top: 10px">
+            <button id="setComDefaults" type="submit" style="width: 45%">YES</button>
+            <button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+        </div>
+    </div>
+
+    <div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
+        <div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
+        <div id="tutorialBtnGroup" style="margin-top: 10px">
+            <button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
+            <button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+        </div>
+    </div>
+	
+	    <div id="importexportDlg" data-bind="visible: showingImportExportDialog" title="Import/Export">
+        <div>
+            <p>Before exporting make sure you have pressed save and close</p>
+            <p>Copy text into/from textarea below</p>
+            <textarea id="ieport" style="width:400px" rows="5"></textarea>
+        </div>
+    </div>
