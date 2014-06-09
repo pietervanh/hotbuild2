@@ -8,8 +8,9 @@
     Community Defaults <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-   <li><a href="#" data-bind="click:$root.showCommunityDefaultWASDPrompt">WASD</a></li>
-    <li><a href="#" data-bind="click:$root.showCommunityDefaultPrompt">ARROW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8592;&#8593;&#8594;&#8595;</a></li>
+	<li><a href="#" data-bind="click:$root.showCommunityDefaultWASDPrompt">WASD (Qwerty)</a></li>
+	<li><a href="#" data-bind="click:$root.showCommunityDefaultWASDPrompt">ZQSD (Azerty)</a></li>
+    <li><a href="#" data-bind="click:$root.showCommunityDefaultPrompt">ARROWS (&#8592;&#8593;&#8594;&#8595;)</a></li>
   </ul>
 </div>
   <button class="btn btn-default btn-xs" id="hb_imexport" type="button" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog">
@@ -18,10 +19,10 @@
 		
     </div>
 
-    <div id="hb_kb_cont">
-      
+    <div id="hb_top_cont">
+		    <div id="hb_kb_cont">
 	  
-	             <ul id="keyboard" data-bind="colorhotbuildkeys: hotbuildkeys, coloruberkeys: uberkeys, colordisabledkeys: disabledkeys, activekey: keyboardkey, click_sound: 'default', rollover_sound: 'default'">
+	             <ul id="hbkeyboard" data-bind="colorhotbuildkeys: hotbuildkeys, coloruberkeys: uberkeys, colordisabledkeys: disabledkeys, activekey: keyboardkey, click_sound: 'default', rollover_sound: 'default'">
                 <li class="tab">tab</li>
                 <li class="letter">q</li>
                 <li class="letter">w</li>
@@ -63,104 +64,113 @@
                 <li class="right-shift lastitem">shift</li>
                 <li class="space lastitem">space</li>
             </ul>
+            <ul id="legend">
+                <li class="letter">&nbsp;</li>
+                <div id="legendlabel">Unassigned</div>
+                <li class="letter hbk">&nbsp;</li>
+                <div id="legendlabel">Hotbuild</div>
+                <li class="letter uber">&nbsp;</li>
+                <div id="legendlabel">Uber</div>
+                <li class="letter dis">&nbsp;</li>
+                <div id="legendlabel">Reserved</div>
+            </ul>	  
 	  
 	  
 	  
-	  
-	  
+		</div>
     </div>
 
-    <div id="hb_assign_cont">
-      <div id="hb_assign_left">
-        <div id="hb_assign_sequence">
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
+    <div id="hb_bottom_cont">
+	
+			<div id="hb_assign_left_header">
+			        <div id="buttoninfo">
+            <ul>
+                <li id="kbselection">&nbsp;</li>
+            </ul>
         </div>
-      </div>
+				<div id="selectedlabels">
+					<div id="uberkeyinfo">
+						
+						<span id="uberlabel">Uber Keybind:</span>
+						<span data-bind="text: uberkey" class="uberkey"></span>
+					</div>
+					<div id="hblabel">Hotbuild Sequence</div>
+				</div>
+			</div>
+			<div id="hb_assign_right_header">
+				<div id="hbfilter">
+					<div class="unitTypes">
+						<span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
+						<span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
+					</div>
+					<div class="buildTabs" data-bind="foreach: filters">
+						<span class="btFilterTab" data-bind="click: function() { $root.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data === $root.activeSubFilters() }, text: $data"></span>
+					</div>
+				</div>
+			</div>
+			
+		<div id="hb_assign_left">
+		
+
+			
+			<div id="hb_assign_sequence">
+		
+				<div id="sequence">
+					<div id="sequencelist">
+						<div class="sequencelistitem" data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_bottom_cont' } }"></div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
 
       <div id="hb_assign_right">
+
         <div id="hb_assign_select">
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
-          MIDDLE<br>
+		
+           <div id="sequenceR">
+                <div id="sequencelistR">
+                    <div data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_bottom_cont' } }"></div>
+                </div>
+            </div>
+			
         </div>
       </div>
     </div>
 
-    <div id="hb_footer">
-      FOOTER
-    </div>
+
   </div>
 
-  
+ 
+
+
+    <script id="leftTemplate" type="text/html">
+        <div class="hotbuild_list_item">
+            <div class="hotbuild_fab_selection">
+                <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+                <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
+            </div>
+            <div class="hotbuild_list_desc">
+                <span data-bind="text: displayname"></span><br />
+                <span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
+             </div>
+            <div id="hbremovefromlist">
+                <span class="ui-icon ui-icon-trash" data-bind="click: $root.remFromList, click_sound: 'default', rollover_sound: 'default'" />
+            </div>
+         </div>
+    </script>
+
+    <script id="rightTemplate" type="text/html">
+        <div class="hotbuild_list_item">
+            <div class="hotbuild_fab_selection">
+                <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+            </div>
+            <div class="hotbuild_list_desc">
+                <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
+                <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
+            </div>
+        </div>
+    </script> 
   
       <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
         <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>

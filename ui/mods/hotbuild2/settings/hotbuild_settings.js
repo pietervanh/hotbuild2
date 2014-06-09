@@ -360,12 +360,12 @@ var hotbuildsettings = (function () {
             $("#setComDefaults").click(function () {
                 console.log("set Community Defaults");
                 //disable osk
-                //$("#keyboard li").unbind("click dblclick", self.keyboardclickhandler);
+                //$("#hbkeyboard li").unbind("click dblclick", self.keyboardclickhandler);
                 self.ComunityDefaults();
                 self.showingDefaultPrompt(false);
                 $("#comdefaultsDlg").dialog("close");
                 //enable osk
-                //$("#keyboard li").bind("click dblclick", self.keyboardclickhandler);
+                //$("#hbkeyboard li").bind("click dblclick", self.keyboardclickhandler);
             });
             $("#ignoreComDefaults").click(function () {
                 self.showingDefaultPrompt(false);
@@ -385,12 +385,12 @@ var hotbuildsettings = (function () {
             $("#setComDefaultsWASD").click(function () {
                 console.log("set Community Defaults WASD");
                 //disable osk
-                //$("#keyboard li").unbind("click dblclick", self.keyboardclickhandler);
+                //$("#hbkeyboard li").unbind("click dblclick", self.keyboardclickhandler);
                 self.ComunityDefaultsWASD();
                 self.showingDefaultWASDPrompt(false);
                 $("#comdefaultsWASDDlg").dialog("close");
                 //enable osk
-                //$("#keyboard li").bind("click dblclick", self.keyboardclickhandler);
+                //$("#hbkeyboard li").bind("click dblclick", self.keyboardclickhandler);
             });
             $("#ignoreComDefaultsWASD").click(function () {
                 self.showingDefaultWASDPrompt(false);
@@ -559,7 +559,7 @@ var hotbuildsettings = (function () {
         element.load(url, function () {
             console.log("Loading html " + url);
             ko.applyBindings(model, element.get(0));
-            $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
+            $("#hbkeyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
         });
     };
 
@@ -622,14 +622,14 @@ var hotbuildsettings = (function () {
             var value = valueAccessor();
             // Next, whether or not the supplied model property is observable, get its current value
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            $('#keyboard li').each(function (index) {
+            $('#hbkeyboard li').each(function (index) {
                 if ($(this).hasClass('hbk')) {
                     $(this).removeClass('hbk');
                 }
             });
             /*jshint -W083 */
             for (var i = 0; i < valueUnwrapped.length; i++) {
-                $("#keyboard li").each(function (index) {
+                $("#hbkeyboard li").each(function (index) {
                     if ($(this).text() === valueUnwrapped[i]) {
                         if (!$(this).hasClass('hbk')) {
                             $(this).toggleClass('hbk');
@@ -647,14 +647,14 @@ var hotbuildsettings = (function () {
             var value = valueAccessor();
             // Next, whether or not the supplied model property is observable, get its current value
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            $('#keyboard li').each(function (index) {
+            $('#hbkeyboard li').each(function (index) {
                 if ($(this).hasClass('uber')) {
                     $(this).removeClass('uber');
                 }
             });
             /*jshint -W083 */
             for (var i = 0; i < valueUnwrapped.length; i++) {
-                $("#keyboard li").each(function (index) {
+                $("#hbkeyboard li").each(function (index) {
                     if ($(this).text() === valueUnwrapped[i]) {
                         if (!$(this).hasClass('uber')) {
                             $(this).toggleClass('uber');
@@ -672,14 +672,14 @@ var hotbuildsettings = (function () {
             var value = valueAccessor();
             // Next, whether or not the supplied model property is observable, get its current value
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            $('#keyboard li').each(function (index) {
+            $('#hbkeyboard li').each(function (index) {
                 if ($(this).hasClass('dis')) {
                     $(this).removeClass('dis');
                 }
             });
             /*jshint -W083 */
             for (var i = 0; i < valueUnwrapped.length; i++) {
-                $("#keyboard li").each(function (index) {
+                $("#hbkeyboard li").each(function (index) {
                     if ($(this).text() === valueUnwrapped[i]) {
                         if (!$(this).hasClass('dis')) {
                             $(this).toggleClass('dis');
@@ -697,22 +697,22 @@ var hotbuildsettings = (function () {
             var value = valueAccessor();
             // Next, whether or not the supplied model property is observable, get its current value
             var valueUnwrapped = ko.utils.unwrapObservable(value);
-            $('#keyboard li').each(function (index) {
+            $('#hbkeyboard li').each(function (index) {
                 if ($(this).hasClass('active')) {
-                    $(this).css('box-shadow', '');
+                    $(this).css('-webkit-filter', '');
                     $(this).removeClass('active');
                 }
             });
-            $("#keyboard li").each(function (index) {
+            $("#hbkeyboard li").each(function (index) {
                 if ($(this).text() === valueUnwrapped) {
                     var $this = $(this);
                     if (!$this.hasClass('active')) {
                         $this.addClass('active');
-                        $this.css('box-shadow', '0px 0px 2px 2px rgba(0,255,255,.7)');
+                        $this.css('-webkit-filter', 'drop-shadow(0px 0px 6px rgba(255,255,255,1))');
                         var $selectedButton = $this.clone();
                         //$selectedButton.removeClass('active');
                         $selectedButton.attr('id', 'kbselection');
-                        $selectedButton.css({ 'box-shadow': '', 'border': 'rgba(0,255,255,1) solid thin', '-webkit-border-radius': '5px', 'text-transform': 'uppercase !important' });
+                        $selectedButton.css({ '-webkit-filter': 'none', 'text-transform': 'uppercase !important' });
                         $('#kbselection').replaceWith($selectedButton);
                         $('#kbselection').click(function () {
                             $('#changeKeyDlg').dialog({
