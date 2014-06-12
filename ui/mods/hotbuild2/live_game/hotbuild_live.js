@@ -3,8 +3,7 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
-/*
-var hotbuild2 = (function(){})();
+
 var hotbuild2live = (function () {
     //load html dynamically
     loadHotBuildTemplate = function (element, url, model) {
@@ -72,7 +71,7 @@ var hotbuild2live = (function () {
     
     //Hook up Real Functions to Keyboard Keys
     //Special Action
-    /*
+    
     action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
     action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
     action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
@@ -80,7 +79,7 @@ var hotbuild2live = (function () {
     action_sets.hotbuild['Toggle HotSelect']=function(event){hotbuild2.toggleState_select();};
 
 })();    
-*/
+
 apply_keybinds('hotbuild');
 
 var input_maps = (function () {
