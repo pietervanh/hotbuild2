@@ -31,6 +31,14 @@ var hotbuild2 = (function () {
 
     function hbManager(resetTime) {
         var self = this;
+        self.buildable_units = ko.observableArray([]);
+        handlers["hbselection"] = function(payload){
+            //get data from buildbar;
+            console.log("got buildlist from buildbar");
+            console.log(payload);
+            self.buildable_units(payload);
+        };
+
         self.cycleResetTime = resetTime; //time you have to press again to loop trough list
         self.lastCycleTime = ko.observable(new Date());
         self.lastkey = ko.observable(0);
@@ -97,9 +105,9 @@ var hotbuild2 = (function () {
         
         self.hotBuild = function (event, hotbuilds) {
             self.hotbuilds(hotbuilds);
+            //debugger;
             if (model.maybeSetBuildTarget) {
-                
-                if (self.knowsAnyBuildCommand()&&hotbuild_enable) {
+                if (self.knowsAnyBuildCommand() && hotbuild_enable) {
                     var failDetect = 0;
                     do {
                         self.doCycleId(self.hotbuilds().length, event.which);
@@ -131,7 +139,15 @@ var hotbuild2 = (function () {
                         //model.buildItemBySpec(hbunit.id);
                         //console.log(hbunit.id);
                         //model.executeStartBuild(event, self.getBuildItemId());
-                        model.executeStartBuild(event, hbunit);
+                        //model.executeStartBuild(event, hbunit);
+                        //debugger;
+                        var params = {}
+                        params.item = hbunit.id;
+                        params.batch = event.shiftKey;
+                        params.cancel = false;
+                        params.urgent = false;
+                        params.more = "";
+                        model.executeStartBuild(params);
                     }
                     self.unitName(hbunit.name);
                     self.buildPreviewList(self.cycleid(), self.hotbuilds());
@@ -184,7 +200,19 @@ var hotbuild2 = (function () {
 
         self.knowsBuildCommand = function (cmd) {
             //check on buildtablist empty
-
+            //debugger;
+            if(self.buildable_units().length > 0){
+                for(var i = 0; i < self.buildable_units().length; i++){
+                    if(self.buildable_units()[i].id == cmd) {
+                        return true;
+                    }
+                    //GW fix
+                    if(self.buildable_units()[i].id == cmd + ".player") {
+                        return true;
+                    }  
+                }
+            }
+            /*
             if (model.buildTabLists().length > 0){
                 for (var b = 0; b < model.buildTabLists().length; b++){
                     for (var i = 0; i < model.buildTabLists()[b].length; i++) {
@@ -201,6 +229,7 @@ var hotbuild2 = (function () {
                     }
                 }
             }
+            */
             return false;
         };
 
@@ -527,7 +556,6 @@ var hotbuild2 = (function () {
         }
     });
 
-
     var keycodes = {
         37: "left",
         38: "up",
@@ -579,7 +607,6 @@ var hotbuild2 = (function () {
     // stop = s = default mousetrap binding
     // build mex = hotbuild key = using keydown
     $(document).keydown(function (e) {
-
         if (!model.hasSelection() || model.showLanding() || model.chatSelected())
             return;
 
@@ -608,3 +635,5 @@ var hotbuild2 = (function () {
     return hotbuild2;
 
 })();
+console.log("sending hotbuild2 to buildbar");
+api.panels.build_bar.message("hb_hotbuild", hotbuild2);

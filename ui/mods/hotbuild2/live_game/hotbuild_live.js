@@ -3,13 +3,14 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
+/*
+var hotbuild2 = (function(){})();
 var hotbuild2live = (function () {
-
     //load html dynamically
     loadHotBuildTemplate = function (element, url, model) {
         element.load(url, function () {
             console.log("Loading html " + url);
-            ko.applyBindings(model, element.get(0));
+            ko.applyBindings(model, element.get(0))
         });
     };
 
@@ -71,17 +72,15 @@ var hotbuild2live = (function () {
     
     //Hook up Real Functions to Keyboard Keys
     //Special Action
-    
+    /*
     action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
     action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
     action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
     action_sets.hotbuild['Toggle Hotbuild']=function(event){hotbuild2.toggleState();};
     action_sets.hotbuild['Toggle HotSelect']=function(event){hotbuild2.toggleState_select();};
 
-    
-
-})();
-
+})();    
+*/
 apply_keybinds('hotbuild');
 
 var input_maps = (function () {
@@ -133,3 +132,38 @@ var input_maps = (function () {
 
     return result;
 })();
+
+model.hbunitspecs = ko.computed(function(){
+    if(model.buildSet() !== undefined){
+        if(model.buildSet().selectedSpecs() !== undefined){
+            return model.buildSet().selectedSpecs();
+        }
+    }
+});
+
+model.hbunitspecs.subscribe(function(newval){
+    //try{
+        //console.log(newval);
+        var specs = ko.toJS(newval[Object.keys(newval)[0]]);
+        console.log(specs);
+        var barr = [];
+        if(specs !== undefined){
+            
+            //console.log(specs);
+            for(var i = 0; i < specs.length; i++){
+                var bspec = specs[i];
+                delete bspec.build;
+                delete bspec.commands;
+                delete bspec.consumption;
+                delete bspec.production;
+                barr[i] = bspec;
+            }
+            
+        }
+        console.log(barr);
+        api.Panel.message(api.Panel.parentId,'hbselection',barr);
+   /* }
+    catch(e){
+        console.log(e);
+    } */
+});
