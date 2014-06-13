@@ -13,46 +13,46 @@
 
         <div id="keyboardcontainer">
             <ul id="keyboard" data-bind="colorhotbuildkeys: hotbuildkeys, coloruberkeys: uberkeys, colordisabledkeys: disabledkeys, activekey: keyboardkey, click_sound: 'default', rollover_sound: 'default'">
-                <li class="tab">tab</li>
-                <li class="letter">q</li>
-                <li class="letter">w</li>
-                <li class="letter">e</li>
-                <li class="letter">r</li>
-                <li class="letter">t</li>
-                <li class="letter">y</li>
-                <li class="letter">u</li>
-                <li class="letter">i</li>
-                <li class="letter">o</li>
-                <li class="letter">p</li>
-                <li class="symbol">[</li>
-                <li class="symbol">]</li>
-                <li class="symbol lastitem">\</li>
-                <li class="capslock">caps lock</li>
-                <li class="letter">a</li>
-                <li class="letter">s</li>
-                <li class="letter">d</li>
-                <li class="letter">f</li>
-                <li class="letter">g</li>
-                <li class="letter">h</li>
-                <li class="letter">j</li>
-                <li class="letter">k</li>
-                <li class="letter">l</li>
-                <li class="symbol">;</li>
-                <li class="symbol">'</li>
-                <li class="return lastitem">return</li>
-                <li class="left-shift">shift</li>
-                <li class="letter">z</li>
-                <li class="letter">x</li>
-                <li class="letter">c</li>
-                <li class="letter">v</li>
-                <li class="letter">b</li>
-                <li class="letter">n</li>
-                <li class="letter">m</li>
-                <li class="symbol">,</li>
-                <li class="symbol">.</li>
-                <li class="symbol">/</li>
-                <li class="right-shift lastitem">shift</li>
-                <li class="space lastitem">space</li>
+                <li class="tab" data-bind="click:$data.handlekey">tab</li>
+                <li class="letter" data-bind="click:$data.handlekey">q</li>
+                <li class="letter" data-bind="click:$data.handlekey">w</li>
+                <li class="letter" data-bind="click:$data.handlekey">e</li>
+                <li class="letter" data-bind="click:$data.handlekey">r</li>
+                <li class="letter" data-bind="click:$data.handlekey">t</li>
+                <li class="letter" data-bind="click:$data.handlekey">y</li>
+                <li class="letter" data-bind="click:$data.handlekey">u</li>
+                <li class="letter" data-bind="click:$data.handlekey">i</li>
+                <li class="letter" data-bind="click:$data.handlekey">o</li>
+                <li class="letter" data-bind="click:$data.handlekey">p</li>
+                <li class="symbol" data-bind="click:$data.handlekey">[</li>
+                <li class="symbol" data-bind="click:$data.handlekey">]</li>
+                <li class="symbol lastitem" data-bind="click:$data.handlekey">\</li>
+                <li class="capslock" data-bind="click:$data.handlekey">caps lock</li>
+                <li class="letter" data-bind="click:$data.handlekey">a</li>
+                <li class="letter" data-bind="click:$data.handlekey">s</li>
+                <li class="letter" data-bind="click:$data.handlekey">d</li>
+                <li class="letter" data-bind="click:$data.handlekey">f</li>
+                <li class="letter" data-bind="click:$data.handlekey">g</li>
+                <li class="letter" data-bind="click:$data.handlekey">h</li>
+                <li class="letter" data-bind="click:$data.handlekey">j</li>
+                <li class="letter" data-bind="click:$data.handlekey">k</li>
+                <li class="letter" data-bind="click:$data.handlekey">l</li>
+                <li class="symbol" data-bind="click:$data.handlekey">;</li>
+                <li class="symbol" data-bind="click:$data.handlekey">'</li>
+                <li class="return lastitem" data-bind="click:$data.handlekey">return</li>
+                <li class="left-shift" data-bind="click:$data.handlekey">shift</li>
+                <li class="letter" data-bind="click:$data.handlekey">z</li>
+                <li class="letter" data-bind="click:$data.handlekey">x</li>
+                <li class="letter" data-bind="click:$data.handlekey">c</li>
+                <li class="letter" data-bind="click:$data.handlekey">v</li>
+                <li class="letter" data-bind="click:$data.handlekey">b</li>
+                <li class="letter" data-bind="click:$data.handlekey">n</li>
+                <li class="letter" data-bind="click:$data.handlekey">m</li>
+                <li class="symbol" data-bind="click:$data.handlekey">,</li>
+                <li class="symbol" data-bind="click:$data.handlekey">.</li>
+                <li class="symbol" data-bind="click:$data.handlekey">/</li>
+                <li class="right-shift lastitem" data-bind="click:$data.handlekey">shift</li>
+                <li class="space lastitem" data-bind="click:$data.handlekey">space</li>
             </ul>
             <ul id="legend">
                 <li class="letter">&nbsp;</li>

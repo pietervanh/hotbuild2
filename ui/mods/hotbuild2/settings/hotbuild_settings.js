@@ -361,13 +361,9 @@ var hotbuildsettings = (function () {
             });
             $("#setComDefaults").click(function () {
                 console.log("set Community Defaults");
-                //disable osk
-                //$("#keyboard li").unbind("click dblclick", self.keyboardclickhandler);
                 self.ComunityDefaults();
                 self.showingDefaultPrompt(false);
                 $("#comdefaultsDlg").dialog("close");
-                //enable osk
-                //$("#keyboard li").bind("click dblclick", self.keyboardclickhandler);
             });
             $("#ignoreComDefaults").click(function () {
                 self.showingDefaultPrompt(false);
@@ -386,13 +382,9 @@ var hotbuildsettings = (function () {
             });
             $("#setComDefaultsWASD").click(function () {
                 console.log("set Community Defaults WASD");
-                //disable osk
-                //$("#keyboard li").unbind("click dblclick", self.keyboardclickhandler);
                 self.ComunityDefaultsWASD();
                 self.showingDefaultWASDPrompt(false);
                 $("#comdefaultsWASDDlg").dialog("close");
-                //enable osk
-                //$("#keyboard li").bind("click dblclick", self.keyboardclickhandler);
             });
             $("#ignoreComDefaultsWASD").click(function () {
                 self.showingDefaultWASDPrompt(false);
@@ -526,9 +518,9 @@ var hotbuildsettings = (function () {
             });
         };
 
-        self.keyboardclickhandler = function () {
-            //console.log('click hotbuildkey');
-            var $this = $(this);
+        self.handlekey = function (data,event) {
+            console.log(event.target);
+            var $this = $(event.target);
             var character = $this.html();
             if (!$this.hasClass('dis')) {
                 if (!$this.hasClass('active')) {
@@ -731,30 +723,7 @@ var hotbuildsettings = (function () {
     };
     model.settingGroups().push("hotbuild");
     model.settingDefinitions()["hotbuild"] = {title:"Hotbuild",settings:{}};
-    //model.settingsLists().push([]);
-    //debugger;
-    /*
-    var $tabheadersettings = $("#main .header");
-    $tabheadersettings.children(":first").append("<li>" +
-                                            "<a href='#tab_hotbuildprefs' data-toggle='pill'>HOTBUILD</a>" +
-                                            "</li>");
-    */
-    
-    var loadHotBuildSettings = function(element, url, model) {
-        element.load(url, function () {
-            console.log("Loading html " + url);
-            ko.applyBindings(model, element.get(0));
-            $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
-        });
-    };
 
-    var $tabcontentsettings = $("#main .content .wrapper .option-list").first().append($('<div>').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () {
-        //ko.applyBindings(model, element.get(0));
-        console.log("after load hotbuild html");
-        $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
-    }));
-    //loadHotBuildSettings($('#tab_hotbuildprefs'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
+    var $tabcontentsettings = $("#main .content .wrapper .option-list").first().append($('<div>').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () {}));
     
 })();
-
-$("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
