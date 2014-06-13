@@ -735,13 +735,19 @@ var hotbuildsettings = (function () {
             });
         }
     };
-
+    model.settingGroups().push("hotbuild");
+    model.settingDefinitions()["hotbuild"] = {title:"Hotbuild",settings:{}};
+    //model.settingsLists().push([]);
     //debugger;
+    /*
     var $tabheadersettings = $("#main .header");
     $tabheadersettings.children(":first").append("<li>" +
                                             "<a href='#tab_hotbuildprefs' data-toggle='pill'>HOTBUILD</a>" +
                                             "</li>");
-    var $tabcontentsettings = $("#main .content");
-    $tabcontentsettings.children(":first").append('<div class="option-list tab-pane" id="tab_hotbuildprefs"></div>');
-    loadHotBuildSettings($('#tab_hotbuildprefs'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
+    */
+    
+    var $tabcontentsettings = $("#main .content .wrapper");
+    $tabcontentsettings.children().last().after('<div class="option-list" data-bind=\"visible: $index() === $root.activeSettingsGroupIndex()\" style=\"display: none;\">TEST</div>');
+    //loadHotBuildSettings($('#tab_hotbuildprefs'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
+    
 })();
