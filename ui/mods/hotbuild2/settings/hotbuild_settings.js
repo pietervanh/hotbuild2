@@ -557,13 +557,7 @@ var hotbuildsettings = (function () {
 
 (function () {
 
-    var loadHotBuildSettings = function(element, url, model) {
-        element.load(url, function () {
-            console.log("Loading html " + url);
-            ko.applyBindings(model, element.get(0));
-            $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
-        });
-    };
+
 
     model.oldSettingsBeforeHotbuild = model.settings;
     /*
@@ -746,8 +740,21 @@ var hotbuildsettings = (function () {
                                             "</li>");
     */
     
-    var $tabcontentsettings = $("#main .content .wrapper");
-    $tabcontentsettings.children().last().after('<div class="option-list" data-bind=\"visible: $index() === $root.activeSettingsGroupIndex()\" style=\"display: none;\">TEST</div>');
+    var loadHotBuildSettings = function(element, url, model) {
+        element.load(url, function () {
+            console.log("Loading html " + url);
+            ko.applyBindings(model, element.get(0));
+            $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
+        });
+    };
+
+    var $tabcontentsettings = $("#main .content .wrapper .option-list").first().append($('<div>').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () {
+        //ko.applyBindings(model, element.get(0));
+        console.log("after load hotbuild html");
+        $("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
+    }));
     //loadHotBuildSettings($('#tab_hotbuildprefs'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
     
 })();
+
+$("#keyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);

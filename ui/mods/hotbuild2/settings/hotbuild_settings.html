@@ -1,11 +1,12 @@
-<!-- ko if: $index() === 7 -->
+<!-- ko if: $parent.settingGroups()[$index()] === "hotbuild" -->
+<!-- ko with: hotbuildsettings.viewmodel -->
 <div id="div_settings_hotbuild_cont">
     <div id="block">
         <div class="ui-icon ui-icon-comment"></div>
         <div id="comments" style="font-family:'DINPRO-LIGHT'">Please give comments/ideas on the forum</div>
         <div id="communitydefaults">
-            <input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultPrompt" />
-            <input type="button" value="Community Defaults (WASD)"  data-bind="click_sound: 'default', rollover_sound: 'default',click:$root.showCommunityDefaultWASDPrompt" />
+            <input type="button" value="Community Defaults (&#8592;&#8593;&#8594;&#8595;)" data-bind="click_sound: 'default', rollover_sound: 'default',click:$data.showCommunityDefaultPrompt" />
+            <input type="button" value="Community Defaults (WASD)"  data-bind="click_sound: 'default', rollover_sound: 'default',click:$data.showCommunityDefaultWASDPrompt" />
         </div>
         <div id="troubles" style="font-family:'DINPRO-LIGHT'">Issues? Please select a "Community Default" then "Save and Close"</div>
         <div class="ui-icon ui-icon-info"></div>
@@ -67,7 +68,7 @@
         </div>
 
         <div id="imexporter">
-            <input type="button" value="Import - Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog" />
+            <input type="button" value="Import - Export" type="submit" data-bind="click_sound:'default', rollover_sound:'default', click:$data.showImportExportDialog" />
         </div>
     </div>
 
@@ -97,11 +98,11 @@
         </div>
         <div class="filter">
             <div class="unitTypes">
-                <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
-                <span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
+                <span class="unitFilterTab" data-bind="click: function() { $data.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
+                <span class="unitFilterTab" data-bind="click: function() { $data.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
             </div>
             <div class="buildTabs" data-bind="foreach: filters">
-                <span class="btFilterTab" data-bind="click: function() { $root.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data === $root.activeSubFilters() }, text: $data"></span>
+                <span class="btFilterTab" data-bind="click: function() { $parent.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data === $parent.activeSubFilters() }, text: $data"></span>
             </div>
         </div>
 
@@ -186,4 +187,5 @@
     </div>
 
 </div>
+ <!-- /ko -->
  <!-- /ko -->
