@@ -395,12 +395,12 @@ var hotbuildsettings = (function () {
         };
 
         self.ComunityDefaults = function () {
-            forgetFramePosition('hotbuild_info_frame');
+            //forgetFramePosition('hotbuild_info_frame');
             self.importfromfile("/ui/mods/hotbuild2/defaults/ARROWS.json");
         };
 
         self.ComunityDefaultsWASD = function () {
-            forgetFramePosition('hotbuild_info_frame');
+            //forgetFramePosition('hotbuild_info_frame');
             self.importfromfile("/ui/mods/hotbuild2/defaults/WASD.json");
         };
 
@@ -563,20 +563,9 @@ var hotbuildsettings = (function () {
     });
 */
 
-    model.oldsaveBeforeHotbuild = model.save;
-    model.save = function(){
-        model.settings().hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
-        model.settings().hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
-        model.oldsaveBeforeHotbuild();
-    };
-    /*
-    model.oldsaveandexitBeforeHotbuild = model.saveAndExit;
-    model.saveAndExit = function(){
-        model.settings().hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
-        model.settings().hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
-        model.oldsaveandexitBeforeHotbuild();
-    };    
-    */
+    
+
+
     _.extend(api.settings.definitions.ui.settings, {
         hotbuild_reset_time: {
             title: 'Hotbuild Reset Time',
@@ -608,6 +597,25 @@ var hotbuildsettings = (function () {
             options: ['ON','OFF']
         }
     });
+
+    var localsettings = decode(localStorage.settings);
+
+    model.oldsaveBeforeHotbuild = model.save;
+    model.save = function(){
+        //api.settings.set("hb","hotbuildconfigkey",hotbuildsettings.viewmodel.cleanhotbuildglobalkey())
+        localsettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
+        localsettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        localStorage.settings = encode(localsettings);
+        model.oldsaveBeforeHotbuild();
+    };
+    model.oldsaveandexitBeforeHotbuild = model.saveAndExit;
+    model.saveAndExit = function(){
+        localsettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
+        localsettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        localStorage.settings = encode(localsettings);
+        model.oldsaveandexitBeforeHotbuild();
+    };    
+
     /*
     model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Reset Cycle when Shift isn\'t down', 'hotbuild_shift_key_recycle', 'UI', ['ON', 'OFF'], 1, 'Hotbuild2');

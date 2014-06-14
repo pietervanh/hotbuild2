@@ -23,7 +23,6 @@
     ],
     "live_game_build_bar": [
       "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
-      "coui://ui/mods/hotbuild2/live_game/hotbuild_core.js",
       "coui://ui/mods/hotbuild2/live_game/hotbuild_live.js"
       ],
       "settings": [

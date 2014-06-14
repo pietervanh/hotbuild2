@@ -445,6 +445,7 @@ var hotbuild2 = (function () {
             nextSetting = "off";
         }
         engine.call("set_camera_pole_lock", nextSetting);
+        console.log("pole_lock : " + nextSetting);
         allSettings.camera_pole_lock = nextSetting.toUpperCase();
         localStorage.settings = encode(allSettings);
         event.preventDefault();
@@ -635,5 +636,64 @@ var hotbuild2 = (function () {
     return hotbuild2;
 
 })();
-console.log("sending hotbuild2 to buildbar");
-api.panels.build_bar.message("hb_hotbuild", hotbuild2);
+
+    console.log("hook hotbuild2 special funtions");
+    action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
+    action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
+    action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
+    action_sets.hotbuild['Toggle Hotbuild']=function(event){hotbuild2.toggleState();};
+    action_sets.hotbuild['Toggle HotSelect']=function(event){hotbuild2.toggleState_select();};
+    console.log("hook hotbuild2 special funtions");
+
+var input_maps = (function () {
+
+    var result = {};
+
+    function create_dictionary_and_keymap(group) {
+        var dictionary = {};
+        var keymap = {};
+
+        var defaults = default_keybinds[group];
+
+        _.forIn(action_sets[group], function (fn, key) {
+            console.log(group);
+            var binding = defaults[key];
+            var alt;
+            var use_alt = false;
+
+            if (localStorage['keybinding_' + key] !== undefined)
+                binding = decode(localStorage['keybinding_' + key]);
+
+            if (binding && binding.length === 1) {
+                alt = binding;
+                alt = [alt.toLowerCase(), alt.toUpperCase()];
+
+                if (alt[0] !== alt[1])
+                    use_alt = true;
+            }
+
+            if (use_alt){
+                dictionary[alt[0]] = fn;
+                dictionary[alt[1]] = fn;
+            }
+            else
+                dictionary[binding] = fn;
+
+            keymap[binding] = key;
+        });
+
+        return {
+            dictionary: dictionary,
+            keymap: keymap
+        };
+    }
+
+    _.forIn(action_sets, function (set, group) {
+        result[group] = create_dictionary_and_keymap(group);
+    });
+
+    return result;
+})();
+
+console.log("loaded hotbuild core");
+

@@ -1,9 +1,4 @@
-/// <reference path="hotbuild_live.js" />
-//IntelliSense for WebMatrix /VS
-/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
-/// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
-/// <reference path="../.vsdoc/lodash-2.4.1.js" />
-
+console.log("loading hotbuild2 buildbar");
 var hotbuild2live = (function () {
     //load html dynamically
     loadHotBuildTemplate = function (element, url, model) {
@@ -19,6 +14,35 @@ var hotbuild2live = (function () {
     loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
 */
     //show keybinds on build bar
+    var hotbuild2 = {};
+    var hotbuildglobal = {};
+    var hotbuildglobalkey = {};
+    var settings = decode(localStorage.settings);
+
+    hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
+    hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;    
+    hotbuild2.hbgetBuildBarKey = function (id) {
+        var result = '';
+        var hbpos = 1;
+        _.forEach(hotbuildglobal, function (hbkey) {
+            _.forEach(hbkey, function (hbitem) {
+                if (hbitem.json === id) {
+                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
+                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                        return false;
+                    }
+                }
+                if (hbitem.json + ".player" === id) {
+                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
+                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                        return false;
+                    }
+                }                
+            });
+            hbpos += 1;
+        });
+        return result;
+    };    
     
     var show_key_on_buildbar = api.settings.isSet('ui','hotbuild_show_key_on_buildbar',true) || "ON";
 
@@ -70,68 +94,7 @@ var hotbuild2live = (function () {
     }
     */
     
-    //Hook up Real Functions to Keyboard Keys
-    //Special Action
-    
-    action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
-    action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
-    action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
-    action_sets.hotbuild['Toggle Hotbuild']=function(event){hotbuild2.toggleState();};
-    action_sets.hotbuild['Toggle HotSelect']=function(event){hotbuild2.toggleState_select();};
-
 })();    
-
-apply_keybinds('hotbuild');
-
-var input_maps = (function () {
-
-    var result = {};
-
-    function create_dictionary_and_keymap(group) {
-        var dictionary = {};
-        var keymap = {};
-
-        var defaults = default_keybinds[group];
-
-        _.forIn(action_sets[group], function (fn, key) {
-            console.log(group);
-            var binding = defaults[key];
-            var alt;
-            var use_alt = false;
-
-            if (localStorage['keybinding_' + key] !== undefined)
-                binding = decode(localStorage['keybinding_' + key]);
-
-            if (binding && binding.length === 1) {
-                alt = binding;
-                alt = [alt.toLowerCase(), alt.toUpperCase()];
-
-                if (alt[0] !== alt[1])
-                    use_alt = true;
-            }
-
-            if (use_alt){
-                dictionary[alt[0]] = fn;
-                dictionary[alt[1]] = fn;
-            }
-            else
-                dictionary[binding] = fn;
-
-            keymap[binding] = key;
-        });
-
-        return {
-            dictionary: dictionary,
-            keymap: keymap
-        };
-    }
-
-    _.forIn(action_sets, function (set, group) {
-        result[group] = create_dictionary_and_keymap(group);
-    });
-
-    return result;
-})();
 
 model.hbunitspecs = ko.computed(function(){
     if(model.buildSet() !== undefined){
