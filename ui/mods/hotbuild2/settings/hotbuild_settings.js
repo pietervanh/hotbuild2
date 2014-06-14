@@ -299,6 +299,8 @@ var hotbuildsettings = (function () {
             self.cleanhotbuildglobal(viewmodelconfig);
             model.hotbuildconfig = self.cleanhotbuildglobal();
             model.hotbuildconfigkey = self.cleanhotbuildglobalkey();
+            //model.clean(false);
+            api.settings.isDirty(true);
         };
 
 
@@ -567,12 +569,52 @@ var hotbuildsettings = (function () {
         model.settings().hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
         model.oldsaveBeforeHotbuild();
     };
+    /*
+    model.oldsaveandexitBeforeHotbuild = model.saveAndExit;
+    model.saveAndExit = function(){
+        model.settings().hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
+        model.settings().hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        model.oldsaveandexitBeforeHotbuild();
+    };    
+    */
+    _.extend(api.settings.definitions.ui.settings, {
+        hotbuild_reset_time: {
+            title: 'Hotbuild Reset Time',
+            type: 'slider',
+            options:{
+                min:0,
+                max:10000,
+                step:500
+            },
+            default: 2000
+        },
+        hotbuild_shift_key_recycle: {
+            title: 'Hotbuild Reset Sycle when Shift isn\'t down',
+            type: 'select',
+            default: 'OFF',
+            options: ['ON','OFF']
 
+        },
+        hotbuild_show_key_on_buildbar: {
+            title: 'Hotbuild Show Key on BuildBar',
+            type: 'select',
+            default: 'ON',
+            options: ['ON','OFF']
+        },
+        hotbuild_show_key_on_sidebar: {
+            title: 'Hotbuild Show Key on SideBar',
+            type: 'select',
+            default: 'ON',
+            options: ['ON','OFF']
+        }
+    });
+    /*
     model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Reset Cycle when Shift isn\'t down', 'hotbuild_shift_key_recycle', 'UI', ['ON', 'OFF'], 1, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Show Key on SideBar', 'hotbuild_show_key_on_sidebar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
-    model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
+    */
+    //model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
         //debugger;

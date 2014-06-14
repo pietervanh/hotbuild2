@@ -36,8 +36,6 @@
     ]
   },
     "requires": [
-        "rFloatFrame",
-        "rSettingsManager",
         "rBlueprintInfoFramework"
     ],
     "enabled": true
