@@ -578,9 +578,9 @@ var hotbuildsettings = (function () {
             default: 2000
         },
         hotbuild_shift_key_recycle: {
-            title: 'Hotbuild Reset Sycle when Shift isn\'t down',
+            title: 'Hotbuild Reset Cycle when Shift isn\'t down',
             type: 'select',
-            default: 'OFF',
+            default: 'ON',
             options: ['ON','OFF']
 
         },

@@ -17,13 +17,8 @@ var hotbuild2 = (function () {
 
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
-    var hotbuildshiftrecycle = settings.hotbuild_show_key_on_buildbar ? settings.hotbuild_show_key_on_buildbar : "OFF";
-
-    model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time,0);
-    //fast check on bad reset_time input
-    if (isNaN(model.hotbuild_reset_time)) {
-        model.hotbuild_reset_time = 2000;
-    }
+    var hotbuildshiftrecycle = api.settings.isSet('ui','hotbuild_shift_key_recycle',true) || "OFF";
+    var hotbuildreset_time = api.settings.isSet('ui','hotbuild_reset_time',true) || 2000;
 
     var hotbuild2 = {};
 
@@ -262,7 +257,7 @@ var hotbuild2 = (function () {
     }
 
     //init hotbuildsystem
-    hotbuild2.hotbuildManager = new hbManager(model.hotbuild_reset_time);
+    hotbuild2.hotbuildManager = new hbManager(hotbuildreset_time);
 
     hotbuild2.hbgetBuildBarKey = function (id) {
         var result = '';
