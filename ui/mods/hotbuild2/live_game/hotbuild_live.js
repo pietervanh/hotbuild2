@@ -1,27 +1,21 @@
 console.log("loading hotbuild2 buildbar");
+
 var hotbuild2live = (function () {
     //load html dynamically
     loadHotBuildTemplate = function (element, url, model) {
         element.load(url, function () {
             console.log("Loading html " + url);
-            ko.applyBindings(model, element.get(0))
+            ko.applyBindings(model, element.get(0));
         });
     };
 
-    //load hotbuildconfig from settings
-    /*
-    createFloatingFrame('hotbuild_info_frame', 220, 70, { 'offset': 'leftCenter', 'top': -200 });
-    loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
-*/
-    //show keybinds on build bar
-    var hotbuild2 = {};
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
     var settings = decode(localStorage.settings);
 
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;    
-    hotbuild2.hbgetBuildBarKey = function (id) {
+    hbgetBuildBarKey = function (id) {
         var result = '';
         var hbpos = 1;
         _.forEach(hotbuildglobal, function (hbkey) {
@@ -43,20 +37,29 @@ var hotbuild2live = (function () {
         });
         return result;
     };    
+    console.log("lalala");
+
+    //load hotbuildconfig from settings
+    /*
+    createFloatingFrame('hotbuild_info_frame', 220, 70, { 'offset': 'leftCenter', 'top': -200 });
+    loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
+*/
+    //show keybinds on build bar
+
     
     var show_key_on_buildbar = api.settings.isSet('ui','hotbuild_show_key_on_buildbar',true) || "ON";
 
     if (show_key_on_buildbar === "ON") {
         //Show key on buildbar
         $('.div_build_item .span_hotkey').replaceWith(
-        '<span class="span_hotkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.id) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.id)"></span>'
+        '<span class="span_hotkey" data-bind="visible: hbgetBuildBarKey($data.id) != \'\' , text: hbgetBuildBarKey($data.id)"></span>'
         );
         $('.div_build_bar_cont').removeAttr('data-bind');
         //$('.div_command_item .span_hotkey').removeAttr('style');
 
         $('.div_unit_selection img').replaceWith(
         '<img class="img_selected_unit" src="" data-bind="attr: { src: $data.icon }" style="-webkit-transform: scaleX(-1);"/>' +
-        '<span class="hbselectionbarkey" data-bind="visible: hotbuild2.hbgetBuildBarKey($data.type) != \'\' , text: hotbuild2.hbgetBuildBarKey($data.type)"></span>');
+        '<span class="hbselectionbarkey" data-bind="visible: hbgetBuildBarKey($data.type) != \'\' , text: hhbgetBuildBarKey($data.type)"></span>');
     }
     /*
     if (settings.hotbuild_show_key_on_sidebar === "ON") {

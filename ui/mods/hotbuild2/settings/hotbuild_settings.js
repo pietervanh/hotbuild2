@@ -772,7 +772,7 @@ var hotbuildsettings = (function () {
         }
     };
     model.settingGroups().push("hotbuild");
-    model.settingDefinitions()["hotbuild"] = {title:"Hotbuild",settings:{}};
+    model.settingDefinitions().hotbuild = {title:"Hotbuild",settings:{}};
 
     var $tabcontentsettings = $("#main .content .wrapper .option-list").first().append($('<div>').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () {}));
     

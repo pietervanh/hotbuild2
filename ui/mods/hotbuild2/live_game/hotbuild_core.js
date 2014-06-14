@@ -27,7 +27,7 @@ var hotbuild2 = (function () {
     function hbManager(resetTime) {
         var self = this;
         self.buildable_units = ko.observableArray([]);
-        handlers["hbselection"] = function(payload){
+        handlers.hbselection = function(payload){
             //get data from buildbar;
             console.log("got buildlist from buildbar");
             console.log(payload);
@@ -136,7 +136,7 @@ var hotbuild2 = (function () {
                         //model.executeStartBuild(event, self.getBuildItemId());
                         //model.executeStartBuild(event, hbunit);
                         //debugger;
-                        var params = {}
+                        var params = {};
                         params.item = hbunit.id;
                         params.batch = event.shiftKey;
                         params.cancel = false;
