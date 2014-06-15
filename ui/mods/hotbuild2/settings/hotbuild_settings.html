@@ -1,68 +1,69 @@
-  <div id="hb_settings_cont">
+<!-- ko if: $parent.settingGroups()[$index()] === "hotbuild" -->
+<!-- ko with: hotbuildsettings.viewmodel -->
+
     <div id="hb_header">
         <span id="hb_comments">Please give comments/ideas on the forum</span>
-		<span id="hb_troubles">Issues? Please select a "Community Default" then "Save Settings"</span>
-		
-<div class="btn-group" id="hb_commdef_cont">
-  <button class="btn btn-default btn-xs dropdown-toggle" id="hb_communitydefaults" type="button" data-toggle="dropdown" data-bind="click_sound: 'default', rollover_sound: 'default'">
-    Community Defaults <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-	<li><a href="#" data-bind="click:$root.showCommunityDefaultWASDPrompt">WASD (Qwerty)</a></li>
-	<li><a href="#" data-bind="click:$root.showCommunityDefaultWASDPrompt">ZQSD (Azerty)</a></li>
-    <li><a href="#" data-bind="click:$root.showCommunityDefaultPrompt">ARROWS (&#8592;&#8593;&#8594;&#8595;)</a></li>
-  </ul>
-</div>
-  <button class="btn btn-default btn-xs" id="hb_imexport" type="button" data-bind="click_sound:'default', rollover_sound:'default', click:$root.showImportExportDialog">
-    Import/Export
-  </button>
-		
+        <span id="hb_troubles">Issues? Please select a "Community Default" then "Save Settings"</span>
+        
+        <div class="btn-group" id="hb_commdef_cont">
+            <button class="btn btn-default btn-xs dropdown-toggle" id="hb_communitydefaults" type="button" data-toggle="dropdown" data-bind="click_sound: 'default', rollover_sound: 'default'">
+                Community Defaults <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" data-bind="click:$data.showCommunityDefaultWASDPrompt">WASD (Qwerty)</a></li>
+                <li><a href="#" data-bind="click:$data.showCommunityDefaultWASDPrompt">ZQSD (Azerty)</a></li>
+                <li><a href="#" data-bind="click:$data.showCommunityDefaultPrompt">ARROWS (&#8592;&#8593;&#8594;&#8595;)</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-default btn-xs" id="hb_imexport" type="button" data-bind="click_sound:'default', rollover_sound:'default', click:$data.showImportExportDialog">
+            Import/Export
+        </button>
+        
     </div>
 
     <div id="hb_top_cont">
-		    <div id="hb_kb_cont">
-	  
-	             <ul id="hbkeyboard" data-bind="colorhotbuildkeys: hotbuildkeys, coloruberkeys: uberkeys, colordisabledkeys: disabledkeys, activekey: keyboardkey, click_sound: 'default', rollover_sound: 'default'">
-                <li class="tab">tab</li>
-                <li class="letter">q</li>
-                <li class="letter">w</li>
-                <li class="letter">e</li>
-                <li class="letter">r</li>
-                <li class="letter">t</li>
-                <li class="letter">y</li>
-                <li class="letter">u</li>
-                <li class="letter">i</li>
-                <li class="letter">o</li>
-                <li class="letter">p</li>
-                <li class="symbol">[</li>
-                <li class="symbol">]</li>
-                <li class="symbol lastitem">\</li>
-                <li class="capslock">caps lock</li>
-                <li class="letter">a</li>
-                <li class="letter">s</li>
-                <li class="letter">d</li>
-                <li class="letter">f</li>
-                <li class="letter">g</li>
-                <li class="letter">h</li>
-                <li class="letter">j</li>
-                <li class="letter">k</li>
-                <li class="letter">l</li>
-                <li class="symbol">;</li>
-                <li class="symbol">'</li>
-                <li class="return lastitem">return</li>
-                <li class="left-shift">shift</li>
-                <li class="letter">z</li>
-                <li class="letter">x</li>
-                <li class="letter">c</li>
-                <li class="letter">v</li>
-                <li class="letter">b</li>
-                <li class="letter">n</li>
-                <li class="letter">m</li>
-                <li class="symbol">,</li>
-                <li class="symbol">.</li>
-                <li class="symbol">/</li>
-                <li class="right-shift lastitem">shift</li>
-                <li class="space lastitem">space</li>
+        <div id="hb_kb_cont">
+            <ul id="hbkeyboard" data-bind="colorhotbuildkeys: hotbuildkeys, coloruberkeys: uberkeys, colordisabledkeys: disabledkeys, activekey: keyboardkey, click_sound: 'default', rollover_sound: 'default'">
+                <li class="tab" data-bind="click:$data.handlekey">tab</li>
+                <li class="letter" data-bind="click:$data.handlekey">q</li>
+                <li class="letter" data-bind="click:$data.handlekey">w</li>
+                <li class="letter" data-bind="click:$data.handlekey">e</li>
+                <li class="letter" data-bind="click:$data.handlekey">r</li>
+                <li class="letter" data-bind="click:$data.handlekey">t</li>
+                <li class="letter" data-bind="click:$data.handlekey">y</li>
+                <li class="letter" data-bind="click:$data.handlekey">u</li>
+                <li class="letter" data-bind="click:$data.handlekey">i</li>
+                <li class="letter" data-bind="click:$data.handlekey">o</li>
+                <li class="letter" data-bind="click:$data.handlekey">p</li>
+                <li class="symbol" data-bind="click:$data.handlekey">[</li>
+                <li class="symbol" data-bind="click:$data.handlekey">]</li>
+                <li class="symbol lastitem" data-bind="click:$data.handlekey">\</li>
+                <li class="capslock" data-bind="click:$data.handlekey">caps lock</li>
+                <li class="letter" data-bind="click:$data.handlekey">a</li>
+                <li class="letter" data-bind="click:$data.handlekey">s</li>
+                <li class="letter" data-bind="click:$data.handlekey">d</li>
+                <li class="letter" data-bind="click:$data.handlekey">f</li>
+                <li class="letter" data-bind="click:$data.handlekey">g</li>
+                <li class="letter" data-bind="click:$data.handlekey">h</li>
+                <li class="letter" data-bind="click:$data.handlekey">j</li>
+                <li class="letter" data-bind="click:$data.handlekey">k</li>
+                <li class="letter" data-bind="click:$data.handlekey">l</li>
+                <li class="symbol" data-bind="click:$data.handlekey">;</li>
+                <li class="symbol" data-bind="click:$data.handlekey">'</li>
+                <li class="return lastitem" data-bind="click:$data.handlekey">return</li>
+                <li class="left-shift" data-bind="click:$data.handlekey">shift</li>
+                <li class="letter" data-bind="click:$data.handlekey">z</li>
+                <li class="letter" data-bind="click:$data.handlekey">x</li>
+                <li class="letter" data-bind="click:$data.handlekey">c</li>
+                <li class="letter" data-bind="click:$data.handlekey">v</li>
+                <li class="letter" data-bind="click:$data.handlekey">b</li>
+                <li class="letter" data-bind="click:$data.handlekey">n</li>
+                <li class="letter" data-bind="click:$data.handlekey">m</li>
+                <li class="symbol" data-bind="click:$data.handlekey">,</li>
+                <li class="symbol" data-bind="click:$data.handlekey">.</li>
+                <li class="symbol" data-bind="click:$data.handlekey">/</li>
+                <li class="right-shift lastitem" data-bind="click:$data.handlekey">shift</li>
+                <li class="space lastitem" data-bind="click:$data.handlekey">space</li>
             </ul>
             <ul id="legend">
                 <li class="letter">&nbsp;</li>
@@ -73,133 +74,125 @@
                 <div id="legendlabel">Uber</div>
                 <li class="letter dis">&nbsp;</li>
                 <div id="legendlabel">Reserved</div>
-            </ul>	  
-	  
-	  
-	  
-		</div>
+            </ul>     
+        </div>
     </div>
 
     <div id="hb_bottom_cont">
-	
-			<div id="hb_assign_left_header">
-			        <div id="buttoninfo">
-            <ul>
-                <li id="kbselection">&nbsp;</li>
-            </ul>
-        </div>
-				<div id="selectedlabels">
-					<div id="uberkeyinfo">
-						
-						<div id="uberlabel">Uber Keybind:</div>
-						<div data-bind="text: uberkey" class="uberkey"></div>
-					</div>
-				</div>
-			</div>
-			<div id="hb_assign_right_header">
-				<div id="hbfilter">
-					<div class="unitTypes">
-						<span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
-						<span class="unitFilterTab" data-bind="click: function() { $root.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
-					</div>
-					<div class="buildTabs" data-bind="foreach: filters">
-						<span class="btFilterTab" data-bind="click: function() { $root.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data === $root.activeSubFilters() }, text: $data"></span>
-					</div>
-				</div>
-			</div>
-		<div id="hb_assign">
-		<div id="hb_assign_left">
-		
-		<div class="hb_list_top_desc_left">A<br>S<br>S<br>I<br>G<br>N</div>
-			
-			<div id="hb_assign_sequence">
-		
-				<div id="sequence">
-					<div id="sequencelist">
-						<div class="sequencelistitem" data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }"></div>
-						
-					</div>
-				</div>
-			
-			</div>
-		</div>
 
-      <div id="hb_assign_right">
+        <div id="hb_assign_left_header">
 
-		<div class="hb_list_top_desc_right">S<br>E<br>L<br>E<br>C<br>T</div>
-        <div id="hb_assign_select">
-		
-           <div id="sequenceR">
-                <div id="sequencelistR">
-
-                    <div id="hbselectionitems" data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }"></div>
+            <div id="buttoninfo">
+                <ul>
+                    <li id="kbselection">&nbsp;</li>
+                </ul>
+            </div>
+            <div id="selectedlabels">
+                <div id="uberkeyinfo">
+                    <div id="uberlabel">Uber Keybind:</div>
+                    <div data-bind="text: uberkey" class="uberkey"></div>
                 </div>
             </div>
-			
+
         </div>
-      </div>
-	  </div>
+        <div id="hb_assign_right_header">
+
+            <div id="hbfilter">
+                <div class="unitTypes">
+                    <span class="unitFilterTab" data-bind="click: function() { $data.toggleTopFilter(true); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : unitbuildfilter() }">buildings</span>
+                    <span class="unitFilterTab" data-bind="click: function() { $data.toggleTopFilter(false); }, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : !unitbuildfilter() }">units</span>
+                </div>
+                <div class="buildTabs" data-bind="foreach: filters">
+                    <span class="btFilterTab" data-bind="click: function() { $parent.addFilter($data);}, click_sound:'default', rollover_sound:'default', css: { selecterFilterTab : $data === $parent.activeSubFilters() }, text: $data"></span>
+                </div>
+            </div>
+
+        </div>
+        <div id="hb_assign">
+
+            <div id="hb_assign_left">
+                <div class="hb_list_top_desc_left">A<br>S<br>S<br>I<br>G<br>N</div>
+                <div id="hb_assign_sequence">
+                    <div id="sequence">
+                        <div id="sequencelist">
+                            <div class="sequencelistitem" data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hb_assign_right">
+                <div class="hb_list_top_desc_right">S<br>E<br>L<br>E<br>C<br>T</div>
+                <div id="hb_assign_select">
+                    <div id="sequenceR">
+                        <div id="sequencelistR">
+                            <div id="hbselectionitems" data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 
-  </div>
 
- 
-
-
-    <script id="leftTemplate" type="text/html">
-        <div class="hotbuild_list_item">
-            <div class="hotbuild_fab_selection">
-			                <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
-                <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
-
-            </div>
-            <div class="hotbuild_list_desc">
-                <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
-                <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
-             </div>
-            <div id="hbremovefromlist" data-bind="click: $root.remFromList, click_sound: 'default', rollover_sound: 'default'"></div>
+<script id="leftTemplate" type="text/html">
+    <div class="hotbuild_list_item">
+        <div class="hotbuild_fab_selection">
+            <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
+            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+        </div>
+        <div class="hotbuild_list_desc">
+            <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
+            <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
          </div>
-    </script>
+        <div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"></div>
+     </div>
+</script>
 
-    <script id="rightTemplate" type="text/html">
-        <div class="hotbuild_list_item">
-            <div class="hotbuild_fab_selection">
-                <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
-            </div>
-            <div class="hotbuild_list_desc">
-                <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
-                <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
-            </div>
+<script id="rightTemplate" type="text/html">
+    <div class="hotbuild_list_item">
+        <div class="hotbuild_fab_selection">
+            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
         </div>
-    </script> 
+        <div class="hotbuild_list_desc">
+            <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
+            <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
+        </div>
+    </div>
+</script> 
   
-      <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
-        <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
-        <div id="tutorialBtnGroup" style="margin-top: 10px">
-            <button id="setComDefaults" type="submit" style="width: 45%">YES</button>
-            <button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
-        </div>
+<div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
+    <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
+    <div id="tutorialBtnGroup" style="margin-top: 10px">
+        <button id="setComDefaults" type="submit" style="width: 45%">YES</button>
+        <button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
     </div>
+</div>
 
-    <div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
-        <div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
-        <div id="tutorialBtnGroup" style="margin-top: 10px">
-            <button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
-            <button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
-        </div>
+<div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
+    <div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
+    <div id="tutorialBtnGroup" style="margin-top: 10px">
+        <button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
+        <button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
     </div>
-	
-	    <div id="importexportDlg" data-bind="visible: showingImportExportDialog" title="Import/Export">
-        <div>
-            <p>Before exporting make sure you have pressed save and close</p>
-            <p>Copy text into/from textarea below</p>
-            <textarea id="ieport" style="width:400px" rows="5"></textarea>
-        </div>
+</div>
+    
+<div id="importexportDlg" data-bind="visible: showingImportExportDialog" title="Import/Export">
+    <div>
+        <p>Before exporting make sure you have pressed save and close</p>
+        <p>Copy text into/from textarea below</p>
+        <textarea id="ieport" style="width:400px" rows="5"></textarea>
     </div>
-	
-	    <div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details">
-        <div>
-            Change <span id="changekey" data-bind="text: keyboardkey" /> to <input id="swapkey" type="text"/>
-        </div>
+</div>
+    
+<div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details">
+    <div>
+        Change <span id="changekey" data-bind="text: keyboardkey" /> to <input id="swapkey" type="text"/>
     </div>
+</div>
+
+ <!-- /ko -->
+ <!-- /ko -->
