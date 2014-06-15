@@ -91,10 +91,9 @@
 				<div id="selectedlabels">
 					<div id="uberkeyinfo">
 						
-						<span id="uberlabel">Uber Keybind:</span>
-						<span data-bind="text: uberkey" class="uberkey"></span>
+						<div id="uberlabel">Uber Keybind:</div>
+						<div data-bind="text: uberkey" class="uberkey"></div>
 					</div>
-					<div id="hblabel">Hotbuild Sequence</div>
 				</div>
 			</div>
 			<div id="hb_assign_right_header">
@@ -108,16 +107,17 @@
 					</div>
 				</div>
 			</div>
-			
+		<div id="hb_assign">
 		<div id="hb_assign_left">
 		
-
+		<div class="hb_list_top_desc_left">A<br>S<br>S<br>I<br>G<br>N</div>
 			
 			<div id="hb_assign_sequence">
 		
 				<div id="sequence">
 					<div id="sequencelist">
-						<div class="sequencelistitem" data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_bottom_cont' } }"></div>
+						<div class="sequencelistitem" data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }"></div>
+						
 					</div>
 				</div>
 			
@@ -126,16 +126,19 @@
 
       <div id="hb_assign_right">
 
+		<div class="hb_list_top_desc_right">S<br>E<br>L<br>E<br>C<br>T</div>
         <div id="hb_assign_select">
 		
            <div id="sequenceR">
                 <div id="sequencelistR">
-                    <div data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_bottom_cont' } }"></div>
+
+                    <div id="hbselectionitems" data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }"></div>
                 </div>
             </div>
 			
         </div>
       </div>
+	  </div>
     </div>
 
 
@@ -147,16 +150,15 @@
     <script id="leftTemplate" type="text/html">
         <div class="hotbuild_list_item">
             <div class="hotbuild_fab_selection">
+			                <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
                 <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
-                <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
+
             </div>
             <div class="hotbuild_list_desc">
-                <span data-bind="text: displayname"></span><br />
-                <span style="font-family:'DINPRO-LIGHT'" data-bind="text: desc"></span>
+                <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
+                <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
              </div>
-            <div id="hbremovefromlist">
-                <span class="ui-icon ui-icon-trash" data-bind="click: $root.remFromList, click_sound: 'default', rollover_sound: 'default'" />
-            </div>
+            <div id="hbremovefromlist" data-bind="click: $root.remFromList, click_sound: 'default', rollover_sound: 'default'"></div>
          </div>
     </script>
 
@@ -193,5 +195,11 @@
             <p>Before exporting make sure you have pressed save and close</p>
             <p>Copy text into/from textarea below</p>
             <textarea id="ieport" style="width:400px" rows="5"></textarea>
+        </div>
+    </div>
+	
+	    <div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details">
+        <div>
+            Change <span id="changekey" data-bind="text: keyboardkey" /> to <input id="swapkey" type="text"/>
         </div>
     </div>

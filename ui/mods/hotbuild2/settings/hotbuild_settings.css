@@ -53,8 +53,8 @@ height: 64px;
 left: 4px;
 right: 50%;
 top: 0px;
-border-image: url('../../../mods/hotbuild2/settings/panel_tleft.png') 12 12 12 12 fill;
-border-width: 12px 12px 12px 12px;
+/*border-image: url('../../../mods/hotbuild2/settings/panel_tleft.png') 12 12 12 12 fill;
+border-width: 12px 12px 12px 12px;*/
 
 }
 
@@ -68,25 +68,38 @@ border-image: url('../../../mods/hotbuild2/settings/panel_tright.png') 12 12 12 
 border-width: 12px 12px 12px 12px;
 }
 
+#hb_assign {
+position: absolute;
+	top: 64px;
+	bottom: 4px;
+width: 100%;
+padding: 12px;
+}
+
 #hb_assign_left  {
 	position: absolute;
-	top: 64px;
+	top: 0px;
 	bottom: 4px;
 	left: 4px;
 	right: 50%;
-	direction: rtl;
 	overflow-y: scroll;
 	border-image: url('../../../mods/hotbuild2/settings/panel_bleft.png') 12 12 12 12 fill;
 	border-width: 12px 12px 12px 12px;
 }
 
 #hb_assign_sequence {
+	padding-left: 8px;
+}
+
+#hb_assign_select {
     direction: ltr;
+	padding-right: 8px;
 }
 
 #hb_assign_right{
 	position: absolute;
-	top: 64px;
+	direction: rtl;
+	top: 0px;
 	bottom: 4px;
 	right: 4px;
 	border: 1px solid yellow;
@@ -94,6 +107,7 @@ border-width: 12px 12px 12px 12px;
 	overflow-y: scroll;
 	border-image: url('../../../mods/hotbuild2/settings/panel_bright.png') 12 12 12 12 fill;
 	border-width: 12px 12px 12px 12px;
+
 }
 
 #hb_assign_right::-webkit-scrollbar-thumb {
@@ -105,7 +119,9 @@ border-width: 12px 12px 12px 12px;
 }
 
 #hb_assign_select {
+}
 
+#hbselectionitems {
 }
 
 
@@ -312,27 +328,53 @@ padding-top: 7px;
  *************/
   
  
- #sequencelistR {
-    position: relative;
-}
-
-.sequencelistitem {
-position: relative;
+ #sequence, #sequenceR {
 
 }
 
+#sequenceListR{
+}
 
+#sequenceListR{
+}
+
+
+.hb_list_top_desc_left{
+position: fixed;
+margin-left: -8px;
+padding-left: 6px;
+text-align: center;
+	border-image: url('../../../mods/hotbuild2/settings/panel.png') 12 12 12 12 fill;
+	border-width: 12px 12px 12px 0px;
+}
+
+.hb_list_top_desc_right{
+position: fixed;
+margin-right: -22px;
+padding-right: 8px;
+text-align: center;
+	border-image: url('../../../mods/hotbuild2/settings/panel.png') 12 12 12 12 fill;
+	border-width: 12px 0px 12px 12px;
+}
 
 
 .hotbuild_list_item {
 	position: relative;
 	left: 0;
 	min-height: 60px;
-    right: 8px;
+    right: 20px;
 	border-image: url('../../../mods/hotbuild2/settings/panel_bright.png') 12 12 12 12 fill;
 	border-width: 12px 12px 12px 12px;
 	margin-right: 6px;
 	margin-left: 6px;
+}
+
+.hotbuild_list_item.ui-sortable-helper {
+margin-right: -64px !important;
+}
+
+.hotbuild_list_item:hover, .hotbuild_list_item:active {
+	-webkit-filter: drop-shadow(0px 0px 4px rgba(255,255,255,1));
 }
 
 .hotbuild_fab_selection {
@@ -344,6 +386,15 @@ position: relative;
 	padding-right: 8px;
 	border-right: 1px solid #808080;
 	}
+
+.hotbuild_list_desc {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 4px;
+	left: 56px;
+	margin-top: -4px;
+}
 	
 .hotbuild_selected_fab {
     position: relative;
@@ -354,38 +405,52 @@ position: relative;
 }
 
 .hotbuild_selected_text {
-
-}
-
-.hotbuild_list_desc {
 	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 4px;
-	left: 56px;
-	margin-top: -4px;
+	left: 0;
+	right: 8px;
+	text-align: center;
+	font-size: 36px;
+	line-height: 40px;
+	z-index: 999;
+	color: rgba(255,255,255,0.4);
+	text-shadow: 2px 2px rgba(0,0,0,0.7)
 }
+
+
 
 .hotbuild_list_desc_name {
-	font-size: 12px;
+	font-size: 11px;
 }
 
 .hotbuild_list_desc_detail {
     text-transform: none;
 	font-weight: normal;
-	font-size: 10px;
+	font-size: 9px;
 }
 
-.ui-icon-trash {
-    background-image: url(/../../../mods/hotbuild2/settings/ui-icons_00FFFF_256x240.png) !important;
+#hbremovefromlist{
+	position: absolute;
+	right: -4px;
+	top: -4px;
+	height: 10px;
+	width: 10px;
+	border: 1px solid white;
+	background-color: white;
 }
 
-
-.ui-icon-trash:hover {
-    background-image: url(/../../../mods/hotbuild2/settings/ui-icons_FF7F00_256x240.png) !important;
+#hbremovefromlist:hover{
+	border: 1px solid red;
+	background-color: red;
 }
 
-
+.ui-state-hover {
+	border: 1px solid grey;
+	background: black;
+	margin-left: 8px;
+	margin-right: 8px;
+	height: 60px;
+		-webkit-filter: drop-shadow(0px 0px 4px rgba(255,255,255,1));
+}
 
 /*  Selection Headers  *
  *******************/
@@ -393,25 +458,35 @@ position: relative;
  #buttoninfo {
     position: absolute;
 	left: 0px;
-	width: 52px;
-	height: 48px;
+	width: 64px;
+	height: 64px;
+	border-image: url('../../../mods/hotbuild2/settings/panel_tleft.png') 12 12 12 12 fill;
+	border-width: 12px 12px 12px 12px;
 }
 
 #kbselection{
-   min-width: 36px;
-   height: 36px;
-   line-height: 32px;
+     border-width: 0px 8px 0px 8px;
+    border-image: url('../../../mods/hotbuild2/settings/hbkb.png') 0 8 0 8 fill;
+    cursor: default;
+    -webkit-user-select: none;
+   min-width: 40px;
+   min-height: 40px;
+   line-height: 40px;
    text-align: center;
-   border: rgba(0,255,255,.1) solid thin;
-   border-radius: 5px;
-   color: rgba(0,255,255,1);
-   display: inline-block;
+}
+
+#kbselection:hover{
+top: 1px;
+left: 1px;
 }
 
 #selectedlabels{
     position: absolute;
-	left: 60px;
-	right: 4px;
+	right: 0;
+	left: 64px;
+	height: 64px;
+	   border-image: url('../../../mods/hotbuild2/settings/panel_tleft.png') 12 12 12 12 fill;
+	border-width: 12px 12px 12px 12px;
 }
 
 #uberlabel{
@@ -419,26 +494,9 @@ position: relative;
     font-weight: bold;
 }
 
-#hblabel{
-    text-transform: uppercase;
-    font-weight: bold;
-	padding: 2px;
-}
-
-.ui-icon-circle-arrow-e{
-    border-bottom: 1px solid #333;
-    background-image: url(../../../mods/hotbuild2/settings/ui-icons_00FF7F_256x240.png) !important;
-}
-
-
-.ui-icon-circle-arrow-s{
-    background-image: url(../../../mods/hotbuild2/settings/ui-icons_00FFFF_256x240.png) !important;
-}
 
 
 #uberkeyinfo {
-border-bottom: 1px solid white;
-padding: 2px;
 }
 
 .uberkey {
@@ -446,7 +504,6 @@ padding: 2px;
 }
  
  
- 
- 
+  
  /*  Filter         *
  *******************/
