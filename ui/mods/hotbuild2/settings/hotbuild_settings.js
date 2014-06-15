@@ -1,5 +1,5 @@
 //IntelliSense for WebMatrix /VS
-/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
+/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" />
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 var hotbuildsettings = (function () {
@@ -14,7 +14,7 @@ var hotbuildsettings = (function () {
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
         bif.registerBIFReadyCallback(function () {
-            var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json 
+            var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json
             var end = /[.]json$/;
             var filteredresults = [];
             var filteredunits = [];
@@ -82,7 +82,7 @@ var hotbuildsettings = (function () {
             anukeammo.image = '../live_game/img/build_bar/units/' + anukeammo.json.substring(anukeammo.json.search(start), anukeammo.json.search(end)) + '.png';
             anukeammo.display_group = '1';
             filteredresults.push(anukeammo);
-            
+
             for (var j = 0; j < filteredresults.length; j++) {
                 if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
                     filteredunits.push(filteredresults[j]);
@@ -216,7 +216,7 @@ var hotbuildsettings = (function () {
                 self.selectedkeyinfo(hotbuildkey.substring(0, hotbuildkey.length - 1));
             }
             else {
-                //find first unused hotbuildkey and select it 
+                //find first unused hotbuildkey and select it
                 var lastindex = _.keys(self.hotbuildglobalkey()).length + 1;
                 self.hotbuildglobalkey()['hotbuild' + lastindex + 's'] = value;
                 self.hotbuildglobal()['hotbuild' + lastindex + 's'] = [];
@@ -251,9 +251,11 @@ var hotbuildsettings = (function () {
 
         self.disabledkeys = ko.computed(function () {
             var diskeys = ['caps lock', 'shift', 'return'];
+            /*
             if (model.cameraKeyPanStyle() === "WASD") {
                 diskeys = diskeys.concat(['w', 'a', 's', 'd']);
             }
+            */
             return diskeys;
         });
 
@@ -297,6 +299,8 @@ var hotbuildsettings = (function () {
             self.cleanhotbuildglobal(viewmodelconfig);
             model.hotbuildconfig = self.cleanhotbuildglobal();
             model.hotbuildconfigkey = self.cleanhotbuildglobalkey();
+            //model.clean(false);
+            api.settings.isDirty(true);
         };
 
 
@@ -338,7 +342,7 @@ var hotbuildsettings = (function () {
             self.keyboardkey(swapto);
 
         };
-        //remove for dummies that don't know to drag it back 
+        //remove for dummies that don't know to drag it back
         self.remFromList = function (item) {
             self.selectedhotbuild.remove(item);
             self.Save();
@@ -359,13 +363,10 @@ var hotbuildsettings = (function () {
             });
             $("#setComDefaults").click(function () {
                 console.log("set Community Defaults");
-                //disable osk
                 //$("#hbkeyboard li").unbind("click dblclick", self.keyboardclickhandler);
                 self.ComunityDefaults();
                 self.showingDefaultPrompt(false);
                 $("#comdefaultsDlg").dialog("close");
-                //enable osk
-                //$("#hbkeyboard li").bind("click dblclick", self.keyboardclickhandler);
             });
             $("#ignoreComDefaults").click(function () {
                 self.showingDefaultPrompt(false);
@@ -384,13 +385,9 @@ var hotbuildsettings = (function () {
             });
             $("#setComDefaultsWASD").click(function () {
                 console.log("set Community Defaults WASD");
-                //disable osk
-                //$("#hbkeyboard li").unbind("click dblclick", self.keyboardclickhandler);
                 self.ComunityDefaultsWASD();
                 self.showingDefaultWASDPrompt(false);
                 $("#comdefaultsWASDDlg").dialog("close");
-                //enable osk
-                //$("#hbkeyboard li").bind("click dblclick", self.keyboardclickhandler);
             });
             $("#ignoreComDefaultsWASD").click(function () {
                 self.showingDefaultWASDPrompt(false);
@@ -399,12 +396,12 @@ var hotbuildsettings = (function () {
         };
 
         self.ComunityDefaults = function () {
-            forgetFramePosition('hotbuild_info_frame');
+            //forgetFramePosition('hotbuild_info_frame');
             self.importfromfile("/ui/mods/hotbuild2/defaults/ARROWS.json");
         };
 
         self.ComunityDefaultsWASD = function () {
-            forgetFramePosition('hotbuild_info_frame');
+            //forgetFramePosition('hotbuild_info_frame');
             self.importfromfile("/ui/mods/hotbuild2/defaults/WASD.json");
         };
 
@@ -415,7 +412,7 @@ var hotbuildsettings = (function () {
             self.Save();
             keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
             keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
-            keyboardsettings.cameraKeyPanStyle = model.cameraKeyPanStyle();
+            //keyboardsettings.cameraKeyPanStyle = model.cameraKeyPanStyle();
             $("#ieport").val(JSON.stringify(keyboardsettings));
         };
 
@@ -455,7 +452,7 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
-                model.cameraKeyPanStyle(imported.cameraKeyPanStyle);
+                //model.cameraKeyPanStyle(imported.cameraKeyPanStyle);
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
@@ -499,8 +496,8 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
-                console.log(imported.cameraKeyPanStyle);
-                model.cameraKeyPanStyle(imported.cameraKeyPanStyle);
+                //console.log(imported.cameraKeyPanStyle);
+                //model.cameraKeyPanStyle(imported.cameraKeyPanStyle);
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
@@ -524,9 +521,9 @@ var hotbuildsettings = (function () {
             });
         };
 
-        self.keyboardclickhandler = function () {
-            //console.log('click hotbuildkey');
-            var $this = $(this);
+        self.handlekey = function (data,event) {
+            console.log(event.target);
+            var $this = $(event.target);
             var character = $this.html();
             if (!$this.hasClass('dis')) {
                 if (!$this.hasClass('active')) {
@@ -555,13 +552,7 @@ var hotbuildsettings = (function () {
 
 (function () {
 
-    var loadHotBuildSettings = function(element, url, model) {
-        element.load(url, function () {
-            console.log("Loading html " + url);
-            ko.applyBindings(model, element.get(0));
-            $("#hbkeyboard li").bind("click dblclick", hotbuildsettings.viewmodel.keyboardclickhandler);
-        });
-    };
+
 
     model.oldSettingsBeforeHotbuild = model.settings;
     /*
@@ -573,19 +564,67 @@ var hotbuildsettings = (function () {
     });
 */
 
+    
+
+
+    _.extend(api.settings.definitions.ui.settings, {
+        hotbuild_reset_time: {
+            title: 'Hotbuild Reset Time',
+            type: 'slider',
+            options:{
+                min:0,
+                max:10000,
+                step:500
+            },
+            default: 2000
+        },
+        hotbuild_shift_key_recycle: {
+            title: 'Hotbuild Reset Cycle when Shift isn\'t down',
+            type: 'select',
+            default: 'ON',
+            options: ['ON','OFF']
+
+        },
+        hotbuild_show_key_on_buildbar: {
+            title: 'Hotbuild Show Key on BuildBar',
+            type: 'select',
+            default: 'ON',
+            options: ['ON','OFF']
+        },
+        hotbuild_show_key_on_sidebar: {
+            title: 'Hotbuild Show Key on SideBar',
+            type: 'select',
+            default: 'ON',
+            options: ['ON','OFF']
+        }
+    });
+
+    var localsettings = decode(localStorage.settings);
+
     model.oldsaveBeforeHotbuild = model.save;
     model.save = function(){
-        model.settings().hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
-        model.settings().hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        //api.settings.set("hb","hotbuildconfigkey",hotbuildsettings.viewmodel.cleanhotbuildglobalkey())
+        localsettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
+        localsettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        localStorage.settings = encode(localsettings);
         model.oldsaveBeforeHotbuild();
     };
+    model.oldsaveandexitBeforeHotbuild = model.saveAndExit;
+    model.saveAndExit = function(){
+        localsettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
+        localsettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
+        localStorage.settings = encode(localsettings);
+        model.oldsaveandexitBeforeHotbuild();
+    };    
 
+    /*
     model.addSetting_Text('Hotbuild Reset Time', 'hotbuild_reset_time', 'UI', 'Number', 2000, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Reset Cycle when Shift isn\'t down', 'hotbuild_shift_key_recycle', 'UI', ['ON', 'OFF'], 1, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Show Key on BuildBar', 'hotbuild_show_key_on_buildbar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
     model.addSetting_DropDown('Hotbuild Show Key on SideBar', 'hotbuild_show_key_on_sidebar', 'UI', ['ON', 'OFF'], 0, 'Hotbuild2');
-    model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
-    
+    */
+    //model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
+
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
         //debugger;
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
@@ -615,7 +654,7 @@ var hotbuildsettings = (function () {
         hotbuildsettings.viewmodel.Save();
         hotbuildsettings.viewmodel.updatehotbuildkeys();
     };
-    
+
     ko.bindingHandlers.colorhotbuildkeys = {
         update: function (element, valueAccessor, allBindings) {
             // First get the latest data that we're bound to
@@ -733,13 +772,9 @@ var hotbuildsettings = (function () {
             });
         }
     };
+    model.settingGroups().push("hotbuild");
+    model.settingDefinitions().hotbuild = {title:"Hotbuild",settings:{}};
 
-    //debugger;
-    var $tabheadersettings = $("#main .header");
-    $tabheadersettings.children(":first").append("<li>" +
-                                            "<a href='#hotbuild' data-toggle='pill'>HOTBUILD</a>" +
-                                            "</li>");
-    var $tabcontentsettings = $("#main .content");
-    $tabcontentsettings.children(":first").append('<div class="option-list tab-pane" id="hotbuild"></div>');
-    loadHotBuildSettings($('#hotbuild'), 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', hotbuildsettings.viewmodel);
+    var $tabcontentsettings = $("#main .content .wrapper .option-list").first().append($('<div>').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () {}));
+    
 })();

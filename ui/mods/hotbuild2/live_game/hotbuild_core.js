@@ -17,13 +17,8 @@ var hotbuild2 = (function () {
 
     hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
     hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
-    var hotbuildshiftrecycle = settings.hotbuild_show_key_on_buildbar ? settings.hotbuild_show_key_on_buildbar : "OFF";
-
-    model.hotbuild_reset_time = parseInt(settings.hotbuild_reset_time,0);
-    //fast check on bad reset_time input
-    if (isNaN(model.hotbuild_reset_time)) {
-        model.hotbuild_reset_time = 2000;
-    }
+    var hotbuildshiftrecycle = api.settings.isSet('ui','hotbuild_shift_key_recycle',true) || "OFF";
+    var hotbuildreset_time = api.settings.isSet('ui','hotbuild_reset_time',true) || 2000;
 
     var hotbuild2 = {};
 
@@ -31,6 +26,14 @@ var hotbuild2 = (function () {
 
     function hbManager(resetTime) {
         var self = this;
+        self.buildable_units = ko.observableArray([]);
+        handlers.hbselection = function(payload){
+            //get data from buildbar;
+            console.log("got buildlist from buildbar");
+            console.log(payload);
+            self.buildable_units(payload);
+        };
+
         self.cycleResetTime = resetTime; //time you have to press again to loop trough list
         self.lastCycleTime = ko.observable(new Date());
         self.lastkey = ko.observable(0);
@@ -97,9 +100,9 @@ var hotbuild2 = (function () {
         
         self.hotBuild = function (event, hotbuilds) {
             self.hotbuilds(hotbuilds);
+            //debugger;
             if (model.maybeSetBuildTarget) {
-                
-                if (self.knowsAnyBuildCommand()&&hotbuild_enable) {
+                if (self.knowsAnyBuildCommand() && hotbuild_enable) {
                     var failDetect = 0;
                     do {
                         self.doCycleId(self.hotbuilds().length, event.which);
@@ -131,7 +134,15 @@ var hotbuild2 = (function () {
                         //model.buildItemBySpec(hbunit.id);
                         //console.log(hbunit.id);
                         //model.executeStartBuild(event, self.getBuildItemId());
-                        model.executeStartBuild(event, hbunit);
+                        //model.executeStartBuild(event, hbunit);
+                        //debugger;
+                        var params = {};
+                        params.item = hbunit.id;
+                        params.batch = event.shiftKey;
+                        params.cancel = false;
+                        params.urgent = false;
+                        params.more = "";
+                        model.executeStartBuild(params);
                     }
                     self.unitName(hbunit.name);
                     self.buildPreviewList(self.cycleid(), self.hotbuilds());
@@ -184,7 +195,19 @@ var hotbuild2 = (function () {
 
         self.knowsBuildCommand = function (cmd) {
             //check on buildtablist empty
-
+            //debugger;
+            if(self.buildable_units().length > 0){
+                for(var i = 0; i < self.buildable_units().length; i++){
+                    if(self.buildable_units()[i].id == cmd) {
+                        return true;
+                    }
+                    //GW fix
+                    if(self.buildable_units()[i].id == cmd + ".player") {
+                        return true;
+                    }  
+                }
+            }
+            /*
             if (model.buildTabLists().length > 0){
                 for (var b = 0; b < model.buildTabLists().length; b++){
                     for (var i = 0; i < model.buildTabLists()[b].length; i++) {
@@ -201,6 +224,7 @@ var hotbuild2 = (function () {
                     }
                 }
             }
+            */
             return false;
         };
 
@@ -233,7 +257,7 @@ var hotbuild2 = (function () {
     }
 
     //init hotbuildsystem
-    hotbuild2.hotbuildManager = new hbManager(model.hotbuild_reset_time);
+    hotbuild2.hotbuildManager = new hbManager(hotbuildreset_time);
 
     hotbuild2.hbgetBuildBarKey = function (id) {
         var result = '';
@@ -416,6 +440,7 @@ var hotbuild2 = (function () {
             nextSetting = "off";
         }
         engine.call("set_camera_pole_lock", nextSetting);
+        console.log("pole_lock : " + nextSetting);
         allSettings.camera_pole_lock = nextSetting.toUpperCase();
         localStorage.settings = encode(allSettings);
         event.preventDefault();
@@ -527,7 +552,6 @@ var hotbuild2 = (function () {
         }
     });
 
-
     var keycodes = {
         37: "left",
         38: "up",
@@ -579,7 +603,6 @@ var hotbuild2 = (function () {
     // stop = s = default mousetrap binding
     // build mex = hotbuild key = using keydown
     $(document).keydown(function (e) {
-
         if (!model.hasSelection() || model.showLanding() || model.chatSelected())
             return;
 
@@ -608,3 +631,64 @@ var hotbuild2 = (function () {
     return hotbuild2;
 
 })();
+
+    console.log("hook hotbuild2 special funtions");
+    action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
+    action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
+    action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
+    action_sets.hotbuild['Toggle Hotbuild']=function(event){hotbuild2.toggleState();};
+    action_sets.hotbuild['Toggle HotSelect']=function(event){hotbuild2.toggleState_select();};
+    console.log("hook hotbuild2 special funtions");
+
+var input_maps = (function () {
+
+    var result = {};
+
+    function create_dictionary_and_keymap(group) {
+        var dictionary = {};
+        var keymap = {};
+
+        var defaults = default_keybinds[group];
+
+        _.forIn(action_sets[group], function (fn, key) {
+            console.log(group);
+            var binding = defaults[key];
+            var alt;
+            var use_alt = false;
+
+            if (localStorage['keybinding_' + key] !== undefined)
+                binding = decode(localStorage['keybinding_' + key]);
+
+            if (binding && binding.length === 1) {
+                alt = binding;
+                alt = [alt.toLowerCase(), alt.toUpperCase()];
+
+                if (alt[0] !== alt[1])
+                    use_alt = true;
+            }
+
+            if (use_alt){
+                dictionary[alt[0]] = fn;
+                dictionary[alt[1]] = fn;
+            }
+            else
+                dictionary[binding] = fn;
+
+            keymap[binding] = key;
+        });
+
+        return {
+            dictionary: dictionary,
+            keymap: keymap
+        };
+    }
+
+    _.forIn(action_sets, function (set, group) {
+        result[group] = create_dictionary_and_keymap(group);
+    });
+
+    return result;
+})();
+
+console.log("loaded hotbuild core");
+
