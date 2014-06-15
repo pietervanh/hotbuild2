@@ -338,6 +338,16 @@ padding-top: 7px;
 #sequenceListR{
 }
 
+/* Needed for drop target empty list !*/
+.sequencelistitem {
+	position: relative;
+	left: 0;
+	min-height: 60px;
+    right: 22px;
+    /*border-top: rgba(0,255,255,.1)  solid thin;
+    border-bottom: rgba(0,255,255,.1)  solid thin;*/
+}
+
 
 .hb_list_top_desc_left{
 position: fixed;
