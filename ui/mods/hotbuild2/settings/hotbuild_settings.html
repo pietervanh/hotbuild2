@@ -169,18 +169,18 @@
 </script> 
   
 <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
-    <div><span>Are you sure you want to reset your keys to the community defaults ?</span></div>
+    <div>Are you sure you want to reset your keys to the community defaults ?</div>
     <div id="tutorialBtnGroup" style="margin-top: 10px">
-        <button id="setComDefaults" type="submit" style="width: 45%">YES</button>
-        <button id="ignoreComDefaults" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+        <button id="setComDefaults" type="submit">YES</button>
+        <button id="ignoreComDefaults" type="submit">NO THANKS</button>
     </div>
 </div>
 
 <div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
-    <div><span>Are you sure you want to reset your keys to the community defaults (WASD) ?</span></div>
+    <div>Are you sure you want to reset your keys to the community defaults (WASD) ?</div>
     <div id="tutorialBtnGroup" style="margin-top: 10px">
-        <button id="setComDefaultsWASD" type="submit" style="width: 45%">YES</button>
-        <button id="ignoreComDefaultsWASD" type="submit" style="width: 35%; margin-left: 10px">NO THANKS</button>
+        <button id="setComDefaultsWASD" type="submit" >YES</button>
+        <button id="ignoreComDefaultsWASD" type="submit">NO THANKS</button>
     </div>
 </div>
     
@@ -192,7 +192,7 @@
     </div>
 </div>
     
-<div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details">
+<div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details" style="width:400px">
     <div>
         Change <span id="changekey" data-bind="text: keyboardkey" /> to <input id="swapkey" type="text"/>
     </div>
