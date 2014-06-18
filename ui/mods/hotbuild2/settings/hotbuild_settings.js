@@ -356,6 +356,8 @@ var hotbuildsettings = (function () {
             self.showingDefaultPrompt(true);
             $("#comdefaultsDlg").dialog({
                 dialogClass: "no-close",
+				height: 'auto',
+				width: 460,
                 draggable: false,
                 resizable: false,
                 modal: true,
@@ -378,6 +380,8 @@ var hotbuildsettings = (function () {
             self.showingDefaultWASDPrompt(true);
             $("#comdefaultsWASDDlg").dialog({
                 dialogClass: "no-close",
+				height: 'auto',
+				width: 460,
                 draggable: false,
                 resizable: false,
                 modal: true,
@@ -749,8 +753,8 @@ var hotbuildsettings = (function () {
                         $('#kbselection').replaceWith($selectedButton);
                         $('#kbselection').click(function () {
                             $('#changeKeyDlg').dialog({
-                                height: 200,
-                                width: 250,
+                                height: 'auto',
+                                width: 320,
                                 modal: true,
                                 buttons: {
                                     "Change Key": function () { hotbuildsettings.viewmodel.swapKey(); $(this).dialog("close"); }

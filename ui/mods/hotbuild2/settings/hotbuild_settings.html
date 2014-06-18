@@ -11,7 +11,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a href="#" data-bind="click:$data.showCommunityDefaultWASDPrompt">WASD (Qwerty)</a></li>
-                <li><a href="#" data-bind="click:$data.showCommunityDefaultWASDPrompt">ZQSD (Azerty)</a></li>
+                <!-- <li><a href="#" data-bind="click:$data.showCommunityDefaultWASDPrompt">ZQSD (Azerty)</a></li>-->
                 <li><a href="#" data-bind="click:$data.showCommunityDefaultPrompt">ARROWS (&#8592;&#8593;&#8594;&#8595;)</a></li>
             </ul>
         </div>
@@ -170,17 +170,17 @@
   
 <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
     <div>Are you sure you want to reset your keys to the community defaults ?</div>
-    <div id="tutorialBtnGroup" style="margin-top: 10px">
-        <button id="setComDefaults" type="submit">YES</button>
-        <button id="ignoreComDefaults" type="submit">NO THANKS</button>
+    <div class="btn-group">
+        <button id="setComDefaults" class="btn btn_hero" type="button">YES</button>
+        <button id="ignoreComDefaults" class="btn btn_neg" type="button">NO THANKS</button>
     </div>
 </div>
 
 <div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
     <div>Are you sure you want to reset your keys to the community defaults (WASD) ?</div>
-    <div id="tutorialBtnGroup" style="margin-top: 10px">
-        <button id="setComDefaultsWASD" type="submit" >YES</button>
-        <button id="ignoreComDefaultsWASD" type="submit">NO THANKS</button>
+    <div class="btn-group" style="margin-top: 10px">
+        <button id="setComDefaultsWASD" class="btn btn_hero" type="button">YES</button>
+        <button id="ignoreComDefaultsWASD" class="btn btn_neg" type="button">NO THANKS</button>
     </div>
 </div>
     
@@ -194,7 +194,7 @@
     
 <div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details" style="width:400px">
     <div>
-        Change <span id="changekey" data-bind="text: keyboardkey" /> to <input id="swapkey" type="text"/>
+        Change <span id="changekey" data-bind="text: keyboardkey" /><br>to<input id="swapkey" type="text"/>
     </div>
 </div>
 

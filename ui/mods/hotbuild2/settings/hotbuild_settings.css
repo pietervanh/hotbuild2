@@ -518,15 +518,27 @@ left: 1px;
   
  /*  OTHER         *
  *******************/
- #comdefaultsWASDDlg, #comdefaultsDlg {
-	min-width: 300px;
+ #comdefaultsWASDDlg, #comdefaultsDlg, #changeKeyDlg {
+ text-align: center;
 }
  
- #setComDefaultsWASD {
-	float: left;
+ #setComDefaults,  #ignoreComDefaults, #setComDefaultsWASD,  #ignoreComDefaultsWASD {
+	margin-top: 20px;
+    min-width: 140px;
+    color: white;
  }
  
- #ignoreComDefaultsWASD {
-	float: right;
+ #changekey {
+   margin: 10px;
+   text-transform: uppercase;
+   font-weight: bold;
+   font-size: 14px;
  }
  
+ #swapkey {
+	width: 6em;
+	margin: 10px;
+	text-transform: uppercase;
+	font-weight: bold;
+    font-size: 14px;
+ }
