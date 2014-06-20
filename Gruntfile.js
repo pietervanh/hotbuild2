@@ -74,27 +74,6 @@ module.exports = function(grunt) {
             return JSON.stringify(info, null, 2);
           }
         }
-      },
-      dev: {
-        files: [
-          {
-            src: 'modinfo.dev.json',
-            dest: 'modinfo.json',
-          },
-        ],
-        options: {
-          process: function(content, srcpath) {
-            var info = JSON.parse(content);
-            info.date = require('dateformat')(new Date(), 'yyyy/mm/dd');
-            /*
-            for (var scene in info.scenes) {
-              info[scene] = info.scenes[scene];
-            }
-            */
-            console.log(info.id, info.version, info.date);
-            return JSON.stringify(info, null, 2);
-          }
-        }
       }
     },
     /*
