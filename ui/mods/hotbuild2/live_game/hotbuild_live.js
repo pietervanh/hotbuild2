@@ -52,7 +52,7 @@ var hotbuild2live = (function () {
     if (show_key_on_buildbar === "ON") {
         //Show key on buildbar
         $('.div_build_item .span_hotkey').replaceWith(
-        '<span class="span_hotkey" data-bind="visible: hbgetBuildBarKey($data.id) != \'\' , text: hbgetBuildBarKey($data.id)"></span>'
+        '<span class="span_hotkey hb_hotkey" data-bind="visible: hbgetBuildBarKey($data.id) != \'\' , text: hbgetBuildBarKey($data.id)"></span>'
         );
         $('.div_build_bar_cont').removeAttr('data-bind');
         //$('.div_command_item .span_hotkey').removeAttr('style');
