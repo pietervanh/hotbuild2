@@ -11,5 +11,3 @@ The generated project includes a `package.json` that lists the dependencies, but
 The repository expects to be in a mod folder named `hotbuild2_dev`.  The default grunt task builds to `hotbuild2_test`.  The 'production' build is through:
 
     grunt release --target=hotbuild2
-
-The main mod file is `modinfo.dev.json` because PAMM rewrites `modinfo.json` when updating it.  `grunt copy:dev` is a convience task to update the live file from the formatted one.
