@@ -5,8 +5,8 @@
     "description": "Map 1 Key to multiple build actions and more... (See forum link for screenshots and instructions.)",
     "description_nl": "Kies een toetsenbordknop om meerdere gebouwen te bouwen en meer... (bekijk forum voor screenshots en instructies.)",
     "author": "proeleert,tripax,cola_colin",
-    "version": "1.21",
-    "build": "67342",
+    "version": "1.22",
+    "build": "67523",
     "date": "2014/03/25",
     "signature": "not yet implemented",
     "forum": "https://forums.uberent.com/threads/rel-hotbuild2-57703.54561/",
@@ -15,7 +15,7 @@
         "ui"
     ],
     "icon": "http://pamods.github.io/icons/hotbuild2.png",
-    "id": "hotbuild2",
+    "id": "hotbuild2_dev",
     "priority": 100,
     "scenes":{
     "live_game":[

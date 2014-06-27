@@ -232,6 +232,41 @@
           ],
         "name" : "general"
       },
+      { "keybinds" : [ { "action" : "move_left",
+              "actionString" : "move_left",
+              "conflicted" : false,
+              "default" : "left",
+              "dirty" : false,
+              "group" : "camera controls",
+              "value" : "a"
+            },
+            { "action" : "move_right",
+              "actionString" : "move_right",
+              "conflicted" : false,
+              "default" : "right",
+              "dirty" : false,
+              "group" : "camera controls",
+              "value" : "d"
+            },
+            { "action" : "move_up",
+              "actionString" : "move_up",
+              "conflicted" : false,
+              "default" : "up",
+              "dirty" : false,
+              "group" : "camera controls",
+              "value" : "w"
+            },
+            { "action" : "move_down",
+              "actionString" : "move_down",
+              "conflicted" : false,
+              "default" : "down",
+              "dirty" : false,
+              "group" : "camera controls",
+              "value" : "s"
+            }
+          ],
+        "name" : "camera controls"
+      },
       { "keybinds" : [ { "action" : "command mode [move]",
               "actionString" : "command mode [move]",
               "binding" : "",

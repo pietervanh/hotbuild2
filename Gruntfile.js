@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-  var target = grunt.option('target') || 'hotbuild2_test';
+  var target = grunt.option('target') || 'hotbuild2_dev';
   var title = 'Hotbuild2 Test';
   if (target == 'hotbuild2') {
     title = 'Hotbuild2';
@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     target: target,
     clean: {
       options: { force: true },
-      src: ['modinfo.json','../<%= target %>/*/*/*/*','../<%= target %>/*/*/*','../<%= target %>/*/*','../<%= target %>/*']
+      src: ['../<%= target %>/*/*/*/*','../<%= target %>/*/*/*','../<%= target %>/*/*','../<%= target %>/*']
     },
     jshint: {
       files:['Gruntfile.js','ui/mods/hotbuild2/global_mod_list/*.js','ui/mods/hotbuild2/live_game/*.js','ui/mods/hotbuild2/settings/*.js'],
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
       modinfo: {
         files: [
           {
-            src: 'modinfo.dev.json',
+            src: 'modinfo.json',
             dest: '../<%= target %>/modinfo.json',
           },
         ],

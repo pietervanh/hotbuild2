@@ -11,10 +11,9 @@ var hotbuild2live = (function () {
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
-    var settings = decode(localStorage.settings);
-
-    hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
-    hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;    
+    hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
+    hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
+       
     hbgetBuildBarKey = function (id) {
         var result = '';
         var hbpos = 1;
@@ -37,7 +36,6 @@ var hotbuild2live = (function () {
         });
         return result;
     };    
-    console.log("lalala");
 
     //load hotbuildconfig from settings
     /*

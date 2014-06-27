@@ -225,13 +225,11 @@ var hotbuildsettings = (function () {
             }
             //get uberkey info
             var fuberkey = false;
-            _.forEach(model.keybindings().groups(), function (o) {
-                _.forEach(o.keybinds(), function (k) {
-                    if (k.binding() == value) {
-                        fuberkey = true;
-                        self.uberkey(k.action());
-                    }
-                });
+            _.forEach(model.keybindings().bindings(), function (o) {
+                if (o.value() === value) {
+                    fuberkey = true;
+                    self.uberkey(o.action());
+                }
             });
             if (!fuberkey) {
                 self.uberkey(undefined);
@@ -241,10 +239,8 @@ var hotbuildsettings = (function () {
 
         self.uberkeys = ko.computed(function () {
             var uberkeys = [];
-            _.forEach(model.keybindings().groups(), function (o) {
-                _.forEach(o.keybinds(), function (k) {
-                    uberkeys.push(k.binding());
-                });
+            _.forEach(model.keybindings().bindings(), function (o) {
+                uberkeys.push(o.value());
             });
             return uberkeys;
         });
@@ -252,9 +248,12 @@ var hotbuildsettings = (function () {
         self.disabledkeys = ko.computed(function () {
             var diskeys = ['caps lock', 'shift', 'return'];
             /*
-            if (model.cameraKeyPanStyle() === "WASD") {
-                diskeys = diskeys.concat(['w', 'a', 's', 'd']);
-            }
+            Tripax needs to fix uber + disabled keys on same button first
+            _.forEach(model.keybindings().bindings(), function (o) {
+                if(o.action() === 'move_up' || o.action() === 'move_down' || o.action() === 'move_left' || o.action() === 'move_right'){
+                    diskeys.push(o.value());    
+                }
+            });
             */
             return diskeys;
         });
@@ -338,7 +337,7 @@ var hotbuildsettings = (function () {
                 }
             }
             self.updatehotbuildkeys();
-            console.log(swapto);
+            //console.log(swapto);
             self.keyboardkey(swapto);
 
         };
@@ -526,7 +525,7 @@ var hotbuildsettings = (function () {
         };
 
         self.handlekey = function (data,event) {
-            console.log(event.target);
+            //console.log(event.target);
             var $this = $(event.target);
             var character = $this.html();
             if (!$this.hasClass('dis')) {
@@ -540,10 +539,8 @@ var hotbuildsettings = (function () {
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
-
-    var settings = decode(localStorage.settings);
-    hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
-    hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
+    hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
+    hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
 
     var hbuisettings = new HotBuildSettingsViewModel(hotbuildglobal, hotbuildglobalkey);
     var hotbuildsettings = {};
@@ -603,21 +600,18 @@ var hotbuildsettings = (function () {
         }
     });
 
-    var localsettings = decode(localStorage.settings);
 
     model.oldsaveBeforeHotbuild = model.save;
     model.save = function(){
         //api.settings.set("hb","hotbuildconfigkey",hotbuildsettings.viewmodel.cleanhotbuildglobalkey())
-        localsettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
-        localsettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
-        localStorage.settings = encode(localsettings);
+        localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
+        localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
         model.oldsaveBeforeHotbuild();
     };
     model.oldsaveandexitBeforeHotbuild = model.saveAndExit;
     model.saveAndExit = function(){
-        localsettings.hotbuildconfigkey = hotbuildsettings.viewmodel.cleanhotbuildglobalkey();
-        localsettings.hotbuildconfig = hotbuildsettings.viewmodel.cleanhotbuildglobal();
-        localStorage.settings = encode(localsettings);
+        localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
+        localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
         model.oldsaveandexitBeforeHotbuild();
     };    
 

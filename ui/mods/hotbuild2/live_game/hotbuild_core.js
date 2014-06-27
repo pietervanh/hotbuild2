@@ -7,16 +7,14 @@ var hotbuild2 = (function () {
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
+    hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
+    hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
     
     /*variables for hotbuild toggle*/
     var hotbuild_enable=true; //allow hotbuild buildbar
     var hotbuild_select_enable=true; //allow hotbuild select bar
     var hotbuild_frameEvent; //animationFrame Timer
-
-    var settings = decode(localStorage.settings);
-
-    hotbuildglobal = settings.hotbuildconfig ? settings.hotbuildconfig : hotbuildglobal;
-    hotbuildglobalkey = settings.hotbuildconfigkey ? settings.hotbuildconfigkey : hotbuildglobalkey;
+    
     var hotbuildshiftrecycle = api.settings.isSet('ui','hotbuild_shift_key_recycle',true) || "OFF";
     var hotbuildreset_time = api.settings.isSet('ui','hotbuild_reset_time',true) || 2000;
 
