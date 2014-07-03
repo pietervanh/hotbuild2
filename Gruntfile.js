@@ -60,7 +60,6 @@ module.exports = function(grunt) {
             var info = JSON.parse(content);
             info.date = require('dateformat')(new Date(), 'yyyy/mm/dd');
             info.display_name = title;
-            info.id = target;
             info.identifier = "com.pa.proeleert." + target;
             /*
             for (var scene in info.scenes) {

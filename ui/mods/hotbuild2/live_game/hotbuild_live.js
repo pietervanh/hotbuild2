@@ -106,10 +106,10 @@ model.hbunitspecs = ko.computed(function(){
 });
 
 model.hbunitspecs.subscribe(function(newval){
-    //try{
+    try{
         //console.log(newval);
         var specs = ko.toJS(newval[Object.keys(newval)[0]]);
-        console.log(specs);
+        //console.log(specs);
         var barr = [];
         if(specs !== undefined){
             
@@ -124,10 +124,10 @@ model.hbunitspecs.subscribe(function(newval){
             }
             
         }
-        console.log(barr);
+        //console.log(barr);
         api.Panel.message(api.Panel.parentId,'hbselection',barr);
-   /* }
+    }
     catch(e){
         console.log(e);
-    } */
+    } 
 });

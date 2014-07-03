@@ -2,7 +2,7 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
-
+console.log("loading hotbuild core");
 var hotbuild2 = (function () {
 
     var hotbuildglobal = {};
@@ -27,8 +27,8 @@ var hotbuild2 = (function () {
         self.buildable_units = ko.observableArray([]);
         handlers.hbselection = function(payload){
             //get data from buildbar;
-            console.log("got buildlist from buildbar");
-            console.log(payload);
+            //console.log("got buildlist from buildbar");
+            //console.log(payload);
             self.buildable_units(payload);
         };
 
@@ -205,24 +205,7 @@ var hotbuild2 = (function () {
                     }  
                 }
             }
-            /*
-            if (model.buildTabLists().length > 0){
-                for (var b = 0; b < model.buildTabLists().length; b++){
-                    for (var i = 0; i < model.buildTabLists()[b].length; i++) {
-                        if (_.isObject(model.buildTabLists()[b][i])){
-                            //console.log(model.buildTabLists()[b][i].id.replace(".player", "", "gi"));
-                            if(model.buildTabLists()[b][i].id == cmd) {
-                                return true;
-                            }
-                            //GW fix
-                            if(model.buildTabLists()[b][i].id == cmd + ".player") {
-                                return true;
-                            }                            
-                        }
-                    }
-                }
-            }
-            */
+
             return false;
         };
 
@@ -429,24 +412,26 @@ var hotbuild2 = (function () {
 
     //Pole Lock on/off
     hotbuild2.polelockToggle = function (event) {
-        var allSettings = decode(localStorage.settings);
-        var currentPoleLock = allSettings.camera_pole_lock.toLowerCase(); // the settings store this upper case, the engine processes it in lowercase... wtf
+        console.log("PoleLock");
+        var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
+        var currentPoleLock = allSettings.camera.pole_lock; // the settings store this upper case, the engine processes it in lowercase... wtf
         var nextSetting = "";
-        if (currentPoleLock === 'off') {
-            nextSetting = "on";
+        if (currentPoleLock === undefined) {
+            nextSetting = "ON";
+            allSettings.camera.pole_lock = "ON";
         } else {
-            nextSetting = "off";
+            nextSetting = "OFF";
+            delete allSettings.camera.pole_lock;
         }
-        engine.call("set_camera_pole_lock", nextSetting);
+        engine.call("set_camera_pole_lock", nextSetting.toLowerCase());
         console.log("pole_lock : " + nextSetting);
-        allSettings.camera_pole_lock = nextSetting.toUpperCase();
-        localStorage.settings = encode(allSettings);
+        localStorage[localStorage.uberName + ".paSettings"] = encode(allSettings);
         event.preventDefault();
     };
 
     //cinematic mode on/off
     hotbuild2.cinematicToggle = function(event){
-        var allSettings = decode(localStorage.settings);
+        var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
         var currentCinematic = allSettings.cinematic_value; 
         var nextSetting = "";
         if (currentCinematic === 'OFF') {
@@ -455,14 +440,14 @@ var hotbuild2 = (function () {
             nextSetting = "OFF";
         }
         allSettings.cinematic_value = nextSetting;
-        localStorage.settings = encode(allSettings);
-        model.applyUIDisplaySettings();
+        localStorage[localStorage.uberName + ".paSettings"] = encode(allSettings);
+        api.settings.apply(['ui']);
         event.preventDefault();
     };
 
     //terrestial toggle
     hotbuild2.terrestrialToggle = function(event){
-        var allSettings = decode(localStorage.settings);
+        var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
         var currentTerrestrial = allSettings.always_show_terrestrial_units;
         var nextSetting = "";
         if (currentTerrestrial === 'ALWAYS') {
@@ -471,8 +456,8 @@ var hotbuild2 = (function () {
             nextSetting = "ALWAYS";
         }
         allSettings.always_show_terrestrial_units = nextSetting;
-        localStorage.settings = encode(allSettings);
-        model.applyUIDisplaySettings();
+        localStorage[localStorage.uberName + ".paSettings"] = encode(allSettings);
+        api.settings.apply(['ui']);
         event.preventDefault();
     };
     
@@ -649,7 +634,14 @@ var input_maps = (function () {
         var defaults = default_keybinds[group];
 
         _.forIn(action_sets[group], function (fn, key) {
-            console.log(group);
+
+            var wrapping_fn = function () {
+                fn();
+                var audio_response = _.isUndefined(input_audio_response_overrides[key]) ? '/SE/UI/UI_Click' : input_audio_response_overrides[key];
+                if (audio_response)
+                    api.audio.playSound(audio_response);
+            };
+
             var binding = defaults[key];
             var alt;
             var use_alt = false;
@@ -665,12 +657,12 @@ var input_maps = (function () {
                     use_alt = true;
             }
 
-            if (use_alt){
-                dictionary[alt[0]] = fn;
-                dictionary[alt[1]] = fn;
+            if (use_alt) {
+                dictionary[alt[0]] = wrapping_fn;
+                dictionary[alt[1]] = wrapping_fn;
             }
             else
-                dictionary[binding] = fn;
+                dictionary[binding] = wrapping_fn;
 
             keymap[binding] = key;
         });
@@ -689,4 +681,3 @@ var input_maps = (function () {
 })();
 
 console.log("loaded hotbuild core");
-
