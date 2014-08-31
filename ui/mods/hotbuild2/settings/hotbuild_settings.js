@@ -58,7 +58,7 @@ var hotbuildsettings = (function () {
                         hotbuildunit.factory = 'ofac';
                     }
                 }
-
+                //console.log(hotbuildunit.buildPicture);
                 hotbuildunit.image = hotbuildunit.buildPicture;
                 filteredresults.push(hotbuildunit);
 
@@ -225,12 +225,14 @@ var hotbuildsettings = (function () {
             }
             //get uberkey info
             var fuberkey = false;
+            /*
             _.forEach(model.keybindings().bindings(), function (o) {
                 if (o.value() === value) {
                     fuberkey = true;
                     self.uberkey(o.action());
                 }
             });
+*/
             if (!fuberkey) {
                 self.uberkey(undefined);
             }
@@ -239,9 +241,11 @@ var hotbuildsettings = (function () {
 
         self.uberkeys = ko.computed(function () {
             var uberkeys = [];
+            /*
             _.forEach(model.keybindings().bindings(), function (o) {
                 uberkeys.push(o.value());
             });
+        */
             return uberkeys;
         });
 
@@ -411,7 +415,7 @@ var hotbuildsettings = (function () {
         self.export = function () {
             console.log('export');
             var keyboardsettings = {};
-            keyboardsettings.uber = ko.toJS(model.keybindings().groups());
+            keyboardsettings.uber = ko.toJS(model.keybindGroups());
             self.Save();
             keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
             keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
@@ -426,22 +430,22 @@ var hotbuildsettings = (function () {
                 for (var kvgm in imported.uber) {
                     console.log(imported.uber[kvgm].name);
                     var modelKeybindGroupIndex;
-                    for (var mkvgm in model.keybindings().groups()) {
-                        if (imported.uber[kvgm].name === model.keybindings().groups()[mkvgm].name()) {
+                    for (var mkvgm in model.keybindGroups()) {
+                        if (imported.uber[kvgm].name === model.keybindGroups()[mkvgm].name()) {
                             modelKeybindGroupIndex = mkvgm;
                             break;
                         }
                     }
                     if (modelKeybindGroupIndex !== undefined) {
-                        console.log(model.keybindings().groups()[modelKeybindGroupIndex].name());
+                        console.log(model.keybindGroups()[modelKeybindGroupIndex].name());
                         for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
                             for(var j = 0; j < model.keybindings().groups()[modelKeybindGroupIndex].keybinds().length; j++){
-                                if(imported.uber[kvgm].keybinds[i].action === model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].action())
+                                if(imported.uber[kvgm].keybinds[i].action === model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].action())
                                 {
                                     try {
-                                        console.log("OLD" + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].value());
+                                        console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].value());
                                         console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].value);
-                                        model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
+                                        model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
                                         //model.model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].bound(imported.uber[kvgm].keybinds[i].bound);
                                         break;
                                     }
@@ -471,22 +475,22 @@ var hotbuildsettings = (function () {
                 for (var kvgm in imported.uber) {
                     console.log(imported.uber[kvgm].name);
                     var modelKeybindGroupIndex;
-                    for (var mkvgm in model.keybindings().groups()) {
+                    for (var mkvgm in model.keybindGroups()) {
                         if (imported.uber[kvgm].name === model.keybindings().groups()[mkvgm].name()) {
                             modelKeybindGroupIndex = mkvgm;
                             break;
                         }
                     }
                     if (modelKeybindGroupIndex !== undefined) {
-                        console.log(model.keybindings().groups()[modelKeybindGroupIndex].name());
+                        console.log(model.keybindGroups()[modelKeybindGroupIndex].name());
                         for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                            for(var j = 0; j < model.keybindings().groups()[modelKeybindGroupIndex].keybinds().length; j++){
-                                if(imported.uber[kvgm].keybinds[i].action === model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].action())
+                            for(var j = 0; j < model.keybindGroups()[modelKeybindGroupIndex].keybinds().length; j++){
+                                if(imported.uber[kvgm].keybinds[i].action === model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].action())
                                 {
                                     try {
-                                        console.log("OLD" + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[i].binding());
+                                        console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding());
                                         console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].value);
-                                        model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
+                                        model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
                                         break;
                                     }
                                     catch (err) {
@@ -584,6 +588,32 @@ var hotbuildsettings = (function () {
         }
     });
 
+    _.extend(api.settings.definitions.keyboard.settings, {
+        hotbuild_lock_pole: {
+            title: 'Lock Pole Toggle',
+            type: 'keybind',
+            set: 'hotbuild',
+            display_group: 'hotbuild',
+            display_sub_group: 'hotbuild',
+            default : 'y'
+        },
+        hotbuild_toggle: {
+            title: 'Hotbuild Toggle',
+            type: 'keybind',
+            set: 'hotbuild',
+            display_group: 'hotbuild',
+            display_sub_group: 'hotbuild',
+            default: ''
+        },
+        hotbuild_hotselect: {
+            title: 'HotSelect Toggle',
+            type: 'keybind',
+            set: 'hotbuild',
+            display_group: 'hotbuild',
+            display_sub_group: 'hotbuild',
+            default: ''
+        }
+    });
 
     model.oldsaveBeforeHotbuild = model.save;
     model.save = function(){
@@ -751,9 +781,21 @@ var hotbuildsettings = (function () {
     model.settingGroups().push("hotbuild");
     model.settingDefinitions().hotbuild = {title:"Hotbuild",settings:{}};
 
-    var $tabcontentsettings = $(".option-list").first().append($('<div id="hbtab">').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () { 
+    model.hotbuildmodel = hotbuildsettings.viewmodel;
+
+    $(".option-list.ui .form-group").append('<div class="sub-group hotbuild2ui">');
+    $('.sub-group.hotbuild2ui').load('coui://ui/mods/hotbuild2/settings/hotbuild_ui_settings.html', function () { 
+        console.log("loaded hotbuild ui tab");
+        model.settingGroups.notifySubscribers(); 
+    });
+
+    $(".option-list.keyboard").parent().append('<div class="option-list hotbuild2" data-bind="visible:($root.settingGroups()[$root.activeSettingsGroupIndex()] === \'hotbuild\'), with: hotbuildsettings.viewmodel" style="display: none;">');
+    
+    $('.option-list.hotbuild2').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () { 
         console.log("loaded hotbuild tab");
-        //Fix for PTE 
-        model.settingGroups.notifySubscribers(); }));
+        model.settingGroups.notifySubscribers(); 
+    });
+
+
 
 })();
