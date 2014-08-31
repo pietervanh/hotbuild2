@@ -616,6 +616,8 @@ var hotbuild2 = (function () {
 })();
 
 console.log("hook hotbuild2 special funtions");
+/*
+Disabled till I have more time to look into this to fix it
 action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
 action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
 action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
@@ -625,5 +627,5 @@ console.log("hook hotbuild2 special funtions");
 
 api.Panel.message('', 'inputmap.reload');
 apply_keybinds('hotbuild');
-
+*/
 console.log("loaded hotbuild core");

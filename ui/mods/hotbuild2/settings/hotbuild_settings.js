@@ -225,14 +225,14 @@ var hotbuildsettings = (function () {
             }
             //get uberkey info
             var fuberkey = false;
-            /*
-            _.forEach(model.keybindings().bindings(), function (o) {
+            
+            _.forEach(model.keyboardSettingsItems(), function (o) {
                 if (o.value() === value) {
                     fuberkey = true;
-                    self.uberkey(o.action());
+                    self.uberkey(o.title());
                 }
             });
-*/
+
             if (!fuberkey) {
                 self.uberkey(undefined);
             }
@@ -241,11 +241,11 @@ var hotbuildsettings = (function () {
 
         self.uberkeys = ko.computed(function () {
             var uberkeys = [];
-            /*
-            _.forEach(model.keybindings().bindings(), function (o) {
+            
+            _.forEach(model.keyboardSettingsItems(), function (o) {
                 uberkeys.push(o.value());
             });
-        */
+        
             return uberkeys;
         });
 
@@ -415,7 +415,7 @@ var hotbuildsettings = (function () {
         self.export = function () {
             console.log('export');
             var keyboardsettings = {};
-            keyboardsettings.uber = ko.toJS(model.keybindGroups());
+            keyboardsettings.uber = ko.toJS(model.keyboardSettingsItems());
             self.Save();
             keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
             keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
@@ -427,32 +427,17 @@ var hotbuildsettings = (function () {
             console.log('import');
             if ($("#ieport").val() !== '') {
                 var imported = JSON.parse($("#ieport").val());
-                for (var kvgm in imported.uber) {
-                    console.log(imported.uber[kvgm].name);
-                    var modelKeybindGroupIndex;
-                    for (var mkvgm in model.keybindGroups()) {
-                        if (imported.uber[kvgm].name === model.keybindGroups()[mkvgm].name()) {
-                            modelKeybindGroupIndex = mkvgm;
-                            break;
-                        }
-                    }
-                    if (modelKeybindGroupIndex !== undefined) {
-                        console.log(model.keybindGroups()[modelKeybindGroupIndex].name());
-                        for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                            for(var j = 0; j < model.keybindings().groups()[modelKeybindGroupIndex].keybinds().length; j++){
-                                if(imported.uber[kvgm].keybinds[i].action === model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].action())
-                                {
-                                    try {
-                                        console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].value());
-                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].value);
-                                        model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
-                                        //model.model.keybindings().groups()[modelKeybindGroupIndex].keybinds()[j].bound(imported.uber[kvgm].keybinds[i].bound);
-                                        break;
-                                    }
-                                    catch (err) {
-                                        console.log(err);
-                                    }
-                                }
+                for (var ukey in imported.uber) {
+                    for(var i = 0; i < model.keyboardSettingsItems().length; i++){
+                        if(model.keyboardSettingsItems()[i].title === ukey.title){
+                            try{
+                                console.log(imported.uber[ukey].title);
+                                console.log("OLD " + model.keyboardSettingsItems()[i].value());
+                                console.log("NEW " + ukey.value);
+                                model.keyboardSettingsItems()[i].value(imported.uber[ukey].value);
+                            }
+                            catch (err) {
+                                console.log(err);
                             }
                         }
                     }
@@ -472,31 +457,17 @@ var hotbuildsettings = (function () {
         self.importfromfile = function (importfile) {
             console.log('importing importfile ' + importfile);
             $.getJSON('coui:/' + importfile, function (imported) {
-                for (var kvgm in imported.uber) {
-                    console.log(imported.uber[kvgm].name);
-                    var modelKeybindGroupIndex;
-                    for (var mkvgm in model.keybindGroups()) {
-                        if (imported.uber[kvgm].name === model.keybindings().groups()[mkvgm].name()) {
-                            modelKeybindGroupIndex = mkvgm;
-                            break;
-                        }
-                    }
-                    if (modelKeybindGroupIndex !== undefined) {
-                        console.log(model.keybindGroups()[modelKeybindGroupIndex].name());
-                        for (var i = 0; i < imported.uber[kvgm].keybinds.length; i++) {
-                            for(var j = 0; j < model.keybindGroups()[modelKeybindGroupIndex].keybinds().length; j++){
-                                if(imported.uber[kvgm].keybinds[i].action === model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].action())
-                                {
-                                    try {
-                                        console.log("OLD" + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].action() + " = " + model.keybindGroups()[modelKeybindGroupIndex].keybinds()[i].binding());
-                                        console.log("NEW" + imported.uber[kvgm].keybinds[i].action + " = " + imported.uber[kvgm].keybinds[i].value);
-                                        model.keybindGroups()[modelKeybindGroupIndex].keybinds()[j].value(imported.uber[kvgm].keybinds[i].value);
-                                        break;
-                                    }
-                                    catch (err) {
-                                        console.log(err);
-                                    }
-                                }
+                for (var ukey in imported.uber) {
+                    for(var i = 0; i < model.keyboardSettingsItems().length; i++){
+                        if(model.keyboardSettingsItems()[i].title === ukey.title){
+                            try{
+                                console.log(imported.uber[ukey].title);
+                                console.log("OLD " + model.keyboardSettingsItems()[i].value());
+                                console.log("NEW " + ukey.value);
+                                model.keyboardSettingsItems()[i].value(imported.uber[ukey].value);
+                            }
+                            catch (err) {
+                                console.log(err);
                             }
                         }
                     }
@@ -781,21 +752,20 @@ var hotbuildsettings = (function () {
     model.settingGroups().push("hotbuild");
     model.settingDefinitions().hotbuild = {title:"Hotbuild",settings:{}};
 
-    model.hotbuildmodel = hotbuildsettings.viewmodel;
-
-    $(".option-list.ui .form-group").append('<div class="sub-group hotbuild2ui">');
-    $('.sub-group.hotbuild2ui').load('coui://ui/mods/hotbuild2/settings/hotbuild_ui_settings.html', function () { 
-        console.log("loaded hotbuild ui tab");
-        model.settingGroups.notifySubscribers(); 
-    });
-
-    $(".option-list.keyboard").parent().append('<div class="option-list hotbuild2" data-bind="visible:($root.settingGroups()[$root.activeSettingsGroupIndex()] === \'hotbuild\'), with: hotbuildsettings.viewmodel" style="display: none;">');
-    
-    $('.option-list.hotbuild2').load('coui://ui/mods/hotbuild2/settings/hotbuild_settings.html', function () { 
-        console.log("loaded hotbuild tab");
-        model.settingGroups.notifySubscribers(); 
-    });
-
-
+    $(".option-list.ui .form-group").append(
+        $.ajax({
+            type: "GET",
+            url: 'coui://ui/mods/hotbuild2/settings/hotbuild_ui_settings.html',
+            async: false
+        }).responseText
+    );
+    $(".option-list.keyboard").parent().append(
+        $.ajax({
+            type: "GET",
+            url: 'coui://ui/mods/hotbuild2/settings/hotbuild_settings.html',
+            async: false
+        }).responseText
+    );
+    model.settingGroups.notifySubscribers();
 
 })();
