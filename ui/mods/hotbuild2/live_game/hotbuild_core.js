@@ -98,7 +98,7 @@ var hotbuild2 = (function () {
         
         self.hotBuild = function (event, hotbuilds) {
             self.hotbuilds(hotbuilds);
-            //debugger;
+            //console.log(hotbuilds.length);
             if (model.maybeSetBuildTarget) {
                 if (self.knowsAnyBuildCommand() && hotbuild_enable) {
                     var failDetect = 0;
@@ -109,6 +109,7 @@ var hotbuild2 = (function () {
                             console.log("loop of death\n"); // I dont think this should ever happen...
                             return;
                         }
+                        //console.log(self.hotbuilds()[self.cycleid()].json + " " + !self.knowsBuildCommand(self.hotbuilds()[self.cycleid()].json));
                     } while (!self.knowsBuildCommand(self.hotbuilds()[self.cycleid()].json) && self.knowsAnyBuildCommand());
                     self.hbtriggertime(_.now());
                     setTimeout(self.clean, self.cycleResetTime + 1000);
@@ -123,6 +124,7 @@ var hotbuild2 = (function () {
                         //check if it' needs to be ImbaWalled
 
                         //model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
+                        //console.log(hbunit.id);
                         model.buildItemBySpec(hbunit.id);
                         if (self.imbawallers.indexOf(hbunit.id) !== -1) {
                             imbawallclick = "build";
@@ -183,8 +185,8 @@ var hotbuild2 = (function () {
         };
 
         self.knowsAnyBuildCommand = function () {
-            for (var i = 0; i < self.hotbuilds().length; i++) {
-                if (self.knowsBuildCommand(self.hotbuilds()[i].json)) {
+            for (var bc = 0; bc < self.hotbuilds().length; bc++) {
+                if (self.knowsBuildCommand(self.hotbuilds()[bc].json)) {
                     return true;
                 }
             }
@@ -193,10 +195,10 @@ var hotbuild2 = (function () {
 
         self.knowsBuildCommand = function (cmd) {
             //check on buildtablist empty
-            //debugger;
             if(self.buildable_units().length > 0){
                 for(var i = 0; i < self.buildable_units().length; i++){
                     if(self.buildable_units()[i].id == cmd) {
+                        console.log("can build " +self.buildable_units()[i].id);
                         return true;
                     }
                     //GW fix

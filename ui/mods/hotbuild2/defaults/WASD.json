@@ -571,7 +571,7 @@
         "showClear" : false,
         "title" : "select commander",
         "type" : "keybind",
-        "value" : "alt+c"
+        "value" : "b"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -1970,7 +1970,7 @@
         "showClear" : false,
         "title" : "set free camera",
         "type" : "keybind",
-        "value" : "ctrl+alt+m"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2034,7 +2034,7 @@
         "showClear" : false,
         "title" : "toggle debug camera",
         "type" : "keybind",
-        "value" : "ctrl+m"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2275,7 +2275,7 @@
         "showClear" : false,
         "title" : "free move left",
         "type" : "keybind",
-        "value" : "a"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2292,7 +2292,7 @@
         "showClear" : false,
         "title" : "free move right",
         "type" : "keybind",
-        "value" : "d"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2309,7 +2309,7 @@
         "showClear" : false,
         "title" : "free move up",
         "type" : "keybind",
-        "value" : "r"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2326,7 +2326,7 @@
         "showClear" : false,
         "title" : "free move down",
         "type" : "keybind",
-        "value" : "f"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2343,7 +2343,7 @@
         "showClear" : false,
         "title" : "free move forward",
         "type" : "keybind",
-        "value" : "w"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2360,7 +2360,7 @@
         "showClear" : false,
         "title" : "free move backward",
         "type" : "keybind",
-        "value" : "s"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2377,7 +2377,7 @@
         "showClear" : false,
         "title" : "free roll left",
         "type" : "keybind",
-        "value" : "u"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2394,7 +2394,7 @@
         "showClear" : false,
         "title" : "free roll right",
         "type" : "keybind",
-        "value" : "o"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2411,7 +2411,7 @@
         "showClear" : false,
         "title" : "free pitch forward",
         "type" : "keybind",
-        "value" : "i"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2428,7 +2428,7 @@
         "showClear" : false,
         "title" : "free pitch backward",
         "type" : "keybind",
-        "value" : "k"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2445,7 +2445,7 @@
         "showClear" : false,
         "title" : "free yaw left",
         "type" : "keybind",
-        "value" : "j"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2462,7 +2462,7 @@
         "showClear" : false,
         "title" : "free yaw right",
         "type" : "keybind",
-        "value" : "l"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2479,7 +2479,7 @@
         "showClear" : false,
         "title" : "free zoom in",
         "type" : "keybind",
-        "value" : "q"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2496,7 +2496,7 @@
         "showClear" : false,
         "title" : "free zoom out",
         "type" : "keybind",
-        "value" : "e"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],

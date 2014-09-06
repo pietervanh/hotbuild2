@@ -1,92 +1,102 @@
-{ "hotbuildglobal" : { "hotbuild10s" : [ { "json" : "/pa/units/land/energy_storage/energy_storage.json" },
-          { "json" : "/pa/units/land/metal_storage/metal_storage.json" }
-        ],
-      "hotbuild11s" : [ { "json" : "/pa/units/orbital/ion_defense/ion_defense.json" },
-          { "json" : "/pa/units/orbital/delta_v_engine/delta_v_engine.json" }
-        ],
-      "hotbuild1s" : [ { "json" : "/pa/units/land/vehicle_factory/vehicle_factory.json" },
-          { "json" : "/pa/units/land/bot_factory/bot_factory.json" },
-          { "json" : "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
-          { "json" : "/pa/units/land/fabrication_bot/fabrication_bot.json" },
-          { "json" : "/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json" },
-          { "json" : "/pa/units/land/fabrication_vehicle/fabrication_vehicle.json" },
-          { "json" : "/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json" },
-          { "json" : "/pa/units/air/fabrication_aircraft/fabrication_aircraft.json" },
-          { "json" : "/pa/units/sea/fabrication_ship/fabrication_ship.json" },
-          { "json" : "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" }
-        ],
-      "hotbuild2s" : [ { "json" : "/pa/units/air/air_factory/air_factory.json" },
-          { "json" : "/pa/units/air/air_factory_adv/air_factory_adv.json" },
-          { "json" : "/pa/units/sea/naval_factory/naval_factory.json" },
-          { "json" : "/pa/units/air/transport/transport.json" },
-          { "json" : "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
-          { "json" : "/pa/units/orbital/orbital_launcher/orbital_launcher.json" },
-          { "json" : "/pa/units/land/land_scout/land_scout.json" },
-          { "json" : "/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json" },
-          { "json" : "/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json" },
-          { "json" : "/pa/units/air/air_scout/air_scout.json" },
-          { "json" : "/pa/units/sea/sea_scout/sea_scout.json" }
-        ],
-      "hotbuild3s" : [ { "json" : "/pa/units/land/radar_adv/radar_adv.json" },
-          { "json" : "/pa/units/air/fighter_adv/fighter_adv.json" },
-          { "json" : "/pa/units/land/radar/radar.json" },
-          { "json" : "/pa/units/orbital/deep_space_radar/deep_space_radar.json" },
-          { "json" : "/pa/units/air/fighter/fighter.json" },
-          { "json" : "/pa/units/land/bot_aa/bot_aa.json" },
-          { "json" : "/pa/units/sea/frigate/frigate.json" }
-        ],
-      "hotbuild4s" : [ { "json" : "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
-          { "json" : "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
-          { "json" : "/pa/units/land/assault_bot/assault_bot.json" },
-          { "json" : "/pa/units/land/assault_bot_adv/assault_bot_adv.json" },
-          { "json" : "/pa/units/land/tank_laser_adv/tank_laser_adv.json" },
-          { "json" : "/pa/units/land/tank_light_laser/tank_light_laser.json" },
-          { "json" : "/pa/units/air/bomber_adv/bomber_adv.json" },
-          { "json" : "/pa/units/air/bomber/bomber.json" },
-          { "json" : "/pa/units/sea/destroyer/destroyer.json" },
-          { "json" : "/pa/units/sea/battleship/battleship.json" },
-          { "json" : "/pa/units/orbital/orbital_fighter/orbital_fighter.json" },
-          { "json" : "/pa/units/land/teleporter/teleporter.json" }
-        ],
-      "hotbuild5s" : [ { "json" : "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
-          { "json" : "/pa/units/land/tank_armor/tank_armor.json" },
-          { "json" : "/pa/units/air/gunship/gunship.json" },
-          { "json" : "/pa/units/land/tank_heavy_armor/tank_heavy_armor.json" },
-          { "json" : "/pa/units/land/bot_bomb/bot_bomb.json" },
-          { "json" : "/pa/units/land/energy_plant/energy_plant.json" }
-        ],
-      "hotbuild6s" : [ { "json" : "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
-          { "json" : "/pa/units/land/metal_extractor/metal_extractor.json" }
-        ],
-      "hotbuild7s" : [ { "json" : "/pa/units/land/laser_defense_adv/laser_defense_adv.json" },
-          { "json" : "/pa/units/land/laser_defense/laser_defense.json" },
-          { "json" : "/pa/units/land/laser_defense_single/laser_defense_single.json" }
-        ],
-      "hotbuild8s" : [ { "json" : "/pa/units/land/air_defense/air_defense.json" },
+{ "hotbuildglobal" : { "hotbuild10s" : [ { "json" : "/pa/units/land/air_defense/air_defense.json" },
           { "json" : "/pa/units/land/land_barrier/land_barrier.json" }
         ],
-      "hotbuild9s" : [ { "json" : "/pa/units/land/artillery_short/artillery_short.json" },
+      "hotbuild11s" : [ { "json" : "/pa/units/land/artillery_short/artillery_short.json" },
           { "json" : "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json" },
           { "json" : "/pa/units/land/artillery_long/artillery_long.json" },
           { "json" : "/pa/units/land/nuke_launcher/nuke_launcher.json" },
           { "json" : "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json" },
-          { "json" : "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json" },
-          { "json" : "/pa/units/sea/missile_ship/missile_ship.json" },
-          { "json" : "/pa/units/orbital/orbital_laser/orbital_laser.json" },
           { "json" : "/pa/units/orbital/delta_v_engine/delta_v_engine.json" }
+        ],
+      "hotbuild12s" : [ { "json" : "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json" },
+          { "json" : "/pa/units/land/bot_bomb/bot_bomb.json" }
+        ],
+      "hotbuild13s" : [ { "json" : "/pa/units/land/bot_tactical_missile/bot_tactical_missile.json" } ],
+      "hotbuild1s" : [ { "json" : "/pa/units/land/energy_storage/energy_storage.json" },
+          { "json" : "/pa/units/sea/battleship/battleship.json" },
+          { "json" : "/pa/units/air/gunship/gunship.json" },
+          { "json" : "/pa/units/land/tank_laser_adv/tank_laser_adv.json" },
+          { "json" : "/pa/units/land/assault_bot_adv/assault_bot_adv.json" },
+          { "json" : "/pa/units/orbital/orbital_laser/orbital_laser.json" },
+          { "json" : "/pa/units/land/metal_storage/metal_storage.json" }
+        ],
+      "hotbuild2s" : [ { "json" : "/pa/units/orbital/ion_defense/ion_defense.json" },
+          { "json" : "/pa/units/air/transport/transport.json" },
+          { "json" : "/pa/units/land/tank_heavy_mortar/tank_heavy_mortar.json" },
+          { "json" : "/pa/units/land/fabrication_bot_combat_adv/fabrication_bot_combat_adv.json" },
+          { "json" : "/pa/units/orbital/delta_v_engine/delta_v_engine.json" }
+        ],
+      "hotbuild3s" : [ { "json" : "/pa/units/land/vehicle_factory/vehicle_factory.json" },
+          { "json" : "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json" },
+          { "json" : "/pa/units/land/bot_factory/bot_factory.json" },
+          { "json" : "/pa/units/land/fabrication_bot/fabrication_bot.json" },
+          { "json" : "/pa/units/land/fabrication_vehicle/fabrication_vehicle.json" },
+          { "json" : "/pa/units/air/fabrication_aircraft/fabrication_aircraft.json" },
+          { "json" : "/pa/units/sea/fabrication_ship/fabrication_ship.json" }
+        ],
+      "hotbuild4s" : [ { "json" : "/pa/units/air/air_factory/air_factory.json" },
+          { "json" : "/pa/units/orbital/orbital_fighter/orbital_fighter.json" },
+          { "json" : "/pa/units/air/air_factory_adv/air_factory_adv.json" },
+          { "json" : "/pa/units/sea/frigate/frigate.json" },
+          { "json" : "/pa/units/land/assault_bot/assault_bot.json" },
+          { "json" : "/pa/units/air/fighter/fighter.json" },
+          { "json" : "/pa/units/land/tank_light_laser/tank_light_laser.json" },
+          { "json" : "/pa/units/sea/naval_factory/naval_factory.json" },
+          { "json" : "/pa/units/sea/naval_factory_adv/naval_factory_adv.json" },
+          { "json" : "/pa/units/orbital/orbital_launcher/orbital_launcher.json" }
+        ],
+      "hotbuild5s" : [ { "json" : "/pa/units/land/radar_adv/radar_adv.json" },
+          { "json" : "/pa/units/orbital/radar_satellite/radar_satellite.json" },
+          { "json" : "/pa/units/land/radar/radar.json" },
+          { "json" : "/pa/units/sea/destroyer/destroyer.json" },
+          { "json" : "/pa/units/air/bomber/bomber.json" },
+          { "json" : "/pa/units/land/tank_armor/tank_armor.json" },
+          { "json" : "/pa/units/land/bot_grenadier/bot_grenadier.json" },
+          { "json" : "/pa/units/orbital/deep_space_radar/deep_space_radar.json" }
+        ],
+      "hotbuild6s" : [ { "json" : "/pa/units/land/vehicle_factory_adv/vehicle_factory_adv.json" },
+          { "json" : "/pa/units/orbital/orbital_lander/orbital_lander.json" },
+          { "json" : "/pa/units/land/bot_factory_adv/bot_factory_adv.json" },
+          { "json" : "/pa/units/sea/sea_scout/sea_scout.json" },
+          { "json" : "/pa/units/air/air_scout/air_scout.json" },
+          { "json" : "/pa/units/land/land_scout/land_scout.json" },
+          { "json" : "/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json" },
+          { "json" : "/pa/units/land/teleporter/teleporter.json" }
+        ],
+      "hotbuild7s" : [ { "json" : "/pa/units/land/energy_plant_adv/energy_plant_adv.json" },
+          { "json" : "/pa/units/sea/missile_ship/missile_ship.json" },
+          { "json" : "/pa/units/land/bot_sniper/bot_sniper.json" },
+          { "json" : "/pa/units/air/bomber_adv/bomber_adv.json" },
+          { "json" : "/pa/units/orbital/radar_satellite_adv/radar_satellite_adv.json" },
+          { "json" : "/pa/units/land/tank_heavy_armor/tank_heavy_armor.json" },
+          { "json" : "/pa/units/land/energy_plant/energy_plant.json" }
+        ],
+      "hotbuild8s" : [ { "json" : "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json" },
+          { "json" : "/pa/units/land/fabrication_vehicle_adv/fabrication_vehicle_adv.json" },
+          { "json" : "/pa/units/land/fabrication_bot_adv/fabrication_bot_adv.json" },
+          { "json" : "/pa/units/sea/fabrication_ship_adv/fabrication_ship_adv.json" },
+          { "json" : "/pa/units/air/fabrication_aircraft_adv/fabrication_aircraft_adv.json" },
+          { "json" : "/pa/units/orbital/solar_array/solar_array.json" },
+          { "json" : "/pa/units/land/metal_extractor/metal_extractor.json" }
+        ],
+      "hotbuild9s" : [ { "json" : "/pa/units/land/laser_defense_adv/laser_defense_adv.json" },
+          { "json" : "/pa/units/land/laser_defense/laser_defense.json" },
+          { "json" : "/pa/units/land/laser_defense_single/laser_defense_single.json" }
         ]
     },
-  "hotbuildglobalkey" : { "hotbuild10s" : "d",
-      "hotbuild11s" : "g",
-      "hotbuild1s" : "w",
-      "hotbuild2s" : "e",
-      "hotbuild3s" : "r",
-      "hotbuild4s" : "t",
-      "hotbuild5s" : "f",
-      "hotbuild6s" : "s",
-      "hotbuild7s" : "x",
-      "hotbuild8s" : "c",
-      "hotbuild9s" : "v"
+  "hotbuildglobalkey" : { "hotbuild10s" : "c",
+      "hotbuild11s" : "v",
+      "hotbuild12s" : "y",
+      "hotbuild13s" : "h",
+      "hotbuild1s" : "d",
+      "hotbuild2s" : "g",
+      "hotbuild3s" : "w",
+      "hotbuild4s" : "e",
+      "hotbuild5s" : "r",
+      "hotbuild6s" : "t",
+      "hotbuild7s" : "f",
+      "hotbuild8s" : "s",
+      "hotbuild9s" : "x"
     },
   "uber" : [ { "active" : false,
         "conflicts" : [  ],
@@ -134,7 +144,7 @@
         "showClear" : false,
         "title" : "toggle music",
         "type" : "keybind",
-        "value" : "ctrl+s"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -150,7 +160,7 @@
         "showClear" : false,
         "title" : "toggle fullscreen",
         "type" : "keybind",
-        "value" : "alt+enter"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -166,7 +176,7 @@
         "showClear" : false,
         "title" : "Show/Hide game stats",
         "type" : "keybind",
-        "value" : "tab"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -198,7 +208,7 @@
         "showClear" : false,
         "title" : "navigate back/exit",
         "type" : "keybind",
-        "value" : "esc"
+        "value" : "f10"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -326,7 +336,7 @@
         "showClear" : false,
         "title" : "swap pip",
         "type" : "keybind",
-        "value" : "shift+q"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -342,7 +352,7 @@
         "showClear" : false,
         "title" : "copy to pip",
         "type" : "keybind",
-        "value" : "alt+q"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -358,7 +368,7 @@
         "showClear" : false,
         "title" : "toggle pip mirror",
         "type" : "keybind",
-        "value" : "alt+m"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -502,7 +512,7 @@
         "showClear" : false,
         "title" : "toggle twitch streaming",
         "type" : "keybind",
-        "value" : "f6"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -518,7 +528,7 @@
         "showClear" : false,
         "title" : "toggle twitch microphone",
         "type" : "keybind",
-        "value" : "f7"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -534,7 +544,7 @@
         "showClear" : false,
         "title" : "toggle twitch system audio recording",
         "type" : "keybind",
-        "value" : "f8"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -550,7 +560,7 @@
         "showClear" : false,
         "title" : "run twitch commercial",
         "type" : "keybind",
-        "value" : "f9"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -566,7 +576,7 @@
         "showClear" : false,
         "title" : "select commander",
         "type" : "keybind",
-        "value" : "alt+c"
+        "value" : "1"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -582,7 +592,7 @@
         "showClear" : false,
         "title" : "select idle fabbers",
         "type" : "keybind",
-        "value" : ""
+        "value" : "i"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -598,7 +608,7 @@
         "showClear" : false,
         "title" : "select all factories",
         "type" : "keybind",
-        "value" : "shift+f1"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -614,7 +624,7 @@
         "showClear" : false,
         "title" : "select all idle factories",
         "type" : "keybind",
-        "value" : "shift+f2"
+        "value" : "shift+f8"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -630,7 +640,7 @@
         "showClear" : false,
         "title" : "select all factories on screen",
         "type" : "keybind",
-        "value" : "shift+f3"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -646,7 +656,7 @@
         "showClear" : false,
         "title" : "select all idle factories on screen",
         "type" : "keybind",
-        "value" : "shift+f4"
+        "value" : "f8"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -662,7 +672,7 @@
         "showClear" : false,
         "title" : "select all combat units on screen",
         "type" : "keybind",
-        "value" : "shift+f5"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -678,7 +688,7 @@
         "showClear" : false,
         "title" : "select all combat units",
         "type" : "keybind",
-        "value" : "ctrl+shift+f6"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -694,7 +704,7 @@
         "showClear" : false,
         "title" : "select all land combat units on screen",
         "type" : "keybind",
-        "value" : ""
+        "value" : "f5"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -710,7 +720,7 @@
         "showClear" : false,
         "title" : "select all land combat units",
         "type" : "keybind",
-        "value" : "ctrl+shift+f7"
+        "value" : "shift+f5"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -726,7 +736,7 @@
         "showClear" : false,
         "title" : "select all air combat units on screen",
         "type" : "keybind",
-        "value" : "ctrl+shift+f8"
+        "value" : "f6"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -742,7 +752,7 @@
         "showClear" : false,
         "title" : "select all air combat units",
         "type" : "keybind",
-        "value" : "ctrl+shift+f9"
+        "value" : "shift+f6"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -758,7 +768,7 @@
         "showClear" : false,
         "title" : "select all naval combat units on screen",
         "type" : "keybind",
-        "value" : "ctrl+shift+f10"
+        "value" : "shift+f7"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -774,7 +784,7 @@
         "showClear" : false,
         "title" : "select all naval combat units",
         "type" : "keybind",
-        "value" : "ctrl+shift+f4"
+        "value" : "f7"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -790,7 +800,7 @@
         "showClear" : false,
         "title" : "select all matching units on screen",
         "type" : "keybind",
-        "value" : "ctrl+z"
+        "value" : "o"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -806,7 +816,7 @@
         "showClear" : false,
         "title" : "move",
         "type" : "keybind",
-        "value" : ""
+        "value" : "m"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -822,7 +832,7 @@
         "showClear" : false,
         "title" : "attack",
         "type" : "keybind",
-        "value" : ""
+        "value" : "a"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -870,7 +880,7 @@
         "showClear" : false,
         "title" : "reclaim",
         "type" : "keybind",
-        "value" : ""
+        "value" : "u"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -886,7 +896,7 @@
         "showClear" : false,
         "title" : "patrol",
         "type" : "keybind",
-        "value" : ""
+        "value" : "q"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -918,7 +928,7 @@
         "showClear" : false,
         "title" : "unload",
         "type" : "keybind",
-        "value" : ""
+        "value" : "l"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -934,7 +944,7 @@
         "showClear" : false,
         "title" : "load",
         "type" : "keybind",
-        "value" : ""
+        "value" : "k"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -950,7 +960,7 @@
         "showClear" : false,
         "title" : "alt fire",
         "type" : "keybind",
-        "value" : "u"
+        "value" : "p"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -966,7 +976,7 @@
         "showClear" : false,
         "title" : "stop",
         "type" : "keybind",
-        "value" : "q"
+        "value" : "esc"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -1158,7 +1168,7 @@
         "showClear" : false,
         "title" : "toggle energy orders",
         "type" : "keybind",
-        "value" : ""
+        "value" : "tab"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -1174,7 +1184,7 @@
         "showClear" : false,
         "title" : "capture group 1",
         "type" : "keybind",
-        "value" : "ctrl+1"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -1334,7 +1344,7 @@
         "showClear" : false,
         "title" : "recall group 1",
         "type" : "keybind",
-        "value" : "1"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -1662,7 +1672,7 @@
         "showClear" : false,
         "title" : "build loop",
         "type" : "keybind",
-        "value" : ""
+        "value" : "z"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -1678,7 +1688,7 @@
         "showClear" : false,
         "title" : "toggle build orders",
         "type" : "keybind",
-        "value" : "o"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2237,7 +2247,7 @@
         "showClear" : false,
         "title" : "track selection with camera",
         "type" : "keybind",
-        "value" : ""
+        "value" : "ctrl+t"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2507,7 +2517,7 @@
         "showClear" : false,
         "title" : "capture anchor 1",
         "type" : "keybind",
-        "value" : "shift+1"
+        "value" : "ctrl+f1"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2523,7 +2533,7 @@
         "showClear" : false,
         "title" : "capture anchor 2",
         "type" : "keybind",
-        "value" : "shift+2"
+        "value" : "ctrl+f2"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2539,7 +2549,7 @@
         "showClear" : false,
         "title" : "capture anchor 3",
         "type" : "keybind",
-        "value" : "shift+3"
+        "value" : "ctrl+f3"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2555,7 +2565,7 @@
         "showClear" : false,
         "title" : "capture anchor 4",
         "type" : "keybind",
-        "value" : "shift+4"
+        "value" : "ctrl+f4"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2571,7 +2581,7 @@
         "showClear" : false,
         "title" : "capture anchor 5",
         "type" : "keybind",
-        "value" : "shift+5"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2587,7 +2597,7 @@
         "showClear" : false,
         "title" : "capture anchor 6",
         "type" : "keybind",
-        "value" : "shift+6"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2603,7 +2613,7 @@
         "showClear" : false,
         "title" : "capture anchor 7",
         "type" : "keybind",
-        "value" : "shift+7"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2619,7 +2629,7 @@
         "showClear" : false,
         "title" : "capture anchor 8",
         "type" : "keybind",
-        "value" : "shift+8"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2635,7 +2645,7 @@
         "showClear" : false,
         "title" : "capture anchor 9",
         "type" : "keybind",
-        "value" : "shift+9"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2651,7 +2661,7 @@
         "showClear" : false,
         "title" : "capture anchor 10",
         "type" : "keybind",
-        "value" : "shift+0"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2667,7 +2677,7 @@
         "showClear" : false,
         "title" : "recall anchor 1",
         "type" : "keybind",
-        "value" : "alt+1"
+        "value" : "f1"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2683,7 +2693,7 @@
         "showClear" : false,
         "title" : "recall anchor 2",
         "type" : "keybind",
-        "value" : "alt+2"
+        "value" : "f2"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2699,7 +2709,7 @@
         "showClear" : false,
         "title" : "recall anchor 3",
         "type" : "keybind",
-        "value" : "alt+3"
+        "value" : "f3"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2715,7 +2725,7 @@
         "showClear" : false,
         "title" : "recall anchor 4",
         "type" : "keybind",
-        "value" : "alt+4"
+        "value" : "f4"
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2731,7 +2741,7 @@
         "showClear" : false,
         "title" : "recall anchor 5",
         "type" : "keybind",
-        "value" : "alt+5"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2747,7 +2757,7 @@
         "showClear" : false,
         "title" : "recall anchor 6",
         "type" : "keybind",
-        "value" : "alt+6"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2763,7 +2773,7 @@
         "showClear" : false,
         "title" : "recall anchor 7",
         "type" : "keybind",
-        "value" : "alt+7"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2779,7 +2789,7 @@
         "showClear" : false,
         "title" : "recall anchor 8",
         "type" : "keybind",
-        "value" : "alt+8"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2795,7 +2805,7 @@
         "showClear" : false,
         "title" : "recall anchor 9",
         "type" : "keybind",
-        "value" : "alt+9"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2811,7 +2821,7 @@
         "showClear" : false,
         "title" : "recall anchor 0",
         "type" : "keybind",
-        "value" : "alt+0"
+        "value" : ""
       },
       { "active" : false,
         "conflicts" : [  ],
@@ -2923,7 +2933,7 @@
         "showClear" : false,
         "title" : "reload view",
         "type" : "keybind",
-        "value" : "f5"
+        "value" : "f12"
       },
       { "active" : false,
         "conflicts" : [  ],

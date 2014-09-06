@@ -109,6 +109,14 @@ model.hbunitspecs.subscribe(function(newval){
     try{
         //console.log(newval);
         var specs = ko.toJS(newval[Object.keys(newval)[0]]);
+        //console.log(Object.keys(newval).length);
+        if(Object.keys(newval).length > 1){
+            //debugger;
+            for(var j = 1; i < Object.keys(newval).length; j++){
+                specs = _.union(specs, ko.toJS(newval[Object.keys(newval)[j]]));
+            }
+        }
+        
         //console.log(specs);
         var barr = [];
         if(specs !== undefined){
@@ -122,9 +130,9 @@ model.hbunitspecs.subscribe(function(newval){
                 delete bspec.production;
                 barr[i] = bspec;
             }
-            
+            barr = _.uniq(barr);
         }
-        //console.log(barr);
+        //console.log(barr.length);
         api.Panel.message(api.Panel.parentId,'hbselection',barr);
     }
     catch(e){

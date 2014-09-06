@@ -591,13 +591,13 @@ var hotbuildsettings = (function () {
         //api.settings.set("hb","hotbuildconfigkey",hotbuildsettings.viewmodel.cleanhotbuildglobalkey())
         localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
         localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
-        model.oldsaveBeforeHotbuild();
+        return model.oldsaveBeforeHotbuild();
     };
     model.oldsaveandexitBeforeHotbuild = model.saveAndExit;
     model.saveAndExit = function(){
         localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
         localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
-        model.oldsaveandexitBeforeHotbuild();
+        return model.oldsaveandexitBeforeHotbuild();
     };    
 
     //model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
