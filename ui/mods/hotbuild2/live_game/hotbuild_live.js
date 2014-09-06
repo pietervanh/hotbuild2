@@ -109,14 +109,15 @@ model.hbunitspecs.subscribe(function(newval){
     try{
         //console.log(newval);
         var specs = ko.toJS(newval[Object.keys(newval)[0]]);
+        //console.log(specs.length);
         //console.log(Object.keys(newval).length);
         if(Object.keys(newval).length > 1){
             //debugger;
-            for(var j = 1; i < Object.keys(newval).length; j++){
+            for(var j = 1; j <= Object.keys(newval).length; j++){
                 specs = _.union(specs, ko.toJS(newval[Object.keys(newval)[j]]));
             }
         }
-        
+        //console.log(specs.length);
         //console.log(specs);
         var barr = [];
         if(specs !== undefined){
