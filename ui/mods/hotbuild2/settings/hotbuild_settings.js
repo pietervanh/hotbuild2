@@ -401,7 +401,6 @@ var hotbuildsettings = (function () {
             self.Save();
             keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
             keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
-            //keyboardsettings.cameraKeyPanStyle = model.cameraKeyPanStyle();
             $("#ieport").val(JSON.stringify(keyboardsettings));
         };
 
@@ -409,14 +408,14 @@ var hotbuildsettings = (function () {
             console.log('import');
             if ($("#ieport").val() !== '') {
                 var imported = JSON.parse($("#ieport").val());
-                for (var ukey in imported.uber) {
+                for (var u=0; u < imported.uber.length; u++) {
                     for(var i = 0; i < model.keyboardSettingsItems().length; i++){
-                        if(model.keyboardSettingsItems()[i].title === ukey.title){
+                        if(model.keyboardSettingsItems()[i].title() === imported.uber[u].title){
                             try{
-                                console.log(imported.uber[ukey].title);
+                                console.log(imported.uber[u].title);
                                 console.log("OLD " + model.keyboardSettingsItems()[i].value());
-                                console.log("NEW " + ukey.value);
-                                model.keyboardSettingsItems()[i].value(imported.uber[ukey].value);
+                                console.log("NEW " + imported.uber[u].value);
+                                model.keyboardSettingsItems()[i].value(imported.uber[u].value);
                             }
                             catch (err) {
                                 console.log(err);
@@ -426,7 +425,6 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
-                //model.cameraKeyPanStyle(imported.cameraKeyPanStyle);
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
@@ -439,14 +437,14 @@ var hotbuildsettings = (function () {
         self.importfromfile = function (importfile) {
             console.log('importing importfile ' + importfile);
             $.getJSON('coui:/' + importfile, function (imported) {
-                for (var ukey in imported.uber) {
+                for (var u=0; u < imported.uber.length; u++) {
                     for(var i = 0; i < model.keyboardSettingsItems().length; i++){
-                        if(model.keyboardSettingsItems()[i].title === ukey.title){
+                        if(model.keyboardSettingsItems()[i].title() === imported.uber[u].title){
                             try{
-                                console.log(imported.uber[ukey].title);
+                                console.log(imported.uber[u].title);
                                 console.log("OLD " + model.keyboardSettingsItems()[i].value());
-                                console.log("NEW " + ukey.value);
-                                model.keyboardSettingsItems()[i].value(imported.uber[ukey].value);
+                                console.log("NEW " + imported.uber[u].value);
+                                model.keyboardSettingsItems()[i].value(imported.uber[u].value);
                             }
                             catch (err) {
                                 console.log(err);
@@ -456,8 +454,6 @@ var hotbuildsettings = (function () {
                 }
                 self.hotbuildglobalkey(imported.hotbuildglobalkey);
                 self.hotbuildglobal(imported.hotbuildglobal);
-                //console.log(imported.cameraKeyPanStyle);
-                //model.cameraKeyPanStyle(imported.cameraKeyPanStyle);
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
