@@ -2050,7 +2050,7 @@
         "showClear" : false,
         "title" : "move left",
         "type" : "keybind",
-        "value" : "a"
+        "value" : "q"
       },
       { "active" : false,
         "conflicts" : [  ],
