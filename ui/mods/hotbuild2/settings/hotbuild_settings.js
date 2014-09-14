@@ -543,7 +543,7 @@ var hotbuildsettings = (function () {
             type: 'keybind',
             set: 'hotbuild',
             display_group: 'hotbuild',
-            display_sub_group: 'hotbuild',
+            display_sub_group: '',
             default : 'y'
         },
         hotbuild_toggle: {
@@ -551,7 +551,7 @@ var hotbuildsettings = (function () {
             type: 'keybind',
             set: 'hotbuild',
             display_group: 'hotbuild',
-            display_sub_group: 'hotbuild',
+            display_sub_group: '',
             default: ''
         },
         hotbuild_hotselect: {
@@ -559,10 +559,12 @@ var hotbuildsettings = (function () {
             type: 'keybind',
             set: 'hotbuild',
             display_group: 'hotbuild',
-            display_sub_group: 'hotbuild',
+            display_sub_group: '',
             default: ''
         }
     });
+
+    model.keybindGroupTitles().push('hotbuild');
 
     model.oldsaveBeforeHotbuild = model.save;
     model.save = function(){
