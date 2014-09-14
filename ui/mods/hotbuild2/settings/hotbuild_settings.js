@@ -24,8 +24,22 @@ var hotbuildsettings = (function () {
                 var bifunit = bif.units[results[i]];
                 var hotbuildunit = bifunit;
                 hotbuildunit.json = hotbuildunit.path;
-                hotbuildunit.displayname = hotbuildunit.display_name;
-                hotbuildunit.desc = hotbuildunit.description;
+                //TEMP TRANSLATION FIX
+                try{
+                    hotbuildunit.displayname = hotbuildunit.display_name.slice(hotbuildunit.display_name.indexOf('):') + 2); 
+                }
+                catch(e){
+                    hotbuildunit.displayname = hotbuildunit.display_name;
+                    console.log("bad trans string : " + hotbuildunit.displayname);
+                }
+                try{
+                    hotbuildunit.desc = hotbuildunit.description.slice(hotbuildunit.description.indexOf('):') + 2);
+                }
+                catch(e){
+                    hotbuildunit.desc = hotbuildunit.description;
+                    console.log("bad trans string : " + hotbuildunit.desc);
+                }
+                
                 hotbuildunit.factory = "";
                 //console.log(hotbuildunit.json);
                 /*jshint -W030 */
@@ -353,22 +367,24 @@ var hotbuildsettings = (function () {
         };
 
         self.showingDefaultPrompt = ko.observable(false);
-        self.showingDefaultWASDPrompt = ko.observable(false);
 
-        self.showCommunityDefaultPrompt = function () {
+        self.communitydefaultset = ko.observable("");
+
+        self.showCommunityDefaultPrompt = function (defaultset) {
             self.showingDefaultPrompt(true);
+            self.communitydefaultset(defaultset);
             $("#comdefaultsDlg").dialog({
                 dialogClass: "no-close",
-				height: 'auto',
-				width: 460,
+                height: 'auto',
+                width: 460,
                 draggable: false,
                 resizable: false,
                 modal: true,
                 complete: function (data, textStatus) { }
             });
             $("#setComDefaults").click(function () {
-                console.log("set Community Defaults");
-                //$("#hbkeyboard li").unbind("click dblclick", self.keyboardclickhandler);
+                console.log("set Community Defaults " + defaultset);
+                self.importfromfile("/ui/mods/hotbuild2/defaults/" + defaultset + ".json");
                 self.ComunityDefaults();
                 self.showingDefaultPrompt(false);
                 $("#comdefaultsDlg").dialog("close");
@@ -377,39 +393,6 @@ var hotbuildsettings = (function () {
                 self.showingDefaultPrompt(false);
                 $("#comdefaultsDlg").dialog("close");
             });
-        };
-
-        self.showCommunityDefaultWASDPrompt = function () {
-            self.showingDefaultWASDPrompt(true);
-            $("#comdefaultsWASDDlg").dialog({
-                dialogClass: "no-close",
-				height: 'auto',
-				width: 460,
-                draggable: false,
-                resizable: false,
-                modal: true,
-                complete: function (data, textStatus) { }
-            });
-            $("#setComDefaultsWASD").click(function () {
-                console.log("set Community Defaults WASD");
-                self.ComunityDefaultsWASD();
-                self.showingDefaultWASDPrompt(false);
-                $("#comdefaultsWASDDlg").dialog("close");
-            });
-            $("#ignoreComDefaultsWASD").click(function () {
-                self.showingDefaultWASDPrompt(false);
-                $("#comdefaultsWASDDlg").dialog("close");
-            });
-        };
-
-        self.ComunityDefaults = function () {
-            //forgetFramePosition('hotbuild_info_frame');
-            self.importfromfile("/ui/mods/hotbuild2/defaults/ARROWS.json");
-        };
-
-        self.ComunityDefaultsWASD = function () {
-            //forgetFramePosition('hotbuild_info_frame');
-            self.importfromfile("/ui/mods/hotbuild2/defaults/WASD.json");
         };
 
         self.export = function () {

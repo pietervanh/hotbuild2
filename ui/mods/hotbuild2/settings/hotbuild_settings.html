@@ -8,9 +8,9 @@
                 Community Defaults <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#" data-bind="click:$data.showCommunityDefaultWASDPrompt">WASD (Qwerty)</a></li>
-                <!-- <li><a href="#" data-bind="click:$data.showCommunityDefaultWASDPrompt">ZQSD (Azerty)</a></li>-->
-                <li><a href="#" data-bind="click:$data.showCommunityDefaultPrompt">ARROWS (&#8592;&#8593;&#8594;&#8595;)</a></li>
+                <li><a href="#" data-bind="click:$data.showCommunityDefaultPrompt.bind($data,'WASD')">WASD (Qwerty)</a></li>
+                <li><a href="#" data-bind="click:$data.showCommunityDefaultPrompt.bind($data,'ZQSD')">ZQSD (Azerty)</a></li>
+                <li><a href="#" data-bind="click:$data.showCommunityDefaultPrompt.bind($data,'ARROWS')">ARROWS (&#8592;&#8593;&#8594;&#8595;)</a></li>
             </ul>
         </div>
         <button class="btn btn-default btn-xs" id="hb_imexport" type="button" data-bind="click_sound:'default', rollover_sound:'default', click:$data.showImportExportDialog">
@@ -147,7 +147,7 @@
             <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
         </div>
         <div class="hotbuild_list_desc">
-            <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
+            <div class="hotbuild_list_desc_name" data-bind="text:displayname"></div>
             <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
          </div>
         <div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"></div>
@@ -167,18 +167,10 @@
 </script> 
   
 <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
-    <div>Are you sure you want to reset your keys to the community defaults ?</div>
+    <div>Are you sure you want to reset your keys to the community defaults ? (<span data-bind="text:communitydefaultset"></span>)</div>
     <div class="btn-group">
         <button id="setComDefaults" class="btn btn_hero" type="button">YES</button>
         <button id="ignoreComDefaults" class="btn btn_neg" type="button">NO THANKS</button>
-    </div>
-</div>
-
-<div id="comdefaultsWASDDlg" data-bind="visible: showingDefaultWASDPrompt">
-    <div>Are you sure you want to reset your keys to the community defaults (WASD) ?</div>
-    <div class="btn-group" style="margin-top: 10px">
-        <button id="setComDefaultsWASD" class="btn btn_hero" type="button">YES</button>
-        <button id="ignoreComDefaultsWASD" class="btn btn_neg" type="button">NO THANKS</button>
     </div>
 </div>
     
