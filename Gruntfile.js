@@ -61,82 +61,23 @@ module.exports = function(grunt) {
             info.date = require('dateformat')(new Date(), 'yyyy/mm/dd');
             info.display_name = title;
             info.identifier = "com.pa.proeleert." + target;
-            /*
-            for (var scene in info.scenes) {
-              if (info.scenes[scene][0].match('require.js')) {
-                info.scenes[scene].shift()
-              }
-              info[scene] = info.scenes[scene]
-            }
-            */
             console.log(info.version, info.date);
             return JSON.stringify(info, null, 2);
           }
         }
       }
-    },
-    /*
-    requirejs: {
-      target: {
-        options: {
-          baseUrl: 'ui/mods',
-          mainConfigFile: 'ui/mods/instant_sandbox/bootstrap.js',
-          skipDirOptimize: true,
-          optimize: 'none',
-          stubModules: ['text'],
-
-          //name: 'lib/ext/almond',
-          name: 'instant_sandbox/main',
-          out: '../<%= target %>/ui/mods/instant_sandbox/bootstrap.js',
-
-          skipModuleInsertion: true,
-          onBuildWrite: function( name, path, contents ) {
-            return require('amdclean').clean({
-              code: contents,
-              globalObject: true,
-              globalObjectName: 'instant_sandbox',
-            });
-          },
-        }
-      }
-    },
-    */
-    uglify:{
-      release:{
-        options: {
-          mangle: false,
-          compress: {
-            drop_console: true
-          }
-        },
-        files:{
-          '../<%= target %>/ui/mods/hotbuild2/global_mod_list/hotbuild.js' : ['ui/mods/hotbuild2/global_mod_list/hotbuild.js'],
-          '../<%= target %>/ui/mods/hotbuild2/live_game/hotbuild_core.js' : ['ui/mods/hotbuild2/live_game/hotbuild_core.js'],
-          '../<%= target %>/ui/mods/hotbuild2/live_game/hotbuild_live.js' : ['ui/mods/hotbuild2/live_game/hotbuild_live.js'],
-          '../<%= target %>/ui/mods/hotbuild2/settings/hotbuild_settings.js' : ['ui/mods/hotbuild2/settings/hotbuild_settings.js']
-        }
-      }
-    },
-    cssmin: {
-      release: {
-        files: { 
-          '../<%= target %>/ui/mods/hotbuild2/live_game/hotbuild.css' : ['ui/mods/hotbuild2/live_game/hotbuild.css'],
-          '../<%= target %>/ui/mods/hotbuild2/settings/hotbuild_settings.css' : ['ui/mods/hotbuild2/settings/hotbuild_settings.css']
-        }
-      }
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
-  //grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   grunt.registerTask('default', ['jshint','clean','copy:simple', 'copy:modinfo','copy:test']);
-  grunt.registerTask('release', ['jshint','clean','copy:simple', 'copy:modinfo','copy:test']);  
-  //grunt.registerTask('release', ['jshint','clean','copy:simple', 'copy:modinfo','cssmin:release','uglify:release']);
+  grunt.registerTask('release', ['jshint','clean','copy:simple', 'copy:modinfo','copy:test']);
+  
+  //grunt.registerTask('deploy',['compress:main']);
 
 };
