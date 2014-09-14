@@ -385,7 +385,6 @@ var hotbuildsettings = (function () {
             $("#setComDefaults").click(function () {
                 console.log("set Community Defaults " + defaultset);
                 self.importfromfile("/ui/mods/hotbuild2/defaults/" + defaultset + ".json");
-                self.ComunityDefaults();
                 self.showingDefaultPrompt(false);
                 $("#comdefaultsDlg").dialog("close");
             });
