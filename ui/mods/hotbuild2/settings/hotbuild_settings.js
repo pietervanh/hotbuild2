@@ -4,8 +4,11 @@
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 var hotbuildsettings = (function () {
 
+    locAddNamespace('units');
+
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
         var self = this;
+        self.hotbuilddirty = ko.observable(false);
         self.hotbuildglobal = ko.observable(hbglobal).extend({ notify: 'always' });
         self.hotbuildglobalkey = ko.observable(hbglobalkey);
         self.cleanhotbuildglobal = ko.observable(hbglobal);
@@ -26,14 +29,16 @@ var hotbuildsettings = (function () {
                 hotbuildunit.json = hotbuildunit.path;
                 //TEMP TRANSLATION FIX
                 try{
-                    hotbuildunit.displayname = hotbuildunit.display_name.slice(hotbuildunit.display_name.indexOf('):') + 2); 
+                    hotbuildunit.displayname = loc(hotbuildunit.display_name || "");
+                    //hotbuildunit.displayname = hotbuildunit.display_name.slice(hotbuildunit.display_name.indexOf('):') + 2); 
                 }
                 catch(e){
                     hotbuildunit.displayname = hotbuildunit.display_name;
                     console.log("bad trans string : " + hotbuildunit.displayname);
                 }
                 try{
-                    hotbuildunit.desc = hotbuildunit.description.slice(hotbuildunit.description.indexOf('):') + 2);
+                    hotbuildunit.desc = loc(hotbuildunit.description || "");
+                    //hotbuildunit.desc = hotbuildunit.description.slice(hotbuildunit.description.indexOf('):') + 2);
                 }
                 catch(e){
                     hotbuildunit.desc = hotbuildunit.description;
@@ -316,8 +321,9 @@ var hotbuildsettings = (function () {
             self.cleanhotbuildglobal(viewmodelconfig);
             model.hotbuildconfig = self.cleanhotbuildglobal();
             model.hotbuildconfigkey = self.cleanhotbuildglobalkey();
+            self.hotbuilddirty(true);
             //model.clean(false);
-            api.settings.isDirty(true);
+            //api.settings.isDirty(true);
         };
 
 
@@ -499,6 +505,7 @@ var hotbuildsettings = (function () {
     var hotbuildsettings = {};
     hotbuildsettings.viewmodel = hbuisettings;
     hotbuildsettings.viewmodel.updatehotbuildkeys();
+    hotbuildsettings.dirty = hbuisettings.hotbuilddirty;
 
     return hotbuildsettings;
 
@@ -564,20 +571,28 @@ var hotbuildsettings = (function () {
         }
     });
 
-    model.keybindGroupTitles().push('hotbuild');
+    var hotbuildOldClean = model.clean;
+    model.clean = ko.computed(function() {
+        return hotbuildOldClean() && !hotbuildsettings.dirty();
+    });    
 
-    model.oldsaveBeforeHotbuild = model.save;
-    model.save = function(){
-        //api.settings.set("hb","hotbuildconfigkey",hotbuildsettings.viewmodel.cleanhotbuildglobalkey())
+    var hotbuildOldSave = model.save;
+    var hotbuildOldSaveClose = model.saveAndExit;
+
+    var hotbuildStore = function(){
+        hotbuildOldSave();
         localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
         localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
-        return model.oldsaveBeforeHotbuild();
     };
-    model.oldsaveandexitBeforeHotbuild = model.saveAndExit;
+    
+    model.save = function(){
+        hotbuildStore();
+        return hotbuildOldSave();
+    };
+    
     model.saveAndExit = function(){
-        localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
-        localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
-        return model.oldsaveandexitBeforeHotbuild();
+        hotbuildOldSaveClose();  
+        hotbuildStore();                
     };    
 
     //model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
