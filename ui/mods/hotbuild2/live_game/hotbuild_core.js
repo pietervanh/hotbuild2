@@ -198,7 +198,7 @@ var hotbuild2 = (function () {
             if(self.buildable_units().length > 0){
                 for(var i = 0; i < self.buildable_units().length; i++){
                     if(self.buildable_units()[i].id == cmd) {
-                        console.log("can build " +self.buildable_units()[i].id);
+                        //console.log("can build " +self.buildable_units()[i].id);
                         return true;
                     }
                     //GW fix

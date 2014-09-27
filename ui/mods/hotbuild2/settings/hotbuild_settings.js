@@ -4,8 +4,6 @@
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 var hotbuildsettings = (function () {
 
-    locAddNamespace('units');
-
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
         var self = this;
         self.hotbuilddirty = ko.observable(false);
@@ -27,24 +25,8 @@ var hotbuildsettings = (function () {
                 var bifunit = bif.units[results[i]];
                 var hotbuildunit = bifunit;
                 hotbuildunit.json = hotbuildunit.path;
-                //TEMP TRANSLATION FIX
-                try{
-                    hotbuildunit.displayname = loc(hotbuildunit.display_name || "");
-                    //hotbuildunit.displayname = hotbuildunit.display_name.slice(hotbuildunit.display_name.indexOf('):') + 2); 
-                }
-                catch(e){
-                    hotbuildunit.displayname = hotbuildunit.display_name;
-                    console.log("bad trans string : " + hotbuildunit.displayname);
-                }
-                try{
-                    hotbuildunit.desc = loc(hotbuildunit.description || "");
-                    //hotbuildunit.desc = hotbuildunit.description.slice(hotbuildunit.description.indexOf('):') + 2);
-                }
-                catch(e){
-                    hotbuildunit.desc = hotbuildunit.description;
-                    console.log("bad trans string : " + hotbuildunit.desc);
-                }
-                
+                hotbuildunit.displayname = hotbuildunit.display_name;
+                hotbuildunit.desc = hotbuildunit.description;
                 hotbuildunit.factory = "";
                 //console.log(hotbuildunit.json);
                 /*jshint -W030 */
@@ -244,11 +226,15 @@ var hotbuildsettings = (function () {
             }
             //get uberkey info
             var fuberkey = false;
-            
             _.forEach(model.keyboardSettingsItems(), function (o) {
                 if (o.value() === value) {
                     fuberkey = true;
-                    self.uberkey(o.title());
+                    var title = o.title();
+                    try{
+                        title = o.title().slice(o.title().indexOf('):') + 2)
+                    }
+                    catch(e){}
+                    self.uberkey(title);
                 }
             });
 
@@ -260,24 +246,14 @@ var hotbuildsettings = (function () {
 
         self.uberkeys = ko.computed(function () {
             var uberkeys = [];
-            
             _.forEach(model.keyboardSettingsItems(), function (o) {
                 uberkeys.push(o.value());
             });
-        
             return uberkeys;
         });
 
         self.disabledkeys = ko.computed(function () {
             var diskeys = ['caps lock', 'shift', 'return'];
-            /*
-            Tripax needs to fix uber + disabled keys on same button first
-            _.forEach(model.keybindings().bindings(), function (o) {
-                if(o.action() === 'move_up' || o.action() === 'move_down' || o.action() === 'move_left' || o.action() === 'move_right'){
-                    diskeys.push(o.value());    
-                }
-            });
-            */
             return diskeys;
         });
 
@@ -416,7 +392,13 @@ var hotbuildsettings = (function () {
                 var imported = JSON.parse($("#ieport").val());
                 for (var u=0; u < imported.uber.length; u++) {
                     for(var i = 0; i < model.keyboardSettingsItems().length; i++){
-                        if(model.keyboardSettingsItems()[i].title() === imported.uber[u].title){
+                        /*
+                        try{
+                            stitle = model.keyboardSettingsItems()[i].title().slice(model.keyboardSettingsItems()[i].title().indexOf('):') + 2);
+                        }
+                        catch(e){}
+                        */
+                        if(stitle === imported.uber[u].title){
                             try{
                                 console.log(imported.uber[u].title);
                                 console.log("OLD " + model.keyboardSettingsItems()[i].value());
@@ -445,7 +427,14 @@ var hotbuildsettings = (function () {
             $.getJSON('coui:/' + importfile, function (imported) {
                 for (var u=0; u < imported.uber.length; u++) {
                     for(var i = 0; i < model.keyboardSettingsItems().length; i++){
-                        if(model.keyboardSettingsItems()[i].title() === imported.uber[u].title){
+                        var stitle = model.keyboardSettingsItems()[i].title();
+                        /*
+                        try{
+                            stitle = model.keyboardSettingsItems()[i].title().slice(model.keyboardSettingsItems()[i].title().indexOf('):') + 2);
+                        }
+                        catch(e){}
+                        */
+                        if(stitle === imported.uber[u].title){
                             try{
                                 console.log(imported.uber[u].title);
                                 console.log("OLD " + model.keyboardSettingsItems()[i].value());
@@ -574,7 +563,7 @@ var hotbuildsettings = (function () {
     var hotbuildOldClean = model.clean;
     model.clean = ko.computed(function() {
         return hotbuildOldClean() && !hotbuildsettings.dirty();
-    });    
+    });
 
     var hotbuildOldSave = model.save;
     var hotbuildOldSaveClose = model.saveAndExit;
@@ -584,16 +573,16 @@ var hotbuildsettings = (function () {
         localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
         localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
     };
-    
+
     model.save = function(){
         hotbuildStore();
         return hotbuildOldSave();
     };
-    
+
     model.saveAndExit = function(){
-        hotbuildOldSaveClose();  
-        hotbuildStore();                
-    };    
+        hotbuildOldSaveClose();
+        hotbuildStore();
+    };
 
     //model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
 
