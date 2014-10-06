@@ -231,7 +231,7 @@ var hotbuildsettings = (function () {
                     fuberkey = true;
                     var title = o.title();
                     try{
-                        title = o.title().slice(o.title().indexOf('):') + 2)
+                        title = o.title().slice(o.title().indexOf('):') + 2);
                     }
                     catch(e){}
                     self.uberkey(title);
@@ -425,6 +425,8 @@ var hotbuildsettings = (function () {
         self.importfromfile = function (importfile) {
             console.log('importing importfile ' + importfile);
             $.getJSON('coui:/' + importfile, function (imported) {
+                self.hotbuildglobalkey(imported.hotbuildglobalkey);
+                self.hotbuildglobal(imported.hotbuildglobal);
                 for (var u=0; u < imported.uber.length; u++) {
                     for(var i = 0; i < model.keyboardSettingsItems().length; i++){
                         var stitle = model.keyboardSettingsItems()[i].title();
@@ -447,8 +449,7 @@ var hotbuildsettings = (function () {
                         }
                     }
                 }
-                self.hotbuildglobalkey(imported.hotbuildglobalkey);
-                self.hotbuildglobal(imported.hotbuildglobal);
+
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
