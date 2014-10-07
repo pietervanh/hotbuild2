@@ -13,7 +13,7 @@ var hotbuild2live = (function () {
     var hotbuildglobalkey = {};
     hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
     hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
-       
+
     hbgetBuildBarKey = function (id) {
         var result = '';
         var hbpos = 1;
@@ -30,12 +30,12 @@ var hotbuild2live = (function () {
                         result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
                         return false;
                     }
-                }                
+                }
             });
             hbpos += 1;
         });
         return result;
-    };    
+    };
 
     //load hotbuildconfig from settings
     /*
@@ -44,7 +44,6 @@ var hotbuild2live = (function () {
 */
     //show keybinds on build bar
 
-    
     var show_key_on_buildbar = api.settings.isSet('ui','hotbuild_show_key_on_buildbar',true) || "ON";
 
     if (show_key_on_buildbar === "ON") {
@@ -78,7 +77,7 @@ var hotbuild2live = (function () {
             }
         };
         if (keybindFix('keybinding_move') !== '') { $('.div_command_item > a#A5').append('<span class="hbsidebarkey">' + keybindFix('keybinding_move') + '</span>'); }
-        if (keybindFix('keybinding_attack') !== '') { $('.div_command_item > a#A6').append('<span class="hbsidebarkey">' + keybindFix('keybinding_attack') + '</span>'); }        
+        if (keybindFix('keybinding_attack') !== '') { $('.div_command_item > a#A6').append('<span class="hbsidebarkey">' + keybindFix('keybinding_attack') + '</span>'); }
         if (keybindFix('keybinding_assist') !== '') { $('.div_command_item > a#A7').append('<span class="hbsidebarkey">' + keybindFix('keybinding_assist') + '</span>'); }
         if (keybindFix('keybinding_repair') !== '') { $('.div_command_item > a#A8').append('<span class="hbsidebarkey">' + keybindFix('keybinding_repair') + '</span>'); }
         if (keybindFix('keybinding_reclaim') !== '') { $('.div_command_item > a#A9').append('<span class="hbsidebarkey">' + keybindFix('keybinding_reclaim') + '</span>'); }
@@ -87,15 +86,15 @@ var hotbuild2live = (function () {
         if (keybindFix('keybinding_stop') !== '') { $('.div_command_item > a#A13').append('<span class="hbsidebarkey">' + keybindFix('keybinding_stop') + '</span>'); }
         if (keybindFix('keybinding_D-Gun') !== '') { $('.div_command_item > a#A20').append('<span class="hbsidebarkey">' + keybindFix('keybinding_D-Gun') + '</span>'); }
         if (keybindFix('keybinding_Ping') !== '') { $('.div_command_item > a#A21').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Ping') + '</span>'); }
-        
+
         //orders
         if (keybindFix('keybinding_Toggle Energy') !== '') { $('.div_command_item.order_energy_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Toggle Energy') + '</span>'); }
         if (keybindFix('keybinding_Requeue') !== '') { $('.div_command_item.order_buildstance_item').append('<span class="hbsidebarkey">' + keybindFix('keybinding_Requeue') + '</span>'); }
 
     }
     */
-    
-})();    
+
+})();
 
 model.hbunitspecs = ko.computed(function(){
     if(model.buildSet() !== undefined){
@@ -121,7 +120,6 @@ model.hbunitspecs.subscribe(function(newval){
         //console.log(specs);
         var barr = [];
         if(specs !== undefined){
-            
             //console.log(specs);
             for(var i = 0; i < specs.length; i++){
                 var bspec = specs[i];
@@ -138,5 +136,5 @@ model.hbunitspecs.subscribe(function(newval){
     }
     catch(e){
         console.log(e);
-    } 
+    }
 });

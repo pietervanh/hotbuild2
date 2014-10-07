@@ -9,12 +9,12 @@ var hotbuild2 = (function () {
     var hotbuildglobalkey = {};
     hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
     hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
-    
+
     /*variables for hotbuild toggle*/
     var hotbuild_enable=true; //allow hotbuild buildbar
     var hotbuild_select_enable=true; //allow hotbuild select bar
     var hotbuild_frameEvent; //animationFrame Timer
-    
+
     var hotbuildshiftrecycle = api.settings.isSet('ui','hotbuild_shift_key_recycle',true) || "OFF";
     var hotbuildreset_time = api.settings.isSet('ui','hotbuild_reset_time',true) || 2000;
 
@@ -79,7 +79,7 @@ var hotbuild2 = (function () {
                         unitinfo = model.unitSpecs[hotbuilds[j].json];
                         if(unitinfo === undefined){
                          unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];   
-                        }                        
+                        }
                         if (unitinfo.structure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[j].json });
                         }
@@ -95,7 +95,7 @@ var hotbuild2 = (function () {
                 self.previewvisible.notifySubscribers();
             }
         };
-        
+
         self.hotBuild = function (event, hotbuilds) {
             self.hotbuilds(hotbuilds);
             //console.log(hotbuilds.length);
@@ -114,12 +114,12 @@ var hotbuild2 = (function () {
                     self.hbtriggertime(_.now());
                     setTimeout(self.clean, self.cycleResetTime + 1000);
                     //debugger;
-                    
+
                     var hbunit = model.unitSpecs[self.hotbuilds()[self.cycleid()].json];
                     if(hbunit === undefined){
                         hbunit = model.unitSpecs[self.hotbuilds()[self.cycleid()].json + ".player"];
                     }
-                    
+
                     if (hbunit.structure) {
                         //check if it' needs to be ImbaWalled
 
@@ -173,13 +173,12 @@ var hotbuild2 = (function () {
                                 model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
                             }
                         }
-                        
+
                     }
                     else {
                         console.log('hotbuild doesnt know what to do (or hotSelect is disabled)' + self.debuginfo());
                     }
 
-                    
                 }
             }
         };
@@ -204,7 +203,7 @@ var hotbuild2 = (function () {
                     //GW fix
                     if(self.buildable_units()[i].id == cmd + ".player") {
                         return true;
-                    }  
+                    }
                 }
             }
 
@@ -258,13 +257,13 @@ var hotbuild2 = (function () {
                         result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
                         return false;
                     }
-                }                
+                }
             });
             hbpos += 1;
         });
         return result;
     };
-    
+
     if (hotbuildshiftrecycle === "ON") {
         var oldEndFabMode = model.endFabMode;
         model.endFabMode = function () {
@@ -413,7 +412,7 @@ var hotbuild2 = (function () {
     //NON HOTKEY FUNCTIONS BUT CALLABLE THROUGH NORMAL KEYBOARD KEYS
 
     //Pole Lock on/off
-    hotbuild2.polelockToggle = function (event) {
+    hotbuild2.polelockToggle = function () {
         console.log("PoleLock");
         var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
         var currentPoleLock = allSettings.camera.pole_lock; // the settings store this upper case, the engine processes it in lowercase... wtf
@@ -428,7 +427,7 @@ var hotbuild2 = (function () {
         engine.call("set_camera_pole_lock", nextSetting.toLowerCase());
         console.log("pole_lock : " + nextSetting);
         localStorage[localStorage.uberName + ".paSettings"] = encode(allSettings);
-        event.preventDefault();
+        //event.preventDefault();
     };
 
     //cinematic mode on/off
@@ -462,9 +461,9 @@ var hotbuild2 = (function () {
         api.settings.apply(['ui']);
         event.preventDefault();
     };
-    
+
 /*Start of toggle Hotbuild*/
-    
+
     //toggle hotbuild on or off
     hotbuild2.toggleState=function(){
         if(hotbuild_enable){
@@ -473,7 +472,7 @@ var hotbuild2 = (function () {
             hotbuild2.setBuildBehavior(true);
         }
     };
-    
+
     //toggle hotbuild on or off
     hotbuild2.toggleState_select=function(){
         if(hotbuild_select_enable){
@@ -482,7 +481,7 @@ var hotbuild2 = (function () {
             hotbuild2.setSelectBehavior(true);
         }
     };
-    
+
     //manually set the state of hotbuild (can be used by other mods)
     hotbuild2.setBuildBehavior=function(_state){
         if(_state){
@@ -521,8 +520,8 @@ var hotbuild2 = (function () {
             hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
         }
     };
-    
-/*End of toggle Hotbuild*/    
+
+/*End of toggle Hotbuild*/
 
     //capture mouse down to do the imbawalls after click place building
     var $holodeck = $('holodeck');
@@ -616,18 +615,4 @@ var hotbuild2 = (function () {
     return hotbuild2;
 
 })();
-
-console.log("hook hotbuild2 special funtions");
-/*
-Disabled till I have more time to look into this to fix it
-action_sets.hotbuild['Lock Pole'] = function (event) { hotbuild2.polelockToggle(event); };
-action_sets.hotbuild['Toggle Cinematic'] = function (event) { hotbuild2.cinematicToggle(event); };
-action_sets.hotbuild['Toggle Terrestrial'] = function (event) { hotbuild2.terrestrialToggle(event); };
-action_sets.hotbuild['Toggle Hotbuild']=function(event){hotbuild2.toggleState();};
-action_sets.hotbuild['Toggle HotSelect']=function(event){hotbuild2.toggleState_select();};
-console.log("hook hotbuild2 special funtions");
-
-api.Panel.message('', 'inputmap.reload');
-apply_keybinds('hotbuild');
-*/
 console.log("loaded hotbuild core");

@@ -534,33 +534,6 @@ var hotbuildsettings = (function () {
         }
     });
 
-    _.extend(api.settings.definitions.keyboard.settings, {
-        hotbuild_lock_pole: {
-            title: 'Lock Pole Toggle',
-            type: 'keybind',
-            set: 'hotbuild',
-            display_group: 'hotbuild',
-            display_sub_group: '',
-            default : 'y'
-        },
-        hotbuild_toggle: {
-            title: 'Hotbuild Toggle',
-            type: 'keybind',
-            set: 'hotbuild',
-            display_group: 'hotbuild',
-            display_sub_group: '',
-            default: ''
-        },
-        hotbuild_hotselect: {
-            title: 'HotSelect Toggle',
-            type: 'keybind',
-            set: 'hotbuild',
-            display_group: 'hotbuild',
-            display_sub_group: '',
-            default: ''
-        }
-    });
-
     var hotbuildOldClean = model.clean;
     model.clean = ko.computed(function() {
         return hotbuildOldClean() && !hotbuildsettings.dirty();

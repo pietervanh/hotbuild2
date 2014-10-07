@@ -4069,7 +4069,7 @@
             "set":"hotbuild",
             "display_group":"hotbuild",
             "display_sub_group":"",
-            "default":"y"
+            "default":""
          },
          "type":"keybind",
          "active":false,
