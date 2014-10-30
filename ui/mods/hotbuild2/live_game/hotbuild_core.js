@@ -140,7 +140,7 @@ var hotbuild2 = (function () {
                         params.item = hbunit.id;
                         params.batch = event.shiftKey;
                         params.cancel = false;
-                        params.urgent = false;
+                        params.urgent = event.ctrlKey;
                         params.more = "";
                         model.executeStartBuild(params);
                     }
