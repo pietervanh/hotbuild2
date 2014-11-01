@@ -383,15 +383,23 @@ var hotbuildsettings = (function () {
             self.Save();
             keyboardsettings.hotbuildglobalkey = self.cleanhotbuildglobalkey();
             keyboardsettings.hotbuildglobal = self.cleanhotbuildglobal();
-            $("#ieport").val(JSON.stringify(keyboardsettings));
+            //$("#ieport").val(JSON.stringify(keyboardsettings));
+            api.file.saveDialog('hotbuild2settings.pas', JSON.stringify(keyboardsettings));
+            self.showingImportExportDialog(false);
+            $('#importexportDlg').dialog("close");
         };
 
         self.import = function () {
             console.log('import');
-            if ($("#ieport").val() !== '') {
-                var imported = JSON.parse($("#ieport").val());
+            api.file.loadDialog('hotbuild2settings.pas').then(function(loadResult) {
+                if (!_.has(loadResult, 'contents')) {
+                    // Cancelled
+                    return;
+                }
+                var imported = JSON.parse(loadResult.contents);
                 for (var u=0; u < imported.uber.length; u++) {
                     for(var i = 0; i < model.keyboardSettingsItems().length; i++){
+                        var stitle = model.keyboardSettingsItems()[i].title();
                         /*
                         try{
                             stitle = model.keyboardSettingsItems()[i].title().slice(model.keyboardSettingsItems()[i].title().indexOf('):') + 2);
@@ -416,10 +424,9 @@ var hotbuildsettings = (function () {
                 updateExistingSettings();
                 self.Save();
                 self.keyboardkey('');
-            }
-            else {
-                //alert("Please input Text to import in textbox");
-            }
+                self.showingImportExportDialog(false);
+                $('#importexportDlg').dialog("close");
+            });
         };
 
         self.importfromfile = function (importfile) {

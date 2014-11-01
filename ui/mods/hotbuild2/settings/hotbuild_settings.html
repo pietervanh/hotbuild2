@@ -113,7 +113,6 @@
                     <div id="sequence">
                         <div id="sequencelist">
                             <div class="sequencelistitem" data-bind="sortable: {template: 'leftTemplate', data: selectedhotbuild, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }">
-                                
                             </div>
                         </div>
                     </div>
@@ -126,7 +125,6 @@
                     <div id="sequenceR">
                         <div id="sequencelistR">
                             <div id="hbselectionitems" data-bind="sortable: {template: 'rightTemplate', data: filteredunits, options: { helper: 'clone', appendTo: '#hb_bottom_cont', placeholder: 'ui-state-hover', containment: '#hb_assign' } }">
-                                
                             </div>
                         </div>
                     </div>
@@ -163,8 +161,8 @@
             <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
         </div>
     </div>
-</script> 
-  
+</script>
+
 <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
     <div>Are you sure you want to reset your keys to the community defaults ? (<span data-bind="text:communitydefaultset"></span>)</div>
     <div class="btn-group">
@@ -172,15 +170,10 @@
         <button id="ignoreComDefaults" class="btn btn_neg" type="button">NO THANKS</button>
     </div>
 </div>
-    
+
 <div id="importexportDlg" data-bind="visible: showingImportExportDialog" title="Import/Export">
-    <div>
-        <p>Before exporting make sure you have pressed save and close</p>
-        <p>Copy text into/from textarea below</p>
-        <textarea id="ieport" style="width:400px" rows="5"></textarea>
-    </div>
 </div>
-    
+
 <div id="changeKeyDlg" data-bind="visible: showingImportExportDialog" title="Key Details" style="width:400px">
     <div>
         Change <span id="changekey" data-bind="text: keyboardkey" /><br>to<input id="swapkey" type="text"/>
