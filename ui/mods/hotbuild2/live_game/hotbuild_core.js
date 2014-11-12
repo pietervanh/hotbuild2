@@ -1,5 +1,5 @@
 //IntelliSense for WebMatrix /VS
-/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" /> 
+/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" />
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
 console.log("loading hotbuild core");
@@ -17,6 +17,18 @@ var hotbuild2 = (function () {
 
     var hotbuildshiftrecycle = api.settings.isSet('ui','hotbuild_shift_key_recycle',true) || "OFF";
     var hotbuildreset_time = api.settings.isSet('ui','hotbuild_reset_time',true) || 2000;
+
+    //handle settings refresh
+    if(_.isFunction(handlers['settings.exit']))
+    {
+        var hotbuild2oldsettingsexit = handlers['settings.exit'];
+        handlers['settings.exit'] = function(){
+          hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
+          hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
+          api.panels.build_bar.message('hotbuildsettings.exit');
+          hotbuild2oldsettingsexit();
+        };
+    }
 
     var hotbuild2 = {};
 
@@ -67,7 +79,7 @@ var hotbuild2 = (function () {
 
                         unitinfo = model.unitSpecs[hotbuilds[i].json];
                         if(unitinfo === undefined){
-                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];   
+                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
                         }
                         if (unitinfo.structure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[i].json });
@@ -78,7 +90,7 @@ var hotbuild2 = (function () {
                     if (self.knowsBuildCommand(hotbuilds[j].json)) {
                         unitinfo = model.unitSpecs[hotbuilds[j].json];
                         if(unitinfo === undefined){
-                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];   
+                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
                         }
                         if (unitinfo.structure) {
                             self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[j].json });
@@ -433,7 +445,7 @@ var hotbuild2 = (function () {
     //cinematic mode on/off
     hotbuild2.cinematicToggle = function(event){
         var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
-        var currentCinematic = allSettings.cinematic_value; 
+        var currentCinematic = allSettings.cinematic_value;
         var nextSetting = "";
         if (currentCinematic === 'OFF') {
             nextSetting = "ON";
@@ -530,7 +542,7 @@ var hotbuild2 = (function () {
         if (mdevent.button === 0 && imbawallclick === "build" && mdevent.altKey === true) {
             var startx = mdevent.offsetX;
             var starty = mdevent.offsetY;
-            var queue = mdevent.shiftKey; 
+            var queue = mdevent.shiftKey;
             hotbuild2.buildTemplates.imbaWall2(queue,startx,starty);
             imbawallclick = "nobuild";
         }

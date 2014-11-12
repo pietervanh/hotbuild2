@@ -1,18 +1,17 @@
 console.log("loading hotbuild2 buildbar");
 
 var hotbuild2live = (function () {
-    //load html dynamically
-    loadHotBuildTemplate = function (element, url, model) {
-        element.load(url, function () {
-            console.log("Loading html " + url);
-            ko.applyBindings(model, element.get(0));
-        });
+
+    handlers['hotbuildsettings.exit'] = function(){
+      console.log("Settings Closed Reload hotbuild live");
+      window.location.reload();
     };
 
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
     hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
     hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
+    var show_key_on_buildbar = ko.observable(api.settings.isSet('ui','hotbuild_show_key_on_buildbar',true) || "ON");
 
     hbgetBuildBarKey = function (id) {
         var result = '';
@@ -41,12 +40,12 @@ var hotbuild2live = (function () {
     /*
     createFloatingFrame('hotbuild_info_frame', 220, 70, { 'offset': 'leftCenter', 'top': -200 });
     loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
-*/
+    */
     //show keybinds on build bar
 
-    var show_key_on_buildbar = api.settings.isSet('ui','hotbuild_show_key_on_buildbar',true) || "ON";
 
-    if (show_key_on_buildbar === "ON") {
+
+    if (show_key_on_buildbar() === "ON") {
         //Show key on buildbar
         $('.div_build_item .span_hotkey').replaceWith(
         '<span class="span_hotkey hb_hotkey" data-bind="visible: hbgetBuildBarKey($data.id) != \'\' , text: hbgetBuildBarKey($data.id)"></span>'
