@@ -36,12 +36,20 @@ var hotbuild2 = (function () {
 
     function hbManager(resetTime) {
         var self = this;
+        //INPUT FROM BUILDBAR AND SELECTION SCENES
         self.buildable_units = ko.observableArray([]);
         handlers.hbselection = function(payload){
             //get data from buildbar;
             //console.log("got buildlist from buildbar");
             //console.log(payload);
             self.buildable_units(payload);
+        };
+
+        self.selectionList = ko.observableArray([]);
+        handlers.hbunitselection = function(payload){
+          console.log("got selectionlist from selection");
+          console.log(payload);
+          self.selectionList(payload);
         };
 
         self.cycleResetTime = resetTime; //time you have to press again to loop trough list
@@ -162,18 +170,18 @@ var hotbuild2 = (function () {
                     event.preventDefault();
                 }
                 else {
-                    if (model.selectionList().length > 0&&hotbuild_select_enable) { //check if units are selected ?
+                    if (self.selectionList().length > 0&&hotbuild_select_enable) { //check if units are selected ?
                         var selectionTypes = [];
                         for (var i = 0; i < self.hotbuilds().length; i++) {
 
-                            var typeindex = _.findIndex(model.selectionList(), { 'type': self.hotbuilds()[i].json });
+                            var typeindex = _.findIndex(self.selectionList(), { 'type': self.hotbuilds()[i].json });
                             if (typeindex !== -1) {
                                 selectionTypes.push(self.hotbuilds()[i].json);
                             }
                         }
                         var currentselection = [];
-                        for (i = 0; i < model.selectionList().length; i++) {
-                            currentselection.push(model.selectionList()[i].type);
+                        for (i = 0; i < self.selectionList().length; i++) {
+                            currentselection.push(self.selectionList()[i].type);
                         }
                         if (event.ctrlKey) {
                             if(selectionTypes.length > 0){
@@ -252,7 +260,7 @@ var hotbuild2 = (function () {
 
     //init hotbuildsystem
     hotbuild2.hotbuildManager = new hbManager(hotbuildreset_time);
-
+/*
     hotbuild2.hbgetBuildBarKey = function (id) {
         var result = '';
         var hbpos = 1;
@@ -275,7 +283,7 @@ var hotbuild2 = (function () {
         });
         return result;
     };
-
+*/
     if (hotbuildshiftrecycle === "ON") {
         var oldEndFabMode = model.endFabMode;
         model.endFabMode = function () {
