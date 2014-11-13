@@ -71,9 +71,23 @@ var hotbuild2 = (function () {
         self.imbawallers = ko.observableArray(["/pa/units/land/laser_defense/laser_defense.json",
                                                 "/pa/units/land/laser_defense_single/laser_defense_single.json",
                                                 "/pa/units/land/laser_defense_adv/laser_defense_adv.json",
+                                                "/pa/units/land/artillery_short/artillery_short.json",
+                                                "/pa/units/land/artillery_long/artillery_long.json",
+                                                "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json",
+                                                "/pa/units/land/nuke_launcher/nuke_launcher.json",
+                                                "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json",
+                                                "/pa/units/land/radar/radar.json",
+                                                "/pa/units/land/radar_adv/radar_adv.json",
                                                 "/pa/units/land/laser_defense/laser_defense.json.player",
                                                 "/pa/units/land/laser_defense_single/laser_defense_single.json.player",
-                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json.player"
+                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json.player",
+                                                "/pa/units/land/artillery_short/artillery_short.json.player",
+                                                "/pa/units/land/artillery_long/artillery_long.json.player",
+                                                "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json.player",
+                                                "/pa/units/land/nuke_launcher/nuke_launcher.json.player",
+                                                "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json.player",
+                                                "/pa/units/land/radar/radar.player",
+                                                "/pa/units/land/radar_adv/radar_adv.player"
                                                 ]);
 
         self.buildPreviewList = function (hbindex, hotbuilds) {
