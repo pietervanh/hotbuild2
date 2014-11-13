@@ -2,6 +2,7 @@ console.log("loading hotbuild2 selection");
 
 var hotbuild2selection = (function () {
 
+    //RELOAD SELECTION + MODS on Settings Exit
     handlers['hotbuildsettings.exit'] = function(){
       console.log("Settings Closed Reload hotbuild selection");
       window.location.reload();
@@ -11,7 +12,7 @@ var hotbuild2selection = (function () {
     var hotbuildglobalkey = {};
     hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
     hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
-    var show_key_on_buildbar = ko.observable(api.settings.isSet('ui','hotbuild_show_key_on_buildbar',true) || "ON");
+    var show_key_on_selection = ko.observable(api.settings.isSet('ui','hotbuild_show_key_on_selection',true) || "ON");
 
     hbgetBuildBarKey = function (id) {
         var result = '';
@@ -36,7 +37,7 @@ var hotbuild2selection = (function () {
         return result;
     };
 
-    if (show_key_on_buildbar() === "ON") {
+    if (show_key_on_selection() === "ON") {
 
         $('.div_unit_selection img').replaceWith(
         '<img class="img_selected_unit" src="" data-bind="attr: { src: $data.icon }" style="-webkit-transform: scaleX(-1);"/>' +
@@ -45,6 +46,8 @@ var hotbuild2selection = (function () {
 
 })();
 
+//TRANSFER SELECTION DATA to HOTBUILD CORE
 model.selectionList.subscribe(function(newval){
   api.Panel.message(api.Panel.parentId,'hbunitselection',model.selectionList());
 });
+console.log("loaded hotbuild2 selection");

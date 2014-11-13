@@ -1,7 +1,3 @@
-//IntelliSense for WebMatrix /VS
-/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" />
-/// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
-/// <reference path="../.vsdoc/lodash-2.4.1.js" />
 console.log("loading hotbuild core");
 var hotbuild2 = (function () {
 
@@ -26,6 +22,8 @@ var hotbuild2 = (function () {
           hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
           hotbuildglobalkey = localStorage.hotbuildconfigkey ? decode(localStorage.hotbuildconfigkey) : hotbuildglobalkey;
           api.panels.build_bar.message('hotbuildsettings.exit');
+          api.panels.selection.message('hotbuildsettings.exit');
+          api.panels.LiveGame_FloatZone.message('hotbuildsettings.exit');
           hotbuild2oldsettingsexit();
         };
     }
@@ -47,8 +45,8 @@ var hotbuild2 = (function () {
 
         self.selectionList = ko.observableArray([]);
         handlers.hbunitselection = function(payload){
-          console.log("got selectionlist from selection");
-          console.log(payload);
+          //console.log("got selectionlist from selection");
+          //console.log(payload);
           self.selectionList(payload);
         };
 
@@ -104,7 +102,7 @@ var hotbuild2 = (function () {
                          unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
                         }
                         if (unitinfo.structure) {
-                            self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[i].json });
+                            self.hotbuildPreviews.push({ 'icon': 'coui://ui/main/game/live_game/' + unitinfo.buildIcon, 'json': hotbuilds[i].json });
                         }
                     }
                 }
@@ -115,7 +113,7 @@ var hotbuild2 = (function () {
                          unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
                         }
                         if (unitinfo.structure) {
-                            self.hotbuildPreviews.push({ 'icon': unitinfo.buildIcon, 'json': hotbuilds[j].json });
+                            self.hotbuildPreviews.push({ 'icon': 'coui://ui/main/game/live_game/' + unitinfo.buildIcon, 'json': hotbuilds[j].json });
                         }
                     }
                 }
@@ -128,6 +126,7 @@ var hotbuild2 = (function () {
                 self.previewvisible(false);
                 self.previewvisible.notifySubscribers();
             }
+            api.panels.LiveGame_FloatZone.message('hotbuildfloatframepreview',{visible:self.previewvisible(),list:self.hotbuildPreviews()});
         };
 
         self.hotBuild = function (event, hotbuilds) {
@@ -181,6 +180,7 @@ var hotbuild2 = (function () {
                     self.unitName(hbunit.name);
                     self.buildPreviewList(self.cycleid(), self.hotbuilds());
                     self.previewvisible(true);
+                    api.panels.LiveGame_FloatZone.message('hotbuildfloatframepreview',{visible:self.previewvisible(),list:self.hotbuildPreviews()});
                     event.preventDefault();
                 }
                 else {
@@ -274,30 +274,7 @@ var hotbuild2 = (function () {
 
     //init hotbuildsystem
     hotbuild2.hotbuildManager = new hbManager(hotbuildreset_time);
-/*
-    hotbuild2.hbgetBuildBarKey = function (id) {
-        var result = '';
-        var hbpos = 1;
-        _.forEach(hotbuildglobal, function (hbkey) {
-            _.forEach(hbkey, function (hbitem) {
-                if (hbitem.json === id) {
-                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
-                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
-                        return false;
-                    }
-                }
-                if (hbitem.json + ".player" === id) {
-                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
-                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
-                        return false;
-                    }
-                }
-            });
-            hbpos += 1;
-        });
-        return result;
-    };
-*/
+
     if (hotbuildshiftrecycle === "ON") {
         var oldEndFabMode = model.endFabMode;
         model.endFabMode = function () {
@@ -421,26 +398,7 @@ var hotbuild2 = (function () {
             }, 750);
         };
 
-
-        buildTemplates.chooseBuildTemplate = function () {
-            buildTemplates.popupVisible(true);
-            $("#hotbuildTemplatesDlg").dialog({
-                height: 300,
-                width: 300,
-                modal: true,
-                buttons: {
-                    "Build Double Laser Turret": function () { buildTemplates.imbaWall($("#chkImba").val(), "/pa/units/land/laser_defense/laser_defense.json"); $(this).dialog("close"); },
-                    "Build Air Defense": function () { buildTemplates.imbaWall($("#chkImba").val(), "/pa/units/land/air_defense/air_defense.json"); $(this).dialog("close"); },
-                    "Build Flak": function () { buildTemplates.imbaWall($("#chkImba").val(), "/pa/units/land/air_defense_adv/air_defense_adv.json"); $(this).dialog("close"); }
-                },
-                close: function () {
-                    buildTemplates.popupVisible(false);
-                }
-            });
-
-        };
         return buildTemplates;
-
     }();
 
     //NON HOTKEY FUNCTIONS BUT CALLABLE THROUGH NORMAL KEYBOARD KEYS
@@ -496,7 +454,7 @@ var hotbuild2 = (function () {
         event.preventDefault();
     };
 
-/*Start of toggle Hotbuild*/
+    /*Start of toggle Hotbuild*/
 
     //toggle hotbuild on or off
     hotbuild2.toggleState=function(){
@@ -555,7 +513,7 @@ var hotbuild2 = (function () {
         }
     };
 
-/*End of toggle Hotbuild*/
+    /*End of toggle Hotbuild*/
 
     //capture mouse down to do the imbawalls after click place building
     var $holodeck = $('holodeck');

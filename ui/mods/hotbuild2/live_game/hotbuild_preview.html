@@ -1,0 +1,17 @@
+<div id="hotbuild_info" class="ignoremouse">
+    <div data-bind="visible:model.hotbuildPreviewVisible">
+        <!--<div data-bind="text: lastkey"/>-->
+        <!--<div data-bind="text: cycleid"/>-->
+        <!--<div>Debug: <span data-bind="text: debuginfo"/> -->
+        <!--<div class="hbunitName" data-bind="text: unitName"></div>-->
+        <!--<div data-bind="foreach: hotbuilds"><div data-bind="text: $data"/></div>-->
+        <div class="hotbuild_fab_info_cont">
+          <div class="hotbuild_current_fab_info_cont" data-bind="foreach: model.hotbuildPreviews">
+				         <div class="hotbuild_fab_selection" data-bind="visible: $data.icon != ''">
+                   <img class="hotbuild_selected_fab" data-bind="attr: { src: $data.icon }" alt="hbpreview" />
+                      <span class="hotbuild_selected_text" data-bind="text: $index"></span>
+                  </div>
+              </div>
+        </div>
+    </div>
+</div>

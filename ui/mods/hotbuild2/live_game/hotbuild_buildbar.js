@@ -1,7 +1,8 @@
 console.log("loading hotbuild2 buildbar");
 
-var hotbuild2live = (function () {
+var hotbuild2buildbar = (function () {
 
+    //RELOAD BUILDBAR + MODS on Settings Exit
     handlers['hotbuildsettings.exit'] = function(){
       console.log("Settings Closed Reload hotbuild live");
       window.location.reload();
@@ -36,27 +37,18 @@ var hotbuild2live = (function () {
         return result;
     };
 
-
-    /*
-    This should move to LiveGame_FloatZone
-    createFloatingFrame('hotbuild_info_frame', 220, 70, { 'offset': 'leftCenter', 'top': -200 });
-    loadHotBuildTemplate($('#hotbuild_info_frame_content'), 'coui://ui/mods/hotbuild2/live_game/hotbuild_live.html', hotbuild2.hotbuildManager);
-    */
     //show keybinds on build bar
-
-
-
     if (show_key_on_buildbar() === "ON") {
-        //Show key on buildbar
         $('.div_build_item .span_hotkey').replaceWith(
         '<span class="span_hotkey hb_hotkey" data-bind="visible: hbgetBuildBarKey($data.id) != \'\' , text: hbgetBuildBarKey($data.id)"></span>'
         );
         $('.div_build_bar_cont').removeAttr('data-bind');
-        //$('.div_command_item .span_hotkey').removeAttr('style');
     }
 
 })();
 
+
+//TRANSFER BUILDBAR DATA to HOTBUILD CORE
 model.hbunitspecs = ko.computed(function(){
     if(model.buildSet() !== undefined){
         if(model.buildSet().selectedSpecs() !== undefined){
@@ -99,3 +91,5 @@ model.hbunitspecs.subscribe(function(newval){
         console.log(e);
     }
 });
+
+console.log("loaded hotbuild2 buildbar");

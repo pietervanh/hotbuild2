@@ -533,8 +533,14 @@ var hotbuildsettings = (function () {
             default: 'ON',
             options: ['ON','OFF']
         },
-        hotbuild_show_key_on_sidebar: {
-            title: 'Hotbuild Show Key on SideBar',
+        hotbuild_show_key_on_selection: {
+            title: 'Hotbuild Show Key on Selection',
+            type: 'select',
+            default: 'ON',
+            options: ['ON','OFF']
+        },
+        hotbuild_show_preview: {
+            title: 'Hotbuild Show Preview',
             type: 'select',
             default: 'ON',
             options: ['ON','OFF']

@@ -5,9 +5,9 @@
     "description": "Map 1 Key to multiple build actions and more... (See forum link for screenshots and instructions.)",
     "description_nl": "Kies een toetsenbordknop om meerdere gebouwen te bouwen en meer... (bekijk forum voor screenshots en instructies.)",
     "author": "proeleert, tripax, cola_colin",
-    "version": "1.37",
+    "version": "1.38",
     "build": "74525",
-    "date": "2014/03/25",
+    "date": "2014/11/13",
     "signature": "not yet implemented",
     "forum": "https://forums.uberent.com/threads/rel-hotbuild2-57703.54561/",
     "category": [
@@ -22,11 +22,15 @@
         ],
         "live_game_build_bar": [
             "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
-            "coui://ui/mods/hotbuild2/live_game/hotbuild_live.js"
+            "coui://ui/mods/hotbuild2/live_game/hotbuild_buildbar.js"
         ],
         "live_game_selection": [
             "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
             "coui://ui/mods/hotbuild2/live_game/hotbuild_selection.js"
+        ],
+        "LiveGame_FloatZone":[
+            "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
+            "coui://ui/mods/hotbuild2/live_game/hotbuild_floatframe.js"
         ],
         "settings": [
             "coui://ui/mods/hotbuild2/settings/hotbuild_settings.css",
@@ -39,6 +43,7 @@
     },
     "enabled": true,
     "dependencies": [
-        "com.pa.raevn.rblueprintinfoframework"
+        "com.pa.raevn.rblueprintinfoframework",
+        "com.pa.raevn.rfloatframe"
     ]
 }
