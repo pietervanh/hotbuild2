@@ -490,6 +490,33 @@ var hotbuildsettings = (function () {
                 }
             }
         };
+
+        model.hotbuildPreviewLocked = ko.observable(localStorage.frames_hotbuild_info_frame_lockStatus ? decode(localStorage.frames_hotbuild_info_frame_lockStatus) : false);
+
+        model.hotbuildPreviewlocktoggle = function(){
+
+          if(model.hotbuildPreviewLocked()){
+            console.log('unlocking hotbuildpreview');
+            unlockFrame('hotbuild_info_frame');
+            model.hotbuildPreviewLocked(false);
+            self.hotbuilddirty(true);
+          }
+          else{
+            console.log('locking hotbuildpreview');
+            lockFrame('hotbuild_info_frame');
+            model.hotbuildPreviewLocked(true);
+            self.hotbuilddirty(true);
+          }
+        };
+
+        model.hotbuildPreviewLockstate = ko.computed(function () {
+              if(model.hotbuildPreviewLocked()){
+                return 'UNLOCK HOTBUILD PREVIEW';
+              }
+              else{
+                return 'LOCK HOTBUILD PREVIEW';
+              }
+        },true);
     }
 
 
