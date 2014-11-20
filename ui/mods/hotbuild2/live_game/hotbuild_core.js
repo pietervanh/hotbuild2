@@ -407,6 +407,10 @@ var hotbuild2 = (function () {
     hotbuild2.polelockToggle = function () {
         console.log("PoleLock");
         var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
+        if(allSettings.camera === undefined){
+          allSettings.camera = {};
+          allSettings.camera.pole_lock = undefined;
+        }
         var currentPoleLock = allSettings.camera.pole_lock; // the settings store this upper case, the engine processes it in lowercase... wtf
         var nextSetting = "";
         if (currentPoleLock === undefined) {
@@ -420,38 +424,6 @@ var hotbuild2 = (function () {
         console.log("pole_lock : " + nextSetting);
         localStorage[localStorage.uberName + ".paSettings"] = encode(allSettings);
         //event.preventDefault();
-    };
-
-    //cinematic mode on/off
-    hotbuild2.cinematicToggle = function(event){
-        var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
-        var currentCinematic = allSettings.cinematic_value;
-        var nextSetting = "";
-        if (currentCinematic === 'OFF') {
-            nextSetting = "ON";
-        } else {
-            nextSetting = "OFF";
-        }
-        allSettings.cinematic_value = nextSetting;
-        localStorage[localStorage.uberName + ".paSettings"] = encode(allSettings);
-        api.settings.apply(['ui']);
-        event.preventDefault();
-    };
-
-    //terrestial toggle
-    hotbuild2.terrestrialToggle = function(event){
-        var allSettings = decode(localStorage[localStorage.uberName + ".paSettings"]);
-        var currentTerrestrial = allSettings.always_show_terrestrial_units;
-        var nextSetting = "";
-        if (currentTerrestrial === 'ALWAYS') {
-            nextSetting = "RANGE DEPENDENT";
-        } else {
-            nextSetting = "ALWAYS";
-        }
-        allSettings.always_show_terrestrial_units = nextSetting;
-        localStorage[localStorage.uberName + ".paSettings"] = encode(allSettings);
-        api.settings.apply(['ui']);
-        event.preventDefault();
     };
 
     /*Start of toggle Hotbuild*/
