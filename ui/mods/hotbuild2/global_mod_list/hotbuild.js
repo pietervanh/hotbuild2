@@ -15,7 +15,7 @@ api.settings.definitions.keyboard.settings.hotbuild_lock_pole = {
     set: 'hotbuild',
     display_group: 'hotbuild',
     display_sub_group: 'hotbuild',
-    default : 'y'
+    default : ''
 };
 
 api.settings.definitions.keyboard.settings.hotbuild_toggle = {
@@ -35,3 +35,4 @@ api.settings.definitions.keyboard.settings.hotbuild_hotselect = {
     default: ''
 };
 
+api.Panel.message('', 'inputmap.reload');
