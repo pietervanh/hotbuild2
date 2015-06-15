@@ -137,8 +137,7 @@
 
 
 
-<script id="leftTemplate" type="text/html">
-    <div class="hotbuild_list_item">
+<script id="leftTemplate" type="text/html"><div class="hotbuild_list_item">
         <div class="hotbuild_fab_selection">
             <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
             <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
@@ -148,11 +147,9 @@
             <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
          </div>
         <div id="hbremovefromlist" data-bind="click: $parent.remFromList, click_sound: 'default', rollover_sound: 'default'"></div>
-     </div>
-</script>
+     </div></script>
 
-<script id="rightTemplate" type="text/html">
-    <div class="hotbuild_list_item">
+<script id="rightTemplate" type="text/html"><div class="hotbuild_list_item">
         <div class="hotbuild_fab_selection">
             <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
         </div>
@@ -160,8 +157,7 @@
             <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
             <div class="hotbuild_list_desc_detail" data-bind="text: desc"></div>
         </div>
-    </div>
-</script>
+    </div></script>
 
 <div id="comdefaultsDlg" data-bind="visible: showingDefaultPrompt">
     <div>Are you sure you want to reset your keys to the community defaults ? (<span data-bind="text:communitydefaultset"></span>)</div>

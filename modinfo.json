@@ -34,7 +34,6 @@
         ],
         "settings": [
             "coui://ui/mods/hotbuild2/settings/hotbuild_settings.css",
-            "coui://ui/mods/hotbuild2/lib/knockout-sortable.min.js",
             "coui://ui/mods/hotbuild2/settings/hotbuild_settings.js"
         ],
         "global_mod_list": [

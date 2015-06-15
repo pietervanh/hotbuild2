@@ -2,6 +2,13 @@
 /// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" />
 /// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
 /// <reference path="../.vsdoc/lodash-2.4.1.js" />
+
+if(!jQuery().sortable){
+   loadScript("coui://ui/mods/hotbuild2/lib/jqueryui-sortable.js"); 
+}
+if(ko.bindingHandlers.sortable === undefined){
+    loadScript("coui://ui/mods/hotbuild2/lib/knockout-sortable.min.js");
+}
 var hotbuildsettings = (function () {
 
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
@@ -764,6 +771,7 @@ var hotbuildsettings = (function () {
             async: false
         }).responseText
     );
+    
     model.settingGroups.notifySubscribers();
 
 })();
