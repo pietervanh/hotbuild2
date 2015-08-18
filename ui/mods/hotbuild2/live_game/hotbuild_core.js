@@ -102,7 +102,8 @@ var hotbuild2 = (function () {
                          unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
                         }
                         if (unitinfo.structure) {
-                            self.hotbuildPreviews.push({ 'icon': 'coui://ui/main/game/live_game/' + unitinfo.buildIcon, 'json': hotbuilds[i].json });
+                            console.log(unitinfo.buildIcon);
+                            self.hotbuildPreviews.push({ 'icon':  unitinfo.buildIcon, 'json': hotbuilds[i].json });
                         }
                     }
                 }
@@ -113,7 +114,7 @@ var hotbuild2 = (function () {
                          unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
                         }
                         if (unitinfo.structure) {
-                            self.hotbuildPreviews.push({ 'icon': 'coui://ui/main/game/live_game/' + unitinfo.buildIcon, 'json': hotbuilds[j].json });
+                            self.hotbuildPreviews.push({ 'icon':  unitinfo.buildIcon, 'json': hotbuilds[j].json });
                         }
                     }
                 }

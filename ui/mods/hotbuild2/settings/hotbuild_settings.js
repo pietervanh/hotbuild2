@@ -43,6 +43,7 @@ var hotbuildsettings = (function () {
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'vecfac' : '';
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'afac' : '';
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'nfac' : '';
+                        _.contains(hotbuildunit.unit_types,'UNITTYPE_Orbital') ? hotbuildunit.factory = 'ofac' : '';
                     }
                     else {
                         _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'abotfac' : '';
@@ -52,19 +53,6 @@ var hotbuildsettings = (function () {
                     }
                     /*jshint +W030 */
                     //should change to bif is built by orbital launcher
-                    //Orbital is changing rapidly so hacky fixes here
-                    if (hotbuildunit.json === "/pa/units/orbital/orbital_fabrication_bot/orbital_fabrication_bot.json") {
-                        hotbuildunit.factory = 'ofac';
-                    }
-                    if (hotbuildunit.json === "/pa/units/orbital/orbital_lander/orbital_lander.json") {
-                        hotbuildunit.factory = 'ofac';
-                    }
-                    if (hotbuildunit.json === "/pa/units/orbital/orbital_fighter/orbital_fighter.json") {
-                        hotbuildunit.factory = 'ofac';
-                    }
-                    if (hotbuildunit.json === "/pa/units/orbital/radar_satellite/radar_satellite.json") {
-                        hotbuildunit.factory = 'ofac';
-                    }
                 }
                 //console.log(hotbuildunit.buildPicture);
                 hotbuildunit.image = hotbuildunit.buildPicture;
@@ -78,7 +66,7 @@ var hotbuildsettings = (function () {
             nukeammo.desc = "Creates Nuclear Explosion";
             nukeammo.factory = "nuke";
             nukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile','UNITTYPE_Orbital'];
-            nukeammo.image = '../live_game/img/build_bar/units/' + nukeammo.json.substring(nukeammo.json.search(start), nukeammo.json.search(end)) + '.png';
+            nukeammo.image = 'coui://pa/units/land/nuke_launcher/nuke_launcher_ammo_icon_buildbar.png';
             nukeammo.display_group = '1';
             filteredresults.push(nukeammo);
             var anukeammo = {};
@@ -87,7 +75,7 @@ var hotbuildsettings = (function () {
             anukeammo.desc = "Intercepts Nuclear Missiles";
             anukeammo.factory = "antinuke";
             anukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile'];
-            anukeammo.image = '../live_game/img/build_bar/units/' + anukeammo.json.substring(anukeammo.json.search(start), anukeammo.json.search(end)) + '.png';
+            anukeammo.image = 'coui://pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo_icon_buildbar.png';
             anukeammo.display_group = '1';
             filteredresults.push(anukeammo);
 
@@ -272,6 +260,7 @@ var hotbuildsettings = (function () {
 
         self.updatehotbuildkeys = function () {
             self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
+            self.Save();
         };
         self.Save = function () {
             //do cleanup of empty props
