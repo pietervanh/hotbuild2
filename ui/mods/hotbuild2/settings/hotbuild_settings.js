@@ -222,15 +222,23 @@ var hotbuildsettings = (function () {
             //get uberkey info
             var fuberkey = false;
             _.forEach(model.keyboardSettingsItems(), function (o) {
-                if (o.value() === value) {
-                    fuberkey = true;
-                    var title = o.title();
-                    try{
-                        title = o.title().slice(o.title().indexOf('):') + 2);
+                switch(o.options.display_group){
+                    //don't need to save/see dev and terrain_editor keys
+                    case "!LOC:general":                   
+                    case "!LOC:camera":
+                    case "!LOC:units":
+                    case "!LOC:build":
+                    case "hotbuild":
+                    if(o.options.display_sub_group !=="!LOC:free movement" && o.value() === value){
+                        fuberkey = true;
+                        var title = o.title();
+                        try{
+                            title = o.title().slice(o.title().indexOf('!LOC:') + 5);
+                        }
+                        catch(e){}
+                        self.uberkey(title);
                     }
-                    catch(e){}
-                    self.uberkey(title);
-                }
+                }                
             });
 
             if (!fuberkey) {
@@ -242,7 +250,17 @@ var hotbuildsettings = (function () {
         self.uberkeys = ko.computed(function () {
             var uberkeys = [];
             _.forEach(model.keyboardSettingsItems(), function (o) {
-                uberkeys.push(o.value());
+                switch(o.options.display_group){
+                    //don't need to see dev and terrain_editor and free movement keys
+                    case "!LOC:general":                   
+                    case "!LOC:camera":
+                    case "!LOC:units":
+                    case "!LOC:build":
+                    case "hotbuild":
+                    if(o.options.display_sub_group !=="!LOC:free movement")
+                        uberkeys.push(o.value());
+                    break;
+                }
             });
             return uberkeys;
         });
@@ -386,40 +404,13 @@ var hotbuildsettings = (function () {
         };
 
         self.import = function () {
-            console.log('import');
             api.file.loadDialog('hotbuild2settings.pas').then(function(loadResult) {
                 if (!_.has(loadResult, 'contents')) {
                     // Cancelled
                     return;
                 }
                 var imported = JSON.parse(loadResult.contents);
-                for (var u=0; u < imported.uber.length; u++) {
-                    for(var i = 0; i < model.keyboardSettingsItems().length; i++){
-                        var stitle = model.keyboardSettingsItems()[i].title();
-                        /*
-                        try{
-                            stitle = model.keyboardSettingsItems()[i].title().slice(model.keyboardSettingsItems()[i].title().indexOf('):') + 2);
-                        }
-                        catch(e){}
-                        */
-                        if(stitle === imported.uber[u].title){
-                            try{
-                                console.log(imported.uber[u].title);
-                                console.log("OLD " + model.keyboardSettingsItems()[i].value());
-                                console.log("NEW " + imported.uber[u].value);
-                                model.keyboardSettingsItems()[i].value(imported.uber[u].value);
-                            }
-                            catch (err) {
-                                console.log(err);
-                            }
-                        }
-                    }
-                }
-                self.hotbuildglobalkey(imported.hotbuildglobalkey);
-                self.hotbuildglobal(imported.hotbuildglobal);
-                updateExistingSettings();
-                self.Save();
-                self.keyboardkey('');
+                self.importer(imported);
                 self.showingImportExportDialog(false);
                 $('#importexportDlg').dialog("close");
             });
@@ -428,35 +419,35 @@ var hotbuildsettings = (function () {
         self.importfromfile = function (importfile) {
             console.log('importing importfile ' + importfile);
             $.getJSON('coui:/' + importfile, function (imported) {
-                self.hotbuildglobalkey(imported.hotbuildglobalkey);
-                self.hotbuildglobal(imported.hotbuildglobal);
-                for (var u=0; u < imported.uber.length; u++) {
-                    for(var i = 0; i < model.keyboardSettingsItems().length; i++){
-                        var stitle = model.keyboardSettingsItems()[i].title();
-                        /*
+                self.importer(imported);
+            });
+        };
+        
+        self.importer = function(imported){
+            self.keyboardkey('');
+            console.log('HOTBUILD2 IMPORTING KEY CONFIG------------');
+            self.hotbuildglobalkey(imported.hotbuildglobalkey);
+            self.hotbuildglobal(imported.hotbuildglobal);
+            updateExistingSettings();
+            self.Save();
+            console.log('WROTE HOTBUILD KEYS-----------');
+            console.log('IMPORTING DEFAULT KEYBINDS------------');
+            for (var u=0; u < imported.uber.length; u++) {
+                for(var i = 0; i < model.keyboardSettingsItems().length; i++){
+                    var skey = model.keyboardSettingsItems()[i].key();
+                    if(skey === imported.uber[u].key){
                         try{
-                            stitle = model.keyboardSettingsItems()[i].title().slice(model.keyboardSettingsItems()[i].title().indexOf('):') + 2);
+                            console.log(imported.uber[u].key + " Old: " + model.keyboardSettingsItems()[i].value() + " New: " +  imported.uber[u].value);
+                            model.keyboardSettingsItems()[i].value(imported.uber[u].value);
                         }
-                        catch(e){}
-                        */
-                        if(stitle === imported.uber[u].title){
-                            try{
-                                console.log(imported.uber[u].title);
-                                console.log("OLD " + model.keyboardSettingsItems()[i].value());
-                                console.log("NEW " + imported.uber[u].value);
-                                model.keyboardSettingsItems()[i].value(imported.uber[u].value);
-                            }
-                            catch (err) {
-                                console.log(err);
-                            }
+                        catch (err) {
+                            console.log(err);
                         }
                     }
                 }
-
-                updateExistingSettings();
-                self.Save();
-                self.keyboardkey('');
-            });
+            }
+            self.Save();
+            console.log('WROTE DEFAULT ' + imported.uber.length + ' KEYS-----------');
         };
 
         self.showingImportExportDialog = ko.observable(false);
