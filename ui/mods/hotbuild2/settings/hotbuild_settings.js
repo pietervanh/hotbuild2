@@ -22,12 +22,22 @@ var hotbuildsettings = (function () {
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
         bif.registerBIFReadyCallback(function () {
+            console.log("BIF CALLBACK HOTBUILD SETTINGS");
             var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json
             var end = /[.]json$/;
             var filteredresults = [];
             var filteredunits = [];
             var filteredbuildings = [];
-            var results = bif.getBuildableUnitIDs();
+            var results = bif.getBuildableUnitIDs(); //vanilla
+            try{
+            //LEGION Support
+              var legionresults = bif.getBuildableUnitIDs("imperial_invictus");
+               results = _.union(results,legionresults);
+            
+            }catch(e){
+            
+            }
+            
             for (var i = 0; i < results.length; i++) {
                 var bifunit = bif.units[results[i]];
                 var hotbuildunit = bifunit;
