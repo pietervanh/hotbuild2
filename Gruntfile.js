@@ -58,7 +58,7 @@ module.exports = function(grunt) {
         options: {
           process: function(content, srcpath) {
             var info = JSON.parse(content);
-            info.date = require('dateformat')(new Date(), 'yyyy/mm/dd');
+            info.date = require('dateformat')(new Date(), 'yyyy-mm-dd');
             info.display_name = title;
             info.identifier = "com.pa.proeleert." + target;
             console.log(info.version, info.date);

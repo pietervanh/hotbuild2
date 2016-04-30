@@ -3,19 +3,18 @@
     "identifier": "com.pa.proeleert.hotbuild2_dev",
     "display_name": "Hotbuild2 DEV",
     "description": "Map 1 Key to multiple build actions and more... (See forum link for screenshots and instructions.)",
-    "description_nl": "Kies een toetsenbordknop om meerdere gebouwen te bouwen en meer... (bekijk forum voor screenshots en instructies.)",
     "author": "proeleert, tripax, cola_colin",
-    "version": "1.45",
-    "build": "89528",
-    "date": "2016/02/14",
-    "signature": "not yet implemented",
+    "version": "1.46",
+    "build": "94157",
+    "date": "2016/04/30",
+    "signature": " ",
     "forum": "https://forums.uberent.com/threads/rel-hotbuild2-57703.54561/",
     "category": [
-        "in-game",
+        "classic",
+        "titans",
         "ui"
     ],
     "icon": "http://pamods.github.io/icons/hotbuild2.png",
-    "priority": 100,
     "scenes": {
         "live_game": [
             "coui://ui/mods/hotbuild2/live_game/hotbuild_core.js"
