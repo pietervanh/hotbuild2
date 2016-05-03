@@ -31,7 +31,7 @@ var hotbuildsettings = (function () {
             var results = bif.getBuildableUnitIDs(); //vanilla
             try{
             //LEGION Support
-              var legionresults = bif.getBuildableUnitIDs("legion_overwatch");
+              var legionresults = bif.getBuildableUnitIDs("l_overwatch");
                results = _.union(results,legionresults);
             
             }catch(e){
