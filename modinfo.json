@@ -41,7 +41,6 @@
     },
     "enabled": true,
     "dependencies": [
-        "com.pa.raevn.rblueprintinfoframework",
         "com.pa.raevn.rfloatframe"
     ]
 }

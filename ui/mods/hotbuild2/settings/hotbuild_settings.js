@@ -21,89 +21,87 @@ var hotbuildsettings = (function () {
         self.selectedhotbuild = ko.observableArray([]);
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
-        bif.registerBIFReadyCallback(function () {
-            console.log("BIF CALLBACK HOTBUILD SETTINGS");
-            var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json
-            var end = /[.]json$/;
-            var filteredresults = [];
-            var filteredunits = [];
-            var filteredbuildings = [];
-            var results = bif.getBuildableUnitIDs(); //vanilla
-            try{
-            //LEGION Support
-              var legionresults = bif.getBuildableUnitIDs("l_overwatch");
-               results = _.union(results,legionresults);
-            
-            }catch(e){
-            
-            }
-            
-            for (var i = 0; i < results.length; i++) {
-                var bifunit = bif.units[results[i]];
-                var hotbuildunit = bifunit;
-                hotbuildunit.json = hotbuildunit.path;
-                hotbuildunit.displayname = hotbuildunit.display_name;
-                hotbuildunit.desc = hotbuildunit.description;
-                hotbuildunit.factory = "";
-                //console.log(hotbuildunit.json);
-                /*jshint -W030 */
-                if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Mobile')) {
-                    if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Basic')) {
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'botfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'vecfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'afac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'nfac' : '';
-                        _.contains(hotbuildunit.unit_types,'UNITTYPE_Orbital') ? hotbuildunit.factory = 'ofac' : '';
+
+        model.processedUnitSpecs.subscribe(function (unitspecs) {
+            if (unitspecs)
+                var filteredresults = [];
+                var filteredunits = [];
+                var filteredbuildings = [];
+                debugger;
+                Object.keys(unitspecs).forEach(function(key,index) {
+                    // key: the name of the object key
+                    // index: the ordinal position of the key within the object
+
+                        var bifunit = unitspecs[key];
+                        var hotbuildunit = bifunit;
+                        hotbuildunit.json = key;
+                        hotbuildunit.displayname = loc(hotbuildunit.display_name);
+                        hotbuildunit.desc = loc(hotbuildunit.description);
+                        hotbuildunit.image = 'coui:/' + key.replace('.json','_icon_buildbar.png');
+                        hotbuildunit.factory = "";
+                        //console.log(hotbuildunit.json);
+                        
+                        if (_.contains(hotbuildunit.types, 'UNITTYPE_Mobile')) {
+                            if (_.contains(hotbuildunit.types, 'UNITTYPE_Basic')) {
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'botfac' : '';
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'vecfac' : '';
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'afac' : '';
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'nfac' : '';
+                                _.contains(hotbuildunit.types,'UNITTYPE_Orbital') ? hotbuildunit.factory = 'ofac' : '';
+                            }
+                            else {
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'abotfac' : '';
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'avecfac' : '';
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'aafac' : '';
+                                _.contains(hotbuildunit.types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'anfac' : '';
+                            }
+                            
+                            //should change to bif is built by orbital launcher
+                        }
+                        //console.log(hotbuildunit.buildPicture);
+                        //hotbuildunit.image = hotbuildunit.buildPicture;
+                        filteredresults.push(hotbuildunit);
+ 
+                });
+                //todo filter out debug and commanders based on spec
+                //todo better nukes
+                //hack for nuke and anti nuke ammo
+                /*
+                var nukeammo = {};
+                nukeammo.json = "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json";
+                nukeammo.displayname = "Nuclear Missile";
+                nukeammo.desc = "Creates Nuclear Explosion";
+                nukeammo.factory = "nuke";
+                nukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile','UNITTYPE_Orbital'];
+                nukeammo.image = 'coui://pa/units/land/nuke_launcher/nuke_launcher_ammo_icon_buildbar.png';
+                nukeammo.display_group = '1';
+                filteredresults.push(nukeammo);
+                var anukeammo = {};
+                anukeammo.json = "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json";
+                anukeammo.displayname = "Anti Nuclear Missile";
+                anukeammo.desc = "Intercepts Nuclear Missiles";
+                anukeammo.factory = "antinuke";
+                anukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile'];
+                anukeammo.image = 'coui://pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo_icon_buildbar.png';
+                anukeammo.display_group = '1';
+                filteredresults.push(anukeammo);
+                */
+    
+                for (var j = 0; j < filteredresults.length; j++) {
+                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
+                        filteredunits.push(filteredresults[j]);
                     }
-                    else {
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'abotfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'avecfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'aafac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'anfac' : '';
+                }
+                for (j = 0; j < filteredresults.length; j++) {
+                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
+                        filteredbuildings.push(filteredresults[j]);
                     }
-                    /*jshint +W030 */
-                    //should change to bif is built by orbital launcher
                 }
-                //console.log(hotbuildunit.buildPicture);
-                hotbuildunit.image = hotbuildunit.buildPicture;
-                filteredresults.push(hotbuildunit);
-
-            }
-            //hack for nuke and anti nuke ammo
-            var nukeammo = {};
-            nukeammo.json = "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json";
-            nukeammo.displayname = "Nuclear Missile";
-            nukeammo.desc = "Creates Nuclear Explosion";
-            nukeammo.factory = "nuke";
-            nukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile','UNITTYPE_Orbital'];
-            nukeammo.image = 'coui://pa/units/land/nuke_launcher/nuke_launcher_ammo_icon_buildbar.png';
-            nukeammo.display_group = '1';
-            filteredresults.push(nukeammo);
-            var anukeammo = {};
-            anukeammo.json = "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json";
-            anukeammo.displayname = "Anti Nuclear Missile";
-            anukeammo.desc = "Intercepts Nuclear Missiles";
-            anukeammo.factory = "antinuke";
-            anukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile'];
-            anukeammo.image = 'coui://pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo_icon_buildbar.png';
-            anukeammo.display_group = '1';
-            filteredresults.push(anukeammo);
-
-            for (var j = 0; j < filteredresults.length; j++) {
-                if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
-                    filteredunits.push(filteredresults[j]);
-                }
-            }
-            for (j = 0; j < filteredresults.length; j++) {
-                if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
-                    filteredbuildings.push(filteredresults[j]);
-                }
-            }
-
-            filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
-            self.filteredunits(filteredbuildings); //set standard on buildings
-            self.units(filteredresults);
-            updateExistingSettings();
+    
+                filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
+                self.filteredunits(filteredbuildings); //set standard on buildings
+                self.units(filteredresults);
+                updateExistingSettings();                                               
         });
 
         function updateExistingSettings() {
