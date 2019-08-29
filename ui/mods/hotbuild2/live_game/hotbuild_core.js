@@ -30,8 +30,6 @@ var hotbuild2 = (function () {
 
     var hotbuild2 = {};
 
-    var imbawallclick = "nobuild";
-
     function hbManager(resetTime) {
         var self = this;
         //INPUT FROM BUILDBAR AND SELECTION SCENES
@@ -66,27 +64,6 @@ var hotbuild2 = (function () {
         }, this);
 
         self.unitName = ko.observable("");
-        self.imbawallers = ko.observableArray(["/pa/units/land/laser_defense/laser_defense.json",
-                                                "/pa/units/land/laser_defense_single/laser_defense_single.json",
-                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json",
-                                                "/pa/units/land/artillery_short/artillery_short.json",
-                                                "/pa/units/land/artillery_long/artillery_long.json",
-                                                "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json",
-                                                "/pa/units/land/nuke_launcher/nuke_launcher.json",
-                                                "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json",
-                                                "/pa/units/land/radar/radar.json",
-                                                "/pa/units/land/radar_adv/radar_adv.json",
-                                                "/pa/units/land/laser_defense/laser_defense.json.player",
-                                                "/pa/units/land/laser_defense_single/laser_defense_single.json.player",
-                                                "/pa/units/land/laser_defense_adv/laser_defense_adv.json.player",
-                                                "/pa/units/land/artillery_short/artillery_short.json.player",
-                                                "/pa/units/land/artillery_long/artillery_long.json.player",
-                                                "/pa/units/land/tactical_missile_launcher/tactical_missile_launcher.json.player",
-                                                "/pa/units/land/nuke_launcher/nuke_launcher.json.player",
-                                                "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher.json.player",
-                                                "/pa/units/land/radar/radar.player",
-                                                "/pa/units/land/radar_adv/radar_adv.player"
-                                                ]);
 
         self.buildPreviewList = function (hbindex, hotbuilds) {
             //set the buildPreview list
@@ -160,9 +137,6 @@ var hotbuild2 = (function () {
                         //model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
                         //console.log(hbunit.id);
                         model.buildItemBySpec(hbunit.id);
-                        if (self.imbawallers.indexOf(hbunit.id) !== -1) {
-                            imbawallclick = "build";
-                        }
                     }
                     else {
                         //model.buildItemBySpec(hbunit.id);
@@ -284,124 +258,6 @@ var hotbuild2 = (function () {
         };
     }
 
-    hotbuild2.buildTemplates = function () {
-
-        var buildTemplates = {};
-        buildTemplates.popupVisible = ko.observable(false);
-
-        var stepSize = 3;
-        var oldZoomLevel = handlers.zoom_level;
-        handlers.zoom_level = function (payload) {
-            oldZoomLevel(payload);
-            switch (payload.zoom_level) {
-                case "surface":
-                    stepSize = 8;
-                    break;
-                case "air":
-                    stepSize = 3;
-                    break;
-                case "orbital":
-                    stepSize = 2;
-                    break;
-                case "celestial":
-                    stepSize = 1;
-                    break;
-            }
-        };
-
-        function buildAt(x, y, spec, queue, complete) {
-            api.arch.beginFabMode(spec).then(function (ok) {
-                buildSelectedAt(x, y, queue, function (suc) {
-                    api.arch.endFabMode();
-                    if (complete) {
-                        complete(suc);
-                    }
-                });
-            });
-        }
-
-        function buildSelectedAt(x, y, queue, complete) {
-            model.holodeck.unitBeginFab(x, y, false);
-            model.holodeck.unitEndFab(x, y, queue, false).then(function (success) {
-                if (complete) {
-                    complete(success);
-                }
-            });
-        }
-
-        function tryInLine(x, y, dir, complete) {
-            var maxStepSize = 200;
-            var stepCounter = 0;
-            var doStep = function (suc) {
-                stepCounter += stepSize;
-                if (!suc && stepCounter < maxStepSize) {
-                    var xx = x;
-                    var yy = y;
-                    for (var d = 0; d < dir.length; d++) {
-                        switch (dir[d]) {
-                            case "up":
-                                xx -= stepCounter;
-                                break;
-                            case "down":
-                                xx += stepCounter;
-                                break;
-                            case "right":
-                                yy += stepCounter;
-                                break;
-                            case "left":
-                                yy -= stepCounter;
-                                break;
-                        }
-                    }
-                    buildSelectedAt(xx, yy, true, doStep);
-                } else {
-                    if (complete) {
-                        complete();
-                    } else {
-                        api.arch.endFabMode();
-                        api.audio.playSound("/SE/UI/UI_Building_place");
-                    }
-                }
-            };
-            doStep(false);
-        }
-
-        var holodeck = api.Holodeck.get($('.holodeck'));
-        var mouseX = 0;
-        var mouseY = 0;
-        $(document).mousemove(function (e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        buildTemplates.imbaWall2 = function (queue,mX,mY) {
-            var wall = "/pa/units/land/land_barrier/land_barrier.json";
-
-            window.setTimeout(function () {
-                api.arch.beginFabMode(wall).then(function (ok) {
-                    // the callback of the callback of the callback of the oh wtf
-                    tryInLine(mX, mY, ["up"], function () {
-                        tryInLine(mX, mY, ["down"], function () {
-                            tryInLine(mX, mY, ["right"], function () {
-                                tryInLine(mX, mY, ["left"], function () {
-                                    tryInLine(mX, mY, ["up", "left"], function () {
-                                        tryInLine(mX, mY, ["up", "right"], function () {
-                                            tryInLine(mX, mY, ["down", "left"], function () {
-                                                tryInLine(mX, mY, ["down", "right"]);
-                                            });
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            }, 750);
-        };
-
-        return buildTemplates;
-    }();
-
     //NON HOTKEY FUNCTIONS BUT CALLABLE THROUGH NORMAL KEYBOARD KEYS
 
     //Pole Lock on/off
@@ -487,19 +343,6 @@ var hotbuild2 = (function () {
     };
 
     /*End of toggle Hotbuild*/
-
-    //capture mouse down to do the imbawalls after click place building
-    var $holodeck = $('holodeck');
-    var holodeckModeMouseDown = {};
-    $holodeck.mousedown(function (mdevent) {
-        if (mdevent.button === 0 && imbawallclick === "build" && mdevent.altKey === true) {
-            var startx = mdevent.offsetX;
-            var starty = mdevent.offsetY;
-            var queue = mdevent.shiftKey;
-            hotbuild2.buildTemplates.imbaWall2(queue,startx,starty);
-            imbawallclick = "nobuild";
-        }
-    });
 
     var keycodes = {
         37: "left",
