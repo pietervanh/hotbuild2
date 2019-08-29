@@ -1,8 +1,3 @@
-//IntelliSense for WebMatrix /VS
-/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" />
-/// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
-/// <reference path="../.vsdoc/lodash-2.4.1.js" />
-
 if(!jQuery().sortable){
    loadScript("coui://ui/mods/hotbuild2/lib/jqueryui-sortable.js"); 
 }
@@ -22,86 +17,31 @@ var hotbuildsettings = (function () {
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
 
-        model.processedUnitSpecs.subscribe(function (unitspecs) {
+        model.unitSpecs.subscribe(function (unitspecs) {
+            
             if (unitspecs)
+            {
                 var filteredresults = [];
-                var filteredunits = [];
-                var filteredbuildings = [];
-                debugger;
                 Object.keys(unitspecs).forEach(function(key,index) {
-                    // key: the name of the object key
-                    // index: the ordinal position of the key within the object
-
-                        var bifunit = unitspecs[key];
-                        var hotbuildunit = bifunit;
-                        hotbuildunit.json = key;
-                        hotbuildunit.displayname = loc(hotbuildunit.display_name);
-                        hotbuildunit.desc = loc(hotbuildunit.description);
-                        hotbuildunit.image = 'coui:/' + key.replace('.json','_icon_buildbar.png');
-                        hotbuildunit.factory = "";
-                        //console.log(hotbuildunit.json);
-                        
-                        if (_.contains(hotbuildunit.types, 'UNITTYPE_Mobile')) {
-                            if (_.contains(hotbuildunit.types, 'UNITTYPE_Basic')) {
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'botfac' : '';
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'vecfac' : '';
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'afac' : '';
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'nfac' : '';
-                                _.contains(hotbuildunit.types,'UNITTYPE_Orbital') ? hotbuildunit.factory = 'ofac' : '';
-                            }
-                            else {
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'abotfac' : '';
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'avecfac' : '';
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'aafac' : '';
-                                _.contains(hotbuildunit.types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'anfac' : '';
-                            }
-                            
-                            //should change to bif is built by orbital launcher
-                        }
-                        //console.log(hotbuildunit.buildPicture);
-                        //hotbuildunit.image = hotbuildunit.buildPicture;
+                    //don't show commanders and debug units
+                    var unit = unitspecs[key];
+                    if (!_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
+                        console.log(unit);
+                        var hotbuildunit = {
+                            json: unit.id,
+                            displayname: loc(unit.name),
+                            desc: loc(unit.description),
+                            image: 'coui:/' + unit.id.replace('.json','_icon_buildbar.png'),
+                            types: unit.types,
+                            structure: unit.structure
+                        };
                         filteredresults.push(hotbuildunit);
- 
+                    }
                 });
-                //todo filter out debug and commanders based on spec
-                //todo better nukes
-                //hack for nuke and anti nuke ammo
-                /*
-                var nukeammo = {};
-                nukeammo.json = "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json";
-                nukeammo.displayname = "Nuclear Missile";
-                nukeammo.desc = "Creates Nuclear Explosion";
-                nukeammo.factory = "nuke";
-                nukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile','UNITTYPE_Orbital'];
-                nukeammo.image = 'coui://pa/units/land/nuke_launcher/nuke_launcher_ammo_icon_buildbar.png';
-                nukeammo.display_group = '1';
-                filteredresults.push(nukeammo);
-                var anukeammo = {};
-                anukeammo.json = "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json";
-                anukeammo.displayname = "Anti Nuclear Missile";
-                anukeammo.desc = "Intercepts Nuclear Missiles";
-                anukeammo.factory = "antinuke";
-                anukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile'];
-                anukeammo.image = 'coui://pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo_icon_buildbar.png';
-                anukeammo.display_group = '1';
-                filteredresults.push(anukeammo);
-                */
-    
-                for (var j = 0; j < filteredresults.length; j++) {
-                    if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
-                        filteredunits.push(filteredresults[j]);
-                    }
-                }
-                for (j = 0; j < filteredresults.length; j++) {
-                    if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
-                        filteredbuildings.push(filteredresults[j]);
-                    }
-                }
-    
-                filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
-                self.filteredunits(filteredbuildings); //set standard on buildings
                 self.units(filteredresults);
-                updateExistingSettings();                                               
+                self.filteredunits(_.filter(filteredresults, function(u){ return u.structure; })); //set standard on all buildings
+                updateExistingSettings(); 
+            }                             
         });
 
         function updateExistingSettings() {
@@ -119,7 +59,6 @@ var hotbuildsettings = (function () {
                     }
                 }
                 self.hotbuildglobal()[hbkey] = goodstuff;
-
             }
         }
         self.unitbuildfilter = ko.observable(true);
@@ -144,60 +83,22 @@ var hotbuildsettings = (function () {
             if (self.unitbuildfilter()) {
                 self.filters(["All", "Economy", "Factory", "Defense", "Recon"]);
                 if (self.activeSubFilters() !== 'All') {
-                    //check subfilters for buildings
-                    for (var i = 0; i < self.units().length; i++) {
-                        if (self.units()[i].factory === "") {
-                            if (self.activeSubFilters() === 'Economy' && _.contains(self.units()[i].unit_types, "UNITTYPE_Economy")) {
-                                self.filteredunits.push(self.units()[i]);
-                            }
-                            if (self.activeSubFilters() === 'Factory' && _.contains(self.units()[i].unit_types, "UNITTYPE_Factory")) {
-                                self.filteredunits.push(self.units()[i]);
-
-                            }
-                            if (self.activeSubFilters() === 'Defense' && _.contains(self.units()[i].unit_types, "UNITTYPE_Defense")) {
-                                self.filteredunits.push(self.units()[i]);
-
-                            }
-                            if (self.activeSubFilters() === 'Recon' && _.contains(self.units()[i].unit_types, "UNITTYPE_Recon")) {
-                                self.filteredunits.push(self.units()[i]);
-                            }
-                        }
-                    }
+                    console.log("SubFilter set to " + "UNITTYPE_" + self.activeSubFilters());
+                    debugger;
+                    self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
-                    for (var j = 0; j < self.units().length; j++) {
-                        if (self.units()[j].factory === "") {
-                            self.filteredunits.push(self.units()[j]);
-                        }
-                    }
+                    self.filteredunits(_.filter(self.units(), function(u){ return u.structure}));
                 }
             }
             else {
                 self.filters(["All", "Land", "Air", "Naval", "Orbital"]);
                 if (self.activeSubFilters() !== 'All') {
-                    for (var l = 0; l < self.units().length; l++) {
-                        if (self.units()[l].factory !== "") {
-                            if (self.activeSubFilters() === 'Land' && _.contains(self.units()[l].unit_types, "UNITTYPE_Land")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                            if (self.activeSubFilters() === 'Air' && _.contains(self.units()[l].unit_types, "UNITTYPE_Air")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                            if (self.activeSubFilters() === 'Naval' && _.contains(self.units()[l].unit_types, "UNITTYPE_Naval")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                            if (self.activeSubFilters() === 'Orbital' && _.contains(self.units()[l].unit_types, "UNITTYPE_Orbital")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                        }
-                    }
+                    console.log("SubFilter set to " + "UNITTYPE_" + self.activeSubFilters());
+                    self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
-                    for (var k = 0; k < self.units().length; k++) {
-                        if (self.units()[k].factory !== "") {
-                            self.filteredunits.push(self.units()[k]);
-                        }
-                    }
+                    self.filteredunits(_.filter(self.units(), function(u){ return !u.structure}));
                 }
             }
         };
