@@ -132,24 +132,19 @@ var hotbuild2 = (function () {
                     }
 
                     if (hbunit.structure) {
-                        //check if it' needs to be ImbaWalled
-
-                        //model.maybeSetBuildTarget(self.hotbuilds()[self.cycleid()].json);
                         //console.log(hbunit.id);
                         model.buildItemBySpec(hbunit.id);
                     }
                     else {
                         //model.buildItemBySpec(hbunit.id);
                         //console.log(hbunit.id);
-                        //model.executeStartBuild(event, self.getBuildItemId());
-                        //model.executeStartBuild(event, hbunit);
-                        //debugger;
-                        var params = {};
-                        params.item = hbunit.id;
-                        params.batch = event.shiftKey;
-                        params.cancel = false;
-                        params.urgent = event.ctrlKey;
-                        params.more = "";
+                        var params = {
+                            item: hbunit.id,
+                            batch: event.shiftKey,
+                            cancel: false,
+                            urgent: event.ctrlKey,
+                            more: ""
+                        };
                         model.executeStartBuild(params);
                     }
                     self.unitName(hbunit.name);
@@ -162,7 +157,6 @@ var hotbuild2 = (function () {
                     if (self.selectionList().length > 0&&hotbuild_select_enable) { //check if units are selected ?
                         var selectionTypes = [];
                         for (var i = 0; i < self.hotbuilds().length; i++) {
-
                             var typeindex = _.findIndex(self.selectionList(), { 'type': self.hotbuilds()[i].json });
                             if (typeindex !== -1) {
                                 selectionTypes.push(self.hotbuilds()[i].json);
@@ -182,12 +176,10 @@ var hotbuild2 = (function () {
                                 model.holodeck.view.selectByTypes("remove", _.difference(currentselection, selectionTypes));
                             }
                         }
-
                     }
                     else {
                         console.log('hotbuild doesnt know what to do (or hotSelect is disabled)' + self.debuginfo());
                     }
-
                 }
             }
         };
@@ -341,7 +333,6 @@ var hotbuild2 = (function () {
             hotbuild_frameEvent=requestAnimationFrame(hotbuild2.watch_toggle);
         }
     };
-
     /*End of toggle Hotbuild*/
 
     var keycodes = {
@@ -405,11 +396,9 @@ var hotbuild2 = (function () {
             /* grab letters */
             value = String.fromCharCode(e.which).toLowerCase();
         } else {
-
             /* if not a letter look in key codes */
             value = keycodes[e.which];
         }
-
         //console.log(value);
         for (var hotkey in hotbuildglobalkey)
         {
