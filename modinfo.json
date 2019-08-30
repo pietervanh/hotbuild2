@@ -1,14 +1,14 @@
 {
     "context": "client",
-    "identifier": "com.pa.proeleert.hotbuild2_dev",
-    "display_name": "Hotbuild2 DEV",
+    "identifier": "com.pa.proeleert.hotbuild2",
+    "display_name": "Hotbuild2",
     "description": "Map 1 Key to multiple build actions and more... (See forum link for screenshots and instructions.)",
     "author": "proeleert, tripax, cola_colin",
-    "version": "1.47",
-    "build": "94157",
-    "date": "2016/04/30",
+    "version": "1.50",
+    "build": "113578",
+    "date": "2019/08/30",
     "signature": " ",
-    "forum": "https://forums.uberent.com/threads/rel-hotbuild2-57703.54561/",
+    "forum": "https://forums.planetaryannihilation.com/threads/rel-pamm-cmm-hotbuild2-v1-47-89755.54561/",
     "category": [
         "classic",
         "titans",
@@ -41,7 +41,6 @@
     },
     "enabled": true,
     "dependencies": [
-        "com.pa.raevn.rblueprintinfoframework",
         "com.pa.raevn.rfloatframe"
     ]
 }

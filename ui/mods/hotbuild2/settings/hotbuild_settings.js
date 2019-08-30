@@ -1,8 +1,3 @@
-//IntelliSense for WebMatrix /VS
-/// <reference path="../.vsdoc/jquery-1.9.1-vsdoc.js" />
-/// <reference path="../.vsdoc/knockout-2.2.1.debug.js" />
-/// <reference path="../.vsdoc/lodash-2.4.1.js" />
-
 if(!jQuery().sortable){
    loadScript("coui://ui/mods/hotbuild2/lib/jqueryui-sortable.js"); 
 }
@@ -21,89 +16,32 @@ var hotbuildsettings = (function () {
         self.selectedhotbuild = ko.observableArray([]);
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
-        bif.registerBIFReadyCallback(function () {
-            console.log("BIF CALLBACK HOTBUILD SETTINGS");
-            var start = /[^\/]*$/;  // ^ : start , \/ : '/', $ : end // as wildcard: /*.json
-            var end = /[.]json$/;
-            var filteredresults = [];
-            var filteredunits = [];
-            var filteredbuildings = [];
-            var results = bif.getBuildableUnitIDs(); //vanilla
-            try{
-            //LEGION Support
-              var legionresults = bif.getBuildableUnitIDs("l_overwatch");
-               results = _.union(results,legionresults);
+
+        model.unitSpecs.subscribe(function (unitspecs) {
             
-            }catch(e){
-            
-            }
-            
-            for (var i = 0; i < results.length; i++) {
-                var bifunit = bif.units[results[i]];
-                var hotbuildunit = bifunit;
-                hotbuildunit.json = hotbuildunit.path;
-                hotbuildunit.displayname = hotbuildunit.display_name;
-                hotbuildunit.desc = hotbuildunit.description;
-                hotbuildunit.factory = "";
-                //console.log(hotbuildunit.json);
-                /*jshint -W030 */
-                if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Mobile')) {
-                    if (_.contains(hotbuildunit.unit_types, 'UNITTYPE_Basic')) {
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'botfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'vecfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'afac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'nfac' : '';
-                        _.contains(hotbuildunit.unit_types,'UNITTYPE_Orbital') ? hotbuildunit.factory = 'ofac' : '';
+            if (unitspecs)
+            {
+                var filteredresults = [];
+                Object.keys(unitspecs).forEach(function(key,index) {
+                    //don't show commanders and debug units
+                    var unit = unitspecs[key];
+                    if (!_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
+                        //console.log(unit);
+                        var hotbuildunit = {
+                            json: unit.id,
+                            displayname: loc(unit.name),
+                            desc: loc(unit.description),
+                            image: 'coui:/' + unit.id.replace('.json','_icon_buildbar.png'),
+                            types: unit.types,
+                            structure: unit.structure
+                        };
+                        filteredresults.push(hotbuildunit);
                     }
-                    else {
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Bot') ? hotbuildunit.factory = 'abotfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Tank') ? hotbuildunit.factory = 'avecfac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Air') ? hotbuildunit.factory = 'aafac' : '';
-                        _.contains(hotbuildunit.unit_types, 'UNITTYPE_Naval') ? hotbuildunit.factory = 'anfac' : '';
-                    }
-                    /*jshint +W030 */
-                    //should change to bif is built by orbital launcher
-                }
-                //console.log(hotbuildunit.buildPicture);
-                hotbuildunit.image = hotbuildunit.buildPicture;
-                filteredresults.push(hotbuildunit);
-
-            }
-            //hack for nuke and anti nuke ammo
-            var nukeammo = {};
-            nukeammo.json = "/pa/units/land/nuke_launcher/nuke_launcher_ammo.json";
-            nukeammo.displayname = "Nuclear Missile";
-            nukeammo.desc = "Creates Nuclear Explosion";
-            nukeammo.factory = "nuke";
-            nukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile','UNITTYPE_Orbital'];
-            nukeammo.image = 'coui://pa/units/land/nuke_launcher/nuke_launcher_ammo_icon_buildbar.png';
-            nukeammo.display_group = '1';
-            filteredresults.push(nukeammo);
-            var anukeammo = {};
-            anukeammo.json = "/pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo.json";
-            anukeammo.displayname = "Anti Nuclear Missile";
-            anukeammo.desc = "Intercepts Nuclear Missiles";
-            anukeammo.factory = "antinuke";
-            anukeammo.unit_types = ['UNITTYPE_Air','UNITTYPE_Mobile'];
-            anukeammo.image = 'coui://pa/units/land/anti_nuke_launcher/anti_nuke_launcher_ammo_icon_buildbar.png';
-            anukeammo.display_group = '1';
-            filteredresults.push(anukeammo);
-
-            for (var j = 0; j < filteredresults.length; j++) {
-                if (!_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
-                    filteredunits.push(filteredresults[j]);
-                }
-            }
-            for (j = 0; j < filteredresults.length; j++) {
-                if (_.contains(filteredresults[j].unit_types, "UNITTYPE_Structure")){
-                    filteredbuildings.push(filteredresults[j]);
-                }
-            }
-
-            filteredbuildings = _.sortBy(filteredbuildings, 'display_group');
-            self.filteredunits(filteredbuildings); //set standard on buildings
-            self.units(filteredresults);
-            updateExistingSettings();
+                });
+                self.units(filteredresults);
+                self.filteredunits(_.filter(filteredresults, function(u){ return u.structure; })); //set standard on all buildings
+                updateExistingSettings(); 
+            }                             
         });
 
         function updateExistingSettings() {
@@ -121,7 +59,6 @@ var hotbuildsettings = (function () {
                     }
                 }
                 self.hotbuildglobal()[hbkey] = goodstuff;
-
             }
         }
         self.unitbuildfilter = ko.observable(true);
@@ -146,60 +83,19 @@ var hotbuildsettings = (function () {
             if (self.unitbuildfilter()) {
                 self.filters(["All", "Economy", "Factory", "Defense", "Recon"]);
                 if (self.activeSubFilters() !== 'All') {
-                    //check subfilters for buildings
-                    for (var i = 0; i < self.units().length; i++) {
-                        if (self.units()[i].factory === "") {
-                            if (self.activeSubFilters() === 'Economy' && _.contains(self.units()[i].unit_types, "UNITTYPE_Economy")) {
-                                self.filteredunits.push(self.units()[i]);
-                            }
-                            if (self.activeSubFilters() === 'Factory' && _.contains(self.units()[i].unit_types, "UNITTYPE_Factory")) {
-                                self.filteredunits.push(self.units()[i]);
-
-                            }
-                            if (self.activeSubFilters() === 'Defense' && _.contains(self.units()[i].unit_types, "UNITTYPE_Defense")) {
-                                self.filteredunits.push(self.units()[i]);
-
-                            }
-                            if (self.activeSubFilters() === 'Recon' && _.contains(self.units()[i].unit_types, "UNITTYPE_Recon")) {
-                                self.filteredunits.push(self.units()[i]);
-                            }
-                        }
-                    }
+                    self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
-                    for (var j = 0; j < self.units().length; j++) {
-                        if (self.units()[j].factory === "") {
-                            self.filteredunits.push(self.units()[j]);
-                        }
-                    }
+                    self.filteredunits(_.filter(self.units(), function(u){ return u.structure}));
                 }
             }
             else {
                 self.filters(["All", "Land", "Air", "Naval", "Orbital"]);
                 if (self.activeSubFilters() !== 'All') {
-                    for (var l = 0; l < self.units().length; l++) {
-                        if (self.units()[l].factory !== "") {
-                            if (self.activeSubFilters() === 'Land' && _.contains(self.units()[l].unit_types, "UNITTYPE_Land")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                            if (self.activeSubFilters() === 'Air' && _.contains(self.units()[l].unit_types, "UNITTYPE_Air")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                            if (self.activeSubFilters() === 'Naval' && _.contains(self.units()[l].unit_types, "UNITTYPE_Naval")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                            if (self.activeSubFilters() === 'Orbital' && _.contains(self.units()[l].unit_types, "UNITTYPE_Orbital")) {
-                                self.filteredunits.push(self.units()[l]);
-                            }
-                        }
-                    }
+                    self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
-                    for (var k = 0; k < self.units().length; k++) {
-                        if (self.units()[k].factory !== "") {
-                            self.filteredunits.push(self.units()[k]);
-                        }
-                    }
+                    self.filteredunits(_.filter(self.units(), function(u){ return !u.structure}));
                 }
             }
         };
@@ -288,7 +184,7 @@ var hotbuildsettings = (function () {
 
         self.updatehotbuildkeys = function () {
             self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
-            self.Save();
+            //self.Save();
         };
         self.Save = function () {
             //do cleanup of empty props
@@ -311,9 +207,7 @@ var hotbuildsettings = (function () {
                 viewmodelconfig['hotbuild' + nr + 's'] = [];
                 for (var i = 0; i < copyconfig[hotkey].length; i++) {
                     viewmodelconfig['hotbuild' + nr + 's'].push({ 'json': copyconfig[hotkey][i].json });
-                    //viewmodelconfig['hotbuild' + nr + 's'][i] = copyconfig[hotkey][i];
                 }
-                //viewmodelconfig['hotbuild' + nr + 's'].json = copyconfig[hotkey].json;
                 nr++;
             }
 
@@ -322,11 +216,7 @@ var hotbuildsettings = (function () {
             model.hotbuildconfig = self.cleanhotbuildglobal();
             model.hotbuildconfigkey = self.cleanhotbuildglobalkey();
             self.hotbuilddirty(true);
-            //model.clean(false);
-            //api.settings.isDirty(true);
         };
-
-
 
         self.swapKey = function () {
             swapto = $("#swapkey").val();
@@ -341,7 +231,6 @@ var hotbuildsettings = (function () {
                             swapposition = hotkey;
                             break;
                         }
-
                     }
                     //find current key position
                     for (hotkey in self.hotbuildglobalkey()) {
@@ -516,7 +405,6 @@ var hotbuildsettings = (function () {
         },true);
     }
 
-
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
     hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
@@ -571,19 +459,23 @@ var hotbuildsettings = (function () {
         }
     });
 
+    //store ref to pa settings clean and override
     var hotbuildOldClean = model.clean;
     model.clean = ko.computed(function() {
+        //if clean save button is disabled.
+        //console.log(hotbuildsettings.dirty());
         return hotbuildOldClean() && !hotbuildsettings.dirty();
     });
 
-    var hotbuildOldSave = model.save;
-    var hotbuildOldSaveClose = model.saveAndExit;
-
     var hotbuildStore = function(){
-        hotbuildOldSave();
         localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
         localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
+        hotbuildsettings.dirty(false);
     };
+
+    //store ref to pa settings save and saveAndExit and override
+    var hotbuildOldSave = model.save;
+    var hotbuildOldSaveClose = model.saveAndExit;
 
     model.save = function(){
         hotbuildStore();
@@ -591,24 +483,15 @@ var hotbuildsettings = (function () {
     };
 
     model.saveAndExit = function(){
-        hotbuildOldSaveClose();
         hotbuildStore();
+        hotbuildOldSaveClose();
     };
 
-    //model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
-
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
+        //Only allow 1 same type in left droptarget
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
-            if (arg.item.factory !== "" && arg.sourceParentNode.parent().attr("id") === "sequencelistR") {
-                var unitCheck = true;
-                for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-                    if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory === arg.item.factory) {
-                        unitCheck = false;
-                        break;
-                    }
-                }
-
-                if (!unitCheck) {
+            if (arg.sourceParentNode.parent().attr("id") === "sequencelistR") {
+                if(_.filter(hotbuildsettings.viewmodel.selectedhotbuild(),function(n){return n.json === arg.item.json}).length >= 1){
                     arg.cancelDrop = true;
                 }
                 return arg;
@@ -618,7 +501,6 @@ var hotbuildsettings = (function () {
             arg.cancelDrop = true;
             return arg;
         }
-
     };
 
     ko.bindingHandlers.sortable.afterMove = function (arg) {
@@ -764,4 +646,4 @@ var hotbuildsettings = (function () {
     
     model.settingGroups.notifySubscribers();
 
-})();
+})()
