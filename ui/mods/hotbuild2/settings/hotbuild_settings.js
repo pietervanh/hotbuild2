@@ -26,7 +26,7 @@ var hotbuildsettings = (function () {
                     //don't show commanders and debug units
                     var unit = unitspecs[key];
                     if (!_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
-                        console.log(unit);
+                        //console.log(unit);
                         var hotbuildunit = {
                             json: unit.id,
                             displayname: loc(unit.name),
@@ -83,8 +83,6 @@ var hotbuildsettings = (function () {
             if (self.unitbuildfilter()) {
                 self.filters(["All", "Economy", "Factory", "Defense", "Recon"]);
                 if (self.activeSubFilters() !== 'All') {
-                    console.log("SubFilter set to " + "UNITTYPE_" + self.activeSubFilters());
-                    debugger;
                     self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
@@ -94,7 +92,6 @@ var hotbuildsettings = (function () {
             else {
                 self.filters(["All", "Land", "Air", "Naval", "Orbital"]);
                 if (self.activeSubFilters() !== 'All') {
-                    console.log("SubFilter set to " + "UNITTYPE_" + self.activeSubFilters());
                     self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
@@ -187,7 +184,7 @@ var hotbuildsettings = (function () {
 
         self.updatehotbuildkeys = function () {
             self.hotbuildkeys(_.keys(_.invert(self.hotbuildglobalkey())));
-            self.Save();
+            //self.Save();
         };
         self.Save = function () {
             //do cleanup of empty props
@@ -210,9 +207,7 @@ var hotbuildsettings = (function () {
                 viewmodelconfig['hotbuild' + nr + 's'] = [];
                 for (var i = 0; i < copyconfig[hotkey].length; i++) {
                     viewmodelconfig['hotbuild' + nr + 's'].push({ 'json': copyconfig[hotkey][i].json });
-                    //viewmodelconfig['hotbuild' + nr + 's'][i] = copyconfig[hotkey][i];
                 }
-                //viewmodelconfig['hotbuild' + nr + 's'].json = copyconfig[hotkey].json;
                 nr++;
             }
 
@@ -221,11 +216,7 @@ var hotbuildsettings = (function () {
             model.hotbuildconfig = self.cleanhotbuildglobal();
             model.hotbuildconfigkey = self.cleanhotbuildglobalkey();
             self.hotbuilddirty(true);
-            //model.clean(false);
-            //api.settings.isDirty(true);
         };
-
-
 
         self.swapKey = function () {
             swapto = $("#swapkey").val();
@@ -240,7 +231,6 @@ var hotbuildsettings = (function () {
                             swapposition = hotkey;
                             break;
                         }
-
                     }
                     //find current key position
                     for (hotkey in self.hotbuildglobalkey()) {
@@ -415,7 +405,6 @@ var hotbuildsettings = (function () {
         },true);
     }
 
-
     var hotbuildglobal = {};
     var hotbuildglobalkey = {};
     hotbuildglobal = localStorage.hotbuildconfig ? decode(localStorage.hotbuildconfig) : hotbuildglobal;
@@ -470,19 +459,23 @@ var hotbuildsettings = (function () {
         }
     });
 
+    //store ref to pa settings clean and override
     var hotbuildOldClean = model.clean;
     model.clean = ko.computed(function() {
+        //if clean save button is disabled.
+        //console.log(hotbuildsettings.dirty());
         return hotbuildOldClean() && !hotbuildsettings.dirty();
     });
 
-    var hotbuildOldSave = model.save;
-    var hotbuildOldSaveClose = model.saveAndExit;
-
     var hotbuildStore = function(){
-        hotbuildOldSave();
         localStorage.hotbuildconfigkey = encode(hotbuildsettings.viewmodel.cleanhotbuildglobalkey());
         localStorage.hotbuildconfig = encode(hotbuildsettings.viewmodel.cleanhotbuildglobal());
+        hotbuildsettings.dirty(false);
     };
+
+    //store ref to pa settings save and saveAndExit and override
+    var hotbuildOldSave = model.save;
+    var hotbuildOldSaveClose = model.saveAndExit;
 
     model.save = function(){
         hotbuildStore();
@@ -490,24 +483,15 @@ var hotbuildsettings = (function () {
     };
 
     model.saveAndExit = function(){
-        hotbuildOldSaveClose();
         hotbuildStore();
+        hotbuildOldSaveClose();
     };
 
-    //model.registerFrameSetting('hotbuild_info_frame', 'Hotbuild Preview', true);
-
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
+        //Only allow 1 same type in left droptarget
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
-            if (arg.item.factory !== "" && arg.sourceParentNode.parent().attr("id") === "sequencelistR") {
-                var unitCheck = true;
-                for (var i = 0; i < hotbuildsettings.viewmodel.selectedhotbuild().length; i++) {
-                    if (hotbuildsettings.viewmodel.selectedhotbuild()[i].factory === arg.item.factory) {
-                        unitCheck = false;
-                        break;
-                    }
-                }
-
-                if (!unitCheck) {
+            if (arg.sourceParentNode.parent().attr("id") === "sequencelistR") {
+                if(_.filter(hotbuildsettings.viewmodel.selectedhotbuild(),function(n){return n.json === arg.item.json}).length >= 1){
                     arg.cancelDrop = true;
                 }
                 return arg;
@@ -517,7 +501,6 @@ var hotbuildsettings = (function () {
             arg.cancelDrop = true;
             return arg;
         }
-
     };
 
     ko.bindingHandlers.sortable.afterMove = function (arg) {
@@ -663,4 +646,4 @@ var hotbuildsettings = (function () {
     
     model.settingGroups.notifySubscribers();
 
-})();
+})()
