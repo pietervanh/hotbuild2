@@ -86,7 +86,7 @@ var hotbuildsettings = (function () {
                     self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
-                    self.filteredunits(_.filter(self.units(), function(u){ return u.structure}));
+                    self.filteredunits(_.filter(self.units(), function(u){ return u.structure;}));
                 }
             }
             else {
@@ -95,7 +95,7 @@ var hotbuildsettings = (function () {
                     self.filteredunits(_.filter(self.units(), function(u){ return _.contains(u.types, "UNITTYPE_" + self.activeSubFilters())}));
                 }
                 else {
-                    self.filteredunits(_.filter(self.units(), function(u){ return !u.structure}));
+                    self.filteredunits(_.filter(self.units(), function(u){ return !u.structure;}));
                 }
             }
         };
@@ -490,10 +490,15 @@ var hotbuildsettings = (function () {
     ko.bindingHandlers.sortable.beforeMove = function (arg) {
         //Only allow 1 same type in left droptarget
         if (hotbuildsettings.viewmodel.selectedkeyinfo() !== undefined) {
-            if (arg.sourceParentNode.parent().attr("id") === "sequencelistR") {
-                if(_.filter(hotbuildsettings.viewmodel.selectedhotbuild(),function(n){return n.json === arg.item.json}).length >= 1){
-                    arg.cancelDrop = true;
+            try{
+                if (arg.sourceParentNode.parent().attr("id") === "sequencelistR") {
+                    if(_.filter(hotbuildsettings.viewmodel.selectedhotbuild(),function(n){return n.json === arg.item.json}).length >= 1){
+                        arg.cancelDrop = true;
+                    }
+                    return arg;
                 }
+            }
+            catch(ex){
                 return arg;
             }
         }
@@ -504,7 +509,6 @@ var hotbuildsettings = (function () {
     };
 
     ko.bindingHandlers.sortable.afterMove = function (arg) {
-        hotbuildsettings.viewmodel.filterunits(); // should really clone eh
         hotbuildsettings.viewmodel.Save();
         hotbuildsettings.viewmodel.updatehotbuildkeys();
     };
@@ -646,4 +650,4 @@ var hotbuildsettings = (function () {
     
     model.settingGroups.notifySubscribers();
 
-})()
+})();
