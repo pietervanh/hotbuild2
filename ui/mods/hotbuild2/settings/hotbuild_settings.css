@@ -29,12 +29,13 @@
 }
 
 #hb_kb_cont{
+	display:flex;
 	position: relative;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
 	text-align: center;
-	width: 650px;
+	/*width: 100%;*/
 
 
 }
@@ -151,7 +152,8 @@ padding: 12px;
  *************/
  
  #hbkeyboard {
-	width: 750px;
+	display:flex;
+	flex-wrap: wrap;
 	margin: 0 auto;
  }
  
@@ -200,7 +202,8 @@ padding: 12px;
 }
 
 .lastitem {
-    margin-right: 0;
+	flex-basis: 100%;
+	height: 0;
 }
 
 .uppercase {
@@ -241,7 +244,8 @@ padding: 12px;
 }
 
 #legend {
-    display: inline-block;
+	display: inline-block;
+	flex-basis: 200px
 }
 
 #legend li{
