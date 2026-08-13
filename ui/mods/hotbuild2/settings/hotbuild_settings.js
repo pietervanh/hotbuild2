@@ -21,32 +21,93 @@ var hotbuildsettings = (function () {
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
 
-        model.unitSpecs.subscribe(function (unitspecs) {
-            
-            if (unitspecs)
-            {
-                var filteredresults = [];
-                Object.keys(unitspecs).forEach(function(key,index) {
-                    //don't show commanders and debug units
-                    var unit = unitspecs[key];
-                    if (!_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
-                        //console.log(unit);
-                        var hotbuildunit = {
-                            json: unit.id,
-                            displayname: loc(unit.name),
-                            desc: loc(unit.description),
-                            image: 'coui:/' + unit.id.replace('.json','_icon_buildbar.png'),
-                            types: unit.types,
-                            structure: unit.structure
-                        };
+        //in a Galactic War game the sim has a copy of every unit per spec tag, so the
+        //picker has to pick one of them to show. lower rank wins, cosmetic only.
+        self.hbSpecTag = null;
+        function hbTagRank(tag) {
+            if (self.hbSpecTag && tag === self.hbSpecTag) {
+                return 0;
+            }
+            if (tag === '') {
+                return 1;
+            }
+            if (tag === '.player') {
+                return 2;
+            }
+            return 3;
+        }
+
+        var hbUnitSpecs = null;
+        var hbFirstBuild = true;
+
+        self.hbBuildUnitList = function () {
+            if (!hbUnitSpecs) {
+                return;
+            }
+            var filteredresults = [];
+            var seen = {};
+            Object.keys(hbUnitSpecs).forEach(function(key,index) {
+                //don't show commanders and debug units
+                var unit = hbUnitSpecs[key];
+                if (unit && !_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
+                    //console.log(unit);
+                    //the key is the spec id, unit.id is only set by crossRef in the live game scenes
+                    var canonical = hbSpecId.canonical(key);
+                    var rank = hbTagRank(hbSpecId.tag(key));
+                    var existing = seen[canonical];
+                    if (existing !== undefined && rank >= filteredresults[existing].hbrank) {
+                        return;
+                    }
+                    var hotbuildunit = {
+                        json: canonical,
+                        displayname: loc(unit.name),
+                        desc: loc(unit.description),
+                        image: hbSpecId.buildBarIcon(canonical),
+                        types: unit.types,
+                        structure: unit.structure,
+                        hbrank: rank
+                    };
+                    if (existing === undefined) {
+                        seen[canonical] = filteredresults.length;
                         filteredresults.push(hotbuildunit);
                     }
-                });
-                self.units(filteredresults);
+                    else {
+                        filteredresults[existing] = hotbuildunit;
+                    }
+                }
+            });
+            self.units(filteredresults);
+            if (hbFirstBuild) {
+                hbFirstBuild = false;
                 self.filteredunits(_.filter(filteredresults, function(u){ return u.structure; })); //set standard on all buildings
-                updateExistingSettings(); 
-            }                             
+            }
+            else {
+                self.filterunits(); //rebuilt underneath the user, keep them on their filter
+            }
+            updateExistingSettings();
+        };
+
+        model.unitSpecs.subscribe(function (unitspecs) {
+            if (unitspecs)
+            {
+                hbUnitSpecs = unitspecs;
+                self.hbBuildUnitList();
+            }
         });
+
+        //never gate the picker on this, it may never resolve outside a game
+        try {
+            var hbTagRequest = api.game.getUnitSpecTag();
+            if (hbTagRequest && _.isFunction(hbTagRequest.then)) {
+                hbTagRequest.then(function (tag) {
+                    self.hbSpecTag = tag || '';
+                    self.hbBuildUnitList();
+                });
+            }
+        }
+        catch (ex) {
+            console.log(ex);
+        }
 
         function updateExistingSettings() {
             //nothing to compare against yet, don't prune the config to nothing
