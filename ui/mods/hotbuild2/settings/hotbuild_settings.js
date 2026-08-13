@@ -8,55 +8,137 @@ var hotbuildsettings = (function () {
 
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
         var self = this;
+        //migrate configs written before ids were stored untagged
+        hbSpecId.normaliseConfig(hbglobal);
         self.hotbuilddirty = ko.observable(false);
         self.hotbuildglobal = ko.observable(hbglobal).extend({ notify: 'always' });
         self.hotbuildglobalkey = ko.observable(hbglobalkey);
-        self.cleanhotbuildglobal = ko.observable(hbglobal);
-        self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
+        //copies, not the same objects: updateExistingSettings prunes hotbuildglobal in
+        //place and hotbuildStore writes these on any Save, hotbuild edit or not
+        self.cleanhotbuildglobal = ko.observable(_.cloneDeep(hbglobal));
+        self.cleanhotbuildglobalkey = ko.observable(_.cloneDeep(hbglobalkey));
         self.selectedhotbuild = ko.observableArray([]);
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
 
-        model.unitSpecs.subscribe(function (unitspecs) {
-            
-            if (unitspecs)
-            {
-                var filteredresults = [];
-                Object.keys(unitspecs).forEach(function(key,index) {
-                    //don't show commanders and debug units
-                    var unit = unitspecs[key];
-                    if (!_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
-                        //console.log(unit);
-                        var hotbuildunit = {
-                            json: unit.id,
-                            displayname: loc(unit.name),
-                            desc: loc(unit.description),
-                            image: 'coui:/' + unit.id.replace('.json','_icon_buildbar.png'),
-                            types: unit.types,
-                            structure: unit.structure
-                        };
+        //in a Galactic War game the sim has a copy of every unit per spec tag, so the
+        //picker has to pick one of them to show. lower rank wins, cosmetic only.
+        self.hbSpecTag = null;
+        function hbTagRank(tag) {
+            if (self.hbSpecTag && tag === self.hbSpecTag) {
+                return 0;
+            }
+            if (tag === '') {
+                return 1;
+            }
+            if (tag === '.player') {
+                return 2;
+            }
+            return 3;
+        }
+
+        var hbUnitSpecs = null;
+        var hbFirstBuild = true;
+
+        self.hbBuildUnitList = function () {
+            if (!hbUnitSpecs) {
+                return;
+            }
+            var filteredresults = [];
+            var seen = {};
+            Object.keys(hbUnitSpecs).forEach(function(key,index) {
+                //don't show commanders and debug units
+                var unit = hbUnitSpecs[key];
+                if (unit && !_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
+                    //console.log(unit);
+                    //the key is the spec id, unit.id is only set by crossRef in the live game scenes
+                    var canonical = hbSpecId.canonical(key);
+                    var rank = hbTagRank(hbSpecId.tag(key));
+                    var existing = seen[canonical];
+                    if (existing !== undefined && rank >= filteredresults[existing].hbrank) {
+                        return;
+                    }
+                    var hotbuildunit = {
+                        json: canonical,
+                        displayname: loc(unit.name),
+                        desc: loc(unit.description),
+                        image: hbSpecId.buildBarIcon(canonical),
+                        types: unit.types,
+                        structure: unit.structure,
+                        hbrank: rank
+                    };
+                    if (existing === undefined) {
+                        seen[canonical] = filteredresults.length;
                         filteredresults.push(hotbuildunit);
                     }
-                });
-                self.units(filteredresults);
+                    else {
+                        filteredresults[existing] = hotbuildunit;
+                    }
+                }
+            });
+            self.units(filteredresults);
+            if (hbFirstBuild) {
+                hbFirstBuild = false;
                 self.filteredunits(_.filter(filteredresults, function(u){ return u.structure; })); //set standard on all buildings
-                updateExistingSettings(); 
-            }                             
+            }
+            else {
+                self.filterunits(); //rebuilt underneath the user, keep them on their filter
+            }
+            updateExistingSettings();
+        };
+
+        model.unitSpecs.subscribe(function (unitspecs) {
+            if (unitspecs)
+            {
+                hbUnitSpecs = unitspecs;
+                self.hbBuildUnitList();
+            }
         });
 
+        //never gate the picker on this, it may never resolve outside a game
+        try {
+            var hbTagRequest = api.game.getUnitSpecTag();
+            if (hbTagRequest && _.isFunction(hbTagRequest.then)) {
+                hbTagRequest.then(function (tag) {
+                    self.hbSpecTag = tag || '';
+                    self.hbBuildUnitList();
+                });
+            }
+        }
+        catch (ex) {
+            console.log(ex);
+        }
+
+        //a binding this spec set has no unit for, e.g. a Legion unit in a vanilla game.
+        //shown greyed and kept, so it survives back into localStorage on the next save.
+        function hbMissingUnit(json) {
+            return {
+                json: json,
+                displayname: json.replace(/^.*\//, '').replace(/\.json$/, ''),
+                desc: 'NOT AVAILABLE HERE',
+                image: hbSpecId.buildBarIcon(json),
+                types: [],
+                structure: false,
+                hbmissing: true
+            };
+        }
+
         function updateExistingSettings() {
+            //nothing to compare against yet, don't prune the config to nothing
+            if (self.units().length === 0) {
+                return;
+            }
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
             for (var hbkey in self.hotbuildglobal()) {
-                //if(_.contains(self.units(),hb.json))
-                for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
-                    var match = _.find(self.units(), { 'json': self.hotbuildglobal()[hbkey][i].json });
-                    self.hotbuildglobal()[hbkey][i] = match;
-                }
+                var entries = self.hotbuildglobal()[hbkey];
                 var goodstuff = [];
-                for (i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
-                    if (self.hotbuildglobal()[hbkey][i] !== undefined) {
-                        goodstuff.push(self.hotbuildglobal()[hbkey][i]);
+                for (var i = 0; i < entries.length; i++) {
+                    if (!entries[i] || !entries[i].json) {
+                        continue;
                     }
+                    var json = hbSpecId.canonical(entries[i].json);
+                    var match = _.find(self.units(), { 'json': json });
+                    goodstuff.push(match !== undefined ? match : hbMissingUnit(json));
                 }
                 self.hotbuildglobal()[hbkey] = goodstuff;
             }
@@ -206,7 +288,11 @@ var hotbuildsettings = (function () {
                 viewmodelconfigkey['hotbuild' + nr + 's'] = copyconfigkey[hotkey];
                 viewmodelconfig['hotbuild' + nr + 's'] = [];
                 for (var i = 0; i < copyconfig[hotkey].length; i++) {
-                    viewmodelconfig['hotbuild' + nr + 's'].push({ 'json': copyconfig[hotkey][i].json });
+                    if (!copyconfig[hotkey][i] || !copyconfig[hotkey][i].json) {
+                        continue;
+                    }
+                    //store untagged so one mapping works under every spec tag
+                    viewmodelconfig['hotbuild' + nr + 's'].push({ 'json': hbSpecId.canonical(copyconfig[hotkey][i].json) });
                 }
                 nr++;
             }
@@ -326,7 +412,8 @@ var hotbuildsettings = (function () {
             self.keyboardkey('');
             console.log('HOTBUILD2 IMPORTING KEY CONFIG------------');
             self.hotbuildglobalkey(imported.hotbuildglobalkey);
-            self.hotbuildglobal(imported.hotbuildglobal);
+            //a .pas exported from a Galactic War session can hold tagged ids
+            self.hotbuildglobal(hbSpecId.normaliseConfig(imported.hotbuildglobal));
             updateExistingSettings();
             self.Save();
             console.log('WROTE HOTBUILD KEYS-----------');

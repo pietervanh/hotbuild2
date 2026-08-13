@@ -16,12 +16,14 @@ var hotbuild2buildbar = (function () {
 
     hbgetBuildBarKey = function (id) {
         var result = '';
-        //the two configs are joined by property name, so look the key up by name
-        _.forEach(hotbuildglobal, function (hbkey, hbname) {
+        var hbpos = 1;
+        //the build bar hands us tagged ids in Galactic War, ours are stored untagged
+        var canonical = hbSpecId.canonical(id);
+        _.forEach(hotbuildglobal, function (hbkey) {
             _.forEach(hbkey, function (hbitem) {
-                if (hbitem.json === id || hbitem.json + ".player" === id) {
-                    if (hotbuildglobalkey[hbname] !== undefined) {
-                        result += hotbuildglobalkey[hbname];
+                if (hbitem && hbSpecId.canonical(hbitem.json) === canonical) {
+                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
+                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
                         return false;
                     }
                 }
