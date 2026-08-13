@@ -14,6 +14,22 @@ var hotbuild2 = (function () {
     var hotbuildshiftrecycle = api.settings.isSet('ui','hotbuild_shift_key_recycle',true) || "OFF";
     var hotbuildreset_time = api.settings.isSet('ui','hotbuild_reset_time',true) || 2000;
 
+    //remember the sim's spec set. it is the only place a server mod's units show up, and
+    //the settings scene has no way to see them once the game is over.
+    if(_.isFunction(handlers.unit_specs))
+    {
+        var hotbuild2oldunitspecs = handlers.unit_specs;
+        handlers.unit_specs = function(payload){
+          hotbuild2oldunitspecs(payload);
+          try {
+            hbUnitCache.harvest(payload);
+          }
+          catch (ex) {
+            console.log(ex);
+          }
+        };
+    }
+
     //handle settings refresh
     if(_.isFunction(handlers['settings.exit']))
     {

@@ -40,6 +40,13 @@ var hbSpecId = (function () {
         return 'coui:/' + match[1] + '_icon_buildbar.png';
     };
 
+    //the path is a convention, not a guarantee: a mod's internal spawn units have no
+    //build bar art. onerror handler, so clear it first or a missing fallback loops.
+    specid.fallbackIcon = function (img) {
+        img.onerror = null;
+        img.src = MISSING_ICON;
+    };
+
     //first entry of list whose .id is the same unit, whatever tag either carries
     specid.findSpec = function (list, id) {
         var canon = specid.canonical(id);

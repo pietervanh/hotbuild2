@@ -18,6 +18,7 @@
     "scenes": {
         "live_game": [
             "coui://ui/mods/hotbuild2/shared/hotbuild_specid.js",
+            "coui://ui/mods/hotbuild2/shared/hotbuild_unitcache.js",
             "coui://ui/mods/hotbuild2/live_game/hotbuild_core.js"
         ],
         "live_game_build_bar": [
@@ -36,6 +37,8 @@
         ],
         "settings": [
             "coui://ui/mods/hotbuild2/shared/hotbuild_specid.js",
+            "coui://ui/mods/hotbuild2/shared/hotbuild_unitcache.js",
+            "coui://ui/mods/hotbuild2/settings/hotbuild_modscan.js",
             "coui://ui/mods/hotbuild2/settings/hotbuild_settings.css",
             "coui://ui/mods/hotbuild2/settings/hotbuild_settings.js"
         ],
