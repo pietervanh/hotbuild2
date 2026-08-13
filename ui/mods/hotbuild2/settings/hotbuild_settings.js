@@ -13,8 +13,10 @@ var hotbuildsettings = (function () {
         self.hotbuilddirty = ko.observable(false);
         self.hotbuildglobal = ko.observable(hbglobal).extend({ notify: 'always' });
         self.hotbuildglobalkey = ko.observable(hbglobalkey);
-        self.cleanhotbuildglobal = ko.observable(hbglobal);
-        self.cleanhotbuildglobalkey = ko.observable(hbglobalkey);
+        //copies, not the same objects: updateExistingSettings prunes hotbuildglobal in
+        //place and hotbuildStore writes these on any Save, hotbuild edit or not
+        self.cleanhotbuildglobal = ko.observable(_.cloneDeep(hbglobal));
+        self.cleanhotbuildglobalkey = ko.observable(_.cloneDeep(hbglobalkey));
         self.selectedhotbuild = ko.observableArray([]);
         self.filteredunits = ko.observableArray([]);
         self.units = ko.observableArray([]);
@@ -47,6 +49,10 @@ var hotbuildsettings = (function () {
         });
 
         function updateExistingSettings() {
+            //nothing to compare against yet, don't prune the config to nothing
+            if (self.units().length === 0) {
+                return;
+            }
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
             for (var hbkey in self.hotbuildglobal()) {
                 //if(_.contains(self.units(),hb.json))
