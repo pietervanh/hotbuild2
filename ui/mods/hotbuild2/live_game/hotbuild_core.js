@@ -156,16 +156,20 @@ var hotbuild2 = (function () {
                 }
                 else {
                     if (self.selectionList().length > 0&&hotbuild_select_enable) { //check if units are selected ?
-                        var selectionTypes = [];
-                        for (var i = 0; i < self.hotbuilds().length; i++) {
-                            var typeindex = _.findIndex(self.selectionList(), { 'type': self.hotbuilds()[i].json });
-                            if (typeindex !== -1) {
-                                selectionTypes.push(self.hotbuilds()[i].json);
-                            }
+                        var i;
+                        var wanted = [];
+                        for (i = 0; i < self.hotbuilds().length; i++) {
+                            wanted.push(hbSpecId.canonical(self.hotbuilds()[i].json));
                         }
+                        //selectByTypes wants the tagged types the sim knows, so pass those back
+                        var selection = self.selectionList();
+                        var selectionTypes = [];
                         var currentselection = [];
-                        for (i = 0; i < self.selectionList().length; i++) {
-                            currentselection.push(self.selectionList()[i].type);
+                        for (i = 0; i < selection.length; i++) {
+                            currentselection.push(selection[i].type);
+                            if (_.contains(wanted, hbSpecId.canonical(selection[i].type))) {
+                                selectionTypes.push(selection[i].type);
+                            }
                         }
                         if (event.ctrlKey) {
                             if(selectionTypes.length > 0){
