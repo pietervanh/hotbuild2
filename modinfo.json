@@ -17,13 +17,16 @@
     "icon": "http://pamods.github.io/icons/hotbuild2.png",
     "scenes": {
         "live_game": [
+            "coui://ui/mods/hotbuild2/shared/hotbuild_specid.js",
             "coui://ui/mods/hotbuild2/live_game/hotbuild_core.js"
         ],
         "live_game_build_bar": [
+            "coui://ui/mods/hotbuild2/shared/hotbuild_specid.js",
             "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
             "coui://ui/mods/hotbuild2/live_game/hotbuild_buildbar.js"
         ],
         "live_game_selection": [
+            "coui://ui/mods/hotbuild2/shared/hotbuild_specid.js",
             "coui://ui/mods/hotbuild2/live_game/hotbuild.css",
             "coui://ui/mods/hotbuild2/live_game/hotbuild_selection.js"
         ],
@@ -32,6 +35,7 @@
             "coui://ui/mods/hotbuild2/live_game/hotbuild_floatframe.js"
         ],
         "settings": [
+            "coui://ui/mods/hotbuild2/shared/hotbuild_specid.js",
             "coui://ui/mods/hotbuild2/settings/hotbuild_settings.css",
             "coui://ui/mods/hotbuild2/settings/hotbuild_settings.js"
         ],
