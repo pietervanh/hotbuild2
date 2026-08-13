@@ -16,23 +16,16 @@ var hotbuild2selection = (function () {
 
     hbgetBuildBarKey = function (id) {
         var result = '';
-        var hbpos = 1;
-        _.forEach(hotbuildglobal, function (hbkey) {
+        //the two configs are joined by property name, so look the key up by name
+        _.forEach(hotbuildglobal, function (hbkey, hbname) {
             _.forEach(hbkey, function (hbitem) {
-                if (hbitem.json === id) {
-                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
-                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
-                        return false;
-                    }
-                }
-                if (hbitem.json + ".player" === id) {
-                    if (hotbuildglobalkey["hotbuild" + hbpos + "s"] !== undefined) {
-                        result += hotbuildglobalkey["hotbuild" + hbpos + "s"];
+                if (hbitem.json === id || hbitem.json + ".player" === id) {
+                    if (hotbuildglobalkey[hbname] !== undefined) {
+                        result += hotbuildglobalkey[hbname];
                         return false;
                     }
                 }
             });
-            hbpos += 1;
         });
         return result;
     };
