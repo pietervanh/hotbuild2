@@ -28,7 +28,6 @@ var hotbuild2selection = (function () {
                     }
                 }
             });
-            hbpos += 1;
         });
         return result;
     };
