@@ -40,42 +40,55 @@ var hotbuildsettings = (function () {
         var hbUnitSpecs = null;
         var hbFirstBuild = true;
 
+        //worse than any spec tag, so anything the engine sends wins over a stored copy
+        var HB_STORED_RANK = 4;
+
         self.hbBuildUnitList = function () {
-            if (!hbUnitSpecs) {
-                return;
-            }
             var filteredresults = [];
             var seen = {};
-            Object.keys(hbUnitSpecs).forEach(function(key,index) {
+
+            var consider = function (key, unit, rank) {
                 //don't show commanders and debug units
-                var unit = hbUnitSpecs[key];
-                if (unit && !_.contains(unit.types, 'UNITTYPE_Commander') && !_.contains(unit.types, 'UNITTYPE_Debug') && !_.contains(unit.types, 'UNITTYPE_NoBuild') ) {
-                    //console.log(unit);
-                    //the key is the spec id, unit.id is only set by crossRef in the live game scenes
-                    var canonical = hbSpecId.canonical(key);
-                    var rank = hbTagRank(hbSpecId.tag(key));
-                    var existing = seen[canonical];
-                    if (existing !== undefined && rank >= filteredresults[existing].hbrank) {
-                        return;
-                    }
-                    var hotbuildunit = {
-                        json: canonical,
-                        displayname: loc(unit.name),
-                        desc: loc(unit.description),
-                        image: hbSpecId.buildBarIcon(canonical),
-                        types: unit.types,
-                        structure: unit.structure,
-                        hbrank: rank
-                    };
-                    if (existing === undefined) {
-                        seen[canonical] = filteredresults.length;
-                        filteredresults.push(hotbuildunit);
-                    }
-                    else {
-                        filteredresults[existing] = hotbuildunit;
-                    }
+                if (!unit || _.contains(unit.types, 'UNITTYPE_Commander') || _.contains(unit.types, 'UNITTYPE_Debug') || _.contains(unit.types, 'UNITTYPE_NoBuild')) {
+                    return;
                 }
+                //the key is the spec id, unit.id is only set by crossRef in the live game scenes
+                var canonical = hbSpecId.canonical(key);
+                var existing = seen[canonical];
+                if (existing !== undefined && rank >= filteredresults[existing].hbrank) {
+                    return;
+                }
+                var hotbuildunit = {
+                    json: canonical,
+                    displayname: loc(unit.name),
+                    desc: loc(unit.description),
+                    image: hbSpecId.buildBarIcon(canonical),
+                    types: unit.types,
+                    structure: unit.structure,
+                    hbrank: rank
+                };
+                if (existing === undefined) {
+                    seen[canonical] = filteredresults.length;
+                    filteredresults.push(hotbuildunit);
+                }
+                else {
+                    filteredresults[existing] = hotbuildunit;
+                }
+            };
+
+            //a server mod's units are not in this client's spec set outside a game, so
+            //start from what a real game reported and what the mod scan read off disk
+            var stored = hbUnitCache.load();
+            Object.keys(stored).forEach(function (key) {
+                consider(key, stored[key], HB_STORED_RANK);
             });
+
+            if (hbUnitSpecs) {
+                Object.keys(hbUnitSpecs).forEach(function (key) {
+                    consider(key, hbUnitSpecs[key], hbTagRank(hbSpecId.tag(key)));
+                });
+            }
+
             self.units(filteredresults);
             if (hbFirstBuild) {
                 hbFirstBuild = false;
@@ -91,9 +104,47 @@ var hotbuildsettings = (function () {
             if (unitspecs)
             {
                 hbUnitSpecs = unitspecs;
+                //opened from inside a game this is the sim's set, server mod units and all
+                hbUnitCache.harvest(unitspecs);
                 self.hbBuildUnitList();
+                hbRunModScan();
             }
         });
+
+        //every unit the picker can already account for, so the scan reads only the rest
+        function hbKnownIds() {
+            var known = {};
+            var stored = hbUnitCache.load();
+            for (var id in stored) {
+                known[id] = true;
+            }
+            var specs = model.unitSpecs();
+            for (var key in specs) {
+                known[hbSpecId.canonical(key)] = true;
+            }
+            return known;
+        }
+
+        //read the enabled server mods for units this client has no specs for. async and
+        //off the critical path: the picker already shows the engine's units. waits for the
+        //first spec payload so every stock unit counts as known and is not read again.
+        var hbScanned = false;
+        function hbRunModScan() {
+            if (hbScanned) {
+                return;
+            }
+            hbScanned = true;
+            try {
+                hbModScan.run(hbKnownIds()).done(function (gained) {
+                    if (gained) {
+                        self.hbBuildUnitList();
+                    }
+                });
+            }
+            catch (ex) {
+                console.log(ex);
+            }
+        }
 
         //never gate the picker on this, it may never resolve outside a game
         try {

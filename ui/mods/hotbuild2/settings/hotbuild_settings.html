@@ -143,7 +143,7 @@
 <script id="leftTemplate" type="text/html"><div class="hotbuild_list_item" data-bind="css: { hb_missing: hbmissing }">
         <div class="hotbuild_fab_selection">
             <span class="hotbuild_selected_text" data-bind="text: $index() + 1"></span>
-            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" onerror="hbSpecId.fallbackIcon(this)" alt="hbpreview">
         </div>
         <div class="hotbuild_list_desc">
             <div class="hotbuild_list_desc_name" data-bind="text:displayname"></div>
@@ -154,7 +154,7 @@
 
 <script id="rightTemplate" type="text/html"><div class="hotbuild_list_item">
         <div class="hotbuild_fab_selection">
-            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" alt="hbpreview">
+            <img class="hotbuild_selected_fab" src="" data-bind="attr: { src: image }" onerror="hbSpecId.fallbackIcon(this)" alt="hbpreview">
         </div>
         <div class="hotbuild_list_desc">
             <div class="hotbuild_list_desc_name" data-bind="text: displayname"></div>
