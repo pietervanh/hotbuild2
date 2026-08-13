@@ -8,6 +8,8 @@ var hotbuildsettings = (function () {
 
     function HotBuildSettingsViewModel(hbglobal, hbglobalkey) {
         var self = this;
+        //migrate configs written before ids were stored untagged
+        hbSpecId.normaliseConfig(hbglobal);
         self.hotbuilddirty = ko.observable(false);
         self.hotbuildglobal = ko.observable(hbglobal).extend({ notify: 'always' });
         self.hotbuildglobalkey = ko.observable(hbglobalkey);
@@ -206,7 +208,11 @@ var hotbuildsettings = (function () {
                 viewmodelconfigkey['hotbuild' + nr + 's'] = copyconfigkey[hotkey];
                 viewmodelconfig['hotbuild' + nr + 's'] = [];
                 for (var i = 0; i < copyconfig[hotkey].length; i++) {
-                    viewmodelconfig['hotbuild' + nr + 's'].push({ 'json': copyconfig[hotkey][i].json });
+                    if (!copyconfig[hotkey][i] || !copyconfig[hotkey][i].json) {
+                        continue;
+                    }
+                    //store untagged so one mapping works under every spec tag
+                    viewmodelconfig['hotbuild' + nr + 's'].push({ 'json': hbSpecId.canonical(copyconfig[hotkey][i].json) });
                 }
                 nr++;
             }
@@ -326,7 +332,8 @@ var hotbuildsettings = (function () {
             self.keyboardkey('');
             console.log('HOTBUILD2 IMPORTING KEY CONFIG------------');
             self.hotbuildglobalkey(imported.hotbuildglobalkey);
-            self.hotbuildglobal(imported.hotbuildglobal);
+            //a .pas exported from a Galactic War session can hold tagged ids
+            self.hotbuildglobal(hbSpecId.normaliseConfig(imported.hotbuildglobal));
             updateExistingSettings();
             self.Save();
             console.log('WROTE HOTBUILD KEYS-----------');
