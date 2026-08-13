@@ -66,34 +66,33 @@ var hotbuild2 = (function () {
         self.unitName = ko.observable("");
 
         self.buildPreviewList = function (hbindex, hotbuilds) {
-            //set the buildPreview list
-            if (hotbuilds !== undefined) {
-                self.hotbuildPreviews([{ 'icon': '', 'json': '' }]);
-                var unitinfo;
+            //set the buildPreview list, starting at the entry we just cycled to
+            if (hotbuilds === undefined) {
+                return;
+            }
+            //endFabMode parks cycleid at -1 when hotbuild_shift_key_recycle is ON
+            if (hbindex < 0 || hbindex > hotbuilds.length) {
+                hbindex = 0;
+            }
+            self.hotbuildPreviews([{ 'icon': '', 'json': '' }]);
 
-                for (var i = hbindex; i < hotbuilds.length; i++) {
-                    if (self.knowsBuildCommand(hotbuilds[i].json)) {
+            var order = [];
+            var i;
+            for (i = hbindex; i < hotbuilds.length; i++) {
+                order.push(i);
+            }
+            for (i = 0; i < hbindex; i++) {
+                order.push(i);
+            }
 
-                        unitinfo = model.unitSpecs[hotbuilds[i].json];
-                        if(unitinfo === undefined){
-                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
-                        }
-                        if (unitinfo.structure) {
-                            console.log(unitinfo.buildIcon);
-                            self.hotbuildPreviews.push({ 'icon':  unitinfo.buildIcon, 'json': hotbuilds[i].json });
-                        }
-                    }
-                }
-                for (var j = 0; j < hbindex; j++) {
-                    if (self.knowsBuildCommand(hotbuilds[j].json)) {
-                        unitinfo = model.unitSpecs[hotbuilds[j].json];
-                        if(unitinfo === undefined){
-                         unitinfo = model.unitSpecs[hotbuilds[i].json + ".player"];
-                        }
-                        if (unitinfo.structure) {
-                            self.hotbuildPreviews.push({ 'icon':  unitinfo.buildIcon, 'json': hotbuilds[j].json });
-                        }
-                    }
+            for (i = 0; i < order.length; i++) {
+                var stored = hotbuilds[order[i]].json;
+                var unitinfo = self.findBuildable(stored);
+                if (unitinfo !== undefined && unitinfo.structure) {
+                    self.hotbuildPreviews.push({
+                        'icon': unitinfo.buildIcon || hbSpecId.buildBarIcon(unitinfo.id),
+                        'json': hbSpecId.canonical(stored)
+                    });
                 }
             }
         };
@@ -126,9 +125,11 @@ var hotbuild2 = (function () {
                     setTimeout(self.clean, self.cycleResetTime + 1000);
                     //debugger;
 
-                    var hbunit = model.unitSpecs[self.hotbuilds()[self.cycleid()].json];
-                    if(hbunit === undefined){
-                        hbunit = model.unitSpecs[self.hotbuilds()[self.cycleid()].json + ".player"];
+                    //the build set carries this client's spec tag, so its id is the one the sim knows
+                    var hbunit = self.findBuildable(self.hotbuilds()[self.cycleid()].json);
+                    if (hbunit === undefined) {
+                        console.log("hotbuild cannot build " + self.hotbuilds()[self.cycleid()].json);
+                        return;
                     }
 
                     if (hbunit.structure) {
@@ -193,22 +194,13 @@ var hotbuild2 = (function () {
             return false;
         };
 
-        self.knowsBuildCommand = function (cmd) {
-            //check on buildtablist empty
-            if(self.buildable_units().length > 0){
-                for(var i = 0; i < self.buildable_units().length; i++){
-                    if(self.buildable_units()[i].id == cmd) {
-                        //console.log("can build " +self.buildable_units()[i].id);
-                        return true;
-                    }
-                    //GW fix
-                    if(self.buildable_units()[i].id == cmd + ".player") {
-                        return true;
-                    }
-                }
-            }
+        //the live spec for a stored hotbuild entry, whatever spec tag this game uses
+        self.findBuildable = function (cmd) {
+            return hbSpecId.findSpec(self.buildable_units(), cmd);
+        };
 
-            return false;
+        self.knowsBuildCommand = function (cmd) {
+            return self.findBuildable(cmd) !== undefined;
         };
 
         //move trough hotbuilds array when pushing multiple time the same key in a certain time interval
