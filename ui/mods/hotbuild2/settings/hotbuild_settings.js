@@ -109,6 +109,20 @@ var hotbuildsettings = (function () {
             console.log(ex);
         }
 
+        //a binding this spec set has no unit for, e.g. a Legion unit in a vanilla game.
+        //shown greyed and kept, so it survives back into localStorage on the next save.
+        function hbMissingUnit(json) {
+            return {
+                json: json,
+                displayname: json.replace(/^.*\//, '').replace(/\.json$/, ''),
+                desc: 'NOT AVAILABLE HERE',
+                image: hbSpecId.buildBarIcon(json),
+                types: [],
+                structure: false,
+                hbmissing: true
+            };
+        }
+
         function updateExistingSettings() {
             //nothing to compare against yet, don't prune the config to nothing
             if (self.units().length === 0) {
@@ -116,16 +130,15 @@ var hotbuildsettings = (function () {
             }
             //now compare / update the existing hotbuildglobal data so it's always up 2 date
             for (var hbkey in self.hotbuildglobal()) {
-                //if(_.contains(self.units(),hb.json))
-                for (var i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
-                    var match = _.find(self.units(), { 'json': self.hotbuildglobal()[hbkey][i].json });
-                    self.hotbuildglobal()[hbkey][i] = match;
-                }
+                var entries = self.hotbuildglobal()[hbkey];
                 var goodstuff = [];
-                for (i = 0; i < self.hotbuildglobal()[hbkey].length; i++) {
-                    if (self.hotbuildglobal()[hbkey][i] !== undefined) {
-                        goodstuff.push(self.hotbuildglobal()[hbkey][i]);
+                for (var i = 0; i < entries.length; i++) {
+                    if (!entries[i] || !entries[i].json) {
+                        continue;
                     }
+                    var json = hbSpecId.canonical(entries[i].json);
+                    var match = _.find(self.units(), { 'json': json });
+                    goodstuff.push(match !== undefined ? match : hbMissingUnit(json));
                 }
                 self.hotbuildglobal()[hbkey] = goodstuff;
             }

@@ -387,6 +387,11 @@ text-align: center;
 margin-right: -64px !important;
 }
 
+/* bound to a unit this game has no spec for, kept but unusable here */
+.hotbuild_list_item.hb_missing {
+	opacity: 0.4;
+}
+
 .hotbuild_list_item:hover, .hotbuild_list_item:active {
 	-webkit-filter: drop-shadow(0px 0px 4px rgba(255,255,255,1));
 }
